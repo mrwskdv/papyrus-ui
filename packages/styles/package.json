@@ -1,0 +1,52 @@
+{
+  "name": "@papyrus-ui/styles",
+  "version": "0.0.0",
+  "description": "Global styles, themes and style utilities for implementing components based on the Papyrus UI design system.",
+  "files": [
+    "CHANGELOG.md",
+    "css",
+    "dist",
+    "fonts",
+    "package.json",
+    "README.md"
+  ],
+  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "author": "Sergey Murawsky <mrwskdv@gmail.com>",
+  "keywords": [],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrwskdv/appearance.git",
+    "directory": "packages/styles"
+  },
+  "scripts": {
+    "build": "yarn clean && rollup -c rollup.config.mjs",
+    "clean": "rimraf css dist fonts",
+    "test": "jest --config jest.config.js --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.15.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "@vanilla-extract/css": "^1.15.3",
+    "typescript": "4.7.4"
+  },
+  "dependencies": {
+    "@vanilla-extract/sprinkles": "^1.6.2",
+    "boxicons": "^2.1.4",
+    "hex-to-rgba": "^2.0.1",
+    "lodash": "^4.17.21",
+    "modern-normalize": "^2.0.0"
+  }
+}

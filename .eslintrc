@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "./node_modules/@papyrus-ui/configs/eslint-config",
+    "./node_modules/@papyrus-ui/configs/eslint-config-typescript",
+    "./node_modules/@papyrus-ui/configs/eslint-config-react"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "parserOptions": {
+        "tsconfigRootDir": ".",
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    },
+    {
+      "files": [
+        "**/*.stories.tsx"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.stories.tsx"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}

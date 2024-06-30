@@ -1,0 +1,8 @@
+__reports__/
+coverage/
+dist/
+node_modules/
+*.config.*
+*rc.*
+jest.*
+tsconfig.json

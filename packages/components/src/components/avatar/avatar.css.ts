@@ -1,6 +1,5 @@
+import { atoms, vars } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
-
-import { atoms, vars } from '../../../../styles';
 
 export const root = atoms({
   position: 'relative',

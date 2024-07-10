@@ -2,7 +2,8 @@
 
 import { useFloatingTree, useListItem } from '@floating-ui/react';
 import {
-  ButtonHTMLAttributes,
+  AnchorHTMLAttributes,
+  ElementType,
   FocusEvent,
   memo,
   MouseEvent,
@@ -15,7 +16,8 @@ import { MenuButton } from '../../menu-button';
 import { DropdownMenuContext } from '../dropdown-menu.context';
 
 export interface DropdownMenuItemProps
-  extends Omit<ButtonHTMLAttributes<HTMLAnchorElement>, 'children' | 'type'> {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
+  as?: ElementType;
   disabled?: boolean;
   icon?: ReactElement;
   selected?: boolean;

@@ -2,6 +2,7 @@
 
 import {
   AnchorHTMLAttributes,
+  ElementType,
   FocusEvent,
   KeyboardEvent,
   memo,
@@ -16,6 +17,7 @@ import { MenuButton } from '../../menu-button';
 import { MenuContext } from '../menu.context';
 
 export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  as?: ElementType;
   disabled?: boolean;
   icon?: ReactElement;
   index?: number;

@@ -5,7 +5,7 @@ import { MenuButton, MenuButtonProps } from '../menu-button';
 export interface OptionProps
   extends Omit<
     MenuButtonProps,
-    'collapsed' | 'direction' | 'href' | 'size' | 'variant'
+    'as' | 'collapsed' | 'direction' | 'href' | 'size' | 'variant'
   > {
   /**
    * Service property to allow using custom Option component.

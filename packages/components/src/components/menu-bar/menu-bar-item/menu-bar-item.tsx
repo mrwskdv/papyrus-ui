@@ -3,6 +3,7 @@
 import { useFloatingTree, useListItem } from '@floating-ui/react';
 import {
   AnchorHTMLAttributes,
+  ElementType,
   FocusEvent,
   memo,
   MouseEvent,
@@ -16,6 +17,7 @@ import { MenuBarContext } from '../menu-bar.context';
 
 export interface MenuBarItemProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
+  as?: ElementType;
   disabled?: boolean;
   icon?: ReactElement;
   selected?: boolean;

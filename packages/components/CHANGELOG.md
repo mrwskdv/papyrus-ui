@@ -1,5 +1,15 @@
 # @papyrus-ui/components
 
+## 0.1.1
+
+### Patch Changes
+
+- 03842a1: Fixed imports
+- 5e5c559: Updated Menu styles
+- 5e5c559: Updated Jest configs
+- Updated dependencies [3d5d4dc]
+  - @papyrus-ui/styles@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @papyrus-ui/components
 
+## 0.1.2
+
+### Patch Changes
+
+- da85354: Added `as` property to menu item components
+
 ## 0.1.1
 
 ### Patch Changes

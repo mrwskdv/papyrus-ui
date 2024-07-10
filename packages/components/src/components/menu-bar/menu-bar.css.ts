@@ -12,7 +12,7 @@ export const rootVariant = {
   secondary: atoms({
     bg: 'white',
   }),
-  dark: atoms({
+  ghost: atoms({
     bg: 'primary700',
   }),
 };

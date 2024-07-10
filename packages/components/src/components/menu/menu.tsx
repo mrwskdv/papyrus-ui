@@ -22,7 +22,7 @@ import * as S from './menu.css';
 import { MenuSize, MenuVariant } from './menu.types';
 import { Submenu } from './submenu';
 
-export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
+export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
   collapsed?: boolean;
   size?: MenuSize;
   variant?: MenuVariant;
@@ -39,11 +39,7 @@ const MenuComponent: FC<MenuProps> = ({
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState<Maybe<number>>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const updateActiveIndex = useCallback((index: Maybe<number>) => {
-    setActiveIndex(index);
-  }, []);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   const menuCxt: MenuContextType = useMemo(
     () => ({
@@ -53,21 +49,14 @@ const MenuComponent: FC<MenuProps> = ({
       menuRef,
       size,
       variant,
-      updateActiveIndex,
+      setActiveIndex,
       onCollapsedChange,
     }),
-    [
-      activeIndex,
-      collapsed,
-      onCollapsedChange,
-      size,
-      updateActiveIndex,
-      variant,
-    ],
+    [activeIndex, collapsed, onCollapsedChange, size, variant],
   );
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
+    (e: KeyboardEvent<HTMLUListElement>) => {
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
@@ -101,7 +90,7 @@ const MenuComponent: FC<MenuProps> = ({
 
   return (
     <MenuContext.Provider value={menuCxt}>
-      <div
+      <ul
         ref={menuRef}
         className={cn(S.root, S.rootVariant[variant], className)}
         role="menu"
@@ -112,7 +101,7 @@ const MenuComponent: FC<MenuProps> = ({
         {Children.map(children, (child, i) =>
           isValidElement(child) ? cloneElement(child, { index: i }) : null,
         )}
-      </div>
+      </ul>
     </MenuContext.Provider>
   );
 };

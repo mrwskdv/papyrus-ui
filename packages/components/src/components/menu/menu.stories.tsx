@@ -9,7 +9,7 @@ import { Text } from '../text';
 
 import { Menu, MenuProps } from './menu';
 
-const variants: MenuProps['variant'][] = ['primary', 'secondary', 'dark'];
+const variants: MenuProps['variant'][] = ['primary', 'secondary', 'ghost'];
 
 const sizes: MenuProps['size'][] = ['sm', 'md', 'lg'];
 
@@ -23,24 +23,13 @@ export default {
 
 const Template: StoryFn<MenuProps> = (args) => (
   <Menu {...args}>
-    <Menu.Item
-      endIcon={
-        <Icon
-          color={args.variant === 'dark' ? 'white' : 'accent500'}
-          fontSize="lg"
-          name="crown"
-          type="solid"
-        />
-      }
-      selected
-      startIcon={<Icon name="home" />}
-    >
+    <Menu.Item icon={<Icon name="home" />} selected>
       Option 1
     </Menu.Item>
 
-    <Menu.Item startIcon={<Icon name="envelope" />}>Option 2</Menu.Item>
+    <Menu.Item icon={<Icon name="envelope" />}>Option 2</Menu.Item>
 
-    <Menu.Item disabled startIcon={<Icon name="grid-alt" />}>
+    <Menu.Item disabled icon={<Icon name="grid-alt" />}>
       Option 3
     </Menu.Item>
 
@@ -61,7 +50,7 @@ const Template: StoryFn<MenuProps> = (args) => (
       </Menu.Submenu>
     </Menu.Submenu>
 
-    <Menu.Item startIcon={<Icon name="support" />}>Option 6</Menu.Item>
+    <Menu.Item icon={<Icon name="support" />}>Option 6</Menu.Item>
   </Menu>
 );
 

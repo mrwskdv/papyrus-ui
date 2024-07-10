@@ -9,7 +9,7 @@ import { Text } from '../text';
 
 import { MenuBar, MenuBarProps } from './menu-bar';
 
-const variants: MenuBarProps['variant'][] = ['primary', 'secondary', 'dark'];
+const variants: MenuBarProps['variant'][] = ['primary', 'secondary', 'ghost'];
 
 const sizes: MenuBarProps['size'][] = ['sm', 'md', 'lg'];
 
@@ -23,30 +23,14 @@ export default {
 
 const Template: StoryFn<MenuBarProps> = (args) => (
   <>
-    <MenuBar
-      {...args}
-      className={atoms({
-        width: { mobile: 'full', mobileLg: '1/2', desktop: '1/3' },
-      })}
-    >
-      <MenuBar.Item
-        endIcon={
-          <Icon
-            color={args.variant === 'dark' ? 'white' : 'accent400'}
-            fontSize="lg"
-            name="crown"
-            type="solid"
-          />
-        }
-        selected
-        startIcon={<Icon name="home" />}
-      >
+    <MenuBar {...args}>
+      <MenuBar.Item icon={<Icon name="home" />} selected>
         Option 1
       </MenuBar.Item>
 
-      <MenuBar.Item startIcon={<Icon name="envelope" />}>Option 2</MenuBar.Item>
+      <MenuBar.Item icon={<Icon name="envelope" />}>Option 2</MenuBar.Item>
 
-      <MenuBar.Item disabled startIcon={<Icon name="grid-alt" />}>
+      <MenuBar.Item disabled icon={<Icon name="grid-alt" />}>
         Option 3
       </MenuBar.Item>
 
@@ -67,7 +51,7 @@ const Template: StoryFn<MenuBarProps> = (args) => (
         </MenuBar.Submenu>
       </MenuBar.Submenu>
 
-      <MenuBar.Item startIcon={<Icon name="support" />}>Option 6</MenuBar.Item>
+      <MenuBar.Item icon={<Icon name="support" />}>Option 6</MenuBar.Item>
     </MenuBar>
     <Divider color="neutral200" />
   </>

@@ -51,9 +51,9 @@ import { InputBox, InputBoxSize } from '../input-box';
 import { OptionProps, Option } from '../option';
 import { Tag } from '../tag';
 
-export type OptionComponentProps<OptionType> = {
+export interface OptionComponentProps<OptionType> extends OptionProps {
   option: OptionType;
-} & OptionProps;
+}
 
 export type MaybeMultiValue<
   Value,
@@ -699,24 +699,32 @@ const AutocompleteComponent = forwardRef(
                     </Option>
                   )}
 
-                  {optionsState?.map((item, idx) => (
-                    <OptionComponent
-                      key={idx}
-                      active={idx === activeIndex}
-                      data-index={idx}
-                      id={slug(id, OPTION_ID, idx)}
-                      option={item}
-                      selected={selectedOptions.includes(item)}
-                      {...getItemProps({
-                        ref: (node) => {
-                          listRef.current[idx] = node;
-                        },
-                        onClick: handleOptionClick,
-                      })}
-                    >
-                      {getLabel(item)}
-                    </OptionComponent>
-                  ))}
+                  {optionsState?.map((item, idx) => {
+                    const isSelected = selectedOptions.includes(item);
+                    return (
+                      <OptionComponent
+                        key={idx}
+                        active={idx === activeIndex}
+                        data-index={idx}
+                        endIcon={
+                          isSelected ? (
+                            <Icon color="primary500" name="check" />
+                          ) : undefined
+                        }
+                        id={slug(id, OPTION_ID, idx)}
+                        option={item}
+                        selected={isSelected}
+                        {...getItemProps({
+                          ref: (node) => {
+                            listRef.current[idx] = node;
+                          },
+                          onClick: handleOptionClick,
+                        })}
+                      >
+                        {getLabel(item)}
+                      </OptionComponent>
+                    );
+                  })}
                 </Flex>
               </FloatingFocusManager>
             </FloatingPortal>

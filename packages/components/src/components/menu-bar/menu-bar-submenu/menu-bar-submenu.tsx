@@ -32,7 +32,6 @@ import {
   FocusEvent,
   KeyboardEvent,
   ReactElement,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -49,18 +48,16 @@ import {
   getPrevItem,
 } from '../../../utils/list-navigation';
 import { Icon } from '../../icon';
-import { MenuBarButton } from '../menu-bar-button';
+import { MenuButton } from '../../menu-button';
 import { MenuBarContext, MenuBarContextType } from '../menu-bar.context';
 
 import * as S from './menu-bar-submenu.css';
 
-export interface SubMenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
+export interface SubMenuProps extends ButtonHTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
   icon?: ReactElement;
   initialOpen?: boolean;
   label: string;
-  selected?: boolean;
 }
 
 const ENTER_TIMEOUT = 200;
@@ -81,9 +78,8 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(initialOpen);
-  const [hasFocusInside, setHasFocusInside] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const elementsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const labelsRef = useRef<Array<string>>([]);
   const parent = useContext(MenuBarContext);
   const tree = useFloatingTree();
@@ -91,7 +87,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
   const parentId = useFloatingParentNodeId();
   const item = useListItem();
 
-  const { floatingStyles, refs, context } = useFloating<HTMLButtonElement>({
+  const { floatingStyles, refs, context } = useFloating<HTMLElement>({
     nodeId,
     open: isOpen,
     strategy: 'fixed',
@@ -119,11 +115,6 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
   });
 
   const buttonRef = useMergeRefs([refs.setReference, item.ref]);
-  const role = useRole(context, { role: 'menu' });
-
-  const hover = useHover(context, {
-    handleClose: safePolygon({ blockPointerEvents: true }),
-  });
 
   const click = useClick(context, {
     event: 'mousedown',
@@ -132,7 +123,13 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
     keyboardHandlers: false,
   });
 
+  const hover = useHover(context, {
+    handleClose: safePolygon({ blockPointerEvents: true }),
+  });
+
   const dismiss = useDismiss(context);
+
+  const role = useRole(context, { role: 'menu' });
 
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
@@ -145,7 +142,13 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
   );
 
   const handleMenuItemKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement>) => {
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
+
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
@@ -168,7 +171,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
         e.preventDefault();
         e.stopPropagation();
         setIsOpen(false);
-        (refs.reference.current as HTMLButtonElement).focus();
+        (refs.reference.current as HTMLAnchorElement).focus();
       }
 
       if (!parent.isNested && e.key === 'ArrowLeft') {
@@ -178,7 +181,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
 
         const item = getPrevItem(
           parent.refs.floating,
-          refs.reference.current as HTMLButtonElement,
+          refs.reference.current as HTMLAnchorElement,
         );
 
         item?.focus();
@@ -199,7 +202,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
 
         const item = getNextItem(
           parent.refs.floating,
-          refs.reference.current as HTMLButtonElement,
+          refs.reference.current as HTMLAnchorElement,
         );
 
         item?.focus();
@@ -220,22 +223,22 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
       elementsRef,
       floatingStyles,
       getFloatingProps,
-      getItemProps: (userProps = {}) => ({
-        ...getItemProps(userProps),
-        onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
-          handleMenuItemKeyDown(e);
-          userProps.onKeyDown?.(e);
-        },
-      }),
-      hasFocusInside,
       isOpen,
       isNested: true,
       labelsRef,
       refs,
       setActiveIndex,
-      setHasFocusInside,
       size: parent.size,
-      variant: parent.variant,
+      variant: parent.variant === 'primary' ? 'secondary' : parent.variant,
+      getItemProps: (userProps = {}) => ({
+        ...getItemProps({
+          ...userProps,
+          onKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => {
+            handleMenuItemKeyDown(e);
+            userProps.onKeyDown?.(e);
+          },
+        }),
+      }),
     }),
     [
       activeIndex,
@@ -244,7 +247,6 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
       getFloatingProps,
       getItemProps,
       handleMenuItemKeyDown,
-      hasFocusInside,
       isOpen,
       parent.size,
       parent.variant,
@@ -253,16 +255,15 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
   );
 
   const handleFocus = useCallback(
-    (e: FocusEvent<HTMLButtonElement>) => {
-      setHasFocusInside(false);
-      parent.setHasFocusInside(true);
+    (e: FocusEvent<HTMLAnchorElement>) => {
+      setActiveIndex(null);
       onFocus?.(e);
     },
-    [onFocus, parent],
+    [onFocus],
   );
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement>) => {
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
       if (
         e.key === 'Enter' ||
         e.key === ' ' ||
@@ -329,8 +330,10 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
 
   return (
     <FloatingNode id={nodeId}>
-      <MenuBarButton
+      <MenuButton
         ref={buttonRef}
+        collapsed={parent.collapsed}
+        direction={parent.isNested ? 'vertical' : 'horizontal'}
         endIcon={
           parent.isNested ? (
             <Icon name="chevron-right" />
@@ -339,8 +342,14 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
           )
         }
         role="menuitem"
+        size={parent.isNested ? 'sm' : parent.size}
         startIcon={icon}
         tabIndex={isActive ? 0 : -1}
+        variant={
+          parent.isNested && parent.variant === 'primary'
+            ? 'secondary'
+            : parent.variant
+        }
         {...getReferenceProps(
           parent.getItemProps({
             onFocus: handleFocus,
@@ -350,7 +359,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
         {...props}
       >
         {label}
-      </MenuBarButton>
+      </MenuButton>
 
       <MenuBarContext.Provider value={menuCtx}>
         <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
@@ -367,7 +376,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
                   initialFocus={-1}
                   modal={false}
                 >
-                  <div
+                  <ul
                     ref={refs.setFloating}
                     className={cn(
                       S.menuList,
@@ -379,7 +388,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
                     {...getFloatingProps()}
                   >
                     {children}
-                  </div>
+                  </ul>
                 </FloatingFocusManager>
               </FloatingPortal>
             )}

@@ -3,7 +3,7 @@ import { atoms } from '@papyrus-ui/styles';
 export const root = atoms({
   display: 'flex',
   flexDirection: 'column',
-  py: 0.5,
+  my: '-0.5',
 });
 
 export const rootVariant = {
@@ -13,7 +13,7 @@ export const rootVariant = {
   secondary: atoms({
     bg: 'white',
   }),
-  dark: atoms({
+  ghost: atoms({
     bg: 'primary700',
   }),
 };

@@ -22,19 +22,25 @@ export const Basic: StoryFn<DropdownMenuProps> = (args) => (
     </DropdownMenu.Trigger>
 
     <DropdownMenu.Content>
-      <DropdownMenu.Item>Option 1</DropdownMenu.Item>
+      <DropdownMenu.Item icon={<Icon name="home" />}>
+        Option 1
+      </DropdownMenu.Item>
 
-      <DropdownMenu.Item>Option 2</DropdownMenu.Item>
+      <DropdownMenu.Item icon={<Icon name="envelope" />}>
+        Option 2
+      </DropdownMenu.Item>
 
-      <DropdownMenu.Item disabled>Option 3</DropdownMenu.Item>
+      <DropdownMenu.Item disabled icon={<Icon name="grid-alt" />}>
+        Option 3
+      </DropdownMenu.Item>
 
-      <DropdownMenu.Submenu label="Option 4">
+      <DropdownMenu.Submenu icon={<Icon name="stats" />} label="Option 4">
         <DropdownMenu.Item>Option 4-1</DropdownMenu.Item>
         <DropdownMenu.Item>Option 4-2</DropdownMenu.Item>
         <DropdownMenu.Item>Option 4-3</DropdownMenu.Item>
       </DropdownMenu.Submenu>
 
-      <DropdownMenu.Submenu label="Option 5">
+      <DropdownMenu.Submenu icon={<Icon name="cog" />} label="Option 5">
         <DropdownMenu.Item>Option 5-1</DropdownMenu.Item>
         <DropdownMenu.Item>Option 5-2</DropdownMenu.Item>
 
@@ -45,7 +51,9 @@ export const Basic: StoryFn<DropdownMenuProps> = (args) => (
         </DropdownMenu.Submenu>
       </DropdownMenu.Submenu>
 
-      <DropdownMenu.Item>Option 6</DropdownMenu.Item>
+      <DropdownMenu.Item icon={<Icon name="support" />}>
+        Option 6
+      </DropdownMenu.Item>
     </DropdownMenu.Content>
   </DropdownMenu>
 );

@@ -1,47 +1,94 @@
 'use client';
 
 import {
-  ButtonHTMLAttributes,
+  AnchorHTMLAttributes,
+  FocusEvent,
+  KeyboardEvent,
   memo,
+  ReactElement,
   useCallback,
   useContext,
   useRef,
 } from 'react';
 
-import { MenuButton } from '../menu-button';
+import { getNextItem, getPrevItem } from '../../../utils/list-navigation';
+import { MenuButton } from '../../menu-button';
 import { MenuContext } from '../menu.context';
 
-export interface MenuItemProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'type'> {
+export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
+  icon?: ReactElement;
   index?: number;
   selected?: boolean;
-  startIcon?: React.ReactElement;
-  endIcon?: React.ReactElement;
-  children: string;
 }
 
 export const MenuItem = memo<MenuItemProps>(
-  ({ disabled, index, onFocus, children, ...props }) => {
-    const { activeIndex, updateActiveIndex } = useContext(MenuContext);
+  ({ disabled, icon, index, onFocus, onKeyDown, children, ...props }) => {
+    const {
+      activeIndex,
+      collapsed,
+      indent,
+      menuRef,
+      setActiveIndex,
+      size,
+      variant,
+    } = useContext(MenuContext);
 
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonRef = useRef<HTMLAnchorElement>(null);
     const isActive = index === activeIndex;
 
     const handleFocus = useCallback(
-      (e: React.FocusEvent<HTMLButtonElement>) => {
-        updateActiveIndex(index);
+      (e: FocusEvent<HTMLAnchorElement>) => {
+        setActiveIndex(index);
         onFocus?.(e);
       },
-      [index, onFocus, updateActiveIndex],
+      [index, onFocus, setActiveIndex],
+    );
+
+    const handleKeyDown = useCallback(
+      (e: KeyboardEvent<HTMLAnchorElement>) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          e.currentTarget.click();
+        }
+
+        if (!menuRef.current) {
+          onKeyDown?.(e);
+          return;
+        }
+
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          e.stopPropagation();
+          const item = getPrevItem(menuRef, e.currentTarget);
+          item?.focus();
+        }
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          e.stopPropagation();
+          const item = getNextItem(menuRef, e.currentTarget);
+          item?.focus();
+        }
+
+        onKeyDown?.(e);
+      },
+      [menuRef, onKeyDown],
     );
 
     return (
       <MenuButton
         ref={buttonRef}
+        collapsed={collapsed}
         disabled={disabled}
+        indent={indent}
+        size={size}
+        startIcon={icon}
         tabIndex={isActive ? 0 : -1}
+        variant={variant}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
         {...props}
       >
         {children}

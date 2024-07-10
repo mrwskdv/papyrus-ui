@@ -1,75 +1,24 @@
-import cn from 'classnames';
-import {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  LiHTMLAttributes,
-  ReactElement,
-} from 'react';
+import { forwardRef } from 'react';
 
-import { IconProps } from '../icon';
-import { Text } from '../text';
+import { MenuButton, MenuButtonProps } from '../menu-button';
 
-import * as S from './option.css';
-
-export interface OptionProps extends LiHTMLAttributes<HTMLLIElement> {
-  active?: boolean;
-  description?: string;
-  disabled?: boolean;
-  icon?: ReactElement;
+export interface OptionProps
+  extends Omit<
+    MenuButtonProps,
+    'collapsed' | 'direction' | 'href' | 'size' | 'variant'
+  > {
+  /**
+   * Service property to allow using custom Option component.
+   */
   option?: unknown;
-  selected?: boolean;
 }
 
-export const Option = forwardRef<HTMLLIElement, OptionProps>(
-  (
-    {
-      active,
-      children,
-      className,
-      icon,
-      disabled,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      option,
-      selected,
-      ...props
-    },
-    ref,
-  ) => (
-    <li
-      ref={ref}
-      aria-disabled={disabled}
-      aria-selected={selected}
-      className={cn(
-        S.root,
-        active && S.rootActive,
-        selected && [S.rootSelected, active && S.rootSelectedActive],
-        disabled && S.rootDisabled,
-        className,
-      )}
-      role="option"
-      {...props}
-    >
-      {isValidElement<IconProps>(icon) &&
-        cloneElement(icon, {
-          className: cn(
-            S.icon,
-            selected && S.iconSelected,
-            disabled && S.iconDisabled,
-            icon.props.className,
-          ),
-        })}
-
-      <Text
-        as="span"
-        className={S.label}
-        fontWeight={selected && !disabled ? 'semiBold' : 'regular'}
-        mx={1.5}
-        truncate
-      >
-        {children}
-      </Text>
-    </li>
+export const Option = forwardRef<HTMLAnchorElement, OptionProps>(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ({ option, role = 'option', children, ...props }, ref) => (
+    <MenuButton ref={ref} role={role} variant="secondary" {...props}>
+      {children}
+    </MenuButton>
   ),
 );
 

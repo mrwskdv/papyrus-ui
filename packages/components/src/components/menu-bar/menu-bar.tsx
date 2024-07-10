@@ -34,7 +34,7 @@ import { MenuBarContext, MenuBarContextType } from './menu-bar.context';
 import * as S from './menu-bar.css';
 import { MenuBarSize, MenuBarVariant } from './menu-bar.types';
 
-export interface MenuBarProps extends HTMLAttributes<HTMLDivElement> {
+export interface MenuBarProps extends HTMLAttributes<HTMLUListElement> {
   block?: boolean;
   collapsed?: boolean;
   size?: MenuBarSize;
@@ -49,12 +49,11 @@ const MenuBarComponent: FC<MenuBarProps> = ({
   children,
   ...props
 }) => {
-  const [hasFocusInside, setHasFocusInside] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const elementsRef = useRef<Array<HTMLElement | null>>([]);
   const labelsRef = useRef<Array<string>>([]);
 
-  const { refs, context, floatingStyles } = useFloating<HTMLButtonElement>({
+  const { refs, context, floatingStyles } = useFloating<HTMLElement>({
     open: true,
     strategy: 'fixed',
     whileElementsMounted: autoUpdate,
@@ -72,6 +71,12 @@ const MenuBarComponent: FC<MenuBarProps> = ({
 
   const handleMenuItemKeyDown = useCallback(
     (e: KeyboardEvent<HTMLButtonElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
+
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         e.stopPropagation();
@@ -105,6 +110,13 @@ const MenuBarComponent: FC<MenuBarProps> = ({
       elementsRef,
       floatingStyles,
       getFloatingProps,
+      isOpen: true,
+      isNested: false,
+      labelsRef,
+      refs,
+      setActiveIndex,
+      size,
+      variant,
       getItemProps: (userProps = {}) => ({
         ...getItemProps(userProps),
         onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
@@ -112,16 +124,6 @@ const MenuBarComponent: FC<MenuBarProps> = ({
           userProps.onKeyDown?.(e);
         },
       }),
-      hasFocusInside,
-      indent: 0,
-      isOpen: true,
-      isNested: false,
-      labelsRef,
-      refs,
-      setActiveIndex,
-      setHasFocusInside,
-      size,
-      variant,
     }),
     [
       activeIndex,
@@ -131,7 +133,6 @@ const MenuBarComponent: FC<MenuBarProps> = ({
       getFloatingProps,
       getItemProps,
       handleMenuItemKeyDown,
-      hasFocusInside,
       refs,
       size,
       variant,
@@ -139,7 +140,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
   );
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
+    (e: KeyboardEvent<HTMLUListElement>) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         e.stopPropagation();
@@ -175,7 +176,6 @@ const MenuBarComponent: FC<MenuBarProps> = ({
         e.target instanceof Node &&
         !refs.floating.current?.contains(e.target)
       ) {
-        setHasFocusInside(false);
         setActiveIndex(null);
       }
     }
@@ -191,7 +191,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
     <MenuBarContext.Provider value={menuCtx}>
       <FloatingTree>
         <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
-          <div
+          <ul
             ref={refs.setFloating}
             className={cn(S.root, S.rootVariant[variant], block && S.rootBlock)}
             {...getFloatingProps({
@@ -202,7 +202,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
             {...props}
           >
             {children}
-          </div>
+          </ul>
         </FloatingList>
       </FloatingTree>
     </MenuBarContext.Provider>

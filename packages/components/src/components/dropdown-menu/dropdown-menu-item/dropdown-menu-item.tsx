@@ -1,26 +1,30 @@
 'use client';
 
 import { useFloatingTree, useListItem } from '@floating-ui/react';
-import { memo, useCallback, useContext } from 'react';
+import {
+  ButtonHTMLAttributes,
+  FocusEvent,
+  memo,
+  MouseEvent,
+  ReactElement,
+  useCallback,
+  useContext,
+} from 'react';
 
-import { DropdownMenuButton } from '../dropdown-menu-button';
+import { MenuButton } from '../../menu-button';
 import { DropdownMenuContext } from '../dropdown-menu.context';
 
 export interface DropdownMenuItemProps
-  extends Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    'children' | 'type'
-  > {
+  extends Omit<ButtonHTMLAttributes<HTMLAnchorElement>, 'children' | 'type'> {
   disabled?: boolean;
+  icon?: ReactElement;
   selected?: boolean;
-  startIcon?: React.ReactElement;
-  endIcon?: React.ReactElement;
   children: string;
 }
 
 export const DropdownMenuItem = memo<DropdownMenuItemProps>(
-  ({ children, disabled, onClick, onFocus, ...props }) => {
-    const { activeIndex, getItemProps, setHasFocusInside } =
+  ({ disabled, icon, onClick, onFocus, children, ...props }) => {
+    const { activeIndex, getItemProps, setActiveIndex } =
       useContext(DropdownMenuContext);
 
     const item = useListItem({ label: disabled ? null : children });
@@ -28,25 +32,28 @@ export const DropdownMenuItem = memo<DropdownMenuItemProps>(
     const isActive = item.index === activeIndex;
 
     const handleClick = useCallback(
-      (e: React.MouseEvent<HTMLButtonElement>) => {
-        onClick?.(e);
+      (e: MouseEvent<HTMLAnchorElement>) => {
         tree?.events.emit('click');
+        onClick?.(e);
       },
       [onClick, tree?.events],
     );
 
     const handleFocus = useCallback(
-      (e: React.FocusEvent<HTMLButtonElement>) => {
+      (e: FocusEvent<HTMLAnchorElement>) => {
+        setActiveIndex(item.index);
         onFocus?.(e);
-        setHasFocusInside(true);
       },
-      [onFocus, setHasFocusInside],
+      [item.index, onFocus, setActiveIndex],
     );
 
     return (
-      <DropdownMenuButton
+      <MenuButton
         ref={item.ref}
+        size="sm"
+        startIcon={icon}
         tabIndex={isActive ? 0 : -1}
+        variant="secondary"
         {...getItemProps({
           disabled,
           onClick: handleClick,
@@ -55,7 +62,7 @@ export const DropdownMenuItem = memo<DropdownMenuItemProps>(
         {...props}
       >
         {children}
-      </DropdownMenuButton>
+      </MenuButton>
     );
   },
 );

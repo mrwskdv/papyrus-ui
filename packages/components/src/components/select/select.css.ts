@@ -1,4 +1,4 @@
-import { atoms } from '../../../../styles';
+import { atoms } from '@papyrus-ui/styles';
 
 export const input = atoms({
   position: 'relative',

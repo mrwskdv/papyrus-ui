@@ -1,6 +1,5 @@
+import { bpUp } from '@papyrus-ui/styles';
 import { style, styleVariants } from '@vanilla-extract/css';
-
-import { bpUp } from '../../../../styles';
 
 export const root = style({
   pointerEvents: 'none',

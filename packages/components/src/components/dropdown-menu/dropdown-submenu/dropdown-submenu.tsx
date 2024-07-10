@@ -16,12 +16,15 @@ import {
   useHover,
   useInteractions,
   useListItem,
-  useListNavigation,
   useRole,
   useTypeahead,
   useMergeRefs,
 } from '@floating-ui/react';
 import {
+  ButtonHTMLAttributes,
+  FC,
+  KeyboardEvent,
+  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -30,34 +33,37 @@ import {
   useState,
 } from 'react';
 
+import {
+  getFirstItem,
+  getNextItem,
+  getPrevItem,
+} from '../../../utils/list-navigation';
 import { Icon } from '../../icon';
-import { DropdownMenuButton } from '../dropdown-menu-button';
+import { MenuButton } from '../../menu-button';
 import { DropdownMenuContent } from '../dropdown-menu-content';
 import {
   DropdownMenuContext,
   DropdownMenuContextType,
 } from '../dropdown-menu.context';
 
-export interface DropdownSubmenuProps {
-  children?: React.ReactNode;
-  disabled?: boolean;
-  icon?: React.ReactElement;
+export interface DropdownSubmenuProps
+  extends ButtonHTMLAttributes<HTMLAnchorElement> {
+  icon?: ReactElement;
   initialOpen?: boolean;
   label: string;
-  selected?: boolean;
 }
 
-export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
+export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
   icon,
   initialOpen = false,
   label,
+  onKeyDown,
   children,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(initialOpen);
-  const [hasFocusInside, setHasFocusInside] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const elementsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const labelsRef = useRef<Array<string>>([]);
   const parent = useContext(DropdownMenuContext);
   const tree = useFloatingTree();
@@ -65,7 +71,7 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
   const parentId = useFloatingParentNodeId();
   const item = useListItem();
 
-  const { floatingStyles, refs, context } = useFloating<HTMLButtonElement>({
+  const { floatingStyles, refs, context } = useFloating<HTMLElement>({
     nodeId,
     open: isOpen,
     strategy: 'fixed',
@@ -83,11 +89,6 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
   });
 
   const buttonRef = useMergeRefs([refs.setReference, item.ref]);
-  const role = useRole(context, { role: 'menu' });
-
-  const hover = useHover(context, {
-    handleClose: safePolygon({ blockPointerEvents: true }),
-  });
 
   const click = useClick(context, {
     event: 'mousedown',
@@ -96,17 +97,13 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
     keyboardHandlers: true,
   });
 
+  const hover = useHover(context, {
+    handleClose: safePolygon({ blockPointerEvents: true }),
+  });
+
   const dismiss = useDismiss(context);
 
-  const listNavigation = useListNavigation(context, {
-    listRef: elementsRef,
-    activeIndex,
-    nested: true,
-    loop: true,
-    focusItemOnHover: hasFocusInside,
-    orientation: 'vertical',
-    onNavigate: setActiveIndex,
-  });
+  const role = useRole(context, { role: 'menu' });
 
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
@@ -115,25 +112,64 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [hover, click, role, dismiss, listNavigation, typeahead],
+    [hover, click, role, dismiss, typeahead],
+  );
+
+  const handleMenuItemKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getPrevItem(refs.floating, e.currentTarget);
+        item?.focus();
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getNextItem(refs.floating, e.currentTarget);
+        item?.focus();
+      }
+
+      if (!refs.reference.current) {
+        return;
+      }
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(false);
+        (refs.reference.current as HTMLAnchorElement).focus();
+      }
+    },
+    [refs.floating, refs.reference],
   );
 
   const menuCtx = useMemo<DropdownMenuContextType>(
     () => ({
       activeIndex,
-      collapsed: false,
       context,
       elementsRef,
       floatingStyles,
       getFloatingProps,
-      getItemProps,
       getReferenceProps,
-      hasFocusInside,
       isOpen,
       labelsRef,
       refs,
       setActiveIndex,
-      setHasFocusInside,
+      getItemProps: (userProps = {}) => ({
+        ...getItemProps(userProps),
+        onKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => {
+          handleMenuItemKeyDown(e);
+          userProps.onKeyDown?.(e);
+        },
+      }),
     }),
     [
       activeIndex,
@@ -142,24 +178,37 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
       getFloatingProps,
       getItemProps,
       getReferenceProps,
-      hasFocusInside,
+      handleMenuItemKeyDown,
       isOpen,
       refs,
     ],
   );
 
   const handleFocus = useCallback(() => {
-    setHasFocusInside(false);
-    parent.setHasFocusInside(true);
-  }, [parent]);
+    setActiveIndex(null);
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(true);
+
+        requestAnimationFrame(() => {
+          const item = getFirstItem(refs.floating);
+          item?.focus();
+        });
+      }
+
+      onKeyDown?.(e);
+    },
+    [onKeyDown, refs.floating],
+  );
 
   useEffect(() => {
     if (!tree) {
       return;
-    }
-
-    function handleTreeClick() {
-      setIsOpen(false);
     }
 
     function handleSubMenuOpen(event: { nodeId: string; parentId: string }) {
@@ -168,11 +217,9 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
       }
     }
 
-    tree.events.on('click', handleTreeClick);
     tree.events.on('menuopen', handleSubMenuOpen);
 
     return () => {
-      tree.events.off('click', handleTreeClick);
       tree.events.off('menuopen', handleSubMenuOpen);
     };
   }, [tree, nodeId, parentId]);
@@ -187,21 +234,24 @@ export const DropdownSubmenu: React.FC<DropdownSubmenuProps> = ({
 
   return (
     <FloatingNode id={nodeId}>
-      <DropdownMenuButton
+      <MenuButton
         ref={buttonRef}
         endIcon={<Icon name="chevron-right" />}
         role="menuitem"
+        size="sm"
         startIcon={icon}
         tabIndex={isActive ? 0 : -1}
+        variant="secondary"
         {...getReferenceProps(
           parent.getItemProps({
             onFocus: handleFocus,
+            onKeyDown: handleKeyDown,
           }),
         )}
         {...props}
       >
         {label}
-      </DropdownMenuButton>
+      </MenuButton>
 
       <DropdownMenuContext.Provider value={menuCtx}>
         <DropdownMenuContent initialFocus={-1}>{children}</DropdownMenuContent>

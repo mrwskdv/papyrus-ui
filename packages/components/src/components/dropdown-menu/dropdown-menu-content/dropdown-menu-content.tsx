@@ -7,14 +7,14 @@ import {
 } from '@floating-ui/react';
 import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
-import { useContext } from 'react';
+import { FC, HTMLAttributes, useContext } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { Flex } from '../../flex';
 import { DropdownMenuContext } from '../dropdown-menu.context';
 
 export interface DropdownMenuContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends HTMLAttributes<HTMLDivElement> {
   initialFocus?: number;
 }
 
@@ -24,7 +24,7 @@ const TRANSITION_TIMEOUT = {
   exit: 200,
 };
 
-export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
+export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
   children,
   className,
   initialFocus = 0,
@@ -57,6 +57,7 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
             >
               <Flex
                 ref={refs.setFloating}
+                as="ul"
                 bg="white"
                 border={1}
                 borderColor="neutral100"

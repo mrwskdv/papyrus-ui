@@ -2,7 +2,6 @@
 
 import {
   autoUpdate,
-  FloatingTree,
   flip,
   offset as offsetFn,
   shift,
@@ -10,14 +9,30 @@ import {
   useDismiss,
   useFloating,
   useInteractions,
-  useListNavigation,
   useRole,
   useTypeahead,
   Placement,
-  useFloatingTree,
   OffsetOptions,
+  FloatingTree,
+  useFloatingTree,
 } from '@floating-ui/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FC,
+  KeyboardEvent,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+
+import {
+  getFirstItem,
+  getLastItem,
+  getNextItem,
+  getPrevItem,
+} from '../../utils/list-navigation';
 
 import { DropdownMenuContent } from './dropdown-menu-content';
 import { DropdownMenuItem } from './dropdown-menu-item';
@@ -33,7 +48,7 @@ export type DropdownMenuPlacement = Placement;
 export type DropdownMenuStrategy = 'fixed' | 'absolute';
 
 export interface DropdownMenuProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   offset?: number | OffsetOptions;
   placement?: DropdownMenuPlacement;
   strategy?: DropdownMenuStrategy;
@@ -44,20 +59,19 @@ const DEFAULT_OFFSET: OffsetOptions = {
   alignmentAxis: -2,
 };
 
-export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
+export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
   children,
   offset = DEFAULT_OFFSET,
   placement = 'bottom-start',
   strategy = 'fixed',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasFocusInside, setHasFocusInside] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const elementsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const elementsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const labelsRef = useRef<Array<string>>([]);
   const tree = useFloatingTree();
 
-  const { floatingStyles, refs, context } = useFloating<HTMLButtonElement>({
+  const { floatingStyles, refs, context } = useFloating<HTMLElement>({
     open: isOpen,
     strategy,
     onOpenChange: setIsOpen,
@@ -66,27 +80,16 @@ export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
     whileElementsMounted: autoUpdate,
   });
 
-  const role = useRole(context, { role: 'menu' });
-
   const click = useClick(context, {
     event: 'mousedown',
     toggle: true,
     ignoreMouse: false,
+    keyboardHandlers: false,
   });
 
-  const dismiss = useDismiss(context, {
-    bubbles: true,
-  });
+  const dismiss = useDismiss(context);
 
-  const listNavigation = useListNavigation(context, {
-    listRef: elementsRef,
-    activeIndex,
-    nested: true,
-    loop: true,
-    focusItemOnHover: hasFocusInside,
-    orientation: 'vertical',
-    onNavigate: setActiveIndex,
-  });
+  const role = useRole(context, { role: 'menu' });
 
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
@@ -95,26 +98,82 @@ export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [click, role, dismiss, listNavigation, typeahead],
+    [click, role, dismiss, typeahead],
+  );
+
+  const handleMenuKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLUListElement>) => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getLastItem(refs.floating);
+        item?.focus();
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getFirstItem(refs.floating);
+        item?.focus();
+      }
+    },
+    [refs.floating],
+  );
+
+  const handleMenuItemKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getPrevItem(refs.floating, e.currentTarget);
+        item?.focus();
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getNextItem(refs.floating, e.currentTarget);
+        item?.focus();
+      }
+    },
+    [refs.floating],
   );
 
   const menuCtx = useMemo<DropdownMenuContextType>(
     () => ({
       activeIndex,
-      collapsed: false,
       context,
       elementsRef,
       floatingStyles,
-      getFloatingProps,
-      getItemProps,
       getReferenceProps,
-      hasFocusInside,
-      indent: 0,
       isOpen,
       labelsRef,
       refs,
       setActiveIndex,
-      setHasFocusInside,
+      getFloatingProps: (userProps = {}) => ({
+        ...getFloatingProps({
+          ...userProps,
+          onKeyDown: (e: KeyboardEvent<HTMLUListElement>) => {
+            handleMenuKeyDown(e);
+            userProps.onKeyDown?.(e);
+          },
+        }),
+      }),
+      getItemProps: (userProps = {}) => ({
+        ...getItemProps({
+          ...userProps,
+          onKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => {
+            handleMenuItemKeyDown(e);
+            userProps.onKeyDown?.(e);
+          },
+        }),
+      }),
     }),
     [
       activeIndex,
@@ -123,7 +182,8 @@ export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
       getFloatingProps,
       getItemProps,
       getReferenceProps,
-      hasFocusInside,
+      handleMenuItemKeyDown,
+      handleMenuKeyDown,
       isOpen,
       refs,
     ],
@@ -145,6 +205,23 @@ export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
     };
   }, [tree]);
 
+  useEffect(() => {
+    function handleOutsideClick(e: MouseEvent) {
+      if (
+        e.target instanceof Node &&
+        !refs.floating.current?.contains(e.target)
+      ) {
+        setActiveIndex(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [refs.floating]);
+
   return (
     <DropdownMenuContext.Provider value={menuCtx}>
       {children}
@@ -152,9 +229,9 @@ export const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   );
 };
 
-const DropdownMenuTree: React.FC<DropdownMenuProps> = (props) => (
+const DropdownMenuTree = ({ children, ...props }: DropdownMenuProps) => (
   <FloatingTree>
-    <DropdownMenuComponent {...props} />
+    <DropdownMenuComponent {...props}>{children}</DropdownMenuComponent>
   </FloatingTree>
 );
 

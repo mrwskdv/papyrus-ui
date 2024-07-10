@@ -1,6 +1,5 @@
+import { atoms, MIN_WIDTH, SPACING, vars } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
-
-import { atoms, MIN_WIDTH, SPACING, vars } from '../../../../styles';
 
 export const root = style({
   display: 'flex',

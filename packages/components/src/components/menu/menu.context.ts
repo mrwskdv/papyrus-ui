@@ -11,7 +11,7 @@ export interface MenuContextType {
   menuRef: RefObject<HTMLElement>;
   size: MenuSize;
   variant: MenuVariant;
-  updateActiveIndex: (index: Maybe<number>) => void;
+  setActiveIndex: (index: Maybe<number>) => void;
   onCollapsedChange?: (collapsed: boolean) => void;
 }
 
@@ -22,7 +22,7 @@ export const MenuContext = createContext<MenuContextType>({
   menuRef: { current: null },
   size: 'md',
   variant: 'secondary',
-  updateActiveIndex: () => {
+  setActiveIndex: () => {
     // do nothing
   },
   onCollapsedChange: undefined,

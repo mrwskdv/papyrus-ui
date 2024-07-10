@@ -2,7 +2,7 @@
 
 import { useFloatingTree, useListItem } from '@floating-ui/react';
 import {
-  ButtonHTMLAttributes,
+  AnchorHTMLAttributes,
   FocusEvent,
   memo,
   MouseEvent,
@@ -11,29 +11,35 @@ import {
   useContext,
 } from 'react';
 
-import { MenuBarButton } from '../menu-bar-button';
+import { MenuButton } from '../../menu-button';
 import { MenuBarContext } from '../menu-bar.context';
 
 export interface MenuBarItemProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'type'> {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   disabled?: boolean;
+  icon?: ReactElement;
   selected?: boolean;
-  startIcon?: ReactElement;
-  endIcon?: ReactElement;
   children: string;
 }
 
 export const MenuBarItem = memo<MenuBarItemProps>(
-  ({ children, disabled, onClick, onFocus, ...props }) => {
-    const { activeIndex, getItemProps, setHasFocusInside } =
-      useContext(MenuBarContext);
+  ({ disabled, icon, onClick, onFocus, children, ...props }) => {
+    const {
+      activeIndex,
+      collapsed,
+      getItemProps,
+      isNested,
+      setActiveIndex,
+      size,
+      variant,
+    } = useContext(MenuBarContext);
 
     const item = useListItem({ label: disabled ? null : children });
     const tree = useFloatingTree();
     const isActive = item.index === activeIndex;
 
     const handleClick = useCallback(
-      (e: MouseEvent<HTMLButtonElement>) => {
+      (e: MouseEvent<HTMLAnchorElement>) => {
         tree?.events.emit('click');
         onClick?.(e);
       },
@@ -41,17 +47,22 @@ export const MenuBarItem = memo<MenuBarItemProps>(
     );
 
     const handleFocus = useCallback(
-      (e: FocusEvent<HTMLButtonElement>) => {
-        setHasFocusInside(true);
+      (e: FocusEvent<HTMLAnchorElement>) => {
+        setActiveIndex(item.index);
         onFocus?.(e);
       },
-      [onFocus, setHasFocusInside],
+      [item.index, onFocus, setActiveIndex],
     );
 
     return (
-      <MenuBarButton
+      <MenuButton
         ref={item.ref}
+        collapsed={collapsed}
+        direction={isNested ? 'vertical' : 'horizontal'}
+        size={isNested ? 'sm' : size}
+        startIcon={icon}
         tabIndex={isActive ? 0 : -1}
+        variant={variant}
         {...getItemProps({
           disabled,
           onClick: handleClick,
@@ -60,7 +71,7 @@ export const MenuBarItem = memo<MenuBarItemProps>(
         {...props}
       >
         {children}
-      </MenuBarButton>
+      </MenuButton>
     );
   },
 );

@@ -15,22 +15,18 @@ import { MenuBarSize, MenuBarVariant } from './menu-bar.types';
 export interface MenuBarContextType {
   activeIndex: number | null;
   collapsed: boolean;
-  context: FloatingContext<HTMLButtonElement>;
-  elementsRef: MutableRefObject<Array<HTMLButtonElement | null>>;
+  context: FloatingContext<HTMLElement>;
+  elementsRef: MutableRefObject<Array<HTMLElement | null>>;
   floatingStyles: CSSProperties;
   getFloatingProps: (
     userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
-  getItemProps: (
-    userProps?: HTMLProps<HTMLButtonElement>,
-  ) => Record<string, unknown>;
-  hasFocusInside: boolean;
+  getItemProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   isOpen: boolean;
   isNested: boolean;
   labelsRef: MutableRefObject<Array<string>>;
-  refs: ExtendedRefs<HTMLButtonElement>;
+  refs: ExtendedRefs<HTMLElement>;
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
-  setHasFocusInside: Dispatch<SetStateAction<boolean>>;
   size: MenuBarSize;
   variant: MenuBarVariant;
 }
@@ -38,20 +34,16 @@ export interface MenuBarContextType {
 export const MenuBarContext = createContext<MenuBarContextType>({
   activeIndex: null,
   collapsed: false,
-  context: {} as FloatingContext<HTMLButtonElement>,
-  elementsRef: {} as MutableRefObject<Array<HTMLButtonElement>>,
+  context: {} as FloatingContext<HTMLElement>,
+  elementsRef: {} as MutableRefObject<Array<HTMLElement>>,
   floatingStyles: {},
   getFloatingProps: () => ({}),
   getItemProps: () => ({}),
-  hasFocusInside: false,
   isOpen: false,
   isNested: false,
   labelsRef: {} as MutableRefObject<Array<string>>,
-  refs: {} as ExtendedRefs<HTMLButtonElement>,
+  refs: {} as ExtendedRefs<HTMLElement>,
   setActiveIndex: () => {
-    // Do nothing
-  },
-  setHasFocusInside: () => {
     // Do nothing
   },
   size: 'md',

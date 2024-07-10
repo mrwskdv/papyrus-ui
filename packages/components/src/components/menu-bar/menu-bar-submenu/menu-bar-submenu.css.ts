@@ -21,7 +21,7 @@ export const menuListVariant = {
     borderColor: 'neutral100',
     bg: 'white',
   }),
-  dark: atoms({
+  ghost: atoms({
     borderColor: 'primary800',
     bg: 'primary700',
   }),

@@ -1,24 +1,32 @@
 'use client';
 
-import { cloneElement, isValidElement, useCallback, useContext } from 'react';
+import {
+  cloneElement,
+  FC,
+  HTMLProps,
+  isValidElement,
+  ReactElement,
+  useCallback,
+  useContext,
+} from 'react';
 
 import { DropdownMenuContext } from '../dropdown-menu.context';
 
 export interface DropdownMenuTriggerProps {
-  children: React.ReactElement;
+  children: ReactElement;
 }
 
-export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
+export const DropdownMenuTrigger: FC<DropdownMenuTriggerProps> = ({
   children,
 }: DropdownMenuTriggerProps) => {
-  const { refs, getReferenceProps, setHasFocusInside } =
+  const { refs, getReferenceProps, setActiveIndex } =
     useContext(DropdownMenuContext);
 
   const handleFocus = useCallback(() => {
-    setHasFocusInside(false);
-  }, [setHasFocusInside]);
+    setActiveIndex(null);
+  }, [setActiveIndex]);
 
-  return isValidElement<React.HTMLProps<HTMLButtonElement>>(children)
+  return isValidElement<HTMLProps<HTMLButtonElement>>(children)
     ? cloneElement(children, {
         ref: refs.setReference,
         ...getReferenceProps({

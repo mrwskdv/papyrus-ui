@@ -1,6 +1,5 @@
+import { atoms } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
-
-import { atoms } from '../../../../styles';
 
 export const root = atoms({
   display: 'inline-flex',

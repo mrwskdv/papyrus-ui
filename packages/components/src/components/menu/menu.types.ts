@@ -1,3 +1,3 @@
 export type MenuSize = 'sm' | 'md' | 'lg';
 
-export type MenuVariant = 'primary' | 'secondary' | 'dark';
+export type MenuVariant = 'primary' | 'secondary' | 'ghost';

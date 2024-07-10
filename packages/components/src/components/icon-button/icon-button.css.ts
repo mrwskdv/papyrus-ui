@@ -1,6 +1,5 @@
+import { atoms, vars } from '@papyrus-ui/styles';
 import { style, styleVariants } from '@vanilla-extract/css';
-
-import { atoms, vars } from '../../../../styles';
 
 import { IconButtonSize } from './icon-button';
 

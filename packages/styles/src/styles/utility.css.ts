@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
+import { MAX_HEIGHT } from '../const';
+
 import { vars } from './global.css';
 
 /**
@@ -37,13 +39,13 @@ export const fadeInStyle = style({
 });
 
 export const collapseStyle = style({
-  minHeight: 0,
+  maxHeight: 0,
   transition: vars.transition.collapse,
   overflowY: 'hidden',
 });
 
 export const collapseInStyle = style({
-  minHeight: 'max-content',
+  maxHeight: MAX_HEIGHT[96],
 });
 
 /**

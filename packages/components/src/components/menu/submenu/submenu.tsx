@@ -24,14 +24,20 @@ import {
 import { Transition } from 'react-transition-group';
 
 import { Maybe } from '../../../types';
-import { getFirstItem, getLastItem } from '../../../utils/list-navigation';
+import {
+  getFirstItem,
+  getLastItem,
+  getNextItem,
+  getPrevItem,
+} from '../../../utils/list-navigation';
 import { Icon } from '../../icon';
-import { MenuButton } from '../menu-button';
+import { MenuButton } from '../../menu-button';
 import { MenuContext, MenuContextType } from '../menu.context';
 
 import * as S from './submenu.css';
 
-export interface SubmenuProps extends HTMLAttributes<HTMLButtonElement> {
+export interface SubmenuProps
+  extends Omit<HTMLAttributes<HTMLAnchorElement>, 'href'> {
   disabled?: boolean;
   icon?: ReactElement;
   index?: number;
@@ -56,20 +62,18 @@ export const Submenu: FC<SubmenuProps> = ({
   selected,
   onClick,
   onFocus,
+  onKeyDown,
   children,
+  ...props
 }) => {
   const [isOpen, setIsOpen] = useState(initialOpen);
   const [activeIndex, setActiveIndex] = useState<Maybe<number>>(null);
   const parent = useContext(MenuContext);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const isActive = parent.activeIndex === index;
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const buttonId = useId();
   const menuId = useId();
-
-  const updateActiveIndex = useCallback((index: Maybe<number>) => {
-    setActiveIndex(index);
-  }, []);
+  const isActive = index === parent.activeIndex;
 
   const menuCtx = useMemo<MenuContextType>(
     () => ({
@@ -79,20 +83,13 @@ export const Submenu: FC<SubmenuProps> = ({
       menuRef: parent.menuRef,
       size: parent.size,
       variant: parent.variant,
-      updateActiveIndex,
+      setActiveIndex,
     }),
-    [
-      activeIndex,
-      parent.indent,
-      parent.menuRef,
-      parent.size,
-      parent.variant,
-      updateActiveIndex,
-    ],
+    [activeIndex, parent.indent, parent.menuRef, parent.size, parent.variant],
   );
 
   const handleClick = useCallback(
-    (e: ReactMouseEvent<HTMLButtonElement>) => {
+    (e: ReactMouseEvent<HTMLAnchorElement>) => {
       setIsOpen((prev) => !prev);
 
       if (parent.collapsed) {
@@ -105,16 +102,48 @@ export const Submenu: FC<SubmenuProps> = ({
   );
 
   const handleFocus = useCallback(
-    (e: FocusEvent<HTMLButtonElement>) => {
+    (e: FocusEvent<HTMLAnchorElement>) => {
       setActiveIndex(null);
-      parent.updateActiveIndex(index);
+      parent.setActiveIndex(index);
       onFocus?.(e);
     },
     [index, onFocus, parent],
   );
 
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
+
+      if (!menuRef.current) {
+        onKeyDown?.(e);
+        return;
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getPrevItem(menuRef, e.currentTarget);
+        item?.focus();
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getNextItem(menuRef, e.currentTarget);
+        item?.focus();
+      }
+
+      onKeyDown?.(e);
+    },
+    [menuRef, onKeyDown],
+  );
+
   const handleMenuKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLDivElement>) => {
+    (e: KeyboardEvent<HTMLUListElement>) => {
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
@@ -159,23 +188,29 @@ export const Submenu: FC<SubmenuProps> = ({
         aria-controls={isOpen ? menuId : undefined}
         aria-expanded={isOpen ? 'true' : 'false'}
         aria-haspopup="menu"
+        collapsed={parent.collapsed}
         disabled={disabled}
         endIcon={
           <Icon flip={!isOpen ? 'vertical' : 'none'} name="chevron-up" />
         }
         id={buttonId}
+        indent={parent.indent}
         role="menuitem"
         selected={selected}
+        size={parent.size}
         startIcon={icon}
         tabIndex={isActive && activeIndex === null ? 0 : -1}
+        variant={parent.variant}
         onClick={handleClick}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        {...props}
       >
         {label}
       </MenuButton>
 
-      <MenuContext.Provider value={menuCtx}>
-        {!parent.collapsed && (
+      {!parent.collapsed && (
+        <MenuContext.Provider value={menuCtx}>
           <Transition
             in={isOpen}
             mountOnEnter
@@ -183,12 +218,11 @@ export const Submenu: FC<SubmenuProps> = ({
             unmountOnExit
           >
             {(status) => (
-              <div
+              <ul
                 ref={menuRef}
                 aria-labelledby={buttonId}
                 className={cn(
                   S.menuList,
-                  S.menuListVariant[parent.variant],
                   collapseStyle,
                   status === 'entered' && collapseInStyle,
                 )}
@@ -202,11 +236,11 @@ export const Submenu: FC<SubmenuProps> = ({
                     ? cloneElement(child, { index: i })
                     : null,
                 )}
-              </div>
+              </ul>
             )}
           </Transition>
-        )}
-      </MenuContext.Provider>
+        </MenuContext.Provider>
+      )}
     </>
   );
 };

@@ -1,6 +1,5 @@
+import { vars } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
-
-import { vars } from '../../../../styles';
 
 export const rootInvalid = style({
   borderColor: vars.color.danger400,

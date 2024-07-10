@@ -12,42 +12,34 @@ import {
 
 export interface DropdownMenuContextType {
   activeIndex: number | null;
-  context: FloatingContext<HTMLButtonElement>;
-  elementsRef: MutableRefObject<Array<HTMLButtonElement | null>>;
+  context: FloatingContext<HTMLElement>;
+  elementsRef: MutableRefObject<Array<HTMLElement | null>>;
   floatingStyles: CSSProperties;
   getFloatingProps: (
     userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
-  getItemProps: (
-    userProps?: HTMLProps<HTMLButtonElement>,
-  ) => Record<string, unknown>;
+  getItemProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   getReferenceProps: (
     userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
-  hasFocusInside: boolean;
   isOpen: boolean;
   labelsRef: MutableRefObject<Array<string>>;
-  refs: ExtendedRefs<HTMLButtonElement>;
+  refs: ExtendedRefs<HTMLElement>;
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
-  setHasFocusInside: Dispatch<SetStateAction<boolean>>;
 }
 
 export const DropdownMenuContext = createContext<DropdownMenuContextType>({
   activeIndex: null,
-  context: {} as FloatingContext<HTMLButtonElement>,
-  elementsRef: {} as MutableRefObject<Array<HTMLButtonElement>>,
+  context: {} as FloatingContext<HTMLElement>,
+  elementsRef: {} as MutableRefObject<Array<HTMLElement>>,
   floatingStyles: {},
   getFloatingProps: () => ({}),
   getItemProps: () => ({}),
   getReferenceProps: () => ({}),
-  hasFocusInside: false,
   isOpen: false,
   labelsRef: {} as MutableRefObject<Array<string>>,
-  refs: {} as ExtendedRefs<HTMLButtonElement>,
+  refs: {} as ExtendedRefs<HTMLElement>,
   setActiveIndex: () => {
-    // Do nothing
-  },
-  setHasFocusInside: () => {
     // Do nothing
   },
 });

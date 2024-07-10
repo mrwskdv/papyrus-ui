@@ -1,8 +1,8 @@
-import { atoms } from '../../../../styles';
+import { atoms } from '@papyrus-ui/styles';
 
 export const root = atoms({
   display: 'inline-flex',
-  px: 0.5,
+  mx: '-0.5',
 });
 
 export const rootVariant = {
@@ -12,7 +12,7 @@ export const rootVariant = {
   secondary: atoms({
     bg: 'white',
   }),
-  dark: atoms({
+  ghost: atoms({
     bg: 'primary700',
   }),
 };

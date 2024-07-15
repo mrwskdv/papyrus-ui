@@ -1,15 +1,16 @@
 import { atoms, vars } from '@papyrus-ui/styles';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { styleVariants } from '@vanilla-extract/css';
 
 import { IconButtonSize } from './icon-button';
 
-export const root = style({
+export const root = atoms({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   border: 1,
-  lineHeight: 1,
-  transition: vars.transition.base,
+  rounded: 'md',
+  lineHeight: 'none',
+  transition: 'base',
 });
 
 export const rootVariant = styleVariants({

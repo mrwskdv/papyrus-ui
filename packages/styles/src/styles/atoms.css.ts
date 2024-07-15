@@ -62,6 +62,7 @@ const baseProperties = defineProperties({
     objectFit: OBJECT_FIT,
     textDecoration: TEXT_DECORATION,
     textOverflow: TEXT_OVERFLOW,
+    transition: vars.transition,
     verticalAlign: VERTICAL_ALIGN,
     whiteSpace: WHITE_SPACE,
     zIndex: Z_INDEX,

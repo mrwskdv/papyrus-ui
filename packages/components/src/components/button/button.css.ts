@@ -1,30 +1,30 @@
 import { atoms, vars } from '@papyrus-ui/styles';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { styleVariants } from '@vanilla-extract/css';
 
-export const root = style({
+export const root = atoms({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: vars.borderRadius.md,
+  rounded: 'md',
   border: 1,
-  transition: vars.transition.base,
 });
 
 export const rootVariant = styleVariants({
   primary: {
     borderColor: 'transparent',
     color: vars.color.white,
-    background: vars.color.primary500,
+    backgroundColor: vars.color.primary500,
     boxShadow: vars.boxShadow.sm,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.primary400,
+        backgroundColor: vars.color.primary400,
       },
       '&:active': {
-        background: vars.color.primary600,
+        backgroundColor: vars.color.primary600,
       },
       '&:disabled': {
-        background: vars.color.neutral200,
+        backgroundColor: vars.color.neutral200,
       },
     },
   },
@@ -33,6 +33,7 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     background: vars.gradient.highlight,
     boxShadow: vars.boxShadow.sm,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         background: vars.gradient.highlightAlt,
@@ -45,84 +46,89 @@ export const rootVariant = styleVariants({
   secondary: {
     borderColor: 'transparent',
     color: vars.color.neutral900,
-    background: vars.color.neutral100,
+    backgroundColor: vars.color.neutral100,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.neutral200,
+        backgroundColor: vars.color.neutral200,
       },
       '&:active': {
-        background: vars.color.neutral300,
+        backgroundColor: vars.color.neutral300,
       },
       '&:disabled': {
         color: vars.color.neutral300,
-        background: vars.color.neutral50,
+        backgroundColor: vars.color.neutral50,
       },
     },
   },
   tertiary: {
     borderColor: 'transparent',
     color: vars.color.primary500,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.primary100,
+        backgroundColor: vars.color.primary100,
       },
       '&:active': {
-        background: vars.color.primary200,
+        backgroundColor: vars.color.primary200,
       },
       '&:disabled': {
         color: vars.color.neutral300,
-        background: 'transparent',
+        backgroundColor: 'transparent',
       },
     },
   },
   success: {
     borderColor: 'transparent',
     color: vars.color.white,
-    background: vars.color.success500,
+    backgroundColor: vars.color.success500,
     boxShadow: vars.boxShadow.sm,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.success400,
+        backgroundColor: vars.color.success400,
       },
       '&:active': {
-        background: vars.color.success600,
+        backgroundColor: vars.color.success600,
       },
       '&:disabled': {
-        background: vars.color.neutral200,
+        backgroundColor: vars.color.neutral200,
       },
     },
   },
   warning: {
     borderColor: 'transparent',
     color: vars.color.white,
-    background: vars.color.warning500,
+    backgroundColor: vars.color.warning500,
     boxShadow: vars.boxShadow.sm,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.warning400,
+        backgroundColor: vars.color.warning400,
       },
       '&:active': {
-        background: vars.color.warning600,
+        backgroundColor: vars.color.warning600,
       },
       '&:disabled': {
-        background: vars.color.neutral200,
+        backgroundColor: vars.color.neutral200,
       },
     },
   },
   danger: {
     borderColor: 'transparent',
     color: vars.color.white,
-    background: vars.color.danger500,
+    backgroundColor: vars.color.danger500,
     boxShadow: vars.boxShadow.sm,
+    transition: vars.transition.base,
     selectors: {
       '&:hover': {
-        background: vars.color.danger400,
+        backgroundColor: vars.color.danger400,
       },
       '&:active': {
-        background: vars.color.danger600,
+        backgroundColor: vars.color.danger600,
       },
       '&:disabled': {
-        background: vars.color.neutral200,
+        backgroundColor: vars.color.neutral200,
       },
     },
   },
@@ -131,15 +137,15 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     selectors: {
       '&:hover': {
-        background: vars.color.light300,
+        backgroundColor: vars.color.light300,
       },
       '&:active': {
-        background: vars.color.light400,
+        backgroundColor: vars.color.light400,
       },
       '&:disabled': {
         borderColor: vars.color.light400,
         color: vars.color.light400,
-        background: 'transparent',
+        backgroundColor: 'transparent',
       },
     },
   },

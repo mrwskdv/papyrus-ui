@@ -1,5 +1,12 @@
 # @papyrus-ui/styles
 
+## 0.1.3
+
+### Patch Changes
+
+- 14c1ace: Added transition property to atoms
+- 14c1ace: Fixed checkbox transition
+
 ## 0.1.1
 
 ### Patch Changes

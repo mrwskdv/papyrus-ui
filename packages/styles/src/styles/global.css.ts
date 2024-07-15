@@ -191,7 +191,6 @@ globalStyle('[type=checkbox], [type=radio]', {
   verticalAlign: 'baseline',
   backgroundColor: vars.color.neutral100,
   backgroundOrigin: 'border-box',
-  transition: vars.transition.base,
   WebkitPrintColorAdjust: 'exact',
   printColorAdjust: 'exact',
   WebkitUserSelect: 'none',

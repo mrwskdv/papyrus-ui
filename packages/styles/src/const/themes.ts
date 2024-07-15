@@ -159,10 +159,6 @@ export const LIGHT_THEME: Theme = {
       'linear-gradient(90deg, #FF512F 0%, #DD2476 50%, #FF512F 100%) left / 200% auto',
     highlightAlt:
       'linear-gradient(90deg, #FF512F 0%, #DD2476 50%, #FF512F 100%) right / 200% auto',
-    skeleton:
-      'linear-gradient(90deg, #EAEAEB 0%, #F4F5F5 99.82%, #EAEAEB 199.63%) left / 200% auto',
-    skeletonAlt:
-      'linear-gradient(90deg, #EAEAEB 0%, #F4F5F5 99.82%, #EAEAEB 199.63%) right / 200% auto',
   },
 
   boxShadow: {

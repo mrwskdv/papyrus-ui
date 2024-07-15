@@ -135,8 +135,6 @@ export type Theme = {
   gradient: {
     highlight: string;
     highlightAlt: string;
-    skeleton: string;
-    skeletonAlt: string;
   };
   fontWeight: {
     extraLight: string;
@@ -149,5 +147,9 @@ export type Theme = {
     regular: string;
     thin: string;
   };
-  transition: { fade: string; collapse: string; base: string };
+  transition: {
+    base: string;
+    fade: string;
+    collapse: string;
+  };
 };

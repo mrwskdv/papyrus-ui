@@ -1,35 +1,17 @@
-import cn from 'classnames';
-import {
-  ChangeEventHandler,
-  forwardRef,
-  InputHTMLAttributes,
-  memo,
-} from 'react';
-
-import * as S from './range.css';
+import { ChangeEventHandler, forwardRef, InputHTMLAttributes } from 'react';
 
 export interface RangeProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   defaultValue?: number;
   disabled?: boolean;
-  invalid?: boolean;
   min?: number;
   max?: number;
   value?: number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const RangeComponent = forwardRef<HTMLInputElement, RangeProps>(
-  ({ invalid, className, ...props }, ref) => (
-    <input
-      ref={ref}
-      className={cn(invalid && S.rootInvalid, className)}
-      type="range"
-      {...props}
-    />
-  ),
-);
+export const Range = forwardRef<HTMLInputElement, RangeProps>((props, ref) => (
+  <input ref={ref} type="range" {...props} />
+));
 
-RangeComponent.displayName = 'Range';
-
-export const Range = memo(RangeComponent);
+Range.displayName = 'Range';

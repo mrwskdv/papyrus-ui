@@ -32,25 +32,6 @@ export function Basic(args: RangeProps) {
   );
 }
 
-export function Invalid(args: RangeProps) {
-  return (
-    <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="range-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
-        Zoom
-      </Text>
-      <Range {...args} id="range-invalid" invalid />
-    </>
-  );
-}
-
 export function Disabled(args: RangeProps) {
   return (
     <>

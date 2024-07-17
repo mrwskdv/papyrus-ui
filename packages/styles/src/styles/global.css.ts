@@ -188,9 +188,12 @@ globalStyle('[type=checkbox], [type=radio]', {
   height: '1rem',
   border: `1px solid ${vars.color.neutral300}`,
   lineHeight: '100%',
-  verticalAlign: 'baseline',
+  verticalAlign: '-0.125em',
   backgroundColor: vars.color.neutral100,
   backgroundOrigin: 'border-box',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  transition: vars.transition.base,
   WebkitPrintColorAdjust: 'exact',
   printColorAdjust: 'exact',
   WebkitUserSelect: 'none',
@@ -211,6 +214,9 @@ globalStyle('[type=checkbox]', {
  */
 globalStyle('[type=radio]', {
   borderRadius: vars.borderRadius.full,
+  backgroundImage:
+    "url(\"data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='16px' height='16px'><circle cx='8' cy='8' r='8' fill='white'/%3E%3C/svg%3E\")",
+  backgroundSize: 0,
 });
 
 /**
@@ -229,8 +235,6 @@ globalStyle(
 globalStyle('[type=checkbox]:checked, [type=radio]:checked', {
   borderColor: 'transparent',
   backgroundColor: vars.color.primary500,
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
 });
 
 /**
@@ -246,8 +250,6 @@ globalStyle('[type=checkbox]:checked', {
  * Add custom dot for checked radio buttons.
  */
 globalStyle('[type=radio]:checked', {
-  backgroundImage:
-    "url(\"data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='16px' height='16px'><circle cx='8' cy='8' r='8' fill='white'/%3E%3C/svg%3E\")",
   backgroundSize: '37.5%',
 });
 

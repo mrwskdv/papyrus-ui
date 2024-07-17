@@ -11,7 +11,7 @@ import {
   ASPECT_RATIO,
   BORDER_STYLE,
   BORDER_WIDTH,
-  BREAKPOINT,
+  BREAKPOINTS,
   COLOR,
   DISPLAY,
   FLEX,
@@ -81,11 +81,11 @@ export type ResponsiveValue<Value extends string | number> = ConditionalValue<
 >;
 
 const responsiveProperties = defineProperties({
-  conditions: mapValues(BREAKPOINT, (bp) =>
+  conditions: mapValues(BREAKPOINTS, (bp) =>
     bp === 0 ? {} : { '@media': `screen and (min-width: ${bp}px)` },
   ),
 
-  responsiveArray: ['mobile', 'mobileLg', 'tablet', 'tabletLg', 'desktop'],
+  responsiveArray: ['mobile', 'mobileLg', 'tablet', 'desktop', 'desktopLg'],
   defaultCondition: 'mobile',
 
   properties: {

@@ -1,5 +1,12 @@
 # @papyrus-ui/styles
 
+## 0.1.4
+
+### Patch Changes
+
+- 14da4f3: Improved checkbox and radio
+- 14da4f3: Changed reakpoint names
+
 ## 0.1.3
 
 ### Patch Changes

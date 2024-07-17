@@ -1,6 +1,6 @@
 {
   "name": "@papyrus-ui/styles",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Global styles, themes and style utilities for implementing components based on the Papyrus UI design system.",
   "files": [
     "CHANGELOG.md",

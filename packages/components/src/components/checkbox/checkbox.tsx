@@ -1,28 +1,31 @@
-import cn from 'classnames';
-import { forwardRef, memo } from 'react';
+import {
+  ChangeEventHandler,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
 
 import * as S from './checkbox.css';
+
 export interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  invalid?: boolean;
   value?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  children?: ReactNode;
 }
 
-const CheckboxComponent = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ invalid, className, ...props }, ref) => (
-    <input
-      ref={ref}
-      className={cn(invalid && S.rootInvalid, className)}
-      type="checkbox"
-      {...props}
-    />
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ className, id, children, ...props }, ref) => (
+    <div className={className}>
+      <input ref={ref} id={id} type="checkbox" {...props} />
+      <label className={S.label} htmlFor={id}>
+        {children}
+      </label>
+    </div>
   ),
 );
 
-CheckboxComponent.displayName = 'Checkbox';
-
-export const Checkbox = memo(CheckboxComponent);
+Checkbox.displayName = 'Checkbox';

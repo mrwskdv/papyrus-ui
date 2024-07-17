@@ -1,9 +1,8 @@
-import cn from 'classnames';
 import {
   ChangeEventHandler,
   forwardRef,
   InputHTMLAttributes,
-  memo,
+  ReactNode,
 } from 'react';
 
 import * as S from './radio.css';
@@ -13,23 +12,20 @@ export interface RadioProps
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  invalid?: boolean;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  children?: ReactNode;
 }
 
-const RadioComponent = forwardRef<HTMLInputElement, RadioProps>(
-  ({ invalid, className, ...props }, ref) => (
-    <input
-      ref={ref}
-      className={cn(invalid && S.rootInvalid, className)}
-      data-invalid={invalid}
-      type="radio"
-      {...props}
-    />
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ className, id, children, ...props }, ref) => (
+    <div className={className}>
+      <input ref={ref} id={id} type="radio" {...props} />
+      <label className={S.label} htmlFor={id}>
+        {children}
+      </label>
+    </div>
   ),
 );
 
-RadioComponent.displayName = 'Radio';
-
-export const Radio = memo(RadioComponent);
+Radio.displayName = 'Radio';

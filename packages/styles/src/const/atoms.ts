@@ -1,17 +1,3 @@
-/**
- * Use this file for const that are used in atoms but can be written
- * manually in *.styles files. Values that are used in both atoms and *.styles files
- * should be defined in themes.ts and accessed through `vars` object.
- */
-
-export const BREAKPOINT = {
-  mobile: 0,
-  mobileLg: 640,
-  tablet: 768,
-  tabletLg: 1024,
-  desktop: 1280,
-};
-
 export const POSITION = [
   'absolute',
   'fixed',

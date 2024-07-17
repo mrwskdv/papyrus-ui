@@ -1,5 +1,4 @@
-import { Flex } from '../flex';
-import { Text } from '../text';
+import { StoryFn } from '@storybook/react';
 
 import { Radio, RadioProps } from './radio';
 
@@ -8,58 +7,19 @@ export default {
   component: Radio,
 
   args: {
-    name: 'isAgreed',
+    name: 'radio',
     value: 'true',
+    id: 'radio',
+    children: 'Radio',
   },
 };
 
-export function Basic(args: RadioProps) {
-  return (
-    <Flex>
-      <Radio {...args} id="checkbox-basic" />
-      <Text
-        as="label"
-        htmlFor="checkbox-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+const Template: StoryFn<RadioProps> = (args) => <Radio {...args} />;
 
-export function Invalid(args: RadioProps) {
-  return (
-    <Flex>
-      <Radio {...args} id="checkbox-invalid" invalid />
-      <Text
-        as="label"
-        htmlFor="checkbox-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Disabled(args: RadioProps) {
-  return (
-    <Flex>
-      <Radio {...args} disabled id="checkbox-disabled" value="Disabled value" />
-      <Text
-        as="label"
-        htmlFor="checkbox-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  disabled: true,
+};

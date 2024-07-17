@@ -1,5 +1,4 @@
-import { Flex } from '../flex';
-import { Text } from '../text';
+import { StoryFn } from '@storybook/react';
 
 import { Checkbox, CheckboxProps } from './checkbox';
 
@@ -8,63 +7,19 @@ export default {
   component: Checkbox,
 
   args: {
-    name: 'isAgreed',
+    name: 'checkbox',
     value: 'true',
+    id: 'checkbox',
+    children: 'Checkbox',
   },
 };
 
-export function Basic(args: CheckboxProps) {
-  return (
-    <Flex>
-      <Checkbox {...args} id="checkbox-basic" />
-      <Text
-        as="label"
-        htmlFor="checkbox-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+const Template: StoryFn<CheckboxProps> = (args) => <Checkbox {...args} />;
 
-export function Invalid(args: CheckboxProps) {
-  return (
-    <Flex>
-      <Checkbox {...args} id="checkbox-invalid" invalid />
-      <Text
-        as="label"
-        htmlFor="checkbox-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Disabled(args: CheckboxProps) {
-  return (
-    <Flex>
-      <Checkbox
-        {...args}
-        disabled
-        id="checkbox-disabled"
-        value="Disabled value"
-      />
-      <Text
-        as="label"
-        htmlFor="checkbox-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        ml={2}
-      >
-        I agree to the terms and conditions
-      </Text>
-    </Flex>
-  );
-}
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  disabled: true,
+};

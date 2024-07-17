@@ -1,19 +1,8 @@
-import { vars } from '@papyrus-ui/styles';
-import { style } from '@vanilla-extract/css';
+import { atoms } from '@papyrus-ui/styles';
 
-export const rootInvalid = style({
-  borderColor: vars.color.danger400,
-
-  selectors: {
-    '&:checked': {
-      borderColor: 'transparent',
-      backgroundColor: vars.color.danger500,
-    },
-    '&:checked:hover:not(:disabled)': {
-      backgroundColor: vars.color.danger400,
-    },
-    '&:focus-visible': {
-      boxShadow: vars.boxShadow.focusDanger,
-    },
-  },
+export const label = atoms({
+  flex: 1,
+  letterSpacing: 'widest',
+  lineHeight: 'snug',
+  ms: 2,
 });

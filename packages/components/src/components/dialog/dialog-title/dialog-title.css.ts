@@ -2,6 +2,8 @@ import { atoms } from '@papyrus-ui/styles';
 
 export const root = atoms({
   flex: 1,
+  fontSize: 'md',
   fontWeight: 'semiBold',
-  lineHeight: 'none',
+  letterSpacing: 'wider',
+  lineHeight: 'normal',
 });

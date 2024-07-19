@@ -46,14 +46,10 @@ export function Base(args: DialogProps): JSX.Element {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
-          <Box mr={3}>
-            <Button onClick={toggleDialog}>OK</Button>
-          </Box>
-          <Box>
-            <Button variant="tertiary" onClick={toggleDialog}>
-              Cancel
-            </Button>
-          </Box>
+          <Button onClick={toggleDialog}>OK</Button>
+          <Button variant="tertiary" onClick={toggleDialog}>
+            Cancel
+          </Button>
         </Dialog.Footer>
       </Dialog.Content>
     </Dialog>
@@ -157,17 +153,13 @@ export function Sizes(args: DialogProps): JSX.Element {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Box mr={3}>
-              <Button variant="primary" onClick={handleClose}>
-                OK
-              </Button>
-            </Box>
+            <Button variant="primary" onClick={handleClose}>
+              OK
+            </Button>
 
-            <Box>
-              <Button variant="tertiary" onClick={handleClose}>
-                Cancel
-              </Button>
-            </Box>
+            <Button variant="tertiary" onClick={handleClose}>
+              Cancel
+            </Button>
           </Dialog.Footer>
         </Dialog.Content>
       </Dialog>
@@ -220,16 +212,12 @@ export function Sizes(args: DialogProps): JSX.Element {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Box mr={3}>
-              <Button variant="primary" onClick={handleClose}>
-                OK
-              </Button>
-            </Box>
-            <Box>
-              <Button variant="tertiary" onClick={handleClose}>
-                Cancel
-              </Button>
-            </Box>
+            <Button variant="primary" onClick={handleClose}>
+              OK
+            </Button>
+            <Button variant="tertiary" onClick={handleClose}>
+              Cancel
+            </Button>
           </Dialog.Footer>
         </Dialog.Content>
       </Dialog>

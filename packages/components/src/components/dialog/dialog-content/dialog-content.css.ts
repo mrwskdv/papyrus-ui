@@ -9,13 +9,9 @@ export const root = atoms({
   width: 'full',
   height: 'full',
   bg: 'dark500',
-  px: {
+  p: {
     mobile: 0,
     tablet: 4,
-  },
-  py: {
-    mobile: 0,
-    tablet: 6,
   },
   zIndex: 30,
 });

@@ -18,13 +18,14 @@ export const rootSize = {
       tablet: 'static',
     },
     bottom: 0,
+    borderColor: 'neutral100',
     borderTop: {
       mobile: 1,
       tablet: 0,
     },
     px: 4,
     py: {
-      mobile: 2,
+      mobile: 2.5,
       tablet: 4,
     },
     zIndex: 20,
@@ -35,13 +36,14 @@ export const rootSize = {
       tablet: 'static',
     },
     bottom: 0,
+    borderColor: 'neutral100',
     borderTop: {
       mobile: 1,
       tablet: 0,
     },
     px: 4,
     py: {
-      mobile: 2,
+      mobile: 2.5,
       tablet: 4,
     },
     zIndex: 20,

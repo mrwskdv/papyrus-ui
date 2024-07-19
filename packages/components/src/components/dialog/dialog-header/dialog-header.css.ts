@@ -3,7 +3,6 @@ import { atoms } from '@papyrus-ui/styles';
 export const root = atoms({
   display: 'flex',
   alignItems: 'center',
-  height: 14,
   bg: 'white',
 });
 
@@ -17,13 +16,14 @@ export const rootSize = {
       tablet: 'static',
     },
     bottom: 0,
-    borderTop: {
+    borderColor: 'neutral100',
+    borderBottom: {
       mobile: 1,
       tablet: 0,
     },
     px: 4,
     py: {
-      mobile: 2,
+      mobile: 2.5,
       tablet: 4,
     },
     zIndex: 20,
@@ -34,13 +34,14 @@ export const rootSize = {
       tablet: 'static',
     },
     bottom: 0,
-    borderTop: {
+    borderColor: 'neutral100',
+    borderBottom: {
       mobile: 1,
       tablet: 0,
     },
     px: 4,
     py: {
-      mobile: 2,
+      mobile: 2.5,
       tablet: 4,
     },
     zIndex: 20,

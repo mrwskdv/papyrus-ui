@@ -15,7 +15,7 @@ export const DialogClose: FC<DialogCloseProps> = memo((props) => {
   const { close } = useContext(DialogContext);
 
   return (
-    <IconButton rounded size="sm" variant="tertiary" onClick={close} {...props}>
+    <IconButton rounded variant="tertiary" onClick={close} {...props}>
       <Icon name="x" />
     </IconButton>
   );

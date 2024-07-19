@@ -1,5 +1,11 @@
 # @papyrus-ui/components
 
+## 0.1.5
+
+### Patch Changes
+
+- 308c307: Fixed dialog styles
+
 ## 0.1.4
 
 ### Patch Changes

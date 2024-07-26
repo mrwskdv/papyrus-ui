@@ -1,5 +1,11 @@
 # @papyrus-ui/styles
 
+## 0.2.0
+
+### Minor Changes
+
+- 0292933: Added `pointerEvents` atom
+
 ## 0.1.4
 
 ### Patch Changes

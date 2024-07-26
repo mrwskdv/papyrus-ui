@@ -4,60 +4,62 @@ import { StoryFn } from '@storybook/react';
 import { Avatar } from '../avatar';
 import { Icon } from '../icon';
 
-import { Toast, ToastProps } from './toast';
+import { Toast, ToastProps, ToastVariant } from './toast';
 
-const variants: ToastProps['variant'][] = [
-  'primary',
-  'success',
-  'warning',
-  'danger',
-];
+const variants: ToastVariant[] = ['primary', 'success', 'warning', 'danger'];
 
 export default {
   title: 'Feedback/Toast',
   component: Toast,
 
   args: {
-    children: (
-      <>
-        This is a toast message -{' '}
-        <a href={window.location.href}>Check this out</a>
-      </>
-    ),
+    message: 'This is a toast message',
+    children: 'This is a toast description',
+    onDismiss: () => {
+      // Do nothing
+    },
   },
 };
 
-export const Basic: StoryFn<ToastProps> = (args) => <Toast {...args} />;
+const Template: StoryFn<ToastProps> = (args) => <Toast {...args} />;
+
+export const Basic = Template.bind({});
 
 export const Variants: StoryFn<ToastProps> = (args) => (
   <>
     {variants.map((variant, i) => (
-      <Toast {...args} key={i} className={atoms({ mb: 2 })} variant={variant}>
-        This is a {variant} message -{' '}
-        <a href={window.location.href}>Check this out</a>
-      </Toast>
+      <Toast
+        {...args}
+        key={i}
+        className={atoms({ mb: 2 })}
+        message={`This is a ${variant} message`}
+        variant={variant}
+      />
     ))}
   </>
 );
 
-export const WithIcon: StoryFn<ToastProps> = (args) => (
-  <Toast
-    {...args}
-    icon={<Icon color="primary400" fontSize="3xl" name="dollar" />}
-  >
-    This is a toast message - <a href={window.location.href}>Check this out</a>
-  </Toast>
-);
+export const WithAction = Template.bind({});
 
-export const WithAvatar: StoryFn<ToastProps> = (args) => (
-  <Toast
-    {...args}
-    icon={
-      <Avatar size="md">
-        <img alt="Profile" src="https://i.pravatar.cc/300" />
-      </Avatar>
-    }
-  >
-    This is a toast message - <a href={window.location.href}>Check this out</a>
-  </Toast>
-);
+WithAction.args = {
+  actionLabel: 'View More',
+  onActionClick: () => {
+    // Do nothing
+  },
+};
+
+export const WithCustomIcon: StoryFn<ToastProps> = Template.bind({});
+
+WithCustomIcon.args = {
+  icon: <Icon name="bell" />,
+};
+
+export const WithAvatar: StoryFn<ToastProps> = Template.bind({});
+
+WithAvatar.args = {
+  icon: (
+    <Avatar rounded size="md">
+      <img alt="Profile" src="https://i.pravatar.cc/300" />
+    </Avatar>
+  ),
+};

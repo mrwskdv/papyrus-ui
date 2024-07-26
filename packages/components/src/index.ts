@@ -20,7 +20,6 @@ export * from './components/marker';
 export * from './components/menu';
 export * from './components/menu-bar';
 export * from './components/menu-button';
-export * from './components/message';
 export * from './components/numeric-input';
 export * from './components/o-list';
 export * from './components/option';

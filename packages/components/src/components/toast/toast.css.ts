@@ -1,12 +1,28 @@
 import { atoms } from '@papyrus-ui/styles';
-import { style } from '@vanilla-extract/css';
 
-export const root = style({
+export const root = atoms({
+  width: 'full',
+  maxWidth: 'lg',
+  minWidth: 64,
+  rounded: 'lg',
+  px: 4,
+  py: 3,
+  shadow: 'lg',
+  overflow: 'hidden',
   pointerEvents: 'auto',
 });
 
-export const dismiss = atoms({
-  position: 'absolute',
-  top: 2,
-  right: 2,
-});
+export const rootVariant = {
+  primary: atoms({
+    bg: 'primary600',
+  }),
+  success: atoms({
+    bg: 'success600',
+  }),
+  warning: atoms({
+    bg: 'warning600',
+  }),
+  danger: atoms({
+    bg: 'danger600',
+  }),
+};

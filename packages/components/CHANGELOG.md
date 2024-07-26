@@ -1,5 +1,17 @@
 # @papyrus-ui/components
 
+## 0.2.0
+
+### Minor Changes
+
+- 0292933: Removed Message component
+- 0292933: Updated Toast and ToastContainer components
+
+### Patch Changes
+
+- Updated dependencies [0292933]
+  - @papyrus-ui/styles@0.2.0
+
 ## 0.1.5
 
 ### Patch Changes

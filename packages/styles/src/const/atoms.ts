@@ -172,6 +172,8 @@ export const SPACING = {
   '-96': '-24rem', // -336px
 };
 
+export const POINTER_EVENTS = ['auto', 'none'] as const;
+
 export const INSET = { ...SPACING, auto: 'auto' };
 
 export const HEIGHT = {

@@ -1,6 +1,6 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
 
-import Toast, { Basic, Variants, WithAvatar, WithIcon } from './toast.stories';
+import Toast, { Basic, Variants, WithAction, WithCustomIcon, WithAvatar,  } from './toast.stories';
 
 <Meta of={Toast} />
 
@@ -42,11 +42,17 @@ Possible values: 'danger', 'warning', 'info', 'success', 'light'.
 
 <Canvas of={Variants} />
 
-### With Icon
+### With Action
+
+Set `actionLabel` and `onActionClick` to add an action to the toast component.
+
+<Canvas of={WithAction} />
+
+### With Custom Icon
 
 Set `icon` to represent the icon of the toast component.
 
-<Canvas of={WithIcon} />
+<Canvas of={WithCustomIcon} />
 
 ### With Avatar
 

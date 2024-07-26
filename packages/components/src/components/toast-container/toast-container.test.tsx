@@ -9,7 +9,7 @@ describe('ToastContainer', () => {
       it('Then the title should be visible and correctly rendered within the toast', () => {
         const { getByTestId } = render(
           <ToastContainer>
-            <Toast data-testid="toast">Error Message</Toast>
+            <Toast data-testid="toast" message="Error Message" />
           </ToastContainer>,
         );
 

@@ -40,6 +40,7 @@ import {
   INSET,
   Z_INDEX,
   OVERFLOW,
+  POINTER_EVENTS,
 } from '../const';
 
 import { vars } from './global.css';
@@ -65,6 +66,7 @@ const baseProperties = defineProperties({
     transition: vars.transition,
     verticalAlign: VERTICAL_ALIGN,
     whiteSpace: WHITE_SPACE,
+    pointerEvents: POINTER_EVENTS,
     zIndex: Z_INDEX,
   },
   shorthands: {

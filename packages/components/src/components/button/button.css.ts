@@ -7,6 +7,8 @@ export const root = atoms({
   justifyContent: 'center',
   rounded: 'md',
   border: 1,
+  borderStyle: 'solid',
+  transition: 'base',
 });
 
 export const rootVariant = styleVariants({
@@ -15,7 +17,6 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     backgroundColor: vars.color.primary500,
     boxShadow: vars.boxShadow.sm,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.primary400,
@@ -33,7 +34,6 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     background: vars.gradient.highlight,
     boxShadow: vars.boxShadow.sm,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         background: vars.gradient.highlightAlt,
@@ -47,7 +47,6 @@ export const rootVariant = styleVariants({
     borderColor: 'transparent',
     color: vars.color.neutral900,
     backgroundColor: vars.color.neutral100,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.neutral200,
@@ -64,7 +63,6 @@ export const rootVariant = styleVariants({
   tertiary: {
     borderColor: 'transparent',
     color: vars.color.primary500,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.primary100,
@@ -83,7 +81,6 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     backgroundColor: vars.color.success500,
     boxShadow: vars.boxShadow.sm,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.success400,
@@ -101,7 +98,6 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     backgroundColor: vars.color.warning500,
     boxShadow: vars.boxShadow.sm,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.warning400,
@@ -119,7 +115,6 @@ export const rootVariant = styleVariants({
     color: vars.color.white,
     backgroundColor: vars.color.danger500,
     boxShadow: vars.boxShadow.sm,
-    transition: vars.transition.base,
     selectors: {
       '&:hover': {
         backgroundColor: vars.color.danger400,
@@ -155,7 +150,7 @@ export const rootSize = {
   sm: atoms({
     minWidth: 24,
     height: 7,
-    px: 2,
+    px: 2.5,
   }),
   md: atoms({
     minWidth: 28,

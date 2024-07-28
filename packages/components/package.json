@@ -1,6 +1,6 @@
 {
   "name": "@papyrus-ui/components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The UI kit with fundamental React components based on the Papyrus UI design system.",
   "files": [
     "CHANGELOG.md",

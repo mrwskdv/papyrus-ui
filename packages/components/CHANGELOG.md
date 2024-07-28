@@ -1,5 +1,14 @@
 # @papyrus-ui/components
 
+## 0.2.1
+
+### Patch Changes
+
+- 6afeda5: Small modals are centered vertically to save space for toast notifications
+- 6afeda5: Changed collapsed menu bar height to 56px
+- 6afeda5: Changed large elements height to 48px
+- 6afeda5: Toast notifications are centered until the desktop breakpoint
+
 ## 0.2.0
 
 ### Minor Changes

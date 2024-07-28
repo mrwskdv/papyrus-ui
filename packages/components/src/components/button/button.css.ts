@@ -150,7 +150,7 @@ export const rootSize = {
   sm: atoms({
     minWidth: 24,
     height: 7,
-    px: 2.5,
+    px: 2,
   }),
   md: atoms({
     minWidth: 28,
@@ -158,8 +158,8 @@ export const rootSize = {
     px: 3,
   }),
   lg: atoms({
-    minWidth: 32,
-    height: 11,
+    minWidth: 36,
+    height: 12,
     px: 4,
   }),
 };

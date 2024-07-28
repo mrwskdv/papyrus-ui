@@ -32,7 +32,7 @@ export const rootSize = {
   lg: atoms({
     minHeight: 11,
     px: 2.5,
-    py: 2.5,
+    py: 3,
   }),
 };
 

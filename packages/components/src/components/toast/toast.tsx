@@ -13,6 +13,7 @@ import {
   useCallback,
   useEffect,
 } from 'react';
+import { Transition } from 'react-transition-group';
 
 import { useTimeout } from '../../utils/use-timeout';
 import { Box } from '../box';
@@ -88,6 +89,12 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   onAfterHide?: () => void;
 }
 
+const TRANSITION_TIMEOUT = {
+  appear: 0,
+  enter: 200,
+  exit: 200,
+};
+
 const iconByVariant: Record<ToastVariant, string> = {
   primary: 'info-circle',
   danger: 'error-circle',
@@ -155,94 +162,103 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
     }, [onAfterHide, setTimeout, visible]);
 
     return (
-      <div
-        ref={ref}
-        className={cn(
-          S.root,
-          S.rootVariant[variant],
-          fadeStyle,
-          visible && fadeInStyle,
-          className,
-        )}
-        role={role}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        {...props}
+      <Transition
+        in={visible}
+        mountOnEnter
+        timeout={TRANSITION_TIMEOUT}
+        unmountOnExit
       >
-        <Flex alignItems="center" mx="-1.5">
-          <Box lineHeight="none" px={1.5}>
-            {isValidElement<IconProps>(icon) ? (
-              cloneElement(icon, {
-                color: 'white',
-                fontSize: '4xl',
-              })
-            ) : (
-              <Icon
-                color="white"
-                fontSize="4xl"
-                name={iconByVariant[variant]}
-              />
+        {(status) => (
+          <div
+            ref={ref}
+            className={cn(
+              S.root,
+              S.rootVariant[variant],
+              fadeStyle,
+              status === 'entered' && fadeInStyle,
+              className,
             )}
-          </Box>
+            role={role}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            {...props}
+          >
+            <Flex alignItems="center" mx="-1.5">
+              <Box lineHeight="none" px={1.5}>
+                {isValidElement<IconProps>(icon) ? (
+                  cloneElement(icon, {
+                    color: 'white',
+                    fontSize: '4xl',
+                  })
+                ) : (
+                  <Icon
+                    color="white"
+                    fontSize="4xl"
+                    name={iconByVariant[variant]}
+                  />
+                )}
+              </Box>
 
-          <Box flex={1} lineHeight="none" overflow="hidden" px={1.5}>
-            <Text
-              as="div"
-              color="white"
-              fontSize="md"
-              fontWeight="semiBold"
-              letterSpacing="wider"
-              lineHeight="snug"
-              truncate
-            >
-              {message}
-            </Text>
+              <Box flex={1} lineHeight="none" overflow="hidden" px={1.5}>
+                <Text
+                  as="div"
+                  color="white"
+                  fontSize="md"
+                  fontWeight="semiBold"
+                  letterSpacing="wider"
+                  lineHeight="snug"
+                  truncate
+                >
+                  {message}
+                </Text>
 
-            {children && (
-              <Text
-                as="div"
-                color="white"
-                fontSize="sm"
-                fontWeight="regular"
-                letterSpacing="wider"
-                lineHeight="normal"
-                mt={1}
-                truncate
-              >
-                {children}
-              </Text>
-            )}
-          </Box>
+                {children && (
+                  <Text
+                    as="div"
+                    color="white"
+                    fontSize="sm"
+                    fontWeight="regular"
+                    letterSpacing="wider"
+                    lineHeight="normal"
+                    mt={1}
+                    truncate
+                  >
+                    {children}
+                  </Text>
+                )}
+              </Box>
 
-          {actionLabel && onActionClick && (
-            <Box lineHeight="none" px={1.5}>
-              <Button
-                data-testid="action"
-                rounded
-                size="sm"
-                variant="ghost"
-                onClick={onActionClick}
-              >
-                {actionLabel}
-              </Button>
-            </Box>
-          )}
+              {actionLabel && onActionClick && (
+                <Box lineHeight="none" px={1.5}>
+                  <Button
+                    data-testid="action"
+                    rounded
+                    size="sm"
+                    variant="ghost"
+                    onClick={onActionClick}
+                  >
+                    {actionLabel}
+                  </Button>
+                </Box>
+              )}
 
-          {onDismiss && (
-            <Box lineHeight="none" px={1.5}>
-              <IconButton
-                aria-label={dismissLabel}
-                rounded
-                size="sm"
-                variant="ghost"
-                onClick={onDismiss}
-              >
-                <Icon name="x" />
-              </IconButton>
-            </Box>
-          )}
-        </Flex>
-      </div>
+              {onDismiss && (
+                <Box lineHeight="none" px={1.5}>
+                  <IconButton
+                    aria-label={dismissLabel}
+                    rounded
+                    size="sm"
+                    variant="ghost"
+                    onClick={onDismiss}
+                  >
+                    <Icon name="x" />
+                  </IconButton>
+                </Box>
+              )}
+            </Flex>
+          </div>
+        )}
+      </Transition>
     );
   },
 );

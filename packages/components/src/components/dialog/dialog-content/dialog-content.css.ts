@@ -9,23 +9,22 @@ export const root = atoms({
   width: 'full',
   height: 'full',
   bg: 'dark500',
-  p: {
-    mobile: 0,
-    tablet: 4,
-  },
+
   zIndex: 30,
 });
 
 export const rootSize = {
   sm: atoms({
-    justifyContent: {
-      mobile: 'flex-end',
-      mobileLg: 'center',
-    },
+    justifyContent: 'center',
+    p: 4,
     overflowY: 'auto',
   }),
   md: atoms({
     justifyContent: 'center',
+    p: {
+      mobile: 0,
+      tablet: 4,
+    },
     overflowY: {
       mobile: 'hidden',
       tablet: 'auto',
@@ -33,6 +32,10 @@ export const rootSize = {
   }),
   lg: atoms({
     justifyContent: 'flex-start',
+    p: {
+      mobile: 0,
+      tablet: 4,
+    },
     overflowY: {
       mobile: 'hidden',
       tablet: 'auto',
@@ -50,13 +53,8 @@ export const content = atoms({
 
 export const contentSize = {
   sm: atoms({
-    maxWidth: {
-      mobileLg: 'sm',
-    },
-    roundedTop: 'xl',
-    roundedBottom: {
-      mobileLg: 'xl',
-    },
+    maxWidth: 'sm',
+    rounded: 'xl',
     boxShadow: 'md',
     overflow: 'hidden',
   }),

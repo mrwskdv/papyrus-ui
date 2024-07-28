@@ -6,23 +6,10 @@ export const menuList = atoms({
   maxHeight: 80,
   maxWidth: 'xs',
   border: 1,
+  borderColor: 'neutral100',
   rounded: 'lg',
+  bg: 'white',
   boxShadow: 'lg',
   py: 0.5,
   zIndex: 10,
 });
-
-export const menuListVariant = {
-  primary: atoms({
-    borderColor: 'neutral100',
-    bg: 'white',
-  }),
-  secondary: atoms({
-    borderColor: 'neutral100',
-    bg: 'white',
-  }),
-  ghost: atoms({
-    borderColor: 'primary800',
-    bg: 'primary700',
-  }),
-};

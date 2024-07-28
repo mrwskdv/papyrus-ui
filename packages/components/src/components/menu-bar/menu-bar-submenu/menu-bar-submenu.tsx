@@ -229,7 +229,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
       refs,
       setActiveIndex,
       size: parent.size,
-      variant: parent.variant === 'primary' ? 'secondary' : parent.variant,
+      variant: 'secondary',
       getItemProps: (userProps = {}) => ({
         ...getItemProps({
           ...userProps,
@@ -249,7 +249,6 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
       handleMenuItemKeyDown,
       isOpen,
       parent.size,
-      parent.variant,
       refs,
     ],
   );
@@ -380,7 +379,6 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
                     ref={refs.setFloating}
                     className={cn(
                       S.menuList,
-                      S.menuListVariant[parent.variant],
                       fadeStyle,
                       status === 'entered' && fadeInStyle,
                     )}

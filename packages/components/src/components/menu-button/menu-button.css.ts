@@ -26,16 +26,16 @@ export const link = style({
 
 export const linkSize = {
   sm: atoms({
-    px: 1.5,
+    px: 1,
     py: 0.5,
   }),
   md: atoms({
-    px: 2.5,
+    px: 1.5,
     py: 1.5,
   }),
   lg: atoms({
-    px: 3.5,
-    py: 2.5,
+    px: 2.5,
+    py: 3,
   }),
 };
 
@@ -125,7 +125,8 @@ export const linkDisabled = style({
 export const linkCollapsed = style({
   flexDirection: 'column',
   minWidth: 0,
-  padding: `${SPACING[1]} ${SPACING[2]}`,
+  height: '3rem',
+  padding: `0 ${SPACING[2]}`,
 });
 
 export const indent = atoms({
@@ -151,7 +152,7 @@ export const iconVariant = {
 
 export const iconCollapsed = atoms({
   fontSize: '2xl',
-  mb: 1,
+  mb: 0.5,
 });
 
 export const iconCollapsedVariant = {

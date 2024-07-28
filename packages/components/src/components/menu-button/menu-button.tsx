@@ -100,7 +100,6 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
 
         <span
           className={cn(
-            S.label,
             S.labelDirection[direction],
             collapsed
               ? [

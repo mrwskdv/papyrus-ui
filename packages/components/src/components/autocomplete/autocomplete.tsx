@@ -231,8 +231,8 @@ const offsetXBySizeMap: Record<InputBoxSize, number> = {
 };
 
 const offsetYBySizeMap: Record<InputBoxSize, number> = {
-  sm: 2 + INITIAL_OFFSET_Y,
-  md: 6 + INITIAL_OFFSET_Y,
+  sm: INITIAL_OFFSET_Y,
+  md: 4 + INITIAL_OFFSET_Y,
   lg: 10 + INITIAL_OFFSET_Y,
 };
 

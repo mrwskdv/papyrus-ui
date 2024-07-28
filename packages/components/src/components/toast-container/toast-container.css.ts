@@ -19,7 +19,7 @@ export const rootPlacement = styleVariants({
       justifyContent: 'center',
       transform: 'translateX(-50%)',
     },
-    bpUp('mobileLg', {
+    bpUp('desktop', {
       left: 'auto',
       insetInlineStart: 0,
       justifyContent: 'flex-start',
@@ -33,7 +33,7 @@ export const rootPlacement = styleVariants({
       justifyContent: 'center',
       transform: 'translateX(-50%)',
     },
-    bpUp('mobileLg', {
+    bpUp('desktop', {
       left: 'auto',
       insetInlineEnd: 0,
       justifyContent: 'flex-end',
@@ -53,7 +53,7 @@ export const rootPlacement = styleVariants({
       justifyContent: 'center',
       transform: 'translateX(-50%)',
     },
-    bpUp('mobileLg', {
+    bpUp('desktop', {
       left: 'auto',
       insetInlineStart: 0,
       justifyContent: 'flex-start',
@@ -67,7 +67,7 @@ export const rootPlacement = styleVariants({
       justifyContent: 'center',
       transform: 'translateX(-50%)',
     },
-    bpUp('mobileLg', {
+    bpUp('desktop', {
       left: 'auto',
       insetInlineEnd: 0,
       justifyContent: 'flex-end',

@@ -160,8 +160,8 @@ export const rootSize = {
     height: 9,
   }),
   lg: atoms({
-    width: 11,
-    height: 11,
+    width: 12,
+    height: 12,
   }),
 };
 

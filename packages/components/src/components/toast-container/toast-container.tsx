@@ -24,6 +24,10 @@ export interface ToastContainerProps
   children?: ReactNode;
 }
 
+/**
+ * @deprecated
+ * Use Snackbar instead
+ */
 export const ToastContainer = forwardRef<HTMLDivElement, ToastContainerProps>(
   ({ children, className, placement = 'top-end', ...props }, ref) => (
     <Flex

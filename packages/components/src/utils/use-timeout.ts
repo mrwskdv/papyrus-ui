@@ -16,7 +16,7 @@ export function useTimeout(): TimeoutAPI {
   const timeouts = useRef<Map<TimeoutKey, NodeJS.Timeout>>(new Map());
 
   const clearTimeouts = useCallback((): void => {
-    timeouts.current.forEach((timeout) => global.clearTimeout(timeout));
+    timeouts.current.forEach((timeout) => clearTimeout(timeout));
     timeouts.current.clear();
   }, []);
 

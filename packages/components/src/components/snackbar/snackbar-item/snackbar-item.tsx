@@ -1,6 +1,5 @@
 'use client';
 
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   cloneElement,
@@ -11,23 +10,25 @@ import {
   ReactElement,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
 } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { useTimeout } from '../../utils/use-timeout';
-import { Box } from '../box';
-import { Button } from '../button';
-import { Flex } from '../flex';
-import { Icon, IconProps } from '../icon';
-import { IconButton } from '../icon-button';
-import { Text } from '../text';
+import { useTimeout } from '../../../utils/use-timeout';
+import { Box } from '../../box';
+import { Button } from '../../button';
+import { Flex } from '../../flex';
+import { Icon, IconProps } from '../../icon';
+import { IconButton } from '../../icon-button';
+import { Text } from '../../text';
+import { SnackbarContext } from '../snackbar.context';
 
-import * as S from './toast.css';
+import * as S from './snackbar-item.css';
 
-export type ToastVariant = 'primary' | 'danger' | 'warning' | 'success';
+export type SnackbarItemVariant = 'primary' | 'danger' | 'warning' | 'success';
 
-export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
+export interface SnackbarItemProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Label text for the action button.
    */
@@ -61,12 +62,12 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Determines the visual style or variant of the toast component.
    */
-  variant?: ToastVariant;
+  variant?: SnackbarItemVariant;
 
   /**
    * Indicates whether the toast component is currently visible or not.
    */
-  visible?: boolean;
+  in?: boolean;
 
   /**
    * A callback function triggered on the action button click.
@@ -82,11 +83,6 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
    * A callback function triggered when the toast is closed automatically after timeout.
    */
   onHide?: () => void;
-
-  /**
-   * A callback function triggered after the hide animation has finished.
-   */
-  onAfterHide?: () => void;
 }
 
 const TRANSITION_TIMEOUT = {
@@ -95,18 +91,17 @@ const TRANSITION_TIMEOUT = {
   exit: 200,
 };
 
-const iconByVariant: Record<ToastVariant, string> = {
+const iconByVariant: Record<SnackbarItemVariant, string> = {
   primary: 'info-circle',
   danger: 'error-circle',
   warning: 'error',
   success: 'check-circle',
 };
 
-/**
- * @deprecated
- * Use Snackbar.Item instead
- */
-export const Toast = forwardRef<HTMLDivElement, ToastProps>(
+export const SnackbarItem = forwardRef<
+  Transition<HTMLElement>,
+  SnackbarItemProps
+>(
   (
     {
       actionLabel,
@@ -115,26 +110,28 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
       className,
       dismissLabel = 'Dismiss',
       icon,
+      in: visible = true,
       message,
       role = 'alert',
-      visible = true,
       variant = 'primary',
       onActionClick,
       onDismiss,
       onHide,
-      onAfterHide,
       onMouseEnter,
       onMouseLeave,
       ...props
     },
     ref,
   ) => {
+    const { placement } = useContext(SnackbarContext);
     const { setTimeout, clearTimeout } = useTimeout();
 
     const defferAutoHide = useCallback(() => {
-      setTimeout(() => {
-        onHide?.();
-      }, autoHideDuration);
+      if (autoHideDuration) {
+        setTimeout(() => {
+          onHide?.();
+        }, autoHideDuration);
+      }
     }, [autoHideDuration, onHide, setTimeout]);
 
     const handleMouseEnter = useCallback(
@@ -157,35 +154,28 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
       defferAutoHide();
     }, [defferAutoHide]);
 
-    useEffect(() => {
-      if (!visible && onAfterHide) {
-        setTimeout(() => {
-          onAfterHide();
-        }, 200);
-      }
-    }, [onAfterHide, setTimeout, visible]);
-
     return (
       <Transition
+        {...props}
+        ref={ref}
         in={visible}
         mountOnEnter
         timeout={TRANSITION_TIMEOUT}
         unmountOnExit
       >
-        {(status) => (
+        {(status, childProps) => (
           <div
-            ref={ref}
+            {...childProps}
             className={cn(
               S.root,
+              S.rootPlacement[placement],
+              status === 'entered' && S.rootVisiblePlacement[placement],
               S.rootVariant[variant],
-              fadeStyle,
-              status === 'entered' && fadeInStyle,
               className,
             )}
             role={role}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            {...props}
           >
             <Flex alignItems="center" mx="-1.5">
               <Box lineHeight="none" px={1.5}>
@@ -208,7 +198,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
                   as="div"
                   color="white"
                   fontSize="md"
-                  fontWeight="semiBold"
+                  fontWeight={children ? 'semiBold' : 'regular'}
                   letterSpacing="wider"
                   lineHeight="snug"
                   truncate
@@ -267,4 +257,4 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   },
 );
 
-Toast.displayName = 'Toast';
+SnackbarItem.displayName = 'SnackbarItem';

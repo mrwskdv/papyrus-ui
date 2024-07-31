@@ -1,5 +1,11 @@
 # @papyrus-ui/components
 
+## 0.2.2
+
+### Patch Changes
+
+- cb72b29: Created Snackbar component
+
 ## 0.2.1
 
 ### Patch Changes

@@ -29,6 +29,7 @@ export * from './components/radio';
 export * from './components/range';
 export * from './components/select';
 export * from './components/skeleton';
+export * from './components/snackbar';
 export * from './components/tag';
 export * from './components/text';
 export * from './components/textarea';

@@ -7,14 +7,14 @@
 - 6afeda5: Small modals are centered vertically to save space for toast notifications
 - 6afeda5: Changed collapsed menu bar height to 56px
 - 6afeda5: Changed large elements height to 48px
-- 6afeda5: Toast notifications are centered until the desktop breakpoint
+- 6afeda5: SnackbarItem notifications are centered until the desktop breakpoint
 
 ## 0.2.0
 
 ### Minor Changes
 
 - 0292933: Removed Message component
-- 0292933: Updated Toast and ToastContainer components
+- 0292933: Updated SnackbarItem and Snackbar components
 
 ### Patch Changes
 

@@ -1,10 +1,15 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
 
 import Toast, { Basic, Variants, WithAction, WithCustomIcon, WithAvatar,  } from './toast.stories';
+import {Alert} from "../alert";
 
 <Meta of={Toast} />
 
 # Toast
+
+<Alert variant="warning" message="Deprecated">
+ {'This component is going to be removed. Use Snackbar component instead'}
+</Alert>
 
 A small, non-intrusive notification in a user interface that includes a close button for the user to dismiss or hide
 the notification.

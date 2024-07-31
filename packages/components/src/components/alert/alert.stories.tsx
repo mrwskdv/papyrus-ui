@@ -2,7 +2,9 @@ import { Meta, StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
 
+import { Avatar } from '../avatar';
 import { Box } from '../box';
+import { Icon } from '../icon';
 import { Text } from '../text';
 
 import { Alert, AlertProps, AlertVariant } from './alert';
@@ -11,15 +13,18 @@ const meta: Meta = {
   title: 'Feedback/Alert',
   args: {
     variant: 'primary',
-    children: 'This is an alert',
+    message: 'Alert message',
+    children: 'Alert description',
   },
 };
 
-export const Basic: StoryFn<AlertProps> = (args) => (
+const Template: StoryFn<AlertProps> = (args) => (
   <Box width={80}>
     <Alert {...args} />
   </Box>
 );
+
+export const Basic = Template.bind({});
 
 const VARIANTS: AlertVariant[] = ['primary', 'success', 'warning', 'danger'];
 
@@ -39,10 +44,38 @@ export const Variants: StoryFn<AlertProps> = (args) => (
           {capitalize(variant)}
         </Text>
 
-        <Alert {...args} variant={variant} />
+        <Template
+          {...args}
+          message={`${capitalize(variant)} Alert`}
+          variant={variant}
+        />
       </Fragment>
     ))}
   </Box>
 );
+
+export const WithCloseButton = Template.bind({});
+
+WithCloseButton.args = {
+  onClose: () => {
+    // Do nothing
+  },
+};
+
+export const WithCustomIcon = Template.bind({});
+
+WithCustomIcon.args = {
+  icon: <Icon name="bell" />,
+};
+
+export const WithAvatar = Template.bind({});
+
+WithAvatar.args = {
+  icon: (
+    <Avatar rounded size="md">
+      <img alt="Profile" src="https://i.pravatar.cc/300" />
+    </Avatar>
+  ),
+};
 
 export default meta;

@@ -254,7 +254,9 @@ export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
       </MenuButton>
 
       <DropdownMenuContext.Provider value={menuCtx}>
-        <DropdownMenuContent initialFocus={-1}>{children}</DropdownMenuContent>
+        <DropdownMenuContent initialFocus={-1} returnFocus={false}>
+          {children}
+        </DropdownMenuContent>
       </DropdownMenuContext.Provider>
     </FloatingNode>
   );

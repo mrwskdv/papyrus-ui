@@ -41,19 +41,6 @@ export const rootFocused = style({
   boxShadow: vars.boxShadow.focus,
 });
 
-export const rootInvalid = style({
-  outlineColor: vars.color.danger400,
-  selectors: {
-    '&:hover': {
-      outlineColor: vars.color.danger400,
-    },
-  },
-});
-
-export const rootInvalidFocused = style({
-  boxShadow: vars.boxShadow.focusDanger,
-});
-
 export const rootSuccess = style({
   outlineColor: vars.color.success400,
   selectors: {
@@ -65,6 +52,19 @@ export const rootSuccess = style({
 
 export const rootSuccessFocused = style({
   boxShadow: vars.boxShadow.focusSuccess,
+});
+
+export const rootInvalid = style({
+  outlineColor: vars.color.danger400,
+  selectors: {
+    '&:hover': {
+      outlineColor: vars.color.danger400,
+    },
+  },
+});
+
+export const rootInvalidFocused = style({
+  boxShadow: vars.boxShadow.focusDanger,
 });
 
 export const rootDisabled = style({

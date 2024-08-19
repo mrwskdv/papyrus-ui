@@ -36,6 +36,7 @@ const MenuComponent: FC<MenuProps> = ({
   onCollapsedChange,
   children,
   className,
+  onKeyDown,
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState<Maybe<number>>(null);
@@ -60,18 +61,20 @@ const MenuComponent: FC<MenuProps> = ({
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
-        const item = getLastItem(menuRef);
+        const item = getLastItem(menuRef, true);
         item?.focus();
       }
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         e.stopPropagation();
-        const item = getFirstItem(menuRef);
+        const item = getFirstItem(menuRef, true);
         item?.focus();
       }
+
+      onKeyDown?.(e);
     },
-    [menuRef],
+    [onKeyDown],
   );
 
   useEffect(() => {
@@ -91,12 +94,12 @@ const MenuComponent: FC<MenuProps> = ({
   return (
     <MenuContext.Provider value={menuCxt}>
       <ul
+        {...props}
         ref={menuRef}
         className={cn(S.root, S.rootVariant[variant], className)}
         role="menu"
         tabIndex={activeIndex == null ? 0 : -1}
         onKeyDown={handleKeyDown}
-        {...props}
       >
         {Children.map(children, (child, i) =>
           isValidElement(child) ? cloneElement(child, { index: i }) : null,

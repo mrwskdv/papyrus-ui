@@ -28,6 +28,7 @@ export interface MenuButtonProps
   as?: ElementType;
   active?: boolean;
   collapsed?: boolean;
+  danger?: boolean;
   direction?: MenuButtonDirection;
   disabled?: boolean;
   indent?: number;
@@ -45,6 +46,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
       active,
       className,
       collapsed,
+      danger,
       direction = 'vertical',
       disabled,
       indent = 0,
@@ -93,6 +95,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
                 ? [S.iconCollapsed, S.iconCollapsedVariant[variant]]
                 : [S.icon, S.iconVariant[variant]],
               selected && S.iconSelectedVariant[variant],
+              danger && S.iconDanger,
               disabled && S.iconDisabledVariant[variant],
               startIcon.props.className,
             ),
@@ -117,6 +120,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
                   ],
                   truncateStyle,
                 ],
+            danger && S.labelDanger,
             disabled && S.labelDisabledVariant[variant],
           )}
         >
@@ -130,6 +134,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
               S.icon,
               S.endIconVariant[variant],
               selected && S.iconSelectedVariant[variant],
+              danger && S.iconDanger,
               disabled && S.iconDisabledVariant[variant],
               endIcon.props.className,
             ),
@@ -140,6 +145,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
             className={cn(
               S.underline,
               S.underlineDirection[direction],
+              danger && S.underlineDanger,
               fadeStyle,
               selected && fadeInStyle,
             )}

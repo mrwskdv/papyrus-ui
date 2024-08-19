@@ -12,7 +12,6 @@ import {
   useListNavigation,
   useRole,
   FloatingFocusManager,
-  FloatingPortal,
   useClick,
   offset,
 } from '@floating-ui/react';
@@ -224,6 +223,12 @@ const INITIAL_OFFSET_Y = 7;
 
 const ICON_OFFSET = 28;
 
+const OPTION_HEIGHT = 2.5;
+
+const LIST_PY = 0.25;
+
+const MAX_OPTIONS = 10;
+
 const offsetXBySizeMap: Record<InputBoxSize, number> = {
   sm: -6 - INITIAL_OFFSET_X,
   md: -8 - INITIAL_OFFSET_X,
@@ -340,10 +345,17 @@ const AutocompleteComponent = forwardRef(
         sizeFn({
           apply({ availableHeight, elements }) {
             const { offsetWidth = 0 } = containerRef.current ?? {};
+            const docCss = getComputedStyle(document.documentElement);
+            const pxInRem = Number.parseFloat(docCss.fontSize);
+
+            const defaultMaxHeight =
+              (OPTION_HEIGHT * MAX_OPTIONS + LIST_PY) * pxInRem;
+
+            const maxHeight = Math.min(defaultMaxHeight, availableHeight);
 
             Object.assign(elements.floating.style, {
               width: `${offsetWidth + 10}px`,
-              maxHeight: `${availableHeight}px`,
+              maxHeight: `${maxHeight}px`,
             });
           },
           padding: 4,
@@ -663,71 +675,69 @@ const AutocompleteComponent = forwardRef(
           unmountOnExit
         >
           {(status) => (
-            <FloatingPortal>
-              <FloatingFocusManager
-                context={context}
-                initialFocus={-1}
-                modal={false}
+            <FloatingFocusManager
+              context={context}
+              initialFocus={-1}
+              modal={false}
+            >
+              <Flex
+                ref={refs.setFloating}
+                as="ul"
+                bg="white"
+                border={1}
+                borderColor="neutral100"
+                className={cn(fadeStyle, status === 'entered' && fadeInStyle)}
+                flexDirection="column"
+                id={slug(id, LISTBOX_ID)}
+                overflowX="hidden"
+                overflowY="auto"
+                py={0.5}
+                rounded="lg"
+                shadow="lg"
+                style={floatingStyles}
+                zIndex={40}
+                {...getFloatingProps()}
               >
-                <Flex
-                  ref={refs.setFloating}
-                  as="ul"
-                  bg="white"
-                  border={1}
-                  borderColor="neutral100"
-                  className={cn(fadeStyle, status === 'entered' && fadeInStyle)}
-                  flexDirection="column"
-                  id={slug(id, LISTBOX_ID)}
-                  overflowX="hidden"
-                  overflowY="auto"
-                  py={0.5}
-                  rounded="lg"
-                  shadow="lg"
-                  style={floatingStyles}
-                  zIndex={40}
-                  {...getFloatingProps()}
-                >
-                  {!optionsState && loading && (
-                    <Option disabled role="none">
-                      {loadingLabel}
-                    </Option>
-                  )}
+                {!optionsState && loading && (
+                  <Option disabled role="none">
+                    {loadingLabel}
+                  </Option>
+                )}
 
-                  {optionsState && optionsState.length === 0 && (
-                    <Option disabled role="none">
-                      {noResultLabel}
-                    </Option>
-                  )}
+                {optionsState && optionsState.length === 0 && (
+                  <Option disabled role="none">
+                    {noResultLabel}
+                  </Option>
+                )}
 
-                  {optionsState?.map((item, idx) => {
-                    const isSelected = selectedOptions.includes(item);
-                    return (
-                      <OptionComponent
-                        key={idx}
-                        active={idx === activeIndex}
-                        data-index={idx}
-                        endIcon={
-                          isSelected ? (
-                            <Icon color="primary500" name="check" />
-                          ) : undefined
-                        }
-                        id={slug(id, OPTION_ID, idx)}
-                        option={item}
-                        selected={isSelected}
-                        {...getItemProps({
-                          ref: (node) => {
-                            listRef.current[idx] = node;
-                          },
-                          onClick: handleOptionClick,
-                        })}
-                      >
-                        {getLabel(item)}
-                      </OptionComponent>
-                    );
-                  })}
-                </Flex>
-              </FloatingFocusManager>
-            </FloatingPortal>
+                {optionsState?.map((item, idx) => {
+                  const isSelected = selectedOptions.includes(item);
+                  return (
+                    <OptionComponent
+                      key={idx}
+                      active={idx === activeIndex}
+                      data-index={idx}
+                      endIcon={
+                        isSelected ? (
+                          <Icon color="primary500" name="check" />
+                        ) : undefined
+                      }
+                      id={slug(id, OPTION_ID, idx)}
+                      option={item}
+                      selected={isSelected}
+                      {...getItemProps({
+                        ref: (node) => {
+                          listRef.current[idx] = node;
+                        },
+                        onClick: handleOptionClick,
+                      })}
+                    >
+                      {getLabel(item)}
+                    </OptionComponent>
+                  );
+                })}
+              </Flex>
+            </FloatingFocusManager>
           )}
         </Transition>
       </>

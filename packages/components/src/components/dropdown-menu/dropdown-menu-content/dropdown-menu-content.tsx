@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  FloatingFocusManager,
-  FloatingList,
-  FloatingPortal,
-} from '@floating-ui/react';
+import { FloatingFocusManager, FloatingList } from '@floating-ui/react';
 import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import { FC, HTMLAttributes, useContext } from 'react';
@@ -16,6 +12,7 @@ import { DropdownMenuContext } from '../dropdown-menu.context';
 export interface DropdownMenuContentProps
   extends HTMLAttributes<HTMLDivElement> {
   initialFocus?: number;
+  returnFocus?: boolean;
 }
 
 const TRANSITION_TIMEOUT = {
@@ -28,6 +25,7 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
   children,
   className,
   initialFocus = 0,
+  returnFocus = true,
   ...props
 }) => {
   const {
@@ -49,37 +47,36 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
         unmountOnExit
       >
         {(status) => (
-          <FloatingPortal>
-            <FloatingFocusManager
-              context={context}
-              initialFocus={initialFocus}
-              modal={false}
+          <FloatingFocusManager
+            context={context}
+            initialFocus={initialFocus}
+            modal={false}
+            returnFocus={returnFocus}
+          >
+            <Flex
+              ref={refs.setFloating}
+              as="ul"
+              bg="white"
+              border={1}
+              borderColor="neutral100"
+              className={cn(
+                fadeStyle,
+                status === 'entered' && fadeInStyle,
+                className,
+              )}
+              flexDirection="column"
+              maxHeight={80}
+              maxWidth="xs"
+              py={0.5}
+              rounded="lg"
+              shadow="lg"
+              style={floatingStyles}
+              zIndex={10}
+              {...getFloatingProps(props)}
             >
-              <Flex
-                ref={refs.setFloating}
-                as="ul"
-                bg="white"
-                border={1}
-                borderColor="neutral100"
-                className={cn(
-                  fadeStyle,
-                  status === 'entered' && fadeInStyle,
-                  className,
-                )}
-                flexDirection="column"
-                maxHeight={80}
-                maxWidth="xs"
-                py={0.5}
-                rounded="lg"
-                shadow="lg"
-                style={floatingStyles}
-                zIndex={10}
-                {...getFloatingProps(props)}
-              >
-                {children}
-              </Flex>
-            </FloatingFocusManager>
-          </FloatingPortal>
+              {children}
+            </Flex>
+          </FloatingFocusManager>
         )}
       </Transition>
     </FloatingList>

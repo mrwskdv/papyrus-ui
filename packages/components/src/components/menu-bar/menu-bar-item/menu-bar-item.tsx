@@ -18,6 +18,7 @@ import { MenuBarContext } from '../menu-bar.context';
 export interface MenuBarItemProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   as?: ElementType;
+  danger?: boolean;
   disabled?: boolean;
   icon?: ReactElement;
   selected?: boolean;

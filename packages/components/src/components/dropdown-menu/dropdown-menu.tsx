@@ -45,13 +45,10 @@ import { DropdownSubmenu } from './dropdown-submenu';
 
 export type DropdownMenuPlacement = Placement;
 
-export type DropdownMenuStrategy = 'fixed' | 'absolute';
-
 export interface DropdownMenuProps {
   children?: ReactNode;
   offset?: number | OffsetOptions;
   placement?: DropdownMenuPlacement;
-  strategy?: DropdownMenuStrategy;
 }
 
 const DEFAULT_OFFSET: OffsetOptions = {
@@ -63,7 +60,6 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
   children,
   offset = DEFAULT_OFFSET,
   placement = 'bottom-start',
-  strategy = 'fixed',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -73,7 +69,7 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
 
   const { floatingStyles, refs, context } = useFloating<HTMLElement>({
     open: isOpen,
-    strategy,
+    strategy: 'fixed',
     onOpenChange: setIsOpen,
     placement,
     middleware: [offsetFn(offset), flip({ padding: 4 }), shift({ padding: 4 })],

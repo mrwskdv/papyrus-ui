@@ -18,6 +18,7 @@ import { MenuContext } from '../menu.context';
 
 export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   as?: ElementType;
+  danger?: boolean;
   disabled?: boolean;
   icon?: ReactElement;
   index?: number;
@@ -63,14 +64,14 @@ export const MenuItem = memo<MenuItemProps>(
         if (e.key === 'ArrowUp') {
           e.preventDefault();
           e.stopPropagation();
-          const item = getPrevItem(menuRef, e.currentTarget);
+          const item = getPrevItem(menuRef, e.currentTarget, true);
           item?.focus();
         }
 
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           e.stopPropagation();
-          const item = getNextItem(menuRef, e.currentTarget);
+          const item = getNextItem(menuRef, e.currentTarget, true);
           item?.focus();
         }
 
@@ -81,6 +82,7 @@ export const MenuItem = memo<MenuItemProps>(
 
     return (
       <MenuButton
+        {...props}
         ref={buttonRef}
         collapsed={collapsed}
         disabled={disabled}
@@ -91,7 +93,6 @@ export const MenuItem = memo<MenuItemProps>(
         variant={variant}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
-        {...props}
       >
         {children}
       </MenuButton>

@@ -177,6 +177,10 @@ export const iconSelectedVariant = styleVariants({
   ghost: {},
 });
 
+export const iconDanger = style({
+  color: vars.color.danger500,
+});
+
 export const iconDisabledVariant = styleVariants({
   primary: {
     color: vars.color.neutral300,
@@ -259,6 +263,10 @@ export const labelCollapsedSelectedVariant = styleVariants({
   ghost: {},
 });
 
+export const labelDanger = style({
+  color: vars.color.danger500,
+});
+
 export const labelDisabledVariant = styleVariants({
   primary: {
     color: vars.color.neutral300,
@@ -287,7 +295,7 @@ export const underline = atoms({
   position: 'absolute',
   display: 'block',
   rounded: 'full',
-  bg: 'primary400',
+  bg: 'primary500',
 });
 
 export const underlineDirection = {
@@ -304,3 +312,7 @@ export const underlineDirection = {
     height: 1,
   }),
 };
+
+export const underlineDanger = style({
+  background: vars.color.danger500,
+});

@@ -71,7 +71,7 @@ export function Rounded(args: TagProps) {
 
 export function Clickable(args: TagProps) {
   return (
-    <Tag {...args} onClick={() => console.log('tag clicked')}>
+    <Tag {...args} onClick={() => console.log('Click')}>
       Clickable tag
     </Tag>
   );

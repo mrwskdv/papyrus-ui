@@ -18,6 +18,7 @@ import { DropdownMenuContext } from '../dropdown-menu.context';
 export interface DropdownMenuItemProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   as?: ElementType;
+  danger?: boolean;
   disabled?: boolean;
   icon?: ReactElement;
   selected?: boolean;

@@ -118,28 +118,23 @@ export const Submenu: FC<SubmenuProps> = ({
         e.currentTarget.click();
       }
 
-      if (!menuRef.current) {
-        onKeyDown?.(e);
-        return;
-      }
-
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
-        const item = getPrevItem(menuRef, e.currentTarget);
+        const item = getPrevItem(parent.menuRef, e.currentTarget, true);
         item?.focus();
       }
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         e.stopPropagation();
-        const item = getNextItem(menuRef, e.currentTarget);
+        const item = getNextItem(parent.menuRef, e.currentTarget, true);
         item?.focus();
       }
 
       onKeyDown?.(e);
     },
-    [menuRef, onKeyDown],
+    [onKeyDown, parent.menuRef],
   );
 
   const handleMenuKeyDown = useCallback(
@@ -184,6 +179,7 @@ export const Submenu: FC<SubmenuProps> = ({
   return (
     <>
       <MenuButton
+        {...props}
         ref={buttonRef}
         aria-controls={isOpen ? menuId : undefined}
         aria-expanded={isOpen ? 'true' : 'false'}
@@ -204,7 +200,6 @@ export const Submenu: FC<SubmenuProps> = ({
         onClick={handleClick}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
-        {...props}
       >
         {label}
       </MenuButton>

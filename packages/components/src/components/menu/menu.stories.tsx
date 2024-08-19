@@ -50,7 +50,9 @@ const Template: StoryFn<MenuProps> = (args) => (
       </Menu.Submenu>
     </Menu.Submenu>
 
-    <Menu.Item icon={<Icon name="support" />}>Option 6</Menu.Item>
+    <Menu.Item danger icon={<Icon name="support" />}>
+      Option 6
+    </Menu.Item>
   </Menu>
 );
 

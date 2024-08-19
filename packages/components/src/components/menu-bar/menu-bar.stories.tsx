@@ -3,6 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
 
+import { Box } from '../box';
 import { Divider } from '../divider';
 import { Icon } from '../icon';
 import { Text } from '../text';
@@ -22,7 +23,7 @@ export default {
 };
 
 const Template: StoryFn<MenuBarProps> = (args) => (
-  <>
+  <Box height={64}>
     <MenuBar {...args}>
       <MenuBar.Item icon={<Icon name="home" />} selected>
         Option 1
@@ -37,24 +38,26 @@ const Template: StoryFn<MenuBarProps> = (args) => (
       <MenuBar.Submenu icon={<Icon name="stats" />} label="Option 4">
         <MenuBar.Item>Option 4-1</MenuBar.Item>
         <MenuBar.Item>Option 4-2</MenuBar.Item>
-        <MenuBar.Item>Option 4-3</MenuBar.Item>
+
+        <MenuBar.Submenu label="Option 5-3">
+          <MenuBar.Item>Option 4-3-1</MenuBar.Item>
+          <MenuBar.Item>Option 4-3-2</MenuBar.Item>
+          <MenuBar.Item>Option 4-3-3</MenuBar.Item>
+        </MenuBar.Submenu>
       </MenuBar.Submenu>
 
       <MenuBar.Submenu icon={<Icon name="cog" />} label="Option 5">
         <MenuBar.Item>Option 5-1</MenuBar.Item>
         <MenuBar.Item>Option 5-2</MenuBar.Item>
-
-        <MenuBar.Submenu label="Option 5-3">
-          <MenuBar.Item>Option 5-3-1</MenuBar.Item>
-          <MenuBar.Item>Option 5-3-2</MenuBar.Item>
-          <MenuBar.Item>Option 5-3-3</MenuBar.Item>
-        </MenuBar.Submenu>
+        <MenuBar.Item>Option 5-3</MenuBar.Item>
       </MenuBar.Submenu>
 
-      <MenuBar.Item icon={<Icon name="support" />}>Option 6</MenuBar.Item>
+      <MenuBar.Item danger icon={<Icon name="support" />}>
+        Option 6
+      </MenuBar.Item>
     </MenuBar>
     <Divider color="neutral200" />
-  </>
+  </Box>
 );
 
 export const Basic: StoryFn<MenuBarProps> = Template.bind({});

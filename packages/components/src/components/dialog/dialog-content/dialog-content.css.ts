@@ -9,7 +9,6 @@ export const root = atoms({
   width: 'full',
   height: 'full',
   bg: 'dark500',
-
   zIndex: 30,
 });
 

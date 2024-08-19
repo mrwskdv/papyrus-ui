@@ -27,6 +27,9 @@ export const rootVariant = styleVariants({
       '&:disabled': {
         backgroundColor: vars.color.neutral200,
       },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
+      },
     },
   },
   accent: {
@@ -40,6 +43,9 @@ export const rootVariant = styleVariants({
       },
       '&:disabled': {
         background: vars.color.neutral200,
+      },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
       },
     },
   },
@@ -91,6 +97,9 @@ export const rootVariant = styleVariants({
       '&:disabled': {
         backgroundColor: vars.color.neutral200,
       },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
+      },
     },
   },
   warning: {
@@ -108,6 +117,9 @@ export const rootVariant = styleVariants({
       '&:disabled': {
         backgroundColor: vars.color.neutral200,
       },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
+      },
     },
   },
   danger: {
@@ -124,6 +136,9 @@ export const rootVariant = styleVariants({
       },
       '&:disabled': {
         backgroundColor: vars.color.neutral200,
+      },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
       },
     },
   },

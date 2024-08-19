@@ -19,7 +19,6 @@ import {
   useRole,
   useTypeahead,
   useMergeRefs,
-  FloatingPortal,
   FloatingFocusManager,
   FloatingList,
   size as sizeFn,
@@ -92,7 +91,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
     open: isOpen,
     strategy: 'fixed',
     onOpenChange: setIsOpen,
-    placement: 'bottom-start',
+    placement: parent.isNested ? 'right-start' : 'bottom-start',
     middleware: [
       offset({
         mainAxis: parent.isNested ? 9 : 4,
@@ -369,26 +368,24 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
             unmountOnExit
           >
             {(status) => (
-              <FloatingPortal>
-                <FloatingFocusManager
-                  context={context}
-                  initialFocus={-1}
-                  modal={false}
+              <FloatingFocusManager
+                context={context}
+                initialFocus={-1}
+                modal={false}
+              >
+                <ul
+                  ref={refs.setFloating}
+                  className={cn(
+                    S.menuList,
+                    fadeStyle,
+                    status === 'entered' && fadeInStyle,
+                  )}
+                  style={floatingStyles}
+                  {...getFloatingProps()}
                 >
-                  <ul
-                    ref={refs.setFloating}
-                    className={cn(
-                      S.menuList,
-                      fadeStyle,
-                      status === 'entered' && fadeInStyle,
-                    )}
-                    style={floatingStyles}
-                    {...getFloatingProps()}
-                  >
-                    {children}
-                  </ul>
-                </FloatingFocusManager>
-              </FloatingPortal>
+                  {children}
+                </ul>
+              </FloatingFocusManager>
             )}
           </Transition>
         </FloatingList>

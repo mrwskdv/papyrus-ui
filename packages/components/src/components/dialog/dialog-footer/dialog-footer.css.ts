@@ -1,12 +1,18 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms, bpUp, vars } from '@papyrus-ui/styles';
+import { style } from '@vanilla-extract/css';
 
-export const root = atoms({
-  display: 'flex',
-  flexDirection: 'row-reverse',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  bg: 'white',
-});
+export const root = style([
+  {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: vars.color.white,
+  },
+  bpUp('tablet', {
+    background: 'transparent',
+  }),
+]);
 
 export const rootSize = {
   sm: atoms({

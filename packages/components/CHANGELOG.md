@@ -1,5 +1,15 @@
 # @papyrus-ui/components
 
+## 0.2.3
+
+### Patch Changes
+
+- 49a8aa7: Fixed success styles overriding invalid styles
+- 49a8aa7: Added `danger` prop to menu item components
+- 49a8aa7: Fixed dropdown menu z-index issue
+- 49a8aa7: Limited autocomplete listbox heigh
+- 49a8aa7: Fixed dialog footer overlapping body content
+
 ## 0.2.2
 
 ### Patch Changes

@@ -18,7 +18,7 @@ export const Basic: StoryFn<DividerProps> = (args) => (
 
 export const Direction: StoryFn<DividerProps> = (args) => (
   <>
-    <Heading as="h3" mb={4}>
+    <Heading level={3} mb={4}>
       Horizontal
     </Heading>
 
@@ -26,7 +26,7 @@ export const Direction: StoryFn<DividerProps> = (args) => (
       <Divider {...args} direction="horizontal" />
     </Box>
 
-    <Heading as="h3" mb={4} mt={8}>
+    <Heading level={3} mb={4} mt={8}>
       Vertical
     </Heading>
 

@@ -4,7 +4,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 export const root = style({
   display: 'inline-block',
   lineHeight: 1,
-  verticalAlign: '-0.125em',
+  verticalAlign: '-0.167em',
   transition: vars.transition.base,
 });
 

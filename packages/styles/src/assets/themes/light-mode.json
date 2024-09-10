@@ -151,7 +151,7 @@
     },
     "label": {
       "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-      "fontSize": "0.875rem",
+      "fontSize": "1rem",
       "fontWeight": "600",
       "lineHeight": "1.2000000476837158",
       "letterSpacing": "0.024000000953674317em",
@@ -245,7 +245,7 @@
       }
     },
     "heading": {
-      "3xl": {
+      "h1": {
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -287,7 +287,7 @@
           }
         }
       },
-      "2xl": {
+      "h2": {
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -329,7 +329,7 @@
           }
         }
       },
-      "xl": {
+      "h3": {
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -371,7 +371,7 @@
           }
         }
       },
-      "lg": {
+      "h4": {
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -413,7 +413,7 @@
           }
         }
       },
-      "md": {
+      "h5": {
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -455,7 +455,7 @@
           }
         }
       },
-      "sm": {
+      "h6": {
         "primary": {
           "mobile": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",

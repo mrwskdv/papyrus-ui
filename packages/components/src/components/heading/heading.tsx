@@ -13,7 +13,7 @@ import { AllHTMLAttributes, ElementType, forwardRef } from 'react';
 
 import * as S from './heading.css';
 
-export type HeadingSize = '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm';
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export type HeadingVariant = 'primary' | 'secondary';
 
@@ -25,7 +25,7 @@ export interface HeadingProps
   breakWord?: boolean;
   display?: ResponsiveValue<'block' | 'inline-block' | 'inline'>;
   highlight?: boolean;
-  size?: HeadingSize;
+  level?: HeadingLevel;
   truncate?: boolean;
   fontVariant?: HeadingVariant;
 }
@@ -33,11 +33,11 @@ export interface HeadingProps
 export const Heading = forwardRef<HTMLElement, HeadingProps>(
   (
     {
-      as: Element = 'h2',
+      as,
       breakWord,
       className,
       highlight,
-      size = 'md',
+      level = 1,
       truncate,
       fontVariant = 'primary',
       children,
@@ -46,13 +46,14 @@ export const Heading = forwardRef<HTMLElement, HeadingProps>(
     ref,
   ) => {
     const [atomsProps, restProps] = partitionAtoms(props);
+    const Element = as ?? `h${level}`;
 
     return (
       <Element
         {...restProps}
         ref={ref}
         className={cn(
-          S.root({ size, fontVariant }),
+          S.root({ level, fontVariant }),
           highlight && highlightStyle,
           breakWord && breakWordStyle,
           truncate && truncateStyle,

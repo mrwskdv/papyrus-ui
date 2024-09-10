@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { BiCheck } from 'react-icons/bi';
 
+import { Icon } from '../icon';
 import { ListItem } from '../list-item';
 import { UList } from '../u-list';
 
@@ -10,7 +11,11 @@ const meta: Meta = {
   title: 'Typography/Marker',
   component: Marker,
   args: {
-    children: <BiCheck />,
+    children: (
+      <Icon>
+        <BiCheck />
+      </Icon>
+    ),
   },
 };
 

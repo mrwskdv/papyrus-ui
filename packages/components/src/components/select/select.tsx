@@ -131,10 +131,7 @@ const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
 
           {!multiple && (
             <InputAction className={S.endAction}>
-              <Icon
-                color={disabled ? 'neutral300' : 'neutral900'}
-                interactive={!disabled}
-              >
+              <Icon color={disabled ? 'neutral300' : 'neutral900'}>
                 <BiChevronDown />
               </Icon>
             </InputAction>

@@ -1,5 +1,11 @@
 # @papyrus-ui/styles
 
+## 0.3.2
+
+### Patch Changes
+
+- b712818: Updated heading tokens names
+
 ## 0.3.1
 
 ### Patch Changes

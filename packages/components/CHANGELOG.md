@@ -1,5 +1,14 @@
 # @papyrus-ui/components
 
+## 0.3.1
+
+### Patch Changes
+
+- b712818: Updated heading tokens names
+- b712818: Included label import
+- Updated dependencies [b712818]
+  - @papyrus-ui/styles@0.3.2
+
 ## 0.3.0
 
 ### Minor Changes

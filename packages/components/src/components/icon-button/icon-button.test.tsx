@@ -1,6 +1,7 @@
+import { BiSolidLike } from 'react-icons/bi';
+
 import { render, screen, userEvent } from '../../utils/test-utils';
 import { Avatar } from '../avatar';
-import { Icon } from '../icon';
 
 import { IconButton } from './icon-button';
 
@@ -12,7 +13,7 @@ describe('IconButton', () => {
 
         render(
           <IconButton onClick={onClickMock}>
-            <Icon name="like" type="solid" />
+            <BiSolidLike />
           </IconButton>,
         );
 
@@ -30,7 +31,7 @@ describe('IconButton', () => {
 
         render(
           <IconButton>
-            <Icon data-testid={testId} name="like" type="solid" />
+            <BiSolidLike data-testid={testId} />
           </IconButton>,
         );
 
@@ -66,7 +67,7 @@ describe('IconButton', () => {
 
         render(
           <IconButton as="a" data-testid={testId} href="#">
-            <Icon name="like" type="solid" />
+            <BiSolidLike />
           </IconButton>,
         );
 

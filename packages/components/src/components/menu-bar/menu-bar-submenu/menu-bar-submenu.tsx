@@ -38,6 +38,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { BiChevronDown, BiChevronRight } from 'react-icons/bi';
 import { Transition } from 'react-transition-group';
 
 import {
@@ -46,7 +47,6 @@ import {
   getNextItem,
   getPrevItem,
 } from '../../../utils/list-navigation';
-import { Icon } from '../../icon';
 import { MenuButton } from '../../menu-button';
 import { MenuBarContext, MenuBarContextType } from '../menu-bar.context';
 
@@ -332,13 +332,7 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
         ref={buttonRef}
         collapsed={parent.collapsed}
         direction={parent.isNested ? 'vertical' : 'horizontal'}
-        endIcon={
-          parent.isNested ? (
-            <Icon name="chevron-right" />
-          ) : (
-            <Icon name="chevron-down" />
-          )
-        }
+        endIcon={parent.isNested ? <BiChevronRight /> : <BiChevronDown />}
         role="menuitem"
         size={parent.isNested ? 'sm' : parent.size}
         startIcon={icon}

@@ -29,7 +29,7 @@ export const rootSize = {
     },
     px: 4,
     py: {
-      mobile: 2.5,
+      mobile: 1.5,
       tablet: 4,
     },
     zIndex: 20,
@@ -47,7 +47,7 @@ export const rootSize = {
     },
     px: 4,
     py: {
-      mobile: 2.5,
+      mobile: 1.5,
       tablet: 4,
     },
     zIndex: 20,

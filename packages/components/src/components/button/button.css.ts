@@ -1,14 +1,15 @@
 import { atoms, vars } from '@papyrus-ui/styles';
-import { styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
-export const root = atoms({
+export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  rounded: 'md',
-  border: 1,
+  borderRadius: vars.borderRadius.md,
+  borderWidth: '1px',
   borderStyle: 'solid',
-  transition: 'base',
+
+  transition: vars.transition.base,
 });
 
 export const rootVariant = styleVariants({
@@ -32,14 +33,16 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  accent: {
+  secondary: {
     borderColor: 'transparent',
     color: vars.color.white,
-    background: vars.gradient.highlight,
+    backgroundImage: vars.gradient.highlight,
+    backgroundSize: '200%',
+    backgroundPosition: 'left',
     boxShadow: vars.boxShadow.sm,
     selectors: {
       '&:hover': {
-        background: vars.gradient.highlightAlt,
+        backgroundPosition: 'right',
       },
       '&:disabled': {
         background: vars.color.neutral200,
@@ -49,7 +52,7 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  secondary: {
+  tertiary: {
     borderColor: 'transparent',
     color: vars.color.neutral900,
     backgroundColor: vars.color.neutral100,
@@ -66,7 +69,7 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  tertiary: {
+  plain: {
     borderColor: 'transparent',
     color: vars.color.primary500,
     selectors: {
@@ -79,6 +82,26 @@ export const rootVariant = styleVariants({
       '&:disabled': {
         color: vars.color.neutral300,
         backgroundColor: 'transparent',
+      },
+    },
+  },
+  info: {
+    borderColor: 'transparent',
+    color: vars.color.white,
+    backgroundColor: vars.color.info500,
+    boxShadow: vars.boxShadow.sm,
+    selectors: {
+      '&:hover': {
+        backgroundColor: vars.color.info400,
+      },
+      '&:active': {
+        backgroundColor: vars.color.info600,
+      },
+      '&:disabled': {
+        backgroundColor: vars.color.neutral200,
+      },
+      '&:focus-visible': {
+        boxShadow: vars.boxShadow.focus,
       },
     },
   },
@@ -179,6 +202,27 @@ export const rootSize = {
   }),
 };
 
-export const rootBlock = atoms({
-  width: 'full',
+export const rootBlock = style({
+  width: '100%',
+});
+
+export const rootRounded = style({
+  borderRadius: vars.borderRadius.full,
+});
+
+export const icon = atoms({
+  fontSize: 'lg',
+});
+
+export const startIcon = atoms({
+  me: 2,
+});
+
+export const endIcon = atoms({
+  ms: 2,
+});
+
+export const label = style({
+  display: 'inline-block',
+  ...vars.typography.button,
 });

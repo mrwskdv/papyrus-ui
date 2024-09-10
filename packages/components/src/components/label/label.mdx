@@ -1,0 +1,54 @@
+import Label, {Basic, ColoredText, HighlightText, TruncateLongText} from './label.stories'
+import {Meta, ArgsTable, Canvas} from "@storybook/addon-docs";
+
+<Meta of={Label} />
+
+# Label
+
+The Label component is used to represent text in forms or UI elements that typically describe or provide context to an
+input field.
+
+## When To Use
+
+Use the Label component to provide clear and accessible labels for form fields such as input, select, or textarea
+elements.
+
+## Examples
+
+### Basic
+
+<Canvas of={Basic} />
+
+### Truncate Long Text
+
+You can enable text truncation to handle overflow text with an ellipsis (...).
+
+<Canvas of={TruncateLongText} />
+
+### Colored Text
+
+Use `color` property to use different color from the theme.
+
+<Canvas of={ColoredText} />
+
+### Highlighted text
+
+Use `highlight` property to highlight text with a gradient defined in theme.
+
+<Canvas of={HighlightText} />
+
+## Guidelines
+
+- Ensure that labels are short, clear, and to the point. This helps users quickly understand the purpose of the input
+  field or element the label is describing.
+
+- If the label text is not associated with a form control, change the rendered html tag to another using `as` prop
+
+## Accessibility
+
+Labels should always be programmatically associated with form elements by using the for attribute or ensuring proximity
+in the DOM structure.
+
+## Component API
+
+<ArgsTable />

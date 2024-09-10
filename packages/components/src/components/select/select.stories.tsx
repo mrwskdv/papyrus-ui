@@ -1,8 +1,10 @@
+import { BiInfoCircle, BiSearch } from 'react-icons/bi';
+
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Text } from '../text';
+import { Label } from '../label';
 
 import { Select, SelectProps } from './select';
 
@@ -29,17 +31,9 @@ export default {
 export function Basic(args: SelectProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="select-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="select-basic" mb={1}>
         Character
-      </Text>
+      </Label>
       <Select {...args} id="select-basic">
         {SELECT_OPTIONS.map((val, idx) => (
           <option key={idx} value={idx}>
@@ -54,17 +48,9 @@ export function Basic(args: SelectProps) {
 export function Invalid(args: SelectProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="select-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="select-invalid" mb={1}>
         Character
-      </Text>
+      </Label>
       <Select {...args} id="select-invalid" invalid>
         {SELECT_OPTIONS.map((val, idx) => (
           <option key={idx} value={idx}>
@@ -79,17 +65,9 @@ export function Invalid(args: SelectProps) {
 export function Success(args: SelectProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="select-success"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="select-success" mb={1}>
         Character
-      </Text>
+      </Label>
       <Select {...args} id="select-success" success>
         {SELECT_OPTIONS.map((val, idx) => (
           <option key={idx} value={idx}>
@@ -105,22 +83,18 @@ export function WithIcon(args: SelectProps) {
   return (
     <Flex flexDirection="column">
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="select-with-start-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="select-with-start-icon" mb={1}>
           With Start Icon
-        </Text>
+        </Label>
 
         <Select
           {...args}
           id="select-with-start-icon"
-          startIcon={<Icon color="neutral500" name="search" />}
+          startIcon={
+            <Icon color="neutral500">
+              <BiSearch />
+            </Icon>
+          }
         >
           {SELECT_OPTIONS.map((val, idx) => (
             <option key={idx} value={idx}>
@@ -131,21 +105,17 @@ export function WithIcon(args: SelectProps) {
       </Box>
 
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="select-with-end-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="select-with-end-icon" mb={1}>
           With End Icon
-        </Text>
+        </Label>
 
         <Select
           {...args}
-          endIcon={<Icon color="primary400" name="info-circle" />}
+          endIcon={
+            <Icon color="primary400">
+              <BiInfoCircle />
+            </Icon>
+          }
           id="select-with-end-icon"
         >
           {SELECT_OPTIONS.map((val, idx) => (
@@ -162,17 +132,9 @@ export function WithIcon(args: SelectProps) {
 export function Disabled(args: SelectProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="select-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="select-disabled" mb={1}>
         Character
-      </Text>
+      </Label>
       <Select {...args} disabled id="select-disabled">
         {SELECT_OPTIONS.map((val, idx) => (
           <option key={idx} value={idx}>
@@ -187,17 +149,9 @@ export function Disabled(args: SelectProps) {
 export function Multiple(args: SelectProps<true>) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="select-multiple"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="select-multiple" mb={1}>
         Character
-      </Text>
+      </Label>
       <Select {...args} id="select-multiple" multiple>
         {SELECT_OPTIONS.map((val, idx) => (
           <option key={idx} value={idx}>
@@ -214,17 +168,9 @@ export function Sizes(args: SelectProps) {
     <Flex flexDirection="column">
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Text
-            as="label"
-            fontSize="sm"
-            fontWeight="semiBold"
-            htmlFor={`select-size-${size}`}
-            letterSpacing="widest"
-            lineHeight="snug"
-            mb={1}
-          >
+          <Label htmlFor={`select-size-${size}`} mb={1}>
             Character
-          </Text>
+          </Label>
           <Select {...args} id={`select-size-${size}`} size={size}>
             {SELECT_OPTIONS.map((val, idx) => (
               <option key={idx} value={idx}>

@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { BiBell, BiError } from 'react-icons/bi';
 
 import { Avatar } from '../avatar';
 import { Icon } from '../icon';
@@ -12,8 +13,8 @@ const meta: Meta = {
   args: {
     content: 5,
     children: (
-      <IconButton title="Notifications" variant="secondary">
-        <Icon name="bell" />
+      <IconButton title="Notifications" variant="tertiary">
+        <BiBell />
       </IconButton>
     ),
   },
@@ -77,10 +78,14 @@ Offset.args = {
 export const CustomContent = Template.bind({});
 
 CustomContent.args = {
-  content: <Icon color="danger400" fontSize="md" name="error" />,
+  content: (
+    <Icon color="danger400" fontSize="md">
+      <BiError />
+    </Icon>
+  ),
   children: (
     <IconButton title="Notifications">
-      <Icon name="bell" />
+      <BiBell />
     </IconButton>
   ),
 };

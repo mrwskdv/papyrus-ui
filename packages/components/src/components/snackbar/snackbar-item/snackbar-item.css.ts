@@ -6,6 +6,7 @@ export const root = atoms({
   maxWidth: 'lg',
   minWidth: 64,
   rounded: 'lg',
+  color: 'white',
   px: 4,
   py: 3,
   boxShadow: 'lg',
@@ -355,6 +356,9 @@ export const rootVariant = {
   primary: atoms({
     bg: 'primary600',
   }),
+  info: atoms({
+    bg: 'info600',
+  }),
   success: atoms({
     bg: 'success600',
   }),
@@ -365,3 +369,7 @@ export const rootVariant = {
     bg: 'danger600',
   }),
 };
+
+export const icon = atoms({
+  fontSize: '3xl',
+});

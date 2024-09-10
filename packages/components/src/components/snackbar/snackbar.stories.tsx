@@ -2,12 +2,12 @@ import { faker } from '@faker-js/faker';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { useRef, useState } from 'react';
+import { BiBell } from 'react-icons/bi';
 
 import { Avatar } from '../avatar';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Flex } from '../flex';
-import { Icon } from '../icon';
 
 import { Snackbar, SnackbarProps } from './snackbar';
 import { SnackbarItem, SnackbarItemVariant } from './snackbar-item';
@@ -25,6 +25,7 @@ const AUTO_HIDE_DURATION = 3000;
 
 const variants: SnackbarItemVariant[] = [
   'primary',
+  'info',
   'success',
   'warning',
   'danger',
@@ -154,7 +155,7 @@ export const Placement: StoryFn<SnackbarProps> = (args) => {
       <Flex flexWrap="wrap" justifyContent="center" mt="-4" mx="-2">
         {placements.map((placement) => (
           <Box key={placement} mt={4} px={2}>
-            <Button variant="secondary" onClick={() => onPush(placement)}>
+            <Button variant="tertiary" onClick={() => onPush(placement)}>
               {capitalize(placement)}
             </Button>
           </Box>
@@ -183,7 +184,7 @@ export const Variants: StoryFn<SnackbarProps> = (args) => (
   <Flex
     alignItems="center"
     flexDirection="column"
-    height={64}
+    height={96}
     justifyContent="center"
     style={{
       width: '60vw',
@@ -245,7 +246,7 @@ export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
   >
     <Snackbar {...args}>
       <Snackbar.Item
-        icon={<Icon name="bell" />}
+        icon={<BiBell />}
         message={capitalize(faker.lorem.words({ min: 1, max: 3 }))}
         onDismiss={() => {
           // Do nothing
@@ -270,7 +271,7 @@ export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
     <Snackbar {...args}>
       <Snackbar.Item
         icon={
-          <Avatar rounded size="md">
+          <Avatar size="md">
             <img alt="Profile" src="https://i.pravatar.cc/300" />
           </Avatar>
         }

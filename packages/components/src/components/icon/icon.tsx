@@ -7,64 +7,35 @@ import {
   partitionAtoms,
 } from '@papyrus-ui/styles';
 import cn from 'classnames';
-import { forwardRef, HTMLAttributes, memo } from 'react';
+import { forwardRef, HTMLAttributes, ReactElement } from 'react';
 
 import * as S from './icon.css';
 
-export type IconType = 'regular' | 'solid' | 'logo';
+export type IconFlip = 'horizontal' | 'vertical' | 'none';
 
 export type IconRotate = 0 | 90 | 180 | 270;
 
-export type IconFlip = 'horizontal' | 'vertical' | 'none';
-
-export type IconPull = 'left' | 'right' | 'none';
-
-export type IconAnimation =
-  | 'spin'
-  | 'tada'
-  | 'flashing'
-  | 'burst'
-  | 'fade-left'
-  | 'fade-right'
-  | 'fade-up'
-  | 'fade-down'
-  | 'spin-hover'
-  | 'tada-hover'
-  | 'flashing-hover'
-  | 'burst-hover'
-  | 'fade-left-hover'
-  | 'fade-right-hover'
-  | 'fade-up-hover'
-  | 'fade-down-hover'
-  | 'none';
-
 export interface IconProps
   extends MarginAtoms,
-    Omit<HTMLAttributes<HTMLElement>, 'color'> {
+    Omit<HTMLAttributes<HTMLElement>, 'color' | 'children'> {
   color?: Atoms['color'];
+  flip?: IconFlip;
   fontSize?: Atoms['fontSize'];
-  animation?: IconAnimation;
   highlight?: boolean;
   interactive?: boolean;
-  name: string;
-  flip?: IconFlip;
-  pull?: IconPull;
   rotate?: IconRotate;
-  type?: IconType;
+  children: ReactElement;
 }
 
-const IconComponent = forwardRef<HTMLElement, IconProps>(
+export const Icon = forwardRef<HTMLElement, IconProps>(
   (
     {
-      animation = 'none',
       className,
       flip = 'none',
       highlight,
       interactive,
-      name,
-      pull = 'none',
       rotate = 0,
-      type = 'regular',
+      children,
       ...props
     },
     ref,
@@ -76,25 +47,19 @@ const IconComponent = forwardRef<HTMLElement, IconProps>(
         ref={ref}
         className={cn(
           S.root,
-          'bx',
-          (type === 'solid' && `bxs-${name}`) ||
-            (type === 'logo' && `bxl-${name}`) ||
-            `bx-${name}`,
-          rotate !== 0 && `bx-rotate-${rotate}`,
-          flip !== 'none' && `bx-flip-${flip}`,
-          pull !== 'none' && `bx-pull-${pull}`,
-          animation !== 'none' && `bx-${animation}`,
+          rotate !== 0 && S.rootRotate[rotate],
+          flip !== 'none' && S.rootFlip[flip],
           highlight && highlightStyle,
           interactive && interactiveStyle,
           atoms(atomsProps),
           className,
         )}
         {...restProps}
-      />
+      >
+        {children}
+      </i>
     );
   },
 );
 
-IconComponent.displayName = 'Icon';
-
-export const Icon = memo(IconComponent);
+Icon.displayName = 'Icon';

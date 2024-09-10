@@ -1,7 +1,6 @@
 import { StoryFn, Meta } from '@storybook/react';
 
 import { Box } from '../box';
-import { Flex } from '../flex';
 
 import { Text, TextProps } from './text';
 
@@ -13,245 +12,79 @@ const meta: Meta = {
   },
 };
 
-export const Basic: StoryFn = (args: TextProps) => <Text {...args} />;
+export const Template: StoryFn<TextProps> = (args) => <Text {...args} />;
 
-export const Headings: StoryFn = (): JSX.Element => (
-  <Flex>
-    <Box mr={32}>
-      <Text color="neutral500" mb={8}>
-        Primary
-      </Text>
+export const Basic = Template.bind({});
 
-      <Text
-        fontSize="6xl"
-        fontWeight="bold"
-        letterSpacing="normal"
-        lineHeight="normal"
-        mb={8}
-      >
-        48pt
-      </Text>
+Basic.args = {
+  children:
+    'This is a default text using the primary font-family and medium size.',
+  size: 'md',
+  fontVariant: 'primary',
+};
 
-      <Text
-        fontSize="5xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        lineHeight="tight"
-        mb={8}
-      >
-        40pt
-      </Text>
+export const SmallText = Template.bind({});
 
-      <Text
-        fontSize="4xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        lineHeight="tight"
-        mb={8}
-      >
-        32pt
-      </Text>
+SmallText.args = {
+  children: 'This is a small text using the primary font-family.',
+  size: 'sm',
+};
 
-      <Text
-        fontSize="3xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        lineHeight="tight"
-        mb={8}
-      >
-        28pt
-      </Text>
+export const PrimaryFont = Template.bind({});
 
-      <Text
-        fontSize="2xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        lineHeight="tight"
-        mb={8}
-      >
-        24pt
-      </Text>
+PrimaryFont.args = {
+  children: 'This text uses the primary font-family.',
+  size: 'md',
+  fontVariant: 'primary',
+};
 
-      <Text
-        fontSize="xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        lineHeight="tight"
-      >
-        20pt
-      </Text>
-    </Box>
+export const SecondaryFont = Template.bind({});
 
-    <Box>
-      <Text color="neutral500" mb={8}>
-        Secondary
-      </Text>
+SecondaryFont.args = {
+  children: 'This text uses the secondary font-family.',
+  size: 'md',
+  fontVariant: 'secondary',
+};
 
-      <Text
-        fontFamily="secondary"
-        fontSize="6xl"
-        fontWeight="medium"
-        letterSpacing="normal"
-        lineHeight="tight"
-        mb={8}
-      >
-        48pt
-      </Text>
+export const BoldText = Template.bind({});
 
-      <Text
-        fontFamily="secondary"
-        fontSize="5xl"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        lineHeight="tight"
-        mb={8}
-      >
-        40pt
-      </Text>
+BoldText.args = {
+  children: 'This text is bold.',
+  size: 'md',
+  fontVariant: 'primary',
+  bold: true,
+};
 
-      <Text
-        fontFamily="secondary"
-        fontSize="4xl"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        lineHeight="tight"
-        mb={8}
-      >
-        32pt
-      </Text>
-
-      <Text
-        fontFamily="secondary"
-        fontSize="3xl"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        lineHeight="tight"
-        mb={8}
-      >
-        28pt
-      </Text>
-
-      <Text
-        fontFamily="secondary"
-        fontSize="2xl"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        lineHeight="tight"
-        mb={8}
-      >
-        24pt
-      </Text>
-
-      <Text
-        fontFamily="secondary"
-        fontSize="xl"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        lineHeight="tight"
-      >
-        20pt
-      </Text>
-    </Box>
-  </Flex>
+export const TruncateLongText: StoryFn<TextProps> = (args) => (
+  <Box maxWidth="sm">
+    <Text {...args} />
+  </Box>
 );
 
-export const Body: StoryFn = () => (
-  <Flex>
-    <Box mr={32}>
-      <Text color="neutral500" mb={8}>
-        Primary
-      </Text>
+TruncateLongText.args = {
+  children:
+    'This is a very long text that will be truncated with an ellipsis if it exceeds the width of its container.',
+  size: 'md',
+  fontVariant: 'primary',
+  truncate: true,
+};
 
-      <Text mb={2}>Regular 16pt</Text>
+export const ColoredText = Template.bind({});
 
-      <Text fontWeight="semiBold" mb={8}>
-        Bold 16pt
-      </Text>
+ColoredText.args = {
+  children: 'This text uses the color property from the theme.',
+  size: 'md',
+  fontVariant: 'primary',
+  color: 'success500',
+};
 
-      <Text fontSize="sm" mb={2}>
-        Regular 14pt
-      </Text>
+export const HighlightText = Template.bind({});
 
-      <Text fontSize="sm" fontWeight="semiBold">
-        Bold 14pt
-      </Text>
-    </Box>
-
-    <Box>
-      <Text color="neutral500" mb={8}>
-        Secondary
-      </Text>
-
-      <Text fontFamily="secondary" letterSpacing="wide" mb={2}>
-        Regular 16pt
-      </Text>
-
-      <Text
-        fontFamily="secondary"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-        mb={8}
-      >
-        Bold 16pt
-      </Text>
-
-      <Text fontFamily="secondary" fontSize="sm" letterSpacing="wide" mb={2}>
-        Regular 14pt
-      </Text>
-
-      <Text
-        fontFamily="secondary"
-        fontSize="sm"
-        fontWeight="semiBold"
-        letterSpacing="wide"
-      >
-        Bold 14pt
-      </Text>
-    </Box>
-  </Flex>
-);
-
-export const Labels: StoryFn = () => (
-  <>
-    <Text fontWeight="semiBold" letterSpacing="widest" lineHeight="snug" mb={8}>
-      Medium Label
-    </Text>
-
-    <Text
-      fontSize="sm"
-      fontWeight="semiBold"
-      letterSpacing="widest"
-      lineHeight="snug"
-      mb={8}
-    >
-      Small Label
-    </Text>
-
-    <Text fontSize="xs" letterSpacing="widest" lineHeight="snug" mb={8}>
-      Caption
-    </Text>
-  </>
-);
-
-export const Elements: StoryFn = () => (
-  <Flex>
-    <Box mr={8}>
-      <Text as="a" color="accent500" mb={8}>
-        Link
-      </Text>
-    </Box>
-
-    <Box>
-      <Text
-        as="button"
-        color="primary500"
-        textDecoration="underline"
-        type="button"
-      >
-        Button
-      </Text>
-    </Box>
-  </Flex>
-);
+HighlightText.args = {
+  children: 'This text is highlighted.',
+  size: 'md',
+  fontVariant: 'primary',
+  highlight: true,
+};
 
 export default meta;

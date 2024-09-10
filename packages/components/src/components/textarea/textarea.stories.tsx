@@ -1,14 +1,14 @@
+import { BiInfoCircle, BiSearch } from 'react-icons/bi';
+
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Text } from '../text';
+import { Label } from '../label';
 
 import { Textarea, TextareaProps } from './textarea';
 
-const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
-
-export default {
+const meta = {
   title: 'Inputs/Textarea',
   component: Textarea,
 
@@ -18,40 +18,15 @@ export default {
   },
 };
 
+const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
+
 export function Basic(args: TextareaProps): JSX.Element {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="textarea-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="textarea-basic" mb={1}>
         Bio
-      </Text>
+      </Label>
       <Textarea {...args} id="textarea-basic" />
-    </>
-  );
-}
-
-export function Invalid(args: TextareaProps): JSX.Element {
-  return (
-    <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="textarea-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
-        Bio
-      </Text>
-      <Textarea {...args} id="textarea-invalid" invalid />
     </>
   );
 }
@@ -59,18 +34,21 @@ export function Invalid(args: TextareaProps): JSX.Element {
 export function Success(args: TextareaProps): JSX.Element {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="textarea-success"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label as="label" htmlFor="textarea-success" mb={1}>
         Bio
-      </Text>
+      </Label>
       <Textarea {...args} id="textarea-success" success />
+    </>
+  );
+}
+
+export function Invalid(args: TextareaProps): JSX.Element {
+  return (
+    <>
+      <Label as="label" htmlFor="textarea-invalid" mb={1}>
+        Bio
+      </Label>
+      <Textarea {...args} id="textarea-invalid" invalid />
     </>
   );
 }
@@ -79,42 +57,34 @@ export function WithIcon(args: TextareaProps) {
   return (
     <Flex flexDirection="column">
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="textarea-with-start-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="textarea-with-start-icon" mb={1}>
           With Start Icon
-        </Text>
+        </Label>
 
         <Textarea
           {...args}
           id="textarea-with-start-icon"
-          startIcon={<Icon color="neutral500" name="search" />}
+          startIcon={
+            <Icon color="neutral500">
+              <BiSearch />
+            </Icon>
+          }
         />
       </Box>
 
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="textarea-with-end-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="textarea-with-end-icon" mb={1}>
           With End Icon
-        </Text>
+        </Label>
 
         <Textarea
           {...args}
-          endIcon={<Icon color="primary400" name="info-circle" />}
           id="textarea-with-end-icon"
+          startIcon={
+            <Icon color="neutral500">
+              <BiInfoCircle />
+            </Icon>
+          }
         />
       </Box>
     </Flex>
@@ -124,17 +94,9 @@ export function WithIcon(args: TextareaProps) {
 export function Disabled(args: TextareaProps): JSX.Element {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="textarea-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="textarea-disabled" mb={1}>
         Bio
-      </Text>
+      </Label>
       <Textarea {...args} disabled id="textarea-disabled" />
     </>
   );
@@ -143,17 +105,9 @@ export function Disabled(args: TextareaProps): JSX.Element {
 export function ReadOnly(args: TextareaProps): JSX.Element {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="textarea-read-only"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="textarea-read-only" mb={1}>
         Bio
-      </Text>
+      </Label>
       <Textarea {...args} id="textarea-read-only" readOnly />
     </>
   );
@@ -164,17 +118,9 @@ export function Sizes(args: TextareaProps): JSX.Element {
     <Flex flexDirection="column">
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Text
-            as="label"
-            fontSize="sm"
-            fontWeight="semiBold"
-            htmlFor={`textarea-size-${size}`}
-            letterSpacing="widest"
-            lineHeight="snug"
-            mb={1}
-          >
+          <Label htmlFor={`textarea-size-${size}`} mb={1}>
             Bio
-          </Text>
+          </Label>
           <Textarea
             {...args}
             id={`textarea-size-${size}`}
@@ -186,3 +132,5 @@ export function Sizes(args: TextareaProps): JSX.Element {
     </Flex>
   );
 }
+
+export default meta;

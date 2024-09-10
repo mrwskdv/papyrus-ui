@@ -20,7 +20,6 @@ import { useDebounceCallback } from '@react-hook/debounce';
 import cn from 'classnames';
 import {
   ChangeEvent,
-  cloneElement,
   FC,
   FocusEvent,
   FocusEventHandler,
@@ -29,7 +28,6 @@ import {
   isValidElement,
   KeyboardEvent,
   MouseEvent,
-  memo,
   ReactElement,
   Ref,
   useCallback,
@@ -37,6 +35,8 @@ import {
   useRef,
   useState,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
+import { BiCheck, BiX } from 'react-icons/bi';
 import { Transition } from 'react-transition-group';
 
 import { Maybe } from '../../types';
@@ -44,7 +44,7 @@ import { slug } from '../../utils/slug';
 import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Icon, IconProps } from '../icon';
+import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 import { OptionProps, Option } from '../option';
@@ -205,6 +205,7 @@ interface AutocompleteFn {
   <Value = unknown, IsMulti extends boolean = false>(
     props: AutocompleteProps<Value, IsMulti>,
   ): JSX.Element;
+  displayName: 'Autocomplete';
 }
 
 export const LISTBOX_ID = 'listbox';
@@ -281,7 +282,7 @@ function toggleOption<Value>(value: Value, items: Value[]): Value[] {
     : [...items, value];
 }
 
-const AutocompleteComponent = forwardRef(
+export const Autocomplete = forwardRef(
   <Value = unknown, IsMulti extends boolean = false>(
     {
       autoFocus,
@@ -578,23 +579,14 @@ const AutocompleteComponent = forwardRef(
           size={size}
           success={success}
         >
-          {isValidElement<IconProps>(startIcon) && (
-            <InputAction me={1}>
-              {cloneElement(startIcon, { fontSize: 'lg' })}
-            </InputAction>
+          {isValidElement<IconBaseProps>(startIcon) && (
+            <InputAction me={1}>{startIcon}</InputAction>
           )}
 
           <Flex as="span" flex={1} flexWrap="wrap" mt="-1" mx="-0.5">
             {multiple &&
               selectedOptions.map((item, idx) => (
-                <Box
-                  key={idx}
-                  as="span"
-                  display="block"
-                  lineHeight="none"
-                  mt={1}
-                  px={0.5}
-                >
+                <Box key={idx} as="span" display="block" mt={1} px={0.5}>
                   <Tag
                     bg={disabled ? 'neutral100' : 'primary100'}
                     borderColor={disabled ? 'neutral200' : 'primary300'}
@@ -651,20 +643,19 @@ const AutocompleteComponent = forwardRef(
                 <Icon
                   aria-label={clearLabel}
                   color="neutral700"
-                  fontSize="xl"
+                  fontSize="lg"
                   interactive
-                  name="x"
                   role="button"
                   tabIndex={-1}
                   onMouseDown={handleClearMouseDown}
-                />
+                >
+                  <BiX />
+                </Icon>
               </InputAction>
             )}
 
-          {isValidElement<IconProps>(endIcon) && (
-            <InputAction ms={1}>
-              {cloneElement(endIcon, { fontSize: 'lg' })}
-            </InputAction>
+          {isValidElement(endIcon) && (
+            <InputAction ms={1}>{endIcon}</InputAction>
           )}
         </InputBox>
 
@@ -719,7 +710,9 @@ const AutocompleteComponent = forwardRef(
                       data-index={idx}
                       endIcon={
                         isSelected ? (
-                          <Icon color="primary500" name="check" />
+                          <Icon color="primary500">
+                            <BiCheck />
+                          </Icon>
                         ) : undefined
                       }
                       id={slug(id, OPTION_ID, idx)}
@@ -743,8 +736,6 @@ const AutocompleteComponent = forwardRef(
       </>
     );
   },
-);
+) as AutocompleteFn;
 
-AutocompleteComponent.displayName = 'Autocomplete';
-
-export const Autocomplete = memo(AutocompleteComponent) as AutocompleteFn;
+Autocomplete.displayName = 'Autocomplete';

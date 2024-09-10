@@ -1,15 +1,18 @@
 'use client';
 
 import { useId } from '@floating-ui/react';
-import { truncateStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import { FC, HTMLAttributes, memo, useContext, useLayoutEffect } from 'react';
 
+import { Heading } from '../../heading';
 import { DialogContext } from '../dialog.context';
 
 import * as S from './dialog-title.css';
 
-export type DialogTitleProps = HTMLAttributes<HTMLElement>;
+export type DialogTitleProps = Omit<
+  HTMLAttributes<HTMLElement>,
+  'color' | 'size'
+>;
 
 export const DialogTitle: FC<DialogTitleProps> = memo(
   ({ children, className, ...props }: DialogTitleProps) => {
@@ -25,9 +28,9 @@ export const DialogTitle: FC<DialogTitleProps> = memo(
     }, [id, setLabelId]);
 
     return (
-      <h1 className={cn(S.root, truncateStyle, className)} id={id} {...props}>
+      <Heading className={cn(S.root, className)} id={id} truncate {...props}>
         {children}
-      </h1>
+      </Heading>
     );
   },
 );

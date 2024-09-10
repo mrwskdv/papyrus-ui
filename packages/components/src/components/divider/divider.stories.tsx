@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Text } from '../text';
+import { Heading } from '../heading';
 
 import { Divider, DividerProps } from './divider';
 
@@ -18,32 +18,17 @@ export const Basic: StoryFn<DividerProps> = (args) => (
 
 export const Direction: StoryFn<DividerProps> = (args) => (
   <>
-    <Text
-      as="h3"
-      fontSize="xl"
-      fontWeight="bold"
-      letterSpacing="tight"
-      lineHeight="tight"
-      mb={4}
-    >
+    <Heading as="h3" mb={4}>
       Horizontal
-    </Text>
+    </Heading>
 
     <Box width={80}>
       <Divider {...args} direction="horizontal" />
     </Box>
 
-    <Text
-      as="h3"
-      fontSize="xl"
-      fontWeight="bold"
-      letterSpacing="tight"
-      lineHeight="tight"
-      mb={4}
-      mt={8}
-    >
+    <Heading as="h3" mb={4} mt={8}>
       Vertical
-    </Text>
+    </Heading>
 
     <Flex height={48} justifyContent="center">
       <Divider {...args} direction="vertical" />

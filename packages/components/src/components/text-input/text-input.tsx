@@ -2,7 +2,6 @@
 
 import {
   ChangeEvent,
-  cloneElement,
   FocusEvent,
   forwardRef,
   InputHTMLAttributes,
@@ -15,9 +14,11 @@ import {
   useRef,
   useState,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
+import { BiX } from 'react-icons/bi';
 
 import { useMergeRefs } from '../../utils/use-merge-refs';
-import { Icon, IconProps } from '../icon';
+import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 
@@ -129,10 +130,8 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>(
         size={size}
         success={success}
       >
-        {isValidElement<IconProps>(startIcon) && (
-          <InputAction me={1}>
-            {cloneElement(startIcon, { fontSize: 'lg' })}
-          </InputAction>
+        {isValidElement<IconBaseProps>(startIcon) && (
+          <InputAction me={1}>{startIcon}</InputAction>
         )}
 
         <input
@@ -156,19 +155,16 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>(
               data-testid="clear-icon"
               fontSize="xl"
               interactive
-              name="x"
               role="button"
               tabIndex={-1}
               onMouseDown={handleClear}
-            />
+            >
+              <BiX />
+            </Icon>
           </InputAction>
         )}
 
-        {isValidElement<IconProps>(endIcon) && (
-          <InputAction ms={1}>
-            {cloneElement(endIcon, { fontSize: 'lg' })}
-          </InputAction>
-        )}
+        {isValidElement(endIcon) && <InputAction ms={1}>{endIcon}</InputAction>}
       </InputBox>
     );
   },

@@ -1,7 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { vanillaExtractPlugin } from '@vanilla-extract/rollup-plugin';
-import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import externals from 'rollup-plugin-node-externals';
 import postcss from 'rollup-plugin-postcss';
@@ -76,16 +75,11 @@ export default [
     plugins: [
       nodeResolve(),
       externals({
-        exclude: [/modern-normalize/, /boxicons/],
+        exclude: [/modern-normalize/],
       }),
       postcss({
         extract: 'css/styles.css',
         sourceMap: true,
-      }),
-      copy({
-        targets: [
-          { src: '../../node_modules/boxicons/fonts/*', dest: 'fonts' },
-        ],
       }),
       del({
         targets: ['dist/es/**/*.css'],

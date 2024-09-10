@@ -1,5 +1,6 @@
+import { BiCheck } from 'react-icons/bi';
+
 import { render } from '../../utils/test-utils';
-import { Icon } from '../icon';
 import { Marker } from '../marker';
 
 import { ListItem } from './list-item';
@@ -29,7 +30,7 @@ describe('ListItem', () => {
         const { getByText, getByTestId } = render(
           <ListItem>
             <Marker>
-              <Icon data-testid="icon" name="check" />
+              <BiCheck data-testid="icon" />
             </Marker>{' '}
             List Item
           </ListItem>,

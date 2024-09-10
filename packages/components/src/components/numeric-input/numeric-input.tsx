@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  cloneElement,
   FocusEvent,
   forwardRef,
   InputHTMLAttributes,
@@ -12,9 +11,9 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
 import { NumericFormat, NumberFormatValues } from 'react-number-format';
 
-import { IconProps } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 
@@ -113,10 +112,8 @@ export const NumericInputComponent = forwardRef<
         size={size}
         success={success}
       >
-        {isValidElement<IconProps>(startIcon) && (
-          <InputAction me={1}>
-            {cloneElement(startIcon, { fontSize: 'lg' })}
-          </InputAction>
+        {isValidElement<IconBaseProps>(startIcon) && (
+          <InputAction me={1}>{startIcon}</InputAction>
         )}
 
         <NumericFormat
@@ -130,11 +127,7 @@ export const NumericInputComponent = forwardRef<
           {...props}
         />
 
-        {isValidElement<IconProps>(endIcon) && (
-          <InputAction ms={1}>
-            {cloneElement(endIcon, { fontSize: 'lg' })}
-          </InputAction>
-        )}
+        {isValidElement(endIcon) && <InputAction ms={1}>{endIcon}</InputAction>}
       </InputBox>
     );
   },

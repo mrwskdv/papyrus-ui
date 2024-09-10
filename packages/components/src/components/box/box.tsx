@@ -15,6 +15,8 @@ import {
 import cn from 'classnames';
 import { ElementType, forwardRef, HTMLAttributes } from 'react';
 
+import * as S from './box.css';
+
 export interface BoxProps
   extends PositionAtoms,
     FlexItemAtoms,
@@ -40,7 +42,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     return (
       <Element
         ref={ref}
-        className={cn(atoms(atomsProps), className)}
+        className={cn(S.root, atoms(atomsProps), className)}
         {...restProps}
       >
         {children}

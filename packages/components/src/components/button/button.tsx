@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { truncateStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,
@@ -10,9 +10,9 @@ import {
   memo,
   ReactNode,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
 
-import { Icon, IconProps } from '../icon';
-import { Text } from '../text';
+import { Loader } from '../loader';
 
 import * as S from './button.css';
 
@@ -20,9 +20,10 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export type ButtonVariant =
   | 'primary'
-  | 'accent'
   | 'secondary'
   | 'tertiary'
+  | 'plain'
+  | 'info'
   | 'success'
   | 'warning'
   | 'danger'
@@ -67,49 +68,28 @@ const ButtonComponent = forwardRef<HTMLElement, ButtonProps>(
         S.rootSize[size],
         S.rootVariant[variant],
         block && S.rootBlock,
-        atoms({
-          rounded: rounded ? 'full' : 'md',
-        }),
+        rounded && S.rootRounded,
         className,
       )}
       type={As === 'button' && type == null ? 'button' : type}
       {...props}
     >
-      {loading && (
-        <Icon
-          animation="spin"
-          color="currentColor"
-          fontSize="lg"
-          name="loader"
-        />
-      )}
+      {loading && <Loader fontSize="lg" />}
 
       {!loading &&
-        isValidElement<IconProps>(startIcon) &&
+        isValidElement<IconBaseProps>(startIcon) &&
         cloneElement(startIcon, {
-          fontSize: 'lg',
-          me: 2,
+          className: cn(S.icon, S.startIcon, startIcon.props.className),
         })}
 
       {!loading && (
-        <Text
-          as="span"
-          display="inline-block"
-          fontSize="sm"
-          letterSpacing="widest"
-          lineHeight="none"
-          textTransform="uppercase"
-          truncate
-        >
-          {children}
-        </Text>
+        <span className={cn(S.label, truncateStyle)}>{children}</span>
       )}
 
       {!loading &&
-        isValidElement<IconProps>(endIcon) &&
+        isValidElement<IconBaseProps>(endIcon) &&
         cloneElement(endIcon, {
-          fontSize: 'lg',
-          ms: 2,
+          className: cn(S.icon, S.endIcon, endIcon.props.className),
         })}
     </As>
   ),

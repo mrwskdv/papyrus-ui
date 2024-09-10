@@ -1,6 +1,5 @@
 // Import external styles at the top of the root file
 import 'modern-normalize/modern-normalize.css';
-import 'boxicons/css/boxicons.css';
 
 export * from './const';
 export * from './types';

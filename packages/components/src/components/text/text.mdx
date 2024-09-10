@@ -1,29 +1,24 @@
-import { Meta, ArgTypes, Canvas, ArgsTable } from '@storybook/addon-docs';
-import Text, {  Basic, Headings, Body, Elements, Labels } from './text.stories';
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import Text, {
+  Basic,
+  SmallText,
+  PrimaryFont,
+  SecondaryFont,
+  BoldText,
+  TruncateLongText,
+  ColoredText,
+  HighlightText,
+} from './text.stories';
 
 <Meta of={Text} />
 
 # Text
 
-A Text React component is a reusable element in a React application designed specifically for implementing various
-typography styles, such as headings, body text, labels, and captions. It allows developers to easily apply consistent
-and customizable text formatting across their app, enhancing design and readability while maintaining code modularity.
+The `Text` component is designed for displaying body text, usually as paragraphs, but it can render other HTML tags as well, depending on the `as` prop. It offers flexibility for setting text size, font-family variants, alignment, truncation, and more.
 
 ## When to use
 
-- Headings: Apply different levels of headings (e.g., h1, h2, h3) with appropriate font sizes and styles for titles
-  and sections.
-
-- Body Text: Style regular paragraphs and content text to ensure uniformity in font size, line height, and spacing.
-
-- Labels: Create visually appealing and consistent labels for form elements, input fields, and other UI components.
-
-- Links: Style hyperlink text for navigation and user interaction, including hover and active states.
-
-- Captions: Add captions to images, charts, or media elements with consistent typography for enhanced accessibility.
-
-- Responsive Typography: Use responsive properties for font size and margins to ensure text scales appropriately across
-  screen sizes.
+Use the `Text` component for body content where customizable typography is required. It’s ideal for paragraphs, captions, or any inline text where you need to control font size, style, and alignment.
 
 ## Examples
 
@@ -31,73 +26,76 @@ and customizable text formatting across their app, enhancing design and readabil
 
 <Canvas of={Basic} />
 
-### Headings
+### Small Text
 
-Headings are used to create a hierarchy of titles and sections within a page. They are used to organize content and
-guide users through the page.
+For smaller text, use the 'sm' size:
 
-<Canvas of={Headings} />
+<Canvas of={SmallText} />
 
-### Body
+### Font Variants
 
-Body text is used for regular paragraphs and content text. It is used to provide additional information and context to
-users.
+You can switch between the primary and secondary font families using the `fontVariant` prop.
 
-<Canvas of={Body} />
+#### Primary Font (default)
 
-### Labels
+<Canvas of={PrimaryFont} />
 
-Labels are used to identify form elements, input fields, and other UI components. They are used to provide additional
-information and context to users.
+#### Secondary Font
 
-<Canvas of={Labels} />
+<Canvas of={SecondaryFont} />
 
-### Elements
+### Bold Text
 
-Text can be used to style other elements, such as links and buttons.
+Use `bold` property for bold text.
 
-<Canvas of={Elements} />
+<Canvas of={BoldText} />
+
+### Truncate Long Text
+
+You can enable text truncation to handle overflow text with an ellipsis (...).
+
+<Canvas of={TruncateLongText} />
+
+### Colored Text
+
+Use `color` property to use different color from the theme.
+
+<Canvas of={ColoredText} />
+
+### Highlighted text
+
+Use `highlight` property to highlight text with a gradient defined in theme.
+
+<Canvas of={HighlightText} />
 
 ## Guidelines
 
-- Font Selection: Choose fonts that align with the app's branding and readability requirements. Consider using web-safe
-  fonts or loading custom fonts using web font services like Google Fonts.
+- **Choose the right size**: Use 'md' for body content and 'sm' for smaller, secondary text like captions.
 
-- Hierarchy: Establish a clear typographic hierarchy with distinct styles for headings, subheadings, body text,
-  and other elements.
+- **Consider truncation**: Use the truncate prop for text that may overflow its container, ensuring readability without
+  breaking layout.
 
-- Responsive Design: Ensure that typography adapts gracefully to different screen sizes and orientations. Use responsive
-  properties to adjust font sizes and spacing as needed for various devices.
+- **Word Breaking**: Use breakWord when you have long or unbreakable content that may overflow the container.
 
-- Line Length: Limit line length to improve readability. Ideally, aim for 50-75 characters per line for body text.
-
-- Line Height: Use a line height of 1.5-1.75 for body text to improve readability. For headings, use a line height of
-  1.25-1.5.
-
-- Text Color: Use a limited color palette for text to maintain a cohesive design. Reserve unique or attention-grabbing
-  colors for specific elements like headings or call-to-action buttons.
-
-- Whitespace: Embrace whitespace to improve text legibility and visual clarity. Proper margins and padding around text
-  elements create a cleaner design.
-
-- Kerning and Letter Spacing: Adjust letter spacing (kerning) and word spacing as needed for improved typography,
-  especially for display or decorative text.
-
-- Font Weight and Style: Use font weight and style variations (e.g., bold, italic) purposefully to emphasize key content
-  or create visual contrast.
-
-- Localization: Design text elements to accommodate different languages, character sets, and text expansion
-  or contraction. Avoid hardcoded text lengths.
-
-- Readability: Prioritize readability over aesthetics. Fancy fonts or decorative typography should not sacrifice ease
-  of reading.
 
 ## Accessibility
 
-- Use semantic HTML tags (e.g., h1, h2, p) for better accessibility and SEO.
+- **Contrast Ratios**: Ensure that the text color has a sufficient contrast ratio against the background. According to
+  the [WCAG 2.1 guidelines](https://www.w3.org/TR/WCAG21/), the contrast ratio should be at least:
 
-- Ensure sufficient contrast between text, and it's background to meet accessibility standards. High contrast
-  aids readability, especially for users with visual impairments.
+  - 4.5:1 for normal text (below 24px).
+  - 3:1 for large text (above 24px or 19px bold).
+
+- **Semantic HTML**: The `Text` component allows for the use of different HTML tags through the `as` prop. Ensure
+  appropriate semantic elements are used for accessibility. For example:
+  - Use `<p>` for paragraphs.
+  - Use `<span>` for inline text.
+  - Use `<h1>` to `<h6>` for headings.
+
+- **Truncation**: Provide alternative text or context if truncation is used, ensuring that users who rely on screen
+readers understand the full content.
+
+
 
 ## API
 

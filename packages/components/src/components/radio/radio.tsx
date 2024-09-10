@@ -5,6 +5,8 @@ import {
   ReactNode,
 } from 'react';
 
+import { Text } from '../text';
+
 import * as S from './radio.css';
 
 export interface RadioProps
@@ -21,9 +23,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, id, children, ...props }, ref) => (
     <div className={className}>
       <input ref={ref} id={id} type="radio" {...props} />
-      <label className={S.label} htmlFor={id}>
+      <Text as="label" className={S.label} htmlFor={id}>
         {children}
-      </label>
+      </Text>
     </div>
   ),
 );

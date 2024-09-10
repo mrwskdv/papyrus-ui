@@ -2,22 +2,36 @@ import { atoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   cloneElement,
+  ComponentType,
   FC,
   HTMLAttributes,
   isValidElement,
   ReactElement,
   ReactNode,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
+import {
+  BiCheckCircle,
+  BiError,
+  BiErrorCircle,
+  BiInfoCircle,
+  BiX,
+} from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Icon, IconProps } from '../icon';
-import { SnackbarItemVariant } from '../snackbar/snackbar-item';
+import { Heading } from '../heading';
+import { Icon } from '../icon';
 import { Text } from '../text';
 
 import * as S from './alert.css';
 
-export type AlertVariant = 'primary' | 'danger' | 'warning' | 'success';
+export type AlertVariant =
+  | 'primary'
+  | 'info'
+  | 'danger'
+  | 'warning'
+  | 'success';
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
@@ -28,11 +42,12 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-const iconByVariant: Record<SnackbarItemVariant, string> = {
-  primary: 'info-circle',
-  danger: 'error-circle',
-  warning: 'error',
-  success: 'check-circle',
+const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
+  primary: BiInfoCircle,
+  info: BiInfoCircle,
+  danger: BiErrorCircle,
+  warning: BiError,
+  success: BiCheckCircle,
 };
 
 export const Alert: FC<AlertProps> = ({
@@ -45,76 +60,66 @@ export const Alert: FC<AlertProps> = ({
   onClose,
   children,
   ...props
-}) => (
-  <div
-    className={cn(
-      S.root,
-      S.rootVariant[variant],
-      atoms({
-        pe: onClose ? 8 : 4,
-      }),
-      className,
-    )}
-    role={role}
-    {...props}
-  >
-    <Flex alignItems="center" mx="-1.5">
-      <Box lineHeight="none" px={1.5}>
-        {isValidElement<IconProps>(icon) ? (
-          cloneElement(icon, {
-            className: cn(S.iconVariant[variant], icon.props.className),
-            fontSize: '4xl',
-          })
-        ) : (
-          <Icon
-            className={S.iconVariant[variant]}
-            fontSize="4xl"
-            name={iconByVariant[variant]}
-          />
-        )}
-      </Box>
+}) => {
+  const IconComponent = iconByVariant[variant];
 
-      <Box flex={1} lineHeight="none" overflow="hidden" px={1.5}>
-        <Text
-          as="div"
-          fontSize="md"
-          fontWeight={children ? 'semiBold' : 'regular'}
-          letterSpacing="wider"
-          lineHeight="snug"
-          truncate
+  return (
+    <div
+      className={cn(
+        S.root,
+        S.rootVariant[variant],
+        atoms({
+          pe: onClose ? 8 : 4,
+        }),
+        className,
+      )}
+      role={role}
+      {...props}
+    >
+      <Flex alignItems="center" mx="-1.5">
+        <Box px={1.5}>
+          {isValidElement<IconBaseProps>(icon) ? (
+            cloneElement(icon, {
+              className: cn(
+                S.icon,
+                S.iconVariant[variant],
+                icon.props.className,
+              ),
+            })
+          ) : (
+            <IconComponent className={cn(S.icon, S.iconVariant[variant])} />
+          )}
+        </Box>
+
+        <Box flex={1} overflow="hidden" px={1.5}>
+          {children ? (
+            <>
+              <Heading as="div" mb={1}>
+                {message}
+              </Heading>
+              <Text as="div" color="neutral900" mt={1} size="sm">
+                {children}
+              </Text>
+            </>
+          ) : (
+            <Text as="div">{message}</Text>
+          )}
+        </Box>
+      </Flex>
+
+      {onClose && (
+        <Icon
+          aria-label={closeLabel}
+          className={S.close}
+          color="neutral700"
+          interactive
+          role="button"
+          tabIndex={0}
+          onClick={onClose}
         >
-          {message}
-        </Text>
-
-        {children && (
-          <Text
-            as="div"
-            color="neutral900"
-            fontSize="sm"
-            fontWeight="regular"
-            letterSpacing="wider"
-            lineHeight="normal"
-            mt={1}
-            truncate
-          >
-            {children}
-          </Text>
-        )}
-      </Box>
-    </Flex>
-
-    {onClose && (
-      <Icon
-        aria-label={closeLabel}
-        className={S.close}
-        color="neutral700"
-        fontSize="md"
-        interactive
-        name="x"
-        role="button"
-        tabIndex={0}
-        onClick={onClose}
-      />
-    )}
-  </div>
-);
+          <BiX size="1rem" />
+        </Icon>
+      )}
+    </div>
+  );
+};

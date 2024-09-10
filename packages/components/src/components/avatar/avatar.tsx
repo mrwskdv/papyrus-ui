@@ -10,12 +10,13 @@ import {
   isValidElement,
   ReactElement,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
 
-import { IconProps } from '../icon';
+import { Text } from '../text';
 
 import * as S from './avatar.css';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -44,11 +45,6 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   placeholder?: string;
 
   /**
-   * Sets the border-radius of the avatar to round.
-   */
-  rounded?: boolean;
-
-  /**
    * Size of the avatar.
    */
   size?: AvatarSize;
@@ -68,7 +64,6 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
       bg = 'primary400',
       icon,
       placeholder,
-      rounded = false,
       size = 'md',
       className,
       children,
@@ -81,7 +76,6 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
       className={cn(
         S.root,
         S.rootSize[size],
-        rounded && S.rootRounded,
         atoms({
           bg,
         }),
@@ -90,14 +84,20 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
       {...props}
     >
       {!children && !icon && (
-        <span className={cn(S.text, S.textSize[size])}>
+        <Text
+          as="span"
+          bold
+          className={cn(S.text, S.textSize[size])}
+          color="white"
+          whiteSpace="nowrap"
+        >
           {formatText(placeholder)}
-        </span>
+        </Text>
       )}
 
       {!children &&
         icon &&
-        isValidElement<IconProps>(icon) &&
+        isValidElement<IconBaseProps>(icon) &&
         cloneElement(icon, {
           className: cn(S.icon, S.iconSize[size], icon.props.className),
         })}

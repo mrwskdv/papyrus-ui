@@ -18,6 +18,7 @@
     "format:js": "prettier --write \"**/*.js\"  --loglevel error",
     "format:json": "prettier --parser json --write \"**/*.{json,prettierrc}\" --loglevel error",
     "format:yaml": "prettier --parser yaml --write \"**/*.{yml,yaml}\" --loglevel error",
+    "generate:themes": "node scripts/generate-themes.js",
     "lint": "eslint . --cache",
     "lint:fix": "yarn lint --fix",
     "lint:quiet": "yarn lint --quiet",

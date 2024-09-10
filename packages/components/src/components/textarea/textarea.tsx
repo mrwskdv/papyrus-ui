@@ -1,15 +1,8 @@
 'use client';
 
-import {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  memo,
-  useCallback,
-  useState,
-} from 'react';
+import { forwardRef, isValidElement, memo, useCallback, useState } from 'react';
+import { IconBaseProps } from 'react-icons';
 
-import { IconProps } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 
@@ -73,10 +66,8 @@ const TextareaComponent: React.FC<TextareaProps> = forwardRef<
         size={size}
         success={success}
       >
-        {isValidElement<IconProps>(startIcon) && (
-          <InputAction me={1}>
-            {cloneElement(startIcon, { fontSize: 'lg' })}
-          </InputAction>
+        {isValidElement<IconBaseProps>(startIcon) && (
+          <InputAction me={1}>{startIcon}</InputAction>
         )}
 
         <textarea
@@ -88,11 +79,7 @@ const TextareaComponent: React.FC<TextareaProps> = forwardRef<
           {...props}
         />
 
-        {isValidElement<IconProps>(endIcon) && (
-          <InputAction ms={1}>
-            {cloneElement(endIcon, { fontSize: 'lg' })}
-          </InputAction>
-        )}
+        {isValidElement(endIcon) && <InputAction ms={1}>{endIcon}</InputAction>}
       </InputBox>
     );
   },

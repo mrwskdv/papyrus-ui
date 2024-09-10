@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "@vanilla-extract/sprinkles": "^1.6.2",
-    "boxicons": "^2.1.4",
     "hex-to-rgba": "^2.0.1",
     "lodash": "^4.17.21",
     "modern-normalize": "^2.0.0"

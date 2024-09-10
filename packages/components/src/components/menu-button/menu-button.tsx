@@ -10,8 +10,7 @@ import {
   isValidElement,
   ReactElement,
 } from 'react';
-
-import { IconProps } from '../icon';
+import { IconBaseProps } from 'react-icons';
 
 import * as S from './menu-button.css';
 
@@ -88,7 +87,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
           />
         )}
 
-        {isValidElement<IconProps>(startIcon) &&
+        {isValidElement<IconBaseProps>(startIcon) &&
           cloneElement(startIcon, {
             className: cn(
               collapsed
@@ -128,7 +127,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
         </span>
 
         {!collapsed &&
-          isValidElement<IconProps>(endIcon) &&
+          isValidElement<IconBaseProps>(endIcon) &&
           cloneElement(endIcon, {
             className: cn(
               S.icon,

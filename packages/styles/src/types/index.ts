@@ -1,1 +1,1 @@
-export * from './theme';
+export * from './design-tokens';

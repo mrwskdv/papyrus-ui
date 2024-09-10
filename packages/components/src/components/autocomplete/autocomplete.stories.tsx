@@ -1,10 +1,11 @@
 import { StoryFn } from '@storybook/react';
+import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Text } from '../text';
+import { Label } from '../label';
 
 import { Autocomplete, AutocompleteProps } from './autocomplete';
 
@@ -22,17 +23,10 @@ const meta = {
 
 const Template: StoryFn<AutocompleteProps> = (args) => (
   <Box style={{ minHeight: '256px' }} width={80}>
-    <Text
-      as="label"
-      fontSize="sm"
-      fontWeight="semiBold"
-      htmlFor={args.id}
-      letterSpacing="widest"
-      lineHeight="snug"
-      mb={1}
-    >
+    <Label htmlFor={args.id} mb={1}>
       Character
-    </Text>
+    </Label>
+
     <Autocomplete {...args} options={OPTIONS_LIST} />
   </Box>
 );
@@ -86,17 +80,9 @@ export function Sizes(args: AutocompleteProps) {
     <Flex flexDirection="column" style={{ minHeight: '384px' }} width={80}>
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Text
-            as="label"
-            fontSize="sm"
-            fontWeight="semiBold"
-            htmlFor={`autocomplete-size-${size}`}
-            letterSpacing="widest"
-            lineHeight="snug"
-            mb={1}
-          >
+          <Label htmlFor={`autocomplete-size-${size}`} mb={1}>
             Character
-          </Text>
+          </Label>
           <Autocomplete
             {...args}
             id={`autocomplete-size-${size}`}
@@ -113,42 +99,34 @@ export function WithIcon(args: AutocompleteProps) {
   return (
     <Flex flexDirection="column" style={{ minHeight: '384px' }}>
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="autocomplete-with-start-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="autocomplete-with-start-icon" mb={1}>
           With Start Icon
-        </Text>
+        </Label>
 
         <Autocomplete
           {...args}
           id="autocomplete-with-start-icon"
           options={OPTIONS_LIST}
-          startIcon={<Icon color="neutral500" name="search" />}
+          startIcon={
+            <Icon color="neutral500">
+              <BiSearch />
+            </Icon>
+          }
         />
       </Box>
 
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="autocomplete-with-end-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="autocomplete-with-end-icon" mb={1}>
           With End Icon
-        </Text>
+        </Label>
 
         <Autocomplete
           {...args}
-          endIcon={<Icon color="primary400" name="info-circle" />}
+          endIcon={
+            <Icon color="primary400">
+              <BiInfoCircle />
+            </Icon>
+          }
           id="autocomplete-with-end-icon"
           options={OPTIONS_LIST}
         />

@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,
@@ -7,18 +6,19 @@ import {
   forwardRef,
   isValidElement,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
 
 import { AvatarProps } from '../avatar';
-import { IconProps } from '../icon';
 
 import * as S from './icon-button.css';
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
 export type IconButtonVariant =
   | 'primary'
-  | 'accent'
   | 'secondary'
   | 'tertiary'
+  | 'plain'
+  | 'info'
   | 'success'
   | 'warning'
   | 'danger'
@@ -72,7 +72,7 @@ const avatarSize: Record<IconButtonSize, AvatarProps['size']> = {
 export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
   (
     {
-      as: As = 'button',
+      as: Element = 'button',
       avatar,
       rounded,
       size = 'md',
@@ -84,34 +84,30 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
     },
     ref,
   ) => (
-    <As
+    <Element
       {...elemProps}
       ref={ref}
       className={cn(
         S.root,
         S.rootVariant[variant],
         S.rootSize[size],
-        atoms({
-          rounded: rounded ? 'full' : 'md',
-        }),
+        (avatar || rounded) && S.rootRounded,
         className,
       )}
-      type={As === 'button' && type == null ? 'button' : type}
+      type={Element === 'button' && type == null ? 'button' : type}
     >
       {avatar &&
         isValidElement<AvatarProps>(avatar) &&
         cloneElement(avatar, {
-          rounded,
           size: avatarSize[size],
         })}
 
       {!avatar &&
-        isValidElement<IconProps>(children) &&
+        isValidElement<IconBaseProps>(children) &&
         cloneElement(children, {
-          highlight: variant === 'accent',
           className: cn(S.iconSize[size], children.props.className),
         })}
-    </As>
+    </Element>
   ),
 );
 

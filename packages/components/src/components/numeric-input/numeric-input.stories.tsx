@@ -1,10 +1,11 @@
 import { capitalize } from 'lodash';
+import { BiInfoCircle, BiSolidPurchaseTag } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Text } from '../text';
+import { Label } from '../label';
 
 import { NumericInput, NumericInputProps } from './numeric-input';
 
@@ -28,17 +29,9 @@ export default {
 export function Basic(args: NumericInputProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="numeric-input-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="numeric-input-basic" mb={1}>
         Max Price
-      </Text>
+      </Label>
       <NumericInput {...args} id="numeric-input-basic" />
     </>
   );
@@ -47,17 +40,9 @@ export function Basic(args: NumericInputProps) {
 export function Invalid(args: NumericInputProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="numeric-input-invalid"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="numeric-input-invalid" mb={1}>
         Max Price
-      </Text>
+      </Label>
       <NumericInput {...args} id="numeric-input-invalid" invalid />
     </>
   );
@@ -66,17 +51,9 @@ export function Invalid(args: NumericInputProps) {
 export function Success(args: NumericInputProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="numeric-input-success"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="numeric-input-success" mb={1}>
         Max Price
-      </Text>
+      </Label>
       <NumericInput {...args} id="numeric-input-success" success />
     </>
   );
@@ -85,17 +62,9 @@ export function Success(args: NumericInputProps) {
 export function Disabled(args: NumericInputProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="numeric-input-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="numeric-input-disabled" mb={1}>
         Max Price
-      </Text>
+      </Label>
       <NumericInput {...args} disabled id="numeric-input-disabled" />
     </>
   );
@@ -104,17 +73,9 @@ export function Disabled(args: NumericInputProps) {
 export function ReadOnly(args: NumericInputProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="numeric-input-read-only"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="numeric-input-basic" mb={1}>
         Max Price
-      </Text>
+      </Label>
       <NumericInput {...args} id="numeric-input-read-only" readOnly />
     </>
   );
@@ -125,17 +86,9 @@ export function Sizes(args: NumericInputProps) {
     <Flex flexDirection="column">
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Text
-            as="label"
-            fontSize="sm"
-            fontWeight="semiBold"
-            htmlFor={`numeric-input-size-${size}`}
-            letterSpacing="widest"
-            lineHeight="snug"
-            mb={1}
-          >
+          <Label htmlFor={`numeric-input-size-${size}`} mb={1}>
             {capitalize(size)}
-          </Text>
+          </Label>
           <NumericInput
             {...args}
             id={`numeric-input-size-${size}`}
@@ -151,43 +104,33 @@ export function WithIcon(args: NumericInputProps) {
   return (
     <Flex flexDirection="column">
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="numeric-input-with-start-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="numeric-input-with-start-icon" mb={1}>
           With Start Icon
-        </Text>
+        </Label>
 
         <NumericInput
           {...args}
           id="numeric-input-with-start-icon"
           startIcon={
-            <Icon color="neutral500" name="purchase-tag" type="solid" />
+            <Icon color="neutral500">
+              <BiSolidPurchaseTag name="purchase-tag" />
+            </Icon>
           }
         />
       </Box>
 
       <Box mt={4}>
-        <Text
-          as="label"
-          fontSize="sm"
-          fontWeight="semiBold"
-          htmlFor="numeric-input-with-end-icon"
-          letterSpacing="widest"
-          lineHeight="snug"
-          mb={1}
-        >
+        <Label htmlFor="numeric-input-with-end-icon" mb={1}>
           With End Icon
-        </Text>
+        </Label>
 
         <NumericInput
           {...args}
-          endIcon={<Icon color="primary400" name="info-circle" />}
+          endIcon={
+            <Icon color="primary400">
+              <BiInfoCircle />
+            </Icon>
+          }
           id="numeric-input-with-end-icon"
         />
       </Box>

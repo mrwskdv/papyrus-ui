@@ -1,12 +1,18 @@
-import { atoms } from '@papyrus-ui/styles';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
+import {
+  BiCog,
+  BiEnvelope,
+  BiGridAlt,
+  BiHome,
+  BiStats,
+  BiSupport,
+} from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Divider } from '../divider';
-import { Icon } from '../icon';
-import { Text } from '../text';
+import { Heading } from '../heading';
 
 import { MenuBar, MenuBarProps } from './menu-bar';
 
@@ -25,17 +31,17 @@ export default {
 const Template: StoryFn<MenuBarProps> = (args) => (
   <Box height={64}>
     <MenuBar {...args}>
-      <MenuBar.Item icon={<Icon name="home" />} selected>
+      <MenuBar.Item icon={<BiHome />} selected>
         Option 1
       </MenuBar.Item>
 
-      <MenuBar.Item icon={<Icon name="envelope" />}>Option 2</MenuBar.Item>
+      <MenuBar.Item icon={<BiEnvelope />}>Option 2</MenuBar.Item>
 
-      <MenuBar.Item disabled icon={<Icon name="grid-alt" />}>
+      <MenuBar.Item disabled icon={<BiGridAlt />}>
         Option 3
       </MenuBar.Item>
 
-      <MenuBar.Submenu icon={<Icon name="stats" />} label="Option 4">
+      <MenuBar.Submenu icon={<BiStats />} label="Option 4">
         <MenuBar.Item>Option 4-1</MenuBar.Item>
         <MenuBar.Item>Option 4-2</MenuBar.Item>
 
@@ -46,13 +52,13 @@ const Template: StoryFn<MenuBarProps> = (args) => (
         </MenuBar.Submenu>
       </MenuBar.Submenu>
 
-      <MenuBar.Submenu icon={<Icon name="cog" />} label="Option 5">
+      <MenuBar.Submenu icon={<BiCog />} label="Option 5">
         <MenuBar.Item>Option 5-1</MenuBar.Item>
         <MenuBar.Item>Option 5-2</MenuBar.Item>
         <MenuBar.Item>Option 5-3</MenuBar.Item>
       </MenuBar.Submenu>
 
-      <MenuBar.Item danger icon={<Icon name="support" />}>
+      <MenuBar.Item danger icon={<BiSupport />}>
         Option 6
       </MenuBar.Item>
     </MenuBar>
@@ -66,17 +72,9 @@ export const Size: StoryFn<MenuBarProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Text
-          as="h3"
-          className={atoms({ mt: i > 0 ? 4 : 0, mb: 1.5 })}
-          fontFamily="secondary"
-          fontSize="2xl"
-          fontWeight="semiBold"
-          letterSpacing="wide"
-          lineHeight="tight"
-        >
+        <Heading as="h3" mb={1.5} mt={i > 0 ? 4 : 0}>
           {capitalize(size)}
-        </Text>
+        </Heading>
 
         <Template {...args} key={i} size={size} />
       </Fragment>
@@ -88,17 +86,9 @@ export const Variant: StoryFn<MenuBarProps> = (args) => (
   <>
     {variants.map((variant, i) => (
       <Fragment key={i}>
-        <Text
-          as="h3"
-          className={atoms({ mt: i > 0 ? 4 : 0, mb: 1.5 })}
-          fontFamily="secondary"
-          fontSize="2xl"
-          fontWeight="semiBold"
-          letterSpacing="wide"
-          lineHeight="tight"
-        >
+        <Heading as="h3" mb={1.5} mt={i > 0 ? 4 : 0}>
           {capitalize(variant)}
-        </Text>
+        </Heading>
 
         <Template {...args} key={i} variant={variant} />
       </Fragment>

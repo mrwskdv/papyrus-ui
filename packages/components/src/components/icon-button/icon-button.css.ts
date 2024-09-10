@@ -1,17 +1,32 @@
 import { atoms, vars } from '@papyrus-ui/styles';
-import { styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 import { IconButtonSize } from './icon-button';
 
-export const root = atoms({
+export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: 1,
-  rounded: 'md',
-  lineHeight: 'none',
-  transition: 'base',
+  borderWidth: '1px',
+  borderRadius: vars.borderRadius.button,
+  lineHeight: 1,
+  transition: vars.transition.base,
 });
+
+export const rootSize = {
+  sm: atoms({
+    width: 7,
+    height: 7,
+  }),
+  md: atoms({
+    width: 9,
+    height: 9,
+  }),
+  lg: atoms({
+    width: 12,
+    height: 12,
+  }),
+};
 
 export const rootVariant = styleVariants({
   primary: {
@@ -31,15 +46,16 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  accent: {
+  secondary: {
     borderColor: 'transparent',
-    background: vars.color.accent100,
+    color: vars.color.secondary500,
+    background: vars.color.secondary100,
     selectors: {
       '&:hover': {
-        background: vars.color.accent200,
+        background: vars.color.secondary200,
       },
       '&:active': {
-        background: vars.color.accent300,
+        background: vars.color.secondary300,
       },
       '&:disabled': {
         color: vars.color.neutral300,
@@ -47,7 +63,7 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  secondary: {
+  tertiary: {
     borderColor: 'transparent',
     color: vars.color.neutral900,
     background: vars.color.neutral100,
@@ -64,7 +80,7 @@ export const rootVariant = styleVariants({
       },
     },
   },
-  tertiary: {
+  plain: {
     borderColor: 'transparent',
     color: vars.color.neutral900,
     selectors: {
@@ -77,6 +93,23 @@ export const rootVariant = styleVariants({
       '&:disabled': {
         color: vars.color.neutral300,
         background: 'transparent',
+      },
+    },
+  },
+  info: {
+    borderColor: 'transparent',
+    color: vars.color.info500,
+    background: vars.color.info100,
+    selectors: {
+      '&:hover': {
+        background: vars.color.info200,
+      },
+      '&:active': {
+        background: vars.color.info300,
+      },
+      '&:disabled': {
+        color: vars.color.neutral300,
+        background: vars.color.neutral50,
       },
     },
   },
@@ -150,20 +183,9 @@ export const rootVariant = styleVariants({
   },
 });
 
-export const rootSize = {
-  sm: atoms({
-    width: 7,
-    height: 7,
-  }),
-  md: atoms({
-    width: 9,
-    height: 9,
-  }),
-  lg: atoms({
-    width: 12,
-    height: 12,
-  }),
-};
+export const rootRounded = style({
+  borderRadius: vars.borderRadius.full,
+});
 
 export const iconSize: Record<IconButtonSize, string> = {
   sm: atoms({ fontSize: 'md' }),

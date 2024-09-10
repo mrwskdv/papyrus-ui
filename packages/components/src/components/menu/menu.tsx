@@ -16,7 +16,7 @@ import {
 import { Maybe } from '../../types';
 import { getFirstItem, getLastItem } from '../../utils/list-navigation';
 
-import { MenuItem } from './menu-item';
+import { MenuItem, MenuItemProps } from './menu-item';
 import { MenuContext, MenuContextType } from './menu.context';
 import * as S from './menu.css';
 import { MenuSize, MenuVariant } from './menu.types';
@@ -102,7 +102,9 @@ const MenuComponent: FC<MenuProps> = ({
         onKeyDown={handleKeyDown}
       >
         {Children.map(children, (child, i) =>
-          isValidElement(child) ? cloneElement(child, { index: i }) : null,
+          isValidElement<MenuItemProps>(child)
+            ? cloneElement(child, { index: i })
+            : null,
         )}
       </ul>
     </MenuContext.Provider>

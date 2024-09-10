@@ -19,7 +19,6 @@ import {
   FLEX_WRAP,
   HEIGHT,
   JUSTIFY_CONTENT,
-  LINE_HEIGHT,
   SPACING,
   MAX_HEIGHT,
   MAX_WIDTH,
@@ -55,17 +54,13 @@ const baseProperties = defineProperties({
     insetInlineEnd: INSET,
     borderStyle: BORDER_STYLE,
     boxShadow: vars.boxShadow,
-    fontFamily: vars.fontFamily,
-    fontWeight: vars.fontWeight,
-    letterSpacing: vars.letterSpacing,
-    lineHeight: { ...vars.lineHeight, ...LINE_HEIGHT },
     textTransform: TEXT_TRANSFORM,
-    objectFit: OBJECT_FIT,
     textDecoration: TEXT_DECORATION,
     textOverflow: TEXT_OVERFLOW,
-    transition: vars.transition,
-    verticalAlign: VERTICAL_ALIGN,
     whiteSpace: WHITE_SPACE,
+    objectFit: OBJECT_FIT,
+    verticalAlign: VERTICAL_ALIGN,
+    transition: vars.transition,
     pointerEvents: POINTER_EVENTS,
     zIndex: Z_INDEX,
   },
@@ -81,6 +76,11 @@ export type ResponsiveValue<Value extends string | number> = ConditionalValue<
   typeof responsiveProperties,
   Value
 >;
+
+const borderRadiusValues = {
+  ...vars.borderRadius,
+  ...BORDER_RADIUS,
+};
 
 const responsiveProperties = defineProperties({
   conditions: mapValues(BREAKPOINTS, (bp) =>
@@ -116,14 +116,14 @@ const responsiveProperties = defineProperties({
     maxHeight: MAX_HEIGHT,
     minHeight: MIN_HEIGHT,
 
-    borderTopLeftRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderTopRightRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderBottomLeftRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderBottomRightRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderTopStartRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderTopEndRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderBottomStartRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
-    borderBottomEndRadius: { ...vars.borderRadius, ...BORDER_RADIUS },
+    borderTopLeftRadius: borderRadiusValues,
+    borderTopRightRadius: borderRadiusValues,
+    borderBottomLeftRadius: borderRadiusValues,
+    borderBottomRightRadius: borderRadiusValues,
+    borderStartStartRadius: borderRadiusValues,
+    borderStartEndRadius: borderRadiusValues,
+    borderEndStartRadius: borderRadiusValues,
+    borderEndEndRadius: borderRadiusValues,
 
     borderBottomWidth: BORDER_WIDTH,
     borderLeftWidth: BORDER_WIDTH,
@@ -166,12 +166,12 @@ const responsiveProperties = defineProperties({
     roundedTopLeft: ['borderTopLeftRadius'],
     roundedBottomLeft: ['borderBottomLeftRadius'],
     roundedBottomRight: ['borderBottomRightRadius'],
-    roundedStart: ['borderTopStartRadius', 'borderBottomStartRadius'],
-    roundedEnd: ['borderTopEndRadius', 'borderBottomEndRadius'],
-    roundedTopStart: ['borderTopStartRadius'],
-    roundedTopEnd: ['borderTopEndRadius'],
-    roundedBottomStart: ['borderBottomStartRadius'],
-    roundedBottomEnd: ['borderBottomEndRadius'],
+    roundedStart: ['borderStartStartRadius', 'borderEndStartRadius'],
+    roundedEnd: ['borderStartEndRadius', 'borderEndEndRadius'],
+    roundedTopStart: ['borderStartStartRadius'],
+    roundedTopEnd: ['borderStartEndRadius'],
+    roundedBottomStart: ['borderEndStartRadius'],
+    roundedBottomEnd: ['borderEndEndRadius'],
 
     border: [
       'borderBottomWidth',
@@ -218,6 +218,11 @@ const colorValues = {
   ...COLOR,
 };
 
+const backgroundValues = {
+  ...vars.gradient,
+  ...colorValues,
+};
+
 const colorProperties = defineProperties({
   conditions: {
     lightMode: {},
@@ -227,7 +232,7 @@ const colorProperties = defineProperties({
   properties: {
     borderColor: colorValues,
     color: colorValues,
-    background: { ...colorValues, ...vars.gradient },
+    background: backgroundValues,
   },
   shorthands: {
     bg: ['background'],
@@ -246,10 +251,7 @@ export type FlexAtoms = Pick<
   'alignItems' | 'justifyContent' | 'flexDirection' | 'flexWrap'
 >;
 
-export type FlexItemAtoms = Pick<
-  Atoms,
-  'alignSelf' | 'flex' | 'order' | 'lineHeight'
->;
+export type FlexItemAtoms = Pick<Atoms, 'alignSelf' | 'flex' | 'order'>;
 
 export type SizingAtoms = Pick<
   Atoms,
@@ -298,16 +300,7 @@ export type BorderAtoms = Pick<
 
 export type TextAtoms = Pick<
   Atoms,
-  | 'color'
-  | 'fontFamily'
-  | 'fontSize'
-  | 'fontWeight'
-  | 'letterSpacing'
-  | 'lineHeight'
-  | 'whiteSpace'
-  | 'textAlign'
-  | 'textTransform'
-  | 'textDecoration'
+  'color' | 'whiteSpace' | 'textAlign' | 'textTransform' | 'textDecoration'
 >;
 
 export type MarginAtoms = Pick<

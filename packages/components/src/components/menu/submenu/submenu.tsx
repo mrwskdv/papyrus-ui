@@ -21,6 +21,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { BiChevronUp } from 'react-icons/bi';
 import { Transition } from 'react-transition-group';
 
 import { Maybe } from '../../../types';
@@ -32,6 +33,7 @@ import {
 } from '../../../utils/list-navigation';
 import { Icon } from '../../icon';
 import { MenuButton } from '../../menu-button';
+import { MenuItemProps } from '../menu-item';
 import { MenuContext, MenuContextType } from '../menu.context';
 
 import * as S from './submenu.css';
@@ -187,7 +189,9 @@ export const Submenu: FC<SubmenuProps> = ({
         collapsed={parent.collapsed}
         disabled={disabled}
         endIcon={
-          <Icon flip={!isOpen ? 'vertical' : 'none'} name="chevron-up" />
+          <Icon flip={!isOpen ? 'vertical' : 'none'}>
+            <BiChevronUp />
+          </Icon>
         }
         id={buttonId}
         indent={parent.indent}
@@ -227,7 +231,7 @@ export const Submenu: FC<SubmenuProps> = ({
                 onKeyDown={handleMenuKeyDown}
               >
                 {Children.map(children, (child, i) =>
-                  isValidElement(child)
+                  isValidElement<MenuItemProps>(child)
                     ? cloneElement(child, { index: i })
                     : null,
                 )}

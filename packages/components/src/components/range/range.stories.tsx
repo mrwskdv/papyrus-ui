@@ -1,4 +1,4 @@
-import { Text } from '../text';
+import { Label } from '../label';
 
 import { Range, RangeProps } from './range';
 
@@ -16,17 +16,9 @@ export default {
 export function Basic(args: RangeProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="range-basic"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="range-basic" mb={1}>
         Zoom
-      </Text>
+      </Label>
       <Range {...args} id="range-basic" />
     </>
   );
@@ -35,17 +27,9 @@ export function Basic(args: RangeProps) {
 export function Disabled(args: RangeProps) {
   return (
     <>
-      <Text
-        as="label"
-        fontSize="sm"
-        fontWeight="semiBold"
-        htmlFor="range-disabled"
-        letterSpacing="widest"
-        lineHeight="snug"
-        mb={1}
-      >
+      <Label htmlFor="range-disabled" mb={1}>
         Zoom
-      </Text>
+      </Label>
       <Range {...args} disabled id="range-disabled" />
     </>
   );

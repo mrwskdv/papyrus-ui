@@ -1,6 +1,6 @@
 import { createThemeContract, globalStyle } from '@vanilla-extract/css';
 
-import { LIGHT_THEME } from '../const';
+import tokens from '../assets/themes/light-mode.json';
 
 /**
  * Document
@@ -10,7 +10,8 @@ import { LIGHT_THEME } from '../const';
 /**
  * Define variables
  */
-export const vars = createThemeContract(LIGHT_THEME);
+
+export const vars = createThemeContract(tokens);
 
 /**
  * Allow adding a border to an element by just adding a border-width.
@@ -25,13 +26,10 @@ globalStyle('*, ::before, ::after', {
  * 1. Set default text style.
  * 2. Disable tap highlights on iOS.
  */
+
 globalStyle('html, :host', {
   color: vars.color.neutral900, // 1
-  fontFamily: vars.fontFamily.primary, // 1
-  fontSize: vars.fontSize.md, // 1
-  fontWeight: vars.fontWeight.regular, // 1
-  letterSpacing: vars.letterSpacing.wider, // 1
-  lineHeight: vars.lineHeight.normal, // 1
+  ...vars.typography.body.md.primary.regular, // 1
   WebkitTapHighlightColor: 'transparent', // 2
 });
 
@@ -114,7 +112,7 @@ globalStyle('button, [role="button"]', {
 
 /**
  * 1. Reset the default placeholder opacity in Firefox.
- * 2. Set the default placeholder color from theme.
+ * 2. Set the default placeholder color from themes.
  */
 globalStyle('input::placeholder, textarea::placeholder', {
   opacity: 1, // 1
@@ -507,10 +505,7 @@ globalStyle('img, video', {
  * Set default font properties for images.
  */
 globalStyle('img', {
-  fontFamily: vars.fontFamily.primary,
-  fontSize: 'xs',
-  letterSpacing: 'wide',
-  lineHeight: 'snug',
+  ...vars.typography.caption,
 });
 
 /**

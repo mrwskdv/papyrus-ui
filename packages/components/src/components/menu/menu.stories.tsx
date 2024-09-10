@@ -2,10 +2,19 @@ import { atoms } from '@papyrus-ui/styles';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment, useCallback, useState } from 'react';
+import {
+  BiCog,
+  BiEnvelope,
+  BiGridAlt,
+  BiHome,
+  BiLeftIndent,
+  BiRightIndent,
+  BiStats,
+  BiSupport,
+} from 'react-icons/bi';
 
-import { Icon } from '../icon';
+import { Heading } from '../heading';
 import { IconButton } from '../icon-button';
-import { Text } from '../text';
 
 import { Menu, MenuProps } from './menu';
 
@@ -23,23 +32,23 @@ export default {
 
 const Template: StoryFn<MenuProps> = (args) => (
   <Menu {...args}>
-    <Menu.Item icon={<Icon name="home" />} selected>
+    <Menu.Item icon={<BiHome />} selected>
       Option 1
     </Menu.Item>
 
-    <Menu.Item icon={<Icon name="envelope" />}>Option 2</Menu.Item>
+    <Menu.Item icon={<BiEnvelope />}>Option 2</Menu.Item>
 
-    <Menu.Item disabled icon={<Icon name="grid-alt" />}>
+    <Menu.Item disabled icon={<BiGridAlt />}>
       Option 3
     </Menu.Item>
 
-    <Menu.Submenu icon={<Icon name="stats" />} label="Option 4">
+    <Menu.Submenu icon={<BiStats />} label="Option 4">
       <Menu.Item>Option 4-1</Menu.Item>
       <Menu.Item>Option 4-2</Menu.Item>
       <Menu.Item>Option 4-3</Menu.Item>
     </Menu.Submenu>
 
-    <Menu.Submenu icon={<Icon name="cog" />} label="Option 5">
+    <Menu.Submenu icon={<BiCog />} label="Option 5">
       <Menu.Item>Option 5-1</Menu.Item>
       <Menu.Item>Option 5-2</Menu.Item>
 
@@ -50,7 +59,7 @@ const Template: StoryFn<MenuProps> = (args) => (
       </Menu.Submenu>
     </Menu.Submenu>
 
-    <Menu.Item danger icon={<Icon name="support" />}>
+    <Menu.Item danger icon={<BiSupport />}>
       Option 6
     </Menu.Item>
   </Menu>
@@ -62,17 +71,9 @@ export const Size: StoryFn<MenuProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Text
-          as="h3"
-          className={atoms({ mt: i > 0 ? 4 : 0, mb: 1.5 })}
-          fontFamily="secondary"
-          fontSize="2xl"
-          fontWeight="semiBold"
-          letterSpacing="wide"
-          lineHeight="tight"
-        >
+        <Heading as="h3" mb={1.5} mt={i > 0 ? 4 : 0}>
           {capitalize(size)}
-        </Text>
+        </Heading>
 
         <Template {...args} key={i} size={size} />
       </Fragment>
@@ -84,17 +85,9 @@ export const Variant: StoryFn<MenuProps> = (args) => (
   <>
     {variants.map((variant, i) => (
       <Fragment key={i}>
-        <Text
-          as="h3"
-          className={atoms({ mt: i > 0 ? 4 : 0, mb: 1.5 })}
-          fontFamily="secondary"
-          fontSize="2xl"
-          fontWeight="semiBold"
-          letterSpacing="wide"
-          lineHeight="tight"
-        >
+        <Heading as="h3" mb={1.5} mt={i > 0 ? 4 : 0}>
           {capitalize(variant)}
-        </Text>
+        </Heading>
 
         <Template {...args} key={i} variant={variant} />
       </Fragment>
@@ -117,7 +110,7 @@ export const Collapsed: StoryFn<MenuProps> = (args) => {
         })}
         onClick={() => setCollapsed(!collapsed)}
       >
-        <Icon name={collapsed ? 'right-indent' : 'left-indent'} />
+        {collapsed ? <BiRightIndent /> : <BiLeftIndent />}
       </IconButton>
 
       <Template

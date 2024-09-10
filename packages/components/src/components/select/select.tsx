@@ -3,7 +3,6 @@
 import cn from 'classnames';
 import {
   ChangeEvent,
-  cloneElement,
   FocusEvent,
   ForwardedRef,
   forwardRef,
@@ -16,9 +15,11 @@ import {
   useCallback,
   useState,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
+import { BiChevronDown } from 'react-icons/bi';
 
 import { Box } from '../box';
-import { Icon, IconProps } from '../icon';
+import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 
@@ -109,10 +110,8 @@ const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
         size={size}
         success={success}
       >
-        {isValidElement<IconProps>(startIcon) && (
-          <InputAction me={1}>
-            {cloneElement(startIcon, { fontSize: 'lg' })}
-          </InputAction>
+        {isValidElement<IconBaseProps>(startIcon) && (
+          <InputAction me={1}>{startIcon}</InputAction>
         )}
 
         <Box flex={1} position="relative">
@@ -134,19 +133,15 @@ const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
             <InputAction className={S.endAction}>
               <Icon
                 color={disabled ? 'neutral300' : 'neutral900'}
-                fontSize="lg"
                 interactive={!disabled}
-                name="chevron-down"
-              />
+              >
+                <BiChevronDown />
+              </Icon>
             </InputAction>
           )}
         </Box>
 
-        {isValidElement<IconProps>(endIcon) && (
-          <InputAction ms={1}>
-            {cloneElement(endIcon, { fontSize: 'lg' })}
-          </InputAction>
-        )}
+        {isValidElement(endIcon) && <InputAction ms={1}>{endIcon}</InputAction>}
       </InputBox>
     );
   },

@@ -1,8 +1,8 @@
 'use client';
 
 import { FC, HTMLAttributes, memo, useContext } from 'react';
+import { BiX } from 'react-icons/bi';
 
-import { Icon } from '../../icon';
 import { IconButton } from '../../icon-button';
 import { DialogContext } from '../dialog.context';
 
@@ -16,7 +16,7 @@ export const DialogClose: FC<DialogCloseProps> = memo((props) => {
 
   return (
     <IconButton rounded variant="tertiary" onClick={close} {...props}>
-      <Icon name="x" />
+      <BiX />
     </IconButton>
   );
 });

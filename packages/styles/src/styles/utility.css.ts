@@ -20,7 +20,9 @@ export const truncateStyle = style({
 });
 
 export const highlightStyle = style({
-  background: vars.gradient.highlight,
+  backgroundImage: vars.gradient.highlight,
+  backgroundSize: '200%',
+  backgroundPosition: 'left',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
 });
@@ -31,7 +33,7 @@ export const highlightStyle = style({
  */
 export const fadeStyle = style({
   opacity: 0,
-  transition: vars.transition.base,
+  transition: vars.transition.fade,
 });
 
 export const fadeInStyle = style({

@@ -1,6 +1,7 @@
+import { BiUser } from 'react-icons/bi';
+
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Icon } from '../icon';
 
 import { Avatar, AvatarProps, AvatarSize } from './avatar';
 
@@ -25,11 +26,11 @@ export function Basic(args: AvatarProps) {
       </Box>
 
       <Box mr={2}>
-        <Avatar {...args} bg="accent400" />
+        <Avatar {...args} bg="secondary400" />
       </Box>
 
       <Box>
-        <Avatar {...args} icon={<Icon name="user" />} />
+        <Avatar {...args} icon={<BiUser />} />
       </Box>
     </Flex>
   );
@@ -53,13 +54,13 @@ export function Rounded(args: AvatarProps) {
   return (
     <Flex>
       <Box mr={2}>
-        <Avatar {...args} rounded>
+        <Avatar {...args}>
           <img alt="Profile" src="https://i.pravatar.cc/300" />
         </Avatar>
       </Box>
 
       <Box>
-        <Avatar {...args} icon={<Icon name="user" />} rounded />
+        <Avatar {...args} icon={<BiUser />} />
       </Box>
     </Flex>
   );

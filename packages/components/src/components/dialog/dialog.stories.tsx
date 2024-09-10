@@ -83,19 +83,19 @@ export function Sizes(args: DialogProps): JSX.Element {
     <>
       <Flex>
         <Box mr={4}>
-          <Button variant="secondary" onClick={handleOpenSmallDialog}>
+          <Button variant="tertiary" onClick={handleOpenSmallDialog}>
             Open small Dialog
           </Button>
         </Box>
 
         <Box mr={4}>
-          <Button variant="secondary" onClick={handleOpenMediumDialog}>
+          <Button variant="tertiary" onClick={handleOpenMediumDialog}>
             Open medium Dialog
           </Button>
         </Box>
 
         <Box>
-          <Button variant="secondary" onClick={handleOpenLargeDialog}>
+          <Button variant="tertiary" onClick={handleOpenLargeDialog}>
             Open large Dialog
           </Button>
         </Box>

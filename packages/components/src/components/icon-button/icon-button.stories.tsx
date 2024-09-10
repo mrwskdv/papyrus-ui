@@ -1,7 +1,8 @@
+import { BiSolidLike } from 'react-icons/bi';
+
 import { Avatar } from '../avatar';
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Icon } from '../icon';
 
 import {
   IconButton,
@@ -12,9 +13,10 @@ import {
 
 const variants: IconButtonVariant[] = [
   'primary',
-  'accent',
   'secondary',
   'tertiary',
+  'plain',
+  'info',
   'success',
   'warning',
   'danger',
@@ -28,7 +30,7 @@ export default {
   component: IconButton,
 
   args: {
-    children: <Icon name="like" type="solid" />,
+    children: <BiSolidLike />,
   },
 };
 

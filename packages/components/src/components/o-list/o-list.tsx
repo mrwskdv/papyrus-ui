@@ -1,30 +1,62 @@
-import {
-  atoms,
-  MarginAtoms,
-  partitionAtoms,
-  TextAtoms,
-} from '@papyrus-ui/styles';
+import { Atoms, atoms, MarginAtoms, partitionAtoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes } from 'react';
 
+import { Text, TextSize, TextVariant } from '../text';
+
 import * as S from './o-list.css';
 
-export type OListProps = TextAtoms &
-  MarginAtoms &
-  Omit<HTMLAttributes<HTMLOListElement>, 'color'>;
+export interface OListProps
+  extends MarginAtoms,
+    Omit<HTMLAttributes<HTMLOListElement>, 'color'> {
+  /**
+   * Applies bold styling to the text.
+   *
+   * @default false
+   */
+  bold?: boolean;
+
+  /**
+   * Controls whether the text should break words to avoid overflow.
+   * Useful for handling long text content that doesn't naturally break.
+   *
+   * @default false
+   */
+  breakWord?: boolean;
+
+  /**
+   * Sets the text color from the theme.
+   */
+  color?: Atoms['color'];
+
+  /**
+   * Sets the font family variant for the text.
+   *
+   * @default 'primary'
+   */
+  fontVariant?: TextVariant;
+
+  /**
+   * Defines the size of the text.
+   *
+   * @default 'md'
+   */
+  size?: TextSize;
+}
 
 export const OList = forwardRef<HTMLOListElement, OListProps>(
   ({ className, children, ...props }, ref) => {
     const [atomsProps, restProps] = partitionAtoms(props);
 
     return (
-      <ol
+      <Text
         ref={ref}
+        as="ol"
         className={cn(S.root, atoms(atomsProps), className)}
         {...restProps}
       >
         {children}
-      </ol>
+      </Text>
     );
   },
 );

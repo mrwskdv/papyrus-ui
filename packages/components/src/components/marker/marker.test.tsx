@@ -1,5 +1,6 @@
+import { BiCheck } from 'react-icons/bi';
+
 import { render } from '../../utils/test-utils';
-import { Icon } from '../icon';
 
 import { Marker } from './marker';
 
@@ -9,7 +10,7 @@ describe('Marker', () => {
       it('Then the correct icon should be rendered', () => {
         const { getByTestId } = render(
           <Marker>
-            <Icon data-testid="icon" name="check" />
+            <BiCheck data-testid="icon" />
           </Marker>,
         );
 

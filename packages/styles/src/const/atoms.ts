@@ -326,10 +326,6 @@ export const TEXT_TRANSFORM = [
   'capitalize',
 ] as const;
 
-export const LINE_HEIGHT = {
-  none: '1',
-};
-
 export const VERTICAL_ALIGN = ['baseline', 'top', 'middle', 'bottom'] as const;
 
 export const WHITE_SPACE = ['normal', 'nowrap'] as const;

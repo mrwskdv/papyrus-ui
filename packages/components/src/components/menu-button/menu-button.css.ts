@@ -193,13 +193,10 @@ export const iconDisabledVariant = styleVariants({
   },
 });
 
-export const label = atoms({
+export const label = style({
   display: 'block',
-  fontSize: 'md',
-  fontWeight: 'regular',
-  letterSpacing: 'wider',
-  lineHeight: 'normal',
-  mx: 1,
+  ...vars.typography.body.md.primary.regular,
+  margin: `0 ${SPACING[1]}`,
 });
 
 export const labelDirection = {
@@ -221,8 +218,8 @@ export const labelVariant = {
   }),
 };
 
-export const labelSelected = atoms({
-  fontWeight: 'semiBold',
+export const labelSelected = style({
+  ...vars.typography.body.md.primary.bold,
 });
 
 export const labelSelectedVariant = styleVariants({
@@ -233,11 +230,8 @@ export const labelSelectedVariant = styleVariants({
   ghost: {},
 });
 
-export const labelCollapsed = atoms({
-  fontSize: 'xs',
-  letterSpacing: 'wide',
-  fontWeight: 'regular',
-  lineHeight: 'snug',
+export const labelCollapsed = style({
+  ...vars.typography.caption,
   textAlign: 'center',
 });
 

@@ -4452,6 +4452,11 @@
   resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.5.tgz#8c08ac4851f4cc89a3dcdb858d8938e69b1481c4"
   integrity sha512-6YXeOEKYTA3UV+RC8DeAjFk+/okoNz/h88R+McnzA2zpaVqTR/Ep+vszkWYlGBcMNO7vEkqbq5nT/JMMvhi+tw==
 
+"@vanilla-extract/recipes@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/recipes/-/recipes-0.5.5.tgz#da34e247be2c3d70e01ecfeb53310daadc608b74"
+  integrity sha512-VadU7+IFUwLNLMgks29AHav/K5h7DOEfTU91RItn5vwdPfzduodNg317YbgWCcpm7FSXkuR3B3X8ZOi95UOozA==
+
 "@vanilla-extract/rollup-plugin@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/rollup-plugin/-/rollup-plugin-1.3.6.tgz#f087b21aab9ef74d2ccb9a47c817fd51f8429193"
@@ -12589,6 +12594,11 @@ react-error-boundary@^3.1.0:
   integrity sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==
   dependencies:
     "@babel/runtime" "^7.12.5"
+
+react-icons@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.3.0.tgz#ccad07a30aebd40a89f8cfa7d82e466019203f1c"
+  integrity sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==
 
 react-inspector@^6.0.0:
   version "6.0.1"

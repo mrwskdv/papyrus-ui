@@ -15,6 +15,11 @@ export const rootVariant = {
     color: 'primary600',
     bg: 'primary50',
   }),
+  info: atoms({
+    borderColor: 'info200',
+    color: 'info600',
+    bg: 'info50',
+  }),
   success: atoms({
     borderColor: 'success200',
     color: 'success600',
@@ -32,9 +37,16 @@ export const rootVariant = {
   }),
 };
 
+export const icon = atoms({
+  fontSize: '3xl',
+});
+
 export const iconVariant = {
   primary: atoms({
     color: 'primary500',
+  }),
+  info: atoms({
+    color: 'info500',
   }),
   success: atoms({
     color: 'success500',

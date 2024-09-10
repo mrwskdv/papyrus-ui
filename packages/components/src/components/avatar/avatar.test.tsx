@@ -1,5 +1,6 @@
+import { BiUser } from 'react-icons/bi';
+
 import { render } from '../../utils/test-utils';
-import { Icon } from '../icon';
 
 import { Avatar } from './avatar';
 
@@ -32,7 +33,7 @@ describe('Avatar', () => {
         const testId = 'avatar-icon';
 
         const { getByTestId } = render(
-          <Avatar icon={<Icon data-testid={testId} name="user" />} />,
+          <Avatar icon={<BiUser data-testid={testId} />} />,
         );
 
         expect(getByTestId(testId)).toBeInTheDocument();
@@ -70,7 +71,7 @@ describe('Avatar', () => {
         const testId = 'avatar-icon';
 
         const { container, queryByTestId } = render(
-          <Avatar icon={<Icon data-testid={testId} name="user" />}>
+          <Avatar icon={<BiUser data-testid={testId} />}>
             <img alt="Profile" src="https://i.pravatar.cc/300" />
           </Avatar>,
         );

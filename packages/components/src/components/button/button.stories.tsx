@@ -1,14 +1,16 @@
+import { BiSolidLike } from 'react-icons/bi';
+
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { Icon } from '../icon';
 
 import { Button, ButtonProps, ButtonSize, ButtonVariant } from './button';
 
 const variants: ButtonVariant[] = [
   'primary',
-  'accent',
   'secondary',
   'tertiary',
+  'plain',
+  'info',
   'success',
   'warning',
   'danger',
@@ -62,13 +64,13 @@ export function WithIcon(args: ButtonProps) {
   return (
     <Flex flexWrap="wrap" mt="-4" mx="-2">
       <Box mt={4} px={2}>
-        <Button {...args} startIcon={<Icon name="like" type="solid" />}>
+        <Button {...args} startIcon={<BiSolidLike />}>
           Start icon
         </Button>
       </Box>
 
       <Box mt={4} px={2}>
-        <Button {...args} endIcon={<Icon name="like" type="solid" />}>
+        <Button {...args} endIcon={<BiSolidLike />}>
           End icon
         </Button>
       </Box>

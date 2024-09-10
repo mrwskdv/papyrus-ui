@@ -3,6 +3,7 @@
 import cn from 'classnames';
 import {
   cloneElement,
+  ComponentType,
   forwardRef,
   HTMLAttributes,
   isValidElement,
@@ -13,20 +14,34 @@ import {
   useContext,
   useEffect,
 } from 'react';
+import { IconBaseProps } from 'react-icons';
+import {
+  BiCheckCircle,
+  BiError,
+  BiErrorCircle,
+  BiInfoCircle,
+  BiX,
+} from 'react-icons/bi';
 import { Transition } from 'react-transition-group';
 
 import { useTimeout } from '../../../utils/use-timeout';
+import { AlertVariant } from '../../alert';
 import { Box } from '../../box';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
-import { Icon, IconProps } from '../../icon';
+import { Heading } from '../../heading';
 import { IconButton } from '../../icon-button';
 import { Text } from '../../text';
 import { SnackbarContext } from '../snackbar.context';
 
 import * as S from './snackbar-item.css';
 
-export type SnackbarItemVariant = 'primary' | 'danger' | 'warning' | 'success';
+export type SnackbarItemVariant =
+  | 'primary'
+  | 'info'
+  | 'danger'
+  | 'warning'
+  | 'success';
 
 export interface SnackbarItemProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -91,11 +106,12 @@ const TRANSITION_TIMEOUT = {
   exit: 200,
 };
 
-const iconByVariant: Record<SnackbarItemVariant, string> = {
-  primary: 'info-circle',
-  danger: 'error-circle',
-  warning: 'error',
-  success: 'check-circle',
+const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
+  primary: BiInfoCircle,
+  info: BiInfoCircle,
+  danger: BiErrorCircle,
+  warning: BiError,
+  success: BiCheckCircle,
 };
 
 export const SnackbarItem = forwardRef<
@@ -154,6 +170,8 @@ export const SnackbarItem = forwardRef<
       defferAutoHide();
     }, [defferAutoHide]);
 
+    const IconComponent = iconByVariant[variant];
+
     return (
       <Transition
         {...props}
@@ -178,52 +196,35 @@ export const SnackbarItem = forwardRef<
             onMouseLeave={handleMouseLeave}
           >
             <Flex alignItems="center" mx="-1.5">
-              <Box lineHeight="none" px={1.5}>
-                {isValidElement<IconProps>(icon) ? (
+              <Box px={1.5}>
+                {isValidElement<IconBaseProps>(icon) ? (
                   cloneElement(icon, {
-                    color: 'white',
-                    fontSize: '4xl',
+                    className: cn(S.icon, icon.props.className),
                   })
                 ) : (
-                  <Icon
-                    color="white"
-                    fontSize="4xl"
-                    name={iconByVariant[variant]}
-                  />
+                  <IconComponent className={S.icon} />
                 )}
               </Box>
 
-              <Box flex={1} lineHeight="none" overflow="hidden" px={1.5}>
-                <Text
-                  as="div"
-                  color="white"
-                  fontSize="md"
-                  fontWeight={children ? 'semiBold' : 'regular'}
-                  letterSpacing="wider"
-                  lineHeight="snug"
-                  truncate
-                >
-                  {message}
-                </Text>
-
-                {children && (
-                  <Text
-                    as="div"
-                    color="white"
-                    fontSize="sm"
-                    fontWeight="regular"
-                    letterSpacing="wider"
-                    lineHeight="normal"
-                    mt={1}
-                    truncate
-                  >
-                    {children}
+              <Box flex={1} overflow="hidden" px={1.5}>
+                {children ? (
+                  <>
+                    <Heading as="div" mb={1} truncate>
+                      {message}
+                    </Heading>
+                    <Text as="div" mt={1} size="sm" truncate>
+                      {children}
+                    </Text>
+                  </>
+                ) : (
+                  <Text as="div" truncate>
+                    {message}
                   </Text>
                 )}
               </Box>
 
               {actionLabel && onActionClick && (
-                <Box lineHeight="none" px={1.5}>
+                <Box px={1.5}>
                   <Button
                     data-testid="action"
                     rounded
@@ -237,7 +238,7 @@ export const SnackbarItem = forwardRef<
               )}
 
               {onDismiss && (
-                <Box lineHeight="none" px={1.5}>
+                <Box px={1.5}>
                   <IconButton
                     aria-label={dismissLabel}
                     rounded
@@ -245,7 +246,7 @@ export const SnackbarItem = forwardRef<
                     variant="ghost"
                     onClick={onDismiss}
                   >
-                    <Icon name="x" />
+                    <BiX />
                   </IconButton>
                 </Box>
               )}

@@ -3,7 +3,8 @@ export type PartitionObject<Source, Included> = [
   Omit<Source, keyof Included>,
 ];
 
-export function partitionObject<Source, Included>(
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function partitionObject<Source extends {}, Included>(
   obj: Source,
   filterFn: (value: Source[keyof Source], key: keyof Source) => boolean,
 ): PartitionObject<Source, Included> {

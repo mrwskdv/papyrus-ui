@@ -32,13 +32,13 @@ import {
   useRef,
   useState,
 } from 'react';
+import { BiChevronRight } from 'react-icons/bi';
 
 import {
   getFirstItem,
   getNextItem,
   getPrevItem,
 } from '../../../utils/list-navigation';
-import { Icon } from '../../icon';
 import { MenuButton } from '../../menu-button';
 import { DropdownMenuContent } from '../dropdown-menu-content';
 import {
@@ -236,7 +236,7 @@ export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
     <FloatingNode id={nodeId}>
       <MenuButton
         ref={buttonRef}
-        endIcon={<Icon name="chevron-right" />}
+        endIcon={<BiChevronRight />}
         role="menuitem"
         size="sm"
         startIcon={icon}

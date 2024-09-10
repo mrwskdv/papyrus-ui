@@ -1,0 +1,48 @@
+import Caption, {Basic, ColoredText, HighlightText, TruncateLongText} from './caption.stories'
+import {Meta, ArgsTable, Canvas} from "@storybook/addon-docs";
+
+<Meta of={Caption} />
+
+# Caption
+
+The `Caption` component is used to display smaller descriptive text, usually accompanying images, figures, or tables.
+
+## When To Use
+
+- **Image Descriptions**: Use `Caption` to provide context or descriptions for images, tables, or charts.
+
+- **Small Annotations**: Useful for adding smaller, secondary information like timestamps, notes, or disclaimers beneath
+  primary content.
+
+## Examples
+
+### Basic
+
+<Canvas of={Basic} />
+
+### Truncate Long Text
+
+You can enable text truncation to handle overflow text with an ellipsis (...).
+
+<Canvas of={TruncateLongText} />
+
+### Colored Text
+
+Use `color` property to use different color from the theme.
+
+<Canvas of={ColoredText} />
+
+### Highlighted text
+
+Use `highlight` property to highlight text with a gradient defined in theme.
+
+<Canvas of={HighlightText} />
+
+### Guidelines
+
+Consider using a lighter or neutral color such as `neutral500` to ensure the caption doesn't overpower the primary text
+but remains readable.
+
+## Component API
+
+<ArgsTable />

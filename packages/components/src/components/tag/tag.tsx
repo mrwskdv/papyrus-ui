@@ -12,9 +12,10 @@ import {
   ReactNode,
   useCallback,
 } from 'react';
+import { BiX } from 'react-icons/bi';
 
+import { Caption } from '../caption';
 import { Icon } from '../icon';
-import { Text } from '../text';
 
 import * as S from './tag.css';
 
@@ -105,18 +106,9 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
-        <Text
-          as="span"
-          display="inline-block"
-          fontFamily="primary"
-          fontSize="xs"
-          fontWeight="regular"
-          letterSpacing="widest"
-          lineHeight="snug"
-          truncate
-        >
+        <Caption as="span" display="inline-block" truncate>
           {children}
-        </Text>
+        </Caption>
 
         {removable && !disabled && (
           <Icon
@@ -125,8 +117,9 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
             fontSize="sm"
             interactive
             ml={1}
-            name="x"
-          />
+          >
+            <BiX />
+          </Icon>
         )}
       </span>
     );

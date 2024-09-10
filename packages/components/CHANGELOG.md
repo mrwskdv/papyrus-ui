@@ -1,5 +1,20 @@
 # @papyrus-ui/components
 
+## 0.3.0
+
+### Minor Changes
+
+- 7d66aac: Replaced boxicons with react-icons
+- 7d66aac: Added `info` colors and style variants
+- 7d66aac: Generation of design-tokens from figma json file
+
+### Patch Changes
+
+- 7d66aac: Added 80px avatar size
+- 7d66aac: Changed modal header height to 48px
+- Updated dependencies [7d66aac]
+  - @papyrus-ui/styles@0.3.0
+
 ## 0.2.3
 
 ### Patch Changes

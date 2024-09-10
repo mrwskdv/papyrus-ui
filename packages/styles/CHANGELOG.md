@@ -1,5 +1,13 @@
 # @papyrus-ui/styles
 
+## 0.3.0
+
+### Minor Changes
+
+- 7d66aac: Replaced boxicons with react-icons
+- 7d66aac: Added `info` colors and style variants
+- 7d66aac: Generation of design-tokens from figma json file
+
 ## 0.2.0
 
 ### Minor Changes

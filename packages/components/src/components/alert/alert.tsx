@@ -94,7 +94,7 @@ export const Alert: FC<AlertProps> = ({
         <Box flex={1} overflow="hidden" px={1.5}>
           {children ? (
             <>
-              <Heading as="div" mb={1}>
+              <Heading as="div" level={5} mb={1}>
                 {message}
               </Heading>
               <Text as="div" color="neutral900" mt={1} size="sm">

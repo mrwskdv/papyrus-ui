@@ -2,6 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { BiCog, BiGridAlt, BiStats } from 'react-icons/bi';
 
 import { Box } from '../box';
+import { Icon } from '../icon';
 import { ListItem } from '../list-item';
 import { Marker } from '../marker';
 
@@ -47,19 +48,25 @@ export const WithIcons: StoryFn<UListProps> = (args) => (
     <UList {...args} type="none">
       <ListItem>
         <Marker role="none">
-          <BiGridAlt />
+          <Icon>
+            <BiGridAlt />
+          </Icon>
         </Marker>
         Item 1
       </ListItem>
       <ListItem>
         <Marker role="none">
-          <BiStats />
+          <Icon>
+            <BiStats />
+          </Icon>
         </Marker>
         Item 2
       </ListItem>
       <ListItem>
         <Marker role="none">
-          <BiCog />
+          <Icon>
+            <BiCog />
+          </Icon>
         </Marker>
         Item 3
       </ListItem>

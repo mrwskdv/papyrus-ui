@@ -1512,7 +1512,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 14,
+                "fontSize": 16,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 120.00000476837158,
@@ -1652,7 +1652,7 @@
               }
             },
             {
-              "name": "heading/3xl/primary/desktop",
+              "name": "heading/h1/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1668,7 +1668,7 @@
               }
             },
             {
-              "name": "heading/3xl/primary/mobile",
+              "name": "heading/h1/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1684,7 +1684,7 @@
               }
             },
             {
-              "name": "heading/3xl/secondary/desktop",
+              "name": "heading/h1/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1700,7 +1700,7 @@
               }
             },
             {
-              "name": "heading/3xl/secondary/mobile",
+              "name": "heading/h1/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1716,7 +1716,7 @@
               }
             },
             {
-              "name": "heading/2xl/primary/desktop",
+              "name": "heading/h2/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1732,7 +1732,7 @@
               }
             },
             {
-              "name": "heading/2xl/primary/mobile",
+              "name": "heading/h2/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1748,7 +1748,7 @@
               }
             },
             {
-              "name": "heading/2xl/secondary/desktop",
+              "name": "heading/h2/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1764,7 +1764,7 @@
               }
             },
             {
-              "name": "heading/2xl/secondary/mobile",
+              "name": "heading/h2/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1780,7 +1780,7 @@
               }
             },
             {
-              "name": "heading/xl/primary/desktop",
+              "name": "heading/h3/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1796,7 +1796,7 @@
               }
             },
             {
-              "name": "heading/xl/primary/mobile",
+              "name": "heading/h3/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1812,7 +1812,7 @@
               }
             },
             {
-              "name": "heading/xl/secondary/desktop",
+              "name": "heading/h3/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1828,7 +1828,7 @@
               }
             },
             {
-              "name": "heading/xl/secondary/mobile",
+              "name": "heading/h3/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1844,7 +1844,7 @@
               }
             },
             {
-              "name": "heading/lg/primary/desktop",
+              "name": "heading/h4/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1860,7 +1860,7 @@
               }
             },
             {
-              "name": "heading/lg/primary/mobile",
+              "name": "heading/h4/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1876,7 +1876,7 @@
               }
             },
             {
-              "name": "heading/lg/secondary/desktop",
+              "name": "heading/h4/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1892,7 +1892,7 @@
               }
             },
             {
-              "name": "heading/lg/secondary/mobile",
+              "name": "heading/h4/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1908,7 +1908,7 @@
               }
             },
             {
-              "name": "heading/md/primary/desktop",
+              "name": "heading/h5/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1924,7 +1924,7 @@
               }
             },
             {
-              "name": "heading/md/primary/mobile",
+              "name": "heading/h5/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1940,7 +1940,7 @@
               }
             },
             {
-              "name": "heading/md/secondary/desktop",
+              "name": "heading/h5/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1956,7 +1956,7 @@
               }
             },
             {
-              "name": "heading/md/secondary/mobile",
+              "name": "heading/h5/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1972,7 +1972,7 @@
               }
             },
             {
-              "name": "heading/sm/primary/mobile",
+              "name": "heading/h6/primary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -1988,7 +1988,7 @@
               }
             },
             {
-              "name": "heading/sm/primary/desktop",
+              "name": "heading/h6/primary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -2004,7 +2004,7 @@
               }
             },
             {
-              "name": "heading/sm/secondary/desktop",
+              "name": "heading/h6/secondary/desktop",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -2020,7 +2020,7 @@
               }
             },
             {
-              "name": "heading/sm/secondary/mobile",
+              "name": "heading/h6/secondary/mobile",
               "type": "typography",
               "isAlias": false,
               "value": {

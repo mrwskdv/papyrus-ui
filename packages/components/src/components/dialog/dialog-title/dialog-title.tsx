@@ -28,7 +28,14 @@ export const DialogTitle: FC<DialogTitleProps> = memo(
     }, [id, setLabelId]);
 
     return (
-      <Heading className={cn(S.root, className)} id={id} truncate {...props}>
+      <Heading
+        as="h1"
+        className={cn(S.root, className)}
+        id={id}
+        level={5}
+        truncate
+        {...props}
+      >
         {children}
       </Heading>
     );

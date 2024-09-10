@@ -209,7 +209,7 @@ export const SnackbarItem = forwardRef<
               <Box flex={1} overflow="hidden" px={1.5}>
                 {children ? (
                   <>
-                    <Heading as="div" mb={1} truncate>
+                    <Heading as="div" level={5} mb={1} truncate>
                       {message}
                     </Heading>
                     <Text as="div" mt={1} size="sm" truncate>

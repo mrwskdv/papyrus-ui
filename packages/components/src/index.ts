@@ -16,6 +16,7 @@ export * from './components/icon-button';
 export * from './components/image';
 export * from './components/input-action';
 export * from './components/input-box';
+export * from './components/label';
 export * from './components/link';
 export * from './components/list-item';
 export * from './components/loader';

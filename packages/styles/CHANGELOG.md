@@ -1,5 +1,11 @@
 # @papyrus-ui/styles
 
+## 0.3.1
+
+### Patch Changes
+
+- 3dfd74c: Added generated tokens to exports
+
 ## 0.3.0
 
 ### Minor Changes

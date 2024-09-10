@@ -1,6 +1,6 @@
 # @papyrus-ui/components
 
-## 1.0.0
+## 0.3.0
 
 ### Minor Changes
 
@@ -12,8 +12,6 @@
 
 - 7d66aac: Added 80px avatar size
 - 7d66aac: Changed modal header height to 48px
-- Updated dependencies [7d66aac]
-- Updated dependencies [7d66aac]
 - Updated dependencies [7d66aac]
   - @papyrus-ui/styles@0.3.0
 

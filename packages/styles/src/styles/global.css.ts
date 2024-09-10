@@ -1,6 +1,11 @@
-import { createThemeContract, globalStyle } from '@vanilla-extract/css';
+import {
+  createTheme,
+  createThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
 
-import tokens from '../assets/themes/light-mode.json';
+import darkMode from '../assets/themes/dark-mode.json';
+import lightMode from '../assets/themes/light-mode.json';
 
 /**
  * Document
@@ -11,7 +16,11 @@ import tokens from '../assets/themes/light-mode.json';
  * Define variables
  */
 
-export const vars = createThemeContract(tokens);
+export const lightThemeTokens = { ...lightMode };
+
+export const darkThemeTokens = { ...darkMode };
+
+export const vars = createThemeContract(lightThemeTokens);
 
 /**
  * Allow adding a border to an element by just adding a border-width.
@@ -514,3 +523,11 @@ globalStyle('img', {
 globalStyle('[hidden]', {
   display: 'none',
 });
+
+/**
+ * Define Themes
+ */
+
+export const lightTheme = createTheme(vars, lightThemeTokens);
+
+export const darkTheme = createTheme(vars, darkThemeTokens);

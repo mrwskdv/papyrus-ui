@@ -8,6 +8,5 @@ export * from './utils/partition-atoms';
 
 // Order of exported styles should be preserved
 export * from './styles/global.css';
-export * from './styles/themes.css';
 export * from './styles/atoms.css';
 export * from './styles/utility.css';

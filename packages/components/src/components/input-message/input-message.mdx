@@ -1,0 +1,40 @@
+import InputMessage, { Basic, Variants } from './input-message.stories';
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs';
+
+<Meta of={InputMessage} />
+
+# InputMessage
+
+The InputMessage component is designed to display messages below an input field. It can be used for both error alerts and regular messages, with different variants for visual distinction.
+
+## When to use
+
+The InputMessage component is used to display messages beneath an input element, typically for form validation messages, status notifications, or additional information. It supports several variants, such as error, success, and info, for different message types.
+
+## Examples
+
+### Basic
+
+<Canvas of={Basic} />
+
+### Variants
+
+Use the `variant` property to display different message types.
+
+<Canvas of={Variants} />
+
+## Guidelines
+
+- **Choose the correct variant**: The variant determines the message style, helping users understand the nature of the message (error, success, etc.). Use the appropriate variant to match the tone of the message.
+
+- **Positioning**: InputMessage is typically used below an input element. Use margin properties (`my`, `mt`, etc.) to adjust the position of the message.
+
+- **Content**: Keep messages concise and to the point, especially for error and warning messages. Use success and info messages for additional context or positive feedback.
+
+## Accessibility
+
+Use appropriate ARIA roles, such as `role="alert"` for error messages, to notify assistive technologies about the nature of the message. For other message types, such as informational or warning messages, use `role="status"` to indicate lower-priority messages.
+
+## Component API
+
+<ArgTypes />

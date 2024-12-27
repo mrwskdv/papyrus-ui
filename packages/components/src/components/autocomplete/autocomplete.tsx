@@ -102,7 +102,7 @@ export interface AutocompleteProps<
   /**
    * If `true`, the loading label will be shown.
    */
-  loading?: string;
+  loading?: boolean;
 
   /**
    * Label to display when data is being loaded.
@@ -689,46 +689,48 @@ export const Autocomplete = forwardRef(
                 zIndex={40}
                 {...getFloatingProps()}
               >
-                {!optionsState && loading && (
+                {(loading || !optionsState) && (
                   <Option disabled role="none">
                     {loadingLabel}
                   </Option>
                 )}
 
-                {optionsState && optionsState.length === 0 && (
+                {!loading && optionsState && optionsState.length === 0 && (
                   <Option disabled role="none">
                     {noResultLabel}
                   </Option>
                 )}
 
-                {optionsState?.map((item, idx) => {
-                  const isSelected = selectedOptions.includes(item);
-                  return (
-                    <OptionComponent
-                      key={idx}
-                      active={idx === activeIndex}
-                      data-index={idx}
-                      endIcon={
-                        isSelected ? (
-                          <Icon color="primary500">
-                            <BiCheck />
-                          </Icon>
-                        ) : undefined
-                      }
-                      id={slug(id, OPTION_ID, idx)}
-                      option={item}
-                      selected={isSelected}
-                      {...getItemProps({
-                        ref: (node) => {
-                          listRef.current[idx] = node;
-                        },
-                        onClick: handleOptionClick,
-                      })}
-                    >
-                      {getLabel(item)}
-                    </OptionComponent>
-                  );
-                })}
+                {!loading &&
+                  optionsState?.map((item, idx) => {
+                    const isSelected = selectedOptions.includes(item);
+
+                    return (
+                      <OptionComponent
+                        key={idx}
+                        active={idx === activeIndex}
+                        data-index={idx}
+                        endIcon={
+                          isSelected ? (
+                            <Icon color="primary500">
+                              <BiCheck />
+                            </Icon>
+                          ) : undefined
+                        }
+                        id={slug(id, OPTION_ID, idx)}
+                        option={item}
+                        selected={isSelected}
+                        {...getItemProps({
+                          ref: (node) => {
+                            listRef.current[idx] = node;
+                          },
+                          onClick: handleOptionClick,
+                        })}
+                      >
+                        {getLabel(item)}
+                      </OptionComponent>
+                    );
+                  })}
               </Flex>
             </FloatingFocusManager>
           )}

@@ -210,37 +210,37 @@
               "name": "color/success900",
               "type": "color",
               "isAlias": false,
-              "value": "#07200E"
+              "value": "#0C1F06"
             },
             {
               "name": "color/success800",
               "type": "color",
               "isAlias": false,
-              "value": "#0F411B"
+              "value": "#183E0B"
             },
             {
               "name": "color/success700",
               "type": "color",
               "isAlias": false,
-              "value": "#166129"
+              "value": "#245E11"
             },
             {
               "name": "color/success600",
               "type": "color",
               "isAlias": false,
-              "value": "#1E8236"
+              "value": "#307D16"
             },
             {
               "name": "color/success500",
               "type": "color",
               "isAlias": false,
-              "value": "#25A244"
+              "value": "#3C9C1C"
             },
             {
               "name": "color/success400",
               "type": "color",
               "isAlias": false,
-              "value": "#51B569"
+              "value": "#63B049"
             },
             {
               "name": "color/success300",
@@ -1720,7 +1720,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 36,
+                "fontSize": 28,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
@@ -1736,7 +1736,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 28,
+                "fontSize": 24,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
@@ -1752,7 +1752,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 36,
+                "fontSize": 28,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
@@ -1768,7 +1768,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 28,
+                "fontSize": 24,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
@@ -1784,7 +1784,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 28,
+                "fontSize": 20,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
@@ -1800,7 +1800,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 24,
+                "fontSize": 20,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
@@ -1816,7 +1816,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 28,
+                "fontSize": 20,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
@@ -1832,7 +1832,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 24,
+                "fontSize": 20,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
@@ -1848,7 +1848,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 20,
+                "fontSize": 18,
                 "fontFamily": "Source Sans 3",
                 "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
@@ -1880,7 +1880,7 @@
               "type": "typography",
               "isAlias": false,
               "value": {
-                "fontSize": 20,
+                "fontSize": 18,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
@@ -1978,12 +1978,12 @@
               "value": {
                 "fontSize": 14,
                 "fontFamily": "Source Sans 3",
-                "fontWeight": "Regular",
+                "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
                 "lineHeightUnit": "PERCENT",
                 "letterSpacing": 2.4000000953674316,
                 "letterSpacingUnit": "PERCENT",
-                "textCase": "UPPER",
+                "textCase": "ORIGINAL",
                 "textDecoration": "NONE"
               }
             },
@@ -1994,12 +1994,12 @@
               "value": {
                 "fontSize": 14,
                 "fontFamily": "Source Sans 3",
-                "fontWeight": "Regular",
+                "fontWeight": "SemiBold",
                 "lineHeight": 111.19999885559082,
                 "lineHeightUnit": "PERCENT",
                 "letterSpacing": 2.4000000953674316,
                 "letterSpacingUnit": "PERCENT",
-                "textCase": "UPPER",
+                "textCase": "ORIGINAL",
                 "textDecoration": "NONE"
               }
             },
@@ -2010,12 +2010,12 @@
               "value": {
                 "fontSize": 14,
                 "fontFamily": "Vollkorn",
-                "fontWeight": "Medium",
+                "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
                 "lineHeightUnit": "PERCENT",
                 "letterSpacing": 2.4000000953674316,
                 "letterSpacingUnit": "PERCENT",
-                "textCase": "UPPER",
+                "textCase": "ORIGINAL",
                 "textDecoration": "NONE"
               }
             },
@@ -2026,12 +2026,12 @@
               "value": {
                 "fontSize": 14,
                 "fontFamily": "Vollkorn",
-                "fontWeight": "Medium",
+                "fontWeight": "Bold",
                 "lineHeight": 111.19999885559082,
                 "lineHeightUnit": "PERCENT",
                 "letterSpacing": 2.4000000953674316,
                 "letterSpacingUnit": "PERCENT",
-                "textCase": "UPPER",
+                "textCase": "ORIGINAL",
                 "textDecoration": "NONE"
               }
             }

@@ -1,5 +1,5 @@
 import Heading, {Basic, ColoredText, HighlightText, TruncateLongText, VariantsAndSizes} from './heading.stories'
-import {Canvas, Meta} from "@storybook/addon-docs";
+import { Canvas, Meta, ArgTypes } from "@storybook/addon-docs";
 
 <Meta of={Heading} />
 
@@ -14,11 +14,6 @@ The Heading component is used to create headings of various sizes and styles for
 ## Examples
 
 ### Basic
-
-Displays the Heading component with default settings:
- - as: 'h5'
- - size: 'md'
- - fontVariant: 'primary'
 
 <Canvas of={Basic} />
 
@@ -69,8 +64,9 @@ container.
 - **Truncation**: Provide alternative text or context if truncation is used, ensuring that users who rely on screen
   readers understand the full content.
 
+## Component API
 
-
+<ArgTypes />
 
 
 

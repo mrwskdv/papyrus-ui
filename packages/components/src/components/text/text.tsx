@@ -15,7 +15,7 @@ import * as S from './text.css';
 
 export type TextSize = 'md' | 'sm';
 
-export type TextVariant = 'primary' | 'secondary';
+export type TextFontVariant = 'primary' | 'secondary';
 
 export interface TextProps
   extends TextAtoms,
@@ -54,8 +54,7 @@ export interface TextProps
    *
    * @default 'primary'
    */
-  fontVariant?: TextVariant;
-
+  fontVariant?: TextFontVariant;
   /**
    * Highlights the text, using a pre-defined gradiant style from the theme.
    *

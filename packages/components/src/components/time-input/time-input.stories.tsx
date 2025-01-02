@@ -6,59 +6,69 @@ import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
-import { TextInput, TextInputProps } from './text-input';
+import { TimeInput, TimeInputProps } from './time-input';
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
 
 export default {
-  title: 'Inputs/TextInput',
-  component: TextInput,
+  title: 'Inputs/TimeInput',
+  component: TimeInput,
 
   args: {
-    label: 'First Name',
-    defaultValue: 'Bob',
-    placeholder: 'First Name',
+    label: 'Time',
+    defaultValue: '12:30',
+    placeholder: 'HH:MM',
   },
 };
 
-const Template: StoryFn<TextInputProps> = (args) => (
+const Template: StoryFn<TimeInputProps> = (args) => (
   <Box width={64}>
-    <TextInput {...args} />
+    <TimeInput {...args} />
   </Box>
 );
 
 export const Basic = Template.bind({});
 
 Basic.args = {
-  id: 'text-input-basic',
+  id: 'time-input-basic',
 };
 
-export const Clearable = Template.bind({});
+export const Hour12 = Template.bind({});
 
-Clearable.args = {
-  id: 'text-input-clearable',
-  clearable: true,
+Hour12.args = {
+  id: 'time-input-hour12',
+  hour12: true,
+  defaultValue: '12:30',
 };
 
-export function Sizes(args: TextInputProps) {
+export const Seconds = Template.bind({});
+
+Seconds.args = {
+  id: 'time-input-seconds',
+  seconds: true,
+  defaultValue: '12:30:45',
+  placeholder: 'HH:MM:SS',
+};
+
+export function Sizes(args: TimeInputProps) {
   return (
     <Flex flexDirection="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <TextInput {...args} id={`text-input-size-${size}`} size={size} />
+          <TimeInput {...args} id={`time-input-size-${size}`} size={size} />
         </Box>
       ))}
     </Flex>
   );
 }
 
-export function WithIcon(args: TextInputProps) {
+export function WithIcon(args: TimeInputProps) {
   return (
     <Flex flexDirection="column" width={64}>
       <Box mb={4}>
-        <TextInput
+        <TimeInput
           {...args}
-          id="text-input-with-start-icon"
+          id="time-input-with-start-icon"
           label="With Start Icon"
           startIcon={
             <Icon color="neutral500">
@@ -69,14 +79,14 @@ export function WithIcon(args: TextInputProps) {
       </Box>
 
       <Box>
-        <TextInput
+        <TimeInput
           {...args}
           endIcon={
             <Icon color="primary400">
               <BiInfoCircle />
             </Icon>
           }
-          id="text-input-with-end-icon"
+          id="time-input-with-end-icon"
           label="With End Icon"
         />
       </Box>
@@ -87,21 +97,21 @@ export function WithIcon(args: TextInputProps) {
 export const Description = Template.bind({});
 
 Description.args = {
-  id: 'text-input-description',
+  id: 'time-input-description',
   description: 'This is a description.',
 };
 
 export const Message = Template.bind({});
 
 Message.args = {
-  id: 'text-input-message',
+  id: 'time-input-message',
   description: 'This is a message',
 };
 
 export const Invalid = Template.bind({});
 
 Invalid.args = {
-  id: 'text-input-invalid',
+  id: 'time-input-invalid',
   invalid: true,
   description: 'Something went wrong',
 };
@@ -109,13 +119,13 @@ Invalid.args = {
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  id: 'text-input-disabled',
+  id: 'time-input-disabled',
   disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 
 ReadOnly.args = {
-  id: 'text-input-readonly',
+  id: 'time-input-readonly',
   readOnly: true,
 };

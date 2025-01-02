@@ -43,4 +43,5 @@ export * from './components/text';
 export * from './components/text-input';
 export * from './components/textarea';
 export * from './components/theme-provider';
+export * from './components/time-input';
 export * from './components/u-list';

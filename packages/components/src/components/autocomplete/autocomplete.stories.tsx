@@ -1,11 +1,10 @@
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Label } from '../label';
 
 import { Autocomplete, AutocompleteProps } from './autocomplete';
 
@@ -13,29 +12,24 @@ const SIZE_OPTIONS: InputBoxSize[] = ['sm', 'md', 'lg'];
 
 const OPTIONS_LIST = ['Peter', 'Louis', 'Mag', 'Chris', 'Stewie', 'Bryan'];
 
-const meta = {
+const meta: Meta<typeof Autocomplete> = {
   title: 'Inputs/Autocomplete',
   component: Autocomplete,
   args: {
+    label: 'Character',
     placeholder: 'Type to search',
   },
 };
 
 const Template: StoryFn<AutocompleteProps> = (args) => (
-  <Box style={{ minHeight: '256px' }} width={80}>
-    <Label htmlFor={args.id} mb={1}>
-      Character
-    </Label>
-
+  <Box style={{ minHeight: '256px' }} width={64}>
     <Autocomplete {...args} options={OPTIONS_LIST} />
   </Box>
 );
 
-export const Basic = Template.bind({});
-
-Basic.args = {
+export const Basic = Template.bind({
   id: 'autocomplete-basic',
-};
+});
 
 export const Multiple = Template.bind({});
 
@@ -47,18 +41,26 @@ Multiple.args = {
   defaultValue: ['Peter', 'Chris', 'Stewie'],
 };
 
+export const Description = Template.bind({});
+
+Description.args = {
+  id: 'autocomplete-description',
+  description: 'This is a description.',
+};
+
+export const Message = Template.bind({});
+
+Message.args = {
+  id: 'autocomplete-message',
+  message: 'Just a hint',
+};
+
 export const Invalid = Template.bind({});
 
 Invalid.args = {
   id: 'autocomplete-invalid',
   invalid: true,
-};
-
-export const Success = Template.bind({});
-
-Success.args = {
-  id: 'autocomplete-success',
-  success: true,
+  message: 'Something went wrong',
 };
 
 export const Disabled = Template.bind({});
@@ -77,12 +79,9 @@ ReadOnly.args = {
 
 export function Sizes(args: AutocompleteProps) {
   return (
-    <Flex flexDirection="column" style={{ minHeight: '384px' }} width={80}>
+    <Flex flexDirection="column" style={{ minHeight: '384px' }} width={64}>
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Label htmlFor={`autocomplete-size-${size}`} mb={1}>
-            Character
-          </Label>
           <Autocomplete
             {...args}
             id={`autocomplete-size-${size}`}
@@ -97,15 +96,12 @@ export function Sizes(args: AutocompleteProps) {
 
 export function WithIcon(args: AutocompleteProps) {
   return (
-    <Flex flexDirection="column" style={{ minHeight: '384px' }}>
+    <Flex flexDirection="column" style={{ minHeight: '384px' }} width={64}>
       <Box mt={4}>
-        <Label htmlFor="autocomplete-with-start-icon" mb={1}>
-          With Start Icon
-        </Label>
-
         <Autocomplete
           {...args}
           id="autocomplete-with-start-icon"
+          label="With Start Icon"
           options={OPTIONS_LIST}
           startIcon={
             <Icon color="neutral500">
@@ -116,10 +112,6 @@ export function WithIcon(args: AutocompleteProps) {
       </Box>
 
       <Box mt={4}>
-        <Label htmlFor="autocomplete-with-end-icon" mb={1}>
-          With End Icon
-        </Label>
-
         <Autocomplete
           {...args}
           endIcon={
@@ -128,6 +120,7 @@ export function WithIcon(args: AutocompleteProps) {
             </Icon>
           }
           id="autocomplete-with-end-icon"
+          label="With End Icon"
           options={OPTIONS_LIST}
         />
       </Box>

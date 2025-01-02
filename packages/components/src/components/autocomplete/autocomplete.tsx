@@ -29,6 +29,7 @@ import {
   KeyboardEvent,
   MouseEvent,
   ReactElement,
+  ReactNode,
   Ref,
   useCallback,
   useEffect,
@@ -41,12 +42,14 @@ import { Transition } from 'react-transition-group';
 
 import { Maybe } from '../../types';
 import { slug } from '../../utils/slug';
+import { useId } from '../../utils/use-id';
 import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
+import { InputGroup } from '../input-group';
 import { OptionProps, Option } from '../option';
 import { Tag } from '../tag';
 
@@ -74,9 +77,16 @@ export interface AutocompleteProps<
   clearLabel?: string;
 
   /**
-   * Default value of the input element.
+   * The default value of the uncontrolled input.
+   * This is used when the component is uncontrolled and does not have a `value` prop.
    */
   defaultValue?: MaybeMultiValue<Value, IsMulti>;
+
+  /**
+   * Optional description text for the input field, providing additional context or instructions for the user.
+   * Appears above the input field to guide the user on the expected input.
+   */
+  description?: ReactNode;
 
   /**
    * If `true`, the input element is disabled and can't be interacted with.
@@ -96,8 +106,15 @@ export interface AutocompleteProps<
 
   /**
    * If `true`, the input element will have a validation error style.
+   *
+   * @default false
    */
   invalid?: boolean;
+
+  /**
+   * The label text for the input field. It is essential for accessibility to link the label with the input.
+   */
+  label?: ReactNode;
 
   /**
    * If `true`, the loading label will be shown.
@@ -108,6 +125,11 @@ export interface AutocompleteProps<
    * Label to display when data is being loaded.
    */
   loadingLabel?: string;
+
+  /**
+   * Message to display under the input, such as validation errors or hints.
+   */
+  message?: ReactNode;
 
   /**
    * If `true`, the component allows multiple values to be selected.
@@ -171,12 +193,8 @@ export interface AutocompleteProps<
   endIcon?: ReactElement;
 
   /**
-   * If `true`, the input box will element a success style.
-   */
-  success?: boolean;
-
-  /**
-   * The current value of autocomplete component.
+   * The current value of the input. This prop is used to control the value of the input.
+   * Use `onChange` to capture changes to the value.
    */
   value?: MaybeMultiValue<Value, IsMulti>;
 
@@ -187,6 +205,7 @@ export interface AutocompleteProps<
 
   /**
    * Callback function fired when the value of autocomplete component changes.
+   * The function receives the new value as its argument.
    */
   onChange?: (value: MaybeMultiValue<Value, IsMulti>) => void;
 
@@ -288,12 +307,15 @@ export const Autocomplete = forwardRef(
       autoFocus,
       clearLabel = 'Clear',
       defaultValue,
+      description,
       disabled,
       getLabel = String,
       id,
       invalid,
+      label,
       loading,
       loadingLabel = 'Loading...',
+      message,
       multiple = false as IsMulti,
       name,
       noResultLabel = 'No result',
@@ -305,7 +327,6 @@ export const Autocomplete = forwardRef(
       size = 'md',
       startIcon,
       endIcon,
-      success,
       value,
       onBlur,
       onChange,
@@ -333,6 +354,7 @@ export const Autocomplete = forwardRef(
     const containerRef = useRef<HTMLDivElement>(null);
     const listRef = useRef<Array<HTMLElement | null>>([]);
     const isControlled = typeof value !== 'undefined';
+    const inputId = useId(id);
 
     const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
       middleware: [
@@ -392,48 +414,11 @@ export const Autocomplete = forwardRef(
 
     const mergedRefs = useMergeRefs(refs.setReference, ref);
 
-    const changeValue = useCallback(
-      (options: Value[]) => {
-        if (isControlled) {
-          const nextOptions = toValue(options, multiple);
-          onChange?.(nextOptions);
-        } else {
-          setSelectedOptions(options);
-        }
-      },
-      [isControlled, multiple, onChange],
-    );
-
     const resetInputValue = useCallback(() => {
       const selectedValue = multiple ? selectedOptions : selectedOptions[0];
       const nextValue = toInputValue(selectedValue, getLabel);
       setInputValue(nextValue);
     }, [getLabel, multiple, selectedOptions]);
-
-    const selectOption = useCallback(
-      (index: number): void => {
-        const option = optionsState?.[index];
-
-        if (!option) {
-          return;
-        }
-
-        const nextOptions = multiple
-          ? toggleOption(option, selectedOptions)
-          : [option];
-
-        changeValue(nextOptions);
-        setIsOpen(false);
-
-        const element = refs.domReference.current;
-
-        if (element) {
-          element.focus();
-          element.setSelectionRange(element.value.length, element.value.length);
-        }
-      },
-      [changeValue, multiple, optionsState, refs.domReference, selectedOptions],
-    );
 
     const filterOptions = useCallback(
       (nextQuery: string) => {
@@ -460,93 +445,6 @@ export const Autocomplete = forwardRef(
       }
     }, searchTimeout);
 
-    const handleInputFocus = useCallback(
-      (e: FocusEvent<HTMLInputElement>) => {
-        setIsFocused(true);
-        onFocus?.(e);
-      },
-      [onFocus],
-    );
-
-    const handleInputChange = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
-        const nextValue = e.target.value;
-        setInputValue(nextValue);
-
-        if (nextValue) {
-          setIsOpen(true);
-          setActiveIndex(0);
-        } else if (!multiple) {
-          changeValue([]);
-        }
-      },
-      [changeValue, multiple],
-    );
-
-    const handleInputKeyDown = useCallback(
-      (e: KeyboardEvent<HTMLInputElement>) => {
-        if (
-          e.key === 'Enter' &&
-          activeIndex != null &&
-          optionsState?.[activeIndex]
-        ) {
-          e.preventDefault();
-          e.stopPropagation();
-          selectOption(activeIndex);
-          setActiveIndex(null);
-        }
-      },
-      [activeIndex, optionsState, selectOption],
-    );
-
-    const handleInputBlur = useCallback(
-      (e: FocusEvent<HTMLInputElement>) => {
-        setIsFocused(false);
-        resetInputValue();
-        onBlur?.(e);
-      },
-      [onBlur, resetInputValue],
-    );
-
-    const handleOptionClick = useCallback(
-      (e: MouseEvent<HTMLLIElement>) => {
-        e.preventDefault();
-        const index = Number(e.currentTarget.dataset.index);
-
-        if (!Number.isNaN(index)) {
-          selectOption(index);
-        }
-      },
-      [selectOption],
-    );
-
-    const handleClearMouseDown = useCallback(
-      (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        changeValue([]);
-        setInputValue('');
-      },
-      [changeValue],
-    );
-
-    const handleRemoveMouseDown = useCallback(
-      (e: MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const index = Number(e.currentTarget.dataset.index);
-
-        if (Number.isNaN(index)) {
-          return;
-        }
-
-        const nextVal = [...selectedOptions];
-        nextVal.splice(index, 1);
-        changeValue(nextVal);
-      },
-      [changeValue, selectedOptions],
-    );
-
     useEffect(() => {
       if (typeof value !== 'undefined') {
         const nextOptions = toSelectedOptions(value);
@@ -568,16 +466,117 @@ export const Autocomplete = forwardRef(
       resetInputValue();
     }, [resetInputValue]);
 
+    const changeValue = (options: Value[]) => {
+      if (isControlled) {
+        const nextOptions = toValue(options, multiple);
+        onChange?.(nextOptions);
+      } else {
+        setSelectedOptions(options);
+      }
+    };
+
+    const selectOption = (index: number): void => {
+      const option = optionsState?.[index];
+
+      if (!option) {
+        return;
+      }
+
+      const nextOptions = multiple
+        ? toggleOption(option, selectedOptions)
+        : [option];
+
+      changeValue(nextOptions);
+      setIsOpen(false);
+
+      const element = refs.domReference.current;
+
+      if (element) {
+        element.focus();
+        element.setSelectionRange(element.value.length, element.value.length);
+      }
+    };
+
+    const handleInputFocus = (e: FocusEvent<HTMLInputElement>) => {
+      setIsFocused(true);
+      onFocus?.(e);
+    };
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const nextValue = e.target.value;
+      setInputValue(nextValue);
+
+      if (nextValue) {
+        setIsOpen(true);
+        setActiveIndex(0);
+      } else if (!multiple) {
+        changeValue([]);
+      }
+    };
+
+    const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (
+        e.key === 'Enter' &&
+        activeIndex != null &&
+        optionsState?.[activeIndex]
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectOption(activeIndex);
+        setActiveIndex(null);
+      }
+    };
+
+    const handleInputBlur = (e: FocusEvent<HTMLInputElement>) => {
+      setIsFocused(false);
+      resetInputValue();
+      onBlur?.(e);
+    };
+
+    const handleOptionClick = (e: MouseEvent<HTMLLIElement>) => {
+      e.preventDefault();
+      const index = Number(e.currentTarget.dataset.index);
+
+      if (!Number.isNaN(index)) {
+        selectOption(index);
+      }
+    };
+
+    const handleClearMouseDown = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      changeValue([]);
+      setInputValue('');
+    };
+
+    const handleRemoveMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const index = Number(e.currentTarget.dataset.index);
+
+      if (Number.isNaN(index)) {
+        return;
+      }
+
+      const nextVal = [...selectedOptions];
+      nextVal.splice(index, 1);
+      changeValue(nextVal);
+    };
+
     return (
-      <>
+      <InputGroup
+        description={description}
+        htmlFor={inputId}
+        invalid={invalid}
+        label={label}
+        message={message}
+      >
         <InputBox
           ref={containerRef}
           disabled={disabled}
-          focused={isFocused}
           invalid={invalid}
           readOnly={readOnly}
           size={size}
-          success={success}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
             <InputAction me={1}>{startIcon}</InputAction>
@@ -608,16 +607,18 @@ export const Autocomplete = forwardRef(
               <Box as="span" display="block" mt={1} px={0.5} width="full">
                 <input
                   aria-activedescendant={
-                    activeIndex != null ? slug(id, OPTION_ID, activeIndex) : ''
+                    activeIndex != null
+                      ? slug(inputId, OPTION_ID, activeIndex)
+                      : ''
                   }
                   aria-autocomplete="list"
-                  aria-controls={isOpen ? slug(id, LISTBOX_ID) : ''}
+                  aria-controls={isOpen ? slug(inputId, LISTBOX_ID) : ''}
                   aria-invalid={invalid}
-                  aria-owns={isOpen ? slug(id, LISTBOX_ID) : ''}
+                  aria-owns={isOpen ? slug(inputId, LISTBOX_ID) : ''}
                   autoComplete="off"
                   autoFocus={autoFocus}
                   disabled={disabled}
-                  id={id}
+                  id={inputId}
                   name={name}
                   placeholder={placeholder}
                   readOnly={readOnly}
@@ -679,7 +680,7 @@ export const Autocomplete = forwardRef(
                 borderColor="neutral100"
                 className={cn(fadeStyle, status === 'entered' && fadeInStyle)}
                 flexDirection="column"
-                id={slug(id, LISTBOX_ID)}
+                id={slug(inputId, LISTBOX_ID)}
                 overflowX="hidden"
                 overflowY="auto"
                 py={0.5}
@@ -717,7 +718,7 @@ export const Autocomplete = forwardRef(
                             </Icon>
                           ) : undefined
                         }
-                        id={slug(id, OPTION_ID, idx)}
+                        id={slug(inputId, OPTION_ID, idx)}
                         option={item}
                         selected={isSelected}
                         {...getItemProps({
@@ -735,7 +736,7 @@ export const Autocomplete = forwardRef(
             </FloatingFocusManager>
           )}
         </Transition>
-      </>
+      </InputGroup>
     );
   },
 ) as AutocompleteFn;

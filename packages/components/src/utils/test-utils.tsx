@@ -17,6 +17,7 @@ import { FunctionComponent, ReactElement, PropsWithChildren } from 'react';
 import { ThemeProvider } from '../components/theme-provider';
 
 import '@testing-library/jest-dom/extend-expect';
+import '@vanilla-extract/css/disableRuntimeStyles';
 import 'jest-axe/extend-expect';
 
 export type RenderFn<T = unknown> = (

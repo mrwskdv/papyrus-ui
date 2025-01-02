@@ -1,10 +1,10 @@
+import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Label } from '../label';
 
 import { Select, SelectProps } from './select';
 
@@ -24,72 +24,60 @@ export default {
   title: 'Inputs/Select',
   component: Select,
   args: {
+    label: 'Character',
     defaultValue: 0,
+    children: SELECT_OPTIONS.map((val, idx) => (
+      <option key={idx} value={idx}>
+        {val}
+      </option>
+    )),
   },
 };
 
-export function Basic(args: SelectProps) {
-  return (
-    <>
-      <Label htmlFor="select-basic" mb={1}>
-        Character
-      </Label>
-      <Select {...args} id="select-basic">
-        {SELECT_OPTIONS.map((val, idx) => (
-          <option key={idx} value={idx}>
-            {val}
-          </option>
-        ))}
-      </Select>
-    </>
-  );
-}
+const Template: StoryFn<SelectProps> = (args) => (
+  <Box width={64}>
+    <Select {...args} />
+  </Box>
+);
 
-export function Invalid(args: SelectProps) {
-  return (
-    <>
-      <Label htmlFor="select-invalid" mb={1}>
-        Character
-      </Label>
-      <Select {...args} id="select-invalid" invalid>
-        {SELECT_OPTIONS.map((val, idx) => (
-          <option key={idx} value={idx}>
-            {val}
-          </option>
-        ))}
-      </Select>
-    </>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Success(args: SelectProps) {
+Basic.args = {
+  id: 'select-basic',
+};
+export const Multiple = Template.bind({});
+
+Multiple.args = {
+  id: 'select-multiple',
+  multiple: true as never,
+};
+
+export function Sizes(args: SelectProps) {
   return (
-    <>
-      <Label htmlFor="select-success" mb={1}>
-        Character
-      </Label>
-      <Select {...args} id="select-success" success>
-        {SELECT_OPTIONS.map((val, idx) => (
-          <option key={idx} value={idx}>
-            {val}
-          </option>
-        ))}
-      </Select>
-    </>
+    <Flex flexDirection="column" width={64}>
+      {SIZE_OPTIONS.map((size, i) => (
+        <Box key={i} mt={i && 4}>
+          <Select {...args} id={`select-size-${size}`} size={size}>
+            {SELECT_OPTIONS.map((val, idx) => (
+              <option key={idx} value={idx}>
+                {val}
+              </option>
+            ))}
+          </Select>
+        </Box>
+      ))}
+    </Flex>
   );
 }
 
 export function WithIcon(args: SelectProps) {
   return (
-    <Flex flexDirection="column">
-      <Box mt={4}>
-        <Label htmlFor="select-with-start-icon" mb={1}>
-          With Start Icon
-        </Label>
-
+    <Flex flexDirection="column" width={64}>
+      <Box mb={4}>
         <Select
           {...args}
           id="select-with-start-icon"
+          label="With Start Icon"
           startIcon={
             <Icon color="neutral500">
               <BiSearch />
@@ -104,11 +92,7 @@ export function WithIcon(args: SelectProps) {
         </Select>
       </Box>
 
-      <Box mt={4}>
-        <Label htmlFor="select-with-end-icon" mb={1}>
-          With End Icon
-        </Label>
-
+      <Box>
         <Select
           {...args}
           endIcon={
@@ -117,6 +101,7 @@ export function WithIcon(args: SelectProps) {
             </Icon>
           }
           id="select-with-end-icon"
+          label="With End Icon"
         >
           {SELECT_OPTIONS.map((val, idx) => (
             <option key={idx} value={idx}>
@@ -129,57 +114,31 @@ export function WithIcon(args: SelectProps) {
   );
 }
 
-export function Disabled(args: SelectProps) {
-  return (
-    <>
-      <Label htmlFor="select-disabled" mb={1}>
-        Character
-      </Label>
-      <Select {...args} disabled id="select-disabled">
-        {SELECT_OPTIONS.map((val, idx) => (
-          <option key={idx} value={idx}>
-            {val}
-          </option>
-        ))}
-      </Select>
-    </>
-  );
-}
+export const Description = Template.bind({});
 
-export function Multiple(args: SelectProps<true>) {
-  return (
-    <>
-      <Label htmlFor="select-multiple" mb={1}>
-        Character
-      </Label>
-      <Select {...args} id="select-multiple" multiple>
-        {SELECT_OPTIONS.map((val, idx) => (
-          <option key={idx} value={idx}>
-            {val}
-          </option>
-        ))}
-      </Select>
-    </>
-  );
-}
+Description.args = {
+  id: 'select-description',
+  description: 'This is a description',
+};
 
-export function Sizes(args: SelectProps) {
-  return (
-    <Flex flexDirection="column">
-      {SIZE_OPTIONS.map((size, i) => (
-        <Box key={i} mt={i && 4}>
-          <Label htmlFor={`select-size-${size}`} mb={1}>
-            Character
-          </Label>
-          <Select {...args} id={`select-size-${size}`} size={size}>
-            {SELECT_OPTIONS.map((val, idx) => (
-              <option key={idx} value={idx}>
-                {val}
-              </option>
-            ))}
-          </Select>
-        </Box>
-      ))}
-    </Flex>
-  );
-}
+export const Invalid = Template.bind({});
+
+Invalid.args = {
+  id: 'select-invalid',
+  invalid: true,
+  message: 'Something wend wrong',
+};
+
+export const Message = Template.bind({});
+
+Message.args = {
+  id: 'select-message',
+  message: 'This is a message',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  id: 'select-disabled',
+  disabled: true,
+};

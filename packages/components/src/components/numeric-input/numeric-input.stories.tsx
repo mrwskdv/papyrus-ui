@@ -1,3 +1,4 @@
+import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { BiInfoCircle, BiSolidPurchaseTag } from 'react-icons/bi';
 
@@ -5,7 +6,6 @@ import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Label } from '../label';
 
 import { NumericInput, NumericInputProps } from './numeric-input';
 
@@ -16,6 +16,7 @@ export default {
   component: NumericInput,
 
   args: {
+    label: 'Max Price',
     allowNegative: false,
     decimalScale: 2,
     defaultValue: 1999,
@@ -26,72 +27,23 @@ export default {
   },
 };
 
-export function Basic(args: NumericInputProps) {
-  return (
-    <>
-      <Label htmlFor="numeric-input-basic" mb={1}>
-        Max Price
-      </Label>
-      <NumericInput {...args} id="numeric-input-basic" />
-    </>
-  );
-}
+const Template: StoryFn<NumericInputProps> = (args) => (
+  <Box width={64}>
+    <NumericInput {...args} />
+  </Box>
+);
 
-export function Invalid(args: NumericInputProps) {
-  return (
-    <>
-      <Label htmlFor="numeric-input-invalid" mb={1}>
-        Max Price
-      </Label>
-      <NumericInput {...args} id="numeric-input-invalid" invalid />
-    </>
-  );
-}
-
-export function Success(args: NumericInputProps) {
-  return (
-    <>
-      <Label htmlFor="numeric-input-success" mb={1}>
-        Max Price
-      </Label>
-      <NumericInput {...args} id="numeric-input-success" success />
-    </>
-  );
-}
-
-export function Disabled(args: NumericInputProps) {
-  return (
-    <>
-      <Label htmlFor="numeric-input-disabled" mb={1}>
-        Max Price
-      </Label>
-      <NumericInput {...args} disabled id="numeric-input-disabled" />
-    </>
-  );
-}
-
-export function ReadOnly(args: NumericInputProps) {
-  return (
-    <>
-      <Label htmlFor="numeric-input-basic" mb={1}>
-        Max Price
-      </Label>
-      <NumericInput {...args} id="numeric-input-read-only" readOnly />
-    </>
-  );
-}
+export const Basic = Template.bind({});
 
 export function Sizes(args: NumericInputProps) {
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Label htmlFor={`numeric-input-size-${size}`} mb={1}>
-            {capitalize(size)}
-          </Label>
           <NumericInput
             {...args}
             id={`numeric-input-size-${size}`}
+            label={capitalize(size)}
             size={size}
           />
         </Box>
@@ -102,15 +54,12 @@ export function Sizes(args: NumericInputProps) {
 
 export function WithIcon(args: NumericInputProps) {
   return (
-    <Flex flexDirection="column">
-      <Box mt={4}>
-        <Label htmlFor="numeric-input-with-start-icon" mb={1}>
-          With Start Icon
-        </Label>
-
+    <Flex flexDirection="column" width={64}>
+      <Box mb={4}>
         <NumericInput
           {...args}
           id="numeric-input-with-start-icon"
+          label="With Start Icon"
           startIcon={
             <Icon color="neutral500">
               <BiSolidPurchaseTag name="purchase-tag" />
@@ -119,11 +68,7 @@ export function WithIcon(args: NumericInputProps) {
         />
       </Box>
 
-      <Box mt={4}>
-        <Label htmlFor="numeric-input-with-end-icon" mb={1}>
-          With End Icon
-        </Label>
-
+      <Box>
         <NumericInput
           {...args}
           endIcon={
@@ -132,8 +77,44 @@ export function WithIcon(args: NumericInputProps) {
             </Icon>
           }
           id="numeric-input-with-end-icon"
+          label="With End Icon"
         />
       </Box>
     </Flex>
   );
 }
+
+export const Description = Template.bind({});
+
+Description.args = {
+  id: 'numeric-input-description',
+  description: 'This is a description.',
+};
+
+export const Message = Template.bind({});
+
+Message.args = {
+  id: 'numeric-input-message',
+  message: 'This is a message',
+};
+
+export const Invalid = Template.bind({});
+
+Invalid.args = {
+  id: 'numeric-input-invalid',
+  invalid: true,
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  id: 'numeric-input-disabled',
+  disabled: true,
+};
+
+export const ReadOnly = Template.bind({});
+
+ReadOnly.args = {
+  id: 'numeric-input-basic',
+  readOnly: true,
+};

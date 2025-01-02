@@ -1,48 +1,31 @@
-import { Atoms, MarginAtoms } from '@papyrus-ui/styles';
+import { MarginAtoms } from '@papyrus-ui/styles';
 import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 import { Text } from '../text';
 
-export type InputMessageVariant =
-  | 'primary'
-  | 'info'
-  | 'danger'
-  | 'warning'
-  | 'success';
-
 export interface InputMessageProps
   extends MarginAtoms,
-    HTMLAttributes<HTMLDivElement> {
+    Omit<HTMLAttributes<HTMLDivElement>, 'color' | 'role' | 'size'> {
   /**
-   * The variant of the message.
-   * Controls the visual style of the message (e.g., error, success, info).
+   * If `true`, render message text as an error message, otherwise renders it as a hint.
    *
-   * @default 'primary'
+   * @default false
    */
-  variant?: InputMessageVariant;
-
+  invalid?: boolean;
   /**
-   * The content to display inside the message.
-   * This can be any valid React node (e.g., string, JSX elements).
+   * Message to display under an input, such as validation errors or hints.
    */
   children?: ReactNode;
 }
 
-const colorByVariantMap: Record<InputMessageVariant, Atoms['color']> = {
-  primary: 'neutral500',
-  info: 'info500',
-  danger: 'danger500',
-  warning: 'warning500',
-  success: 'success500',
-};
-
 export const InputMessage = forwardRef<HTMLDivElement, InputMessageProps>(
-  ({ variant = 'primary', children, ...props }, ref) => (
+  ({ invalid, children, ...props }, ref) => (
     <Text
       {...props}
       ref={ref}
       as="div"
-      color={colorByVariantMap[variant]}
+      color={invalid ? 'danger500' : 'neutral500'}
+      role={invalid ? 'alert' : 'status'}
       size="sm"
     >
       {children}

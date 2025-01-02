@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import {
   ChangeEventHandler,
   forwardRef,
@@ -5,6 +6,7 @@ import {
   ReactNode,
 } from 'react';
 
+import { Box } from '../box';
 import { Text } from '../text';
 
 import * as S from './radio.css';
@@ -20,13 +22,27 @@ export interface RadioProps
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, id, children, ...props }, ref) => (
-    <div className={className}>
-      <input ref={ref} id={id} type="radio" {...props} />
-      <Text as="label" className={S.label} htmlFor={id}>
+  ({ className, disabled, readOnly, children, ...props }, ref) => (
+    <label
+      className={cn(
+        S.root,
+        (disabled || readOnly) && S.rootDisabled,
+        className,
+      )}
+    >
+      <Box as="span" py={1}>
+        <input
+          {...props}
+          ref={ref}
+          disabled={disabled}
+          readOnly={readOnly}
+          type="radio"
+        />
+      </Box>
+      <Text as="span" className={S.label} ms={2}>
         {children}
       </Text>
-    </div>
+    </label>
   ),
 );
 

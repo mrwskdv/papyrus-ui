@@ -1,55 +1,49 @@
-import { atoms, bpUp, vars } from '@papyrus-ui/styles';
-import { style } from '@vanilla-extract/css';
+import { bpUp, SPACING, vars } from '@papyrus-ui/styles';
+import { style, styleVariants } from '@vanilla-extract/css';
 
-export const root = style([
-  {
-    display: 'flex',
-    alignItems: 'center',
-    background: vars.color.white,
-  },
-  bpUp('tablet', {
-    background: 'transparent',
-  }),
-]);
+export const root = style({
+  position: 'sticky',
+  top: 0,
+  display: 'flex',
+  alignItems: 'center',
+  gap: SPACING[4],
+  padding: `${SPACING[3.5]} ${SPACING[4]}`,
+  zIndex: 20,
+});
 
-export const rootSize = {
-  sm: atoms({
-    p: 4,
-  }),
-  md: atoms({
-    position: {
-      mobile: 'sticky',
-      tablet: 'static',
+export const rootSize = styleVariants({
+  sm: {},
+  md: [
+    {
+      borderColor: vars.color.neutral100,
+      borderBottomWidth: 1,
+      background: vars.color.white,
     },
-    bottom: 0,
-    borderColor: 'neutral100',
-    borderBottom: {
-      mobile: 1,
-      tablet: 0,
+    bpUp('tablet', {
+      borderBottomWidth: 0,
+      background: 'transparent',
+    }),
+  ],
+  lg: [
+    {
+      borderColor: vars.color.neutral100,
+      borderBottomWidth: 1,
+      background: vars.color.white,
     },
-    px: 4,
-    py: {
-      mobile: 1.5,
-      tablet: 4,
+    bpUp('tablet', {
+      borderBottomWidth: 0,
+      background: 'transparent',
+    }),
+  ],
+  xl: [
+    {
+      borderColor: vars.color.neutral100,
+      borderBottomWidth: 1,
+      background: vars.color.white,
     },
-    zIndex: 20,
-  }),
-  lg: atoms({
-    position: {
-      mobile: 'sticky',
-      tablet: 'static',
-    },
-    bottom: 0,
-    borderColor: 'neutral100',
-    borderBottom: {
-      mobile: 1,
-      tablet: 0,
-    },
-    px: 4,
-    py: {
-      mobile: 1.5,
-      tablet: 4,
-    },
-    zIndex: 20,
-  }),
-};
+    bpUp('desktop', {
+      borderBottomWidth: 0,
+      background: 'transparent',
+    }),
+  ],
+});

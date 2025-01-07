@@ -22,4 +22,11 @@ export const rootSize = {
       tablet: 0,
     },
   }),
+  xl: atoms({
+    px: 4,
+    py: {
+      mobile: 4,
+      desktop: 0,
+    },
+  }),
 };

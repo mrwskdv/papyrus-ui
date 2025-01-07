@@ -1,11 +1,11 @@
 import { FloatingFocusManager, FloatingPortal } from '@floating-ui/react';
-import { Box } from '@papyrus-ui/components';
 import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes, useContext } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { useMergeRefs } from '../../../utils/use-merge-refs';
+import { Box } from '../../box';
 import { PopoverContext } from '../popover.context';
 
 export type PopoverContentProps = HTMLAttributes<HTMLDivElement>;

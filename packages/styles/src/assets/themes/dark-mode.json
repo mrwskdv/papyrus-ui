@@ -291,7 +291,7 @@
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "2.25rem",
+            "fontSize": "1.75rem",
             "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.00800000011920929em",
@@ -300,7 +300,7 @@
           },
           "mobile": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.75rem",
+            "fontSize": "1.5rem",
             "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.012000000476837159em",
@@ -311,7 +311,7 @@
         "secondary": {
           "desktop": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "2.25rem",
+            "fontSize": "1.75rem",
             "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.00800000011920929em",
@@ -320,7 +320,7 @@
           },
           "mobile": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.75rem",
+            "fontSize": "1.5rem",
             "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.00800000011920929em",
@@ -333,7 +333,7 @@
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.75rem",
+            "fontSize": "1.25rem",
             "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.00800000011920929em",
@@ -342,7 +342,7 @@
           },
           "mobile": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.5rem",
+            "fontSize": "1.25rem",
             "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.012000000476837159em",
@@ -353,7 +353,7 @@
         "secondary": {
           "desktop": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.75rem",
+            "fontSize": "1.25rem",
             "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.00800000011920929em",
@@ -362,7 +362,7 @@
           },
           "mobile": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.5rem",
+            "fontSize": "1.25rem",
             "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.012000000476837159em",
@@ -375,7 +375,7 @@
         "primary": {
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.25rem",
+            "fontSize": "1.125rem",
             "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.012000000476837159em",
@@ -395,7 +395,7 @@
         "secondary": {
           "desktop": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
-            "fontSize": "1.25rem",
+            "fontSize": "1.125rem",
             "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.012000000476837159em",
@@ -460,19 +460,19 @@
           "mobile": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
             "fontSize": "0.875rem",
-            "fontWeight": "400",
+            "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.024000000953674317em",
-            "textTransform": "uppercase",
+            "textTransform": "none",
             "textDecoration": "none"
           },
           "desktop": {
             "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
             "fontSize": "0.875rem",
-            "fontWeight": "400",
+            "fontWeight": "600",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.024000000953674317em",
-            "textTransform": "uppercase",
+            "textTransform": "none",
             "textDecoration": "none"
           }
         },
@@ -480,19 +480,19 @@
           "desktop": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
             "fontSize": "0.875rem",
-            "fontWeight": "500",
+            "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.024000000953674317em",
-            "textTransform": "uppercase",
+            "textTransform": "none",
             "textDecoration": "none"
           },
           "mobile": {
             "fontFamily": "'Vollkorn', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
             "fontSize": "0.875rem",
-            "fontWeight": "500",
+            "fontWeight": "700",
             "lineHeight": "1.1119999885559082",
             "letterSpacing": "0.024000000953674317em",
-            "textTransform": "uppercase",
+            "textTransform": "none",
             "textDecoration": "none"
           }
         }

@@ -1,10 +1,10 @@
+import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Label } from '../label';
 
 import { TextInput, TextInputProps } from './text-input';
 
@@ -15,84 +15,36 @@ export default {
   component: TextInput,
 
   args: {
+    label: 'First Name',
     defaultValue: 'Bob',
     placeholder: 'First Name',
   },
 };
 
-export function Basic(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-basic" mb={1}>
-        First Name
-      </Label>
-      <TextInput {...args} id="text-input-basic" />
-    </>
-  );
-}
+const Template: StoryFn<TextInputProps> = (args) => (
+  <Box width={64}>
+    <TextInput {...args} />
+  </Box>
+);
 
-export function Invalid(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-invalid" mb={1}>
-        First Name
-      </Label>
-      <TextInput {...args} id="text-input-invalid" invalid />
-    </>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Success(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-success" mb={1}>
-        First Name
-      </Label>
-      <TextInput {...args} id="text-input-success" success />
-    </>
-  );
-}
+Basic.args = {
+  id: 'text-input-basic',
+};
 
-export function Disabled(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-disabled" mb={1}>
-        First Name
-      </Label>
-      <TextInput
-        {...args}
-        disabled
-        id="text-input-disabled"
-        value="Disabled value"
-      />
-    </>
-  );
-}
+export const Clearable = Template.bind({});
 
-export function ReadOnly(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-read-only" mb={1}>
-        First Name
-      </Label>
-      <TextInput
-        {...args}
-        id="text-input-read-only"
-        readOnly
-        value="Readonly value"
-      />
-    </>
-  );
-}
+Clearable.args = {
+  id: 'text-input-clearable',
+  clearable: true,
+};
 
 export function Sizes(args: TextInputProps) {
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
-          <Label htmlFor={`text-input-size-${size}`} mb={1}>
-            First Name
-          </Label>
           <TextInput {...args} id={`text-input-size-${size}`} size={size} />
         </Box>
       ))}
@@ -102,15 +54,12 @@ export function Sizes(args: TextInputProps) {
 
 export function WithIcon(args: TextInputProps) {
   return (
-    <Flex flexDirection="column">
-      <Box mt={4}>
-        <Label htmlFor="text-input-with-start-icon" mb={1}>
-          With Start Icon
-        </Label>
-
+    <Flex flexDirection="column" width={64}>
+      <Box mb={4}>
         <TextInput
           {...args}
           id="text-input-with-start-icon"
+          label="With Start Icon"
           startIcon={
             <Icon color="neutral500">
               <BiSearch />
@@ -119,11 +68,7 @@ export function WithIcon(args: TextInputProps) {
         />
       </Box>
 
-      <Box mt={4}>
-        <Label htmlFor="text-input-with-end-icon" mb={1}>
-          With End Icon
-        </Label>
-
+      <Box>
         <TextInput
           {...args}
           endIcon={
@@ -132,19 +77,45 @@ export function WithIcon(args: TextInputProps) {
             </Icon>
           }
           id="text-input-with-end-icon"
+          label="With End Icon"
         />
       </Box>
     </Flex>
   );
 }
 
-export function Clearable(args: TextInputProps) {
-  return (
-    <>
-      <Label htmlFor="text-input-clearable" mb={1}>
-        First Name
-      </Label>
-      <TextInput {...args} clearable id="text-input-clearable" />
-    </>
-  );
-}
+export const Description = Template.bind({});
+
+Description.args = {
+  id: 'text-input-description',
+  description: 'This is a description.',
+};
+
+export const Message = Template.bind({});
+
+Message.args = {
+  id: 'text-input-message',
+  description: 'This is a message',
+};
+
+export const Invalid = Template.bind({});
+
+Invalid.args = {
+  id: 'text-input-invalid',
+  invalid: true,
+  description: 'Something went wrong',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  id: 'text-input-disabled',
+  disabled: true,
+};
+
+export const ReadOnly = Template.bind({});
+
+ReadOnly.args = {
+  id: 'text-input-readonly',
+  readOnly: true,
+};

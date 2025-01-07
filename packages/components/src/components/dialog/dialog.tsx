@@ -30,16 +30,70 @@ import { ANIMATION_DURATION } from './dialog.constants';
 import { DialogContext, DialogContextType } from './dialog.context';
 import { DialogSize } from './dialog.types';
 
+export type DialogRole = 'dialog' | 'alertdialog';
+
 export interface DialogProps {
+  /**
+   * If `true`, the dialog will close when the Escape key is pressed.
+   *
+   * @default true
+   */
+  closeOnEscClick?: boolean;
+
+  /**
+   * If `true`, the dialog will close when a click occurs outside the dialog content.
+   *
+   * @default true
+   */
+  closeOnOutsideClick?: boolean;
+
+  /**
+   * If `true`, the dialog will be open, otherwise, it will be closed.
+   *
+   * @default false
+   */
   isOpen?: boolean;
+
+  /**
+   * Defines the role of the dialog. It can either be a regular dialog (`'dialog'`) or an alert dialog (`'alertdialog'`).
+   * - `'dialog'`: Regular dialog
+   * - `'alertdialog'`: Used for dialogs that require immediate user interaction.
+   *
+   * @default 'dialog'
+   */
+  role?: DialogRole;
+
+  /**
+   * Defines the size of the dialog. It could be small, medium, large, or extra large adjusting the overall dimensions of the dialog.
+   *
+   * @default 'md'
+   */
   size?: DialogSize;
+
+  /**
+   * Callback function that is triggered when the dialog is closed.
+   * This function is typically used to perform cleanup or trigger additional actions after the dialog is closed.
+   */
   onClose?: () => void;
+
+  /**
+   * Callback function that is triggered after the dialog has fully closed.
+   * This can be used to perform any actions or state changes after the dialog has been closed.
+   */
   onAfterClose?: () => void;
-  children?: ReactNode;
+
+  /**
+   * The content of the dialog. The valid children for an uncontrolled dialog are `Dialog.Trigger` and `Dialog.Content`.
+   * For a controlled dialog, only `Dialog.Content` should be provided.
+   */
+  children: ReactNode;
 }
 
 const DialogComponent: FC<DialogProps> = ({
+  closeOnEscClick = true,
+  closeOnOutsideClick = true,
   isOpen,
+  role: roleProp = 'dialog',
   size = 'md',
   onClose,
   onAfterClose,
@@ -50,17 +104,16 @@ const DialogComponent: FC<DialogProps> = ({
   const [isOpenState, setIsOpenState] = useState(false);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
-  const isControlled = isOpen !== undefined;
 
   const setOpen = useCallback(
     (nextOpen: boolean) => {
-      if (!isControlled) {
-        setIsOpenState(nextOpen);
-      } else if (!nextOpen) {
-        onClose?.();
+      setIsOpenState(nextOpen);
+
+      if (!nextOpen && onClose) {
+        onClose();
       }
     },
-    [isControlled, onClose],
+    [onClose],
   );
 
   const { refs, context } = useFloating({
@@ -69,11 +122,16 @@ const DialogComponent: FC<DialogProps> = ({
   });
 
   const click = useClick(context, {
-    enabled: !isControlled,
+    enabled: isOpen === undefined,
   });
 
-  const dismiss = useDismiss(context, { outsidePressEvent: 'mousedown' });
-  const role = useRole(context);
+  const dismiss = useDismiss(context, {
+    escapeKey: closeOnEscClick,
+    outsidePress: closeOnOutsideClick,
+    outsidePressEvent: 'mousedown',
+  });
+
+  const role = useRole(context, { role: roleProp });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     click,
@@ -113,10 +171,10 @@ const DialogComponent: FC<DialogProps> = ({
   );
 
   useEffect(() => {
-    if (isControlled) {
+    if (isOpen !== undefined) {
       setIsOpenState(isOpen);
     }
-  }, [isControlled, isOpen]);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpenState) {

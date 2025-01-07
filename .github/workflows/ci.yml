@@ -6,15 +6,19 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.x
-
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: yarn
 
       # https://github.com/actions/cache/blob/main/examples.md#node---yarn
       - name: Get yarn cache directory path
@@ -32,7 +36,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn --pure-lockfile --prefer-offline
+        run: yarn install --immutable
 
       - name: Check dependency licenses
         run: yarn check:licenses

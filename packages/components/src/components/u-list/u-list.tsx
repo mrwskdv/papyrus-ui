@@ -2,7 +2,7 @@ import { Atoms, atoms, MarginAtoms, partitionAtoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes } from 'react';
 
-import { Text, TextSize, TextVariant } from '../text';
+import { Text, TextSize, TextFontVariant } from '../text';
 
 import * as S from './u-list.css';
 
@@ -36,7 +36,7 @@ export interface UListProps
    *
    * @default 'primary'
    */
-  fontVariant?: TextVariant;
+  fontVariant?: TextFontVariant;
 
   /**
    * Defines the size of the text.

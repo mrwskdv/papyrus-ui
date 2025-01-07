@@ -210,6 +210,16 @@ globalStyle('[type=checkbox], [type=radio]', {
 });
 
 /**
+ * Set cursor default for disabled and read-only inputs.
+ */
+globalStyle(
+  '[type=checkbox]:disabled, [type=checkbox][readonly], [type=radio]:disabled, [type=radio][readonly]',
+  {
+    cursor: 'default',
+  },
+);
+
+/**
  * Apply a consistent border radius to checkboxes.
  */
 globalStyle('[type=checkbox]', {
@@ -230,7 +240,7 @@ globalStyle('[type=radio]', {
  * Style hover state for checkboxes and radio buttons.
  */
 globalStyle(
-  '[type=checkbox]:hover:not(:disabled), [type=radio]:hover:not(:disabled)',
+  '[type=checkbox]:hover:not(:disabled):not([readonly]), [type=radio]:hover:not(:disabled):not([readonly])',
   {
     backgroundColor: vars.color.neutral200,
   },
@@ -264,20 +274,9 @@ globalStyle('[type=radio]:checked', {
  * Style checked and hovered state for checkboxes and radio buttons.
  */
 globalStyle(
-  '[type=checkbox]:checked:hover:not(:disabled), [type=radio]:checked:hover:not(:disabled)',
+  '[type=checkbox]:checked:hover:not(:disabled):not([readonly]), [type=radio]:checked:hover:not(:disabled):not([readonly])',
   {
     backgroundColor: vars.color.primary400,
-  },
-);
-
-/**
- * Set cursor pointer for checkbox and radio labels
- */
-globalStyle(
-  'input[type="checkbox"]:not(:disabled) + label,' +
-    'input[type="radio"]:not(:disabled) + label',
-  {
-    cursor: 'pointer',
   },
 );
 
@@ -293,6 +292,7 @@ globalStyle('[type="range"]', {
   appearance: 'none',
   width: '100%',
   background: 'transparent',
+  padding: '0.5rem 0',
   cursor: 'pointer',
 });
 

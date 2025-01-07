@@ -14,6 +14,15 @@ describe('Radio', () => {
     });
   });
 
+  describe('Given the radio component with text content', () => {
+    describe('When it is rendered', () => {
+      it('Then it should render that text content', () => {
+        render(<Radio value="example">Label</Radio>);
+        expect(screen.getByText('Label')).toBeInTheDocument();
+      });
+    });
+  });
+
   describe('Given the radio component with `disabled` set to true', () => {
     describe('When it is rendered', () => {
       it('Then it should render with the input field disabled', () => {

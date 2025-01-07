@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "es6"],
+    "lib": ["dom", "esnext"],
     "module": "es6",
     "moduleResolution": "node",
     "noEmitOnError": true,

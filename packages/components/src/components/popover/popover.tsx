@@ -1,99 +1,124 @@
 import {
+  arrow as arrowFn,
   autoUpdate,
   flip,
   offset as offsetFn,
   OffsetOptions,
   Placement,
   shift,
+  useHover,
   useClick,
   useDismiss,
   useFloating,
   useInteractions,
   useRole,
+  useFocus,
 } from '@floating-ui/react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
-import { PopoverContent } from './popover-content';
-import { PopoverTrigger } from './popover-trigger';
+import { PopoverArrow as Arrow } from './popover-arrow';
+import { PopoverContent as Content } from './popover-content';
+import { PopoverTrigger as Trigger } from './popover-trigger';
 import { PopoverContext, PopoverContextType } from './popover.context';
 
+declare type PopoverRole =
+  | 'tooltip'
+  | 'dialog'
+  | 'alertdialog'
+  | 'menu'
+  | 'listbox'
+  | 'grid'
+  | 'tree';
+
+export type PopoverTrigger = 'click' | 'focus' | 'hover';
+
 export interface PopoverProps {
+  arrowPadding?: number;
+  children?: ReactNode;
   initialOpen?: boolean;
   offset?: OffsetOptions;
   open?: boolean;
   overflowPadding?: number;
   modal?: boolean;
   placement?: Placement;
+  role?: PopoverRole;
+  trigger?: PopoverTrigger | Array<PopoverTrigger>;
   onOpenChange?: (open: boolean) => void;
-  children?: React.ReactNode;
 }
 
-const DEFAULT_OFFSET: OffsetOptions = {
-  mainAxis: 5,
-  alignmentAxis: -5,
-};
-
-const PopoverComponent: React.FC<PopoverProps> = ({
+const PopoverComponent: FC<PopoverProps> = ({
+  arrowPadding,
   initialOpen = false,
-  offset = DEFAULT_OFFSET,
+  offset,
   open,
-  overflowPadding = 4,
+  overflowPadding,
   modal = false,
   placement = 'bottom',
+  role,
+  trigger = 'click',
   onOpenChange,
   children,
 }) => {
   const [openState, setOpenState] = useState(() => open ?? initialOpen);
+  const arrowRef = useRef<SVGSVGElement | null>(null);
   const isControlled = open !== undefined;
-
-  const setOpen = useCallback(
-    (nextOpen: boolean) => {
-      if (isControlled) {
-        onOpenChange?.(nextOpen);
-      } else {
-        setOpenState(nextOpen);
-      }
-    },
-    [isControlled, onOpenChange],
-  );
+  const triggers = Array.isArray(trigger) ? trigger : [trigger];
 
   const { context, floatingStyles, refs } = useFloating({
     placement,
     open: openState,
-    onOpenChange: setOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
-      offsetFn(offset),
+      arrowFn({
+        element: arrowRef,
+        padding: arrowPadding,
+      }),
       flip({
         crossAxis: placement.includes('-'),
         fallbackAxisSideDirection: 'end',
         padding: overflowPadding,
       }),
       shift({ padding: overflowPadding }),
+      offsetFn(offset),
     ],
+    onOpenChange: (nextOpen: boolean) => {
+      if (isControlled) {
+        onOpenChange?.(nextOpen);
+      } else {
+        setOpenState(nextOpen);
+      }
+    },
   });
 
-  const click = useClick(context, {
-    enabled: !isControlled,
+  const clickProps = useClick(context, {
+    enabled: !isControlled && triggers.includes('click'),
   });
 
-  const dismiss = useDismiss(context);
-  const role = useRole(context);
+  const focusProps = useFocus(context, {
+    enabled: !isControlled && triggers.includes('focus'),
+  });
+
+  const hoverProps = useHover(context, {
+    move: false,
+    enabled: !isControlled && triggers.includes('hover'),
+  });
+
+  const dismissProps = useDismiss(context);
+
+  const roleProps = useRole(context, { role });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-    role,
+    clickProps,
+    dismissProps,
+    focusProps,
+    hoverProps,
+    roleProps,
   ]);
-
-  const closePopover = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
 
   const popoverCxt = useMemo<PopoverContextType>(
     () => ({
+      arrowRef,
       context,
-      closePopover,
       floatingStyles,
       getReferenceProps,
       getFloatingProps,
@@ -102,7 +127,6 @@ const PopoverComponent: React.FC<PopoverProps> = ({
       refs,
     }),
     [
-      closePopover,
       context,
       floatingStyles,
       getFloatingProps,
@@ -117,7 +141,7 @@ const PopoverComponent: React.FC<PopoverProps> = ({
     if (open !== undefined) {
       setOpenState(open);
     }
-  }, [open, setOpen]);
+  }, [open]);
 
   return (
     <PopoverContext.Provider value={popoverCxt}>
@@ -127,6 +151,7 @@ const PopoverComponent: React.FC<PopoverProps> = ({
 };
 
 export const Popover = Object.assign(PopoverComponent, {
-  Trigger: PopoverTrigger,
-  Content: PopoverContent,
+  Arrow,
+  Content,
+  Trigger,
 });

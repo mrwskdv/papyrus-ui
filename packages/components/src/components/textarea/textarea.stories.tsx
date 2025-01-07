@@ -1,10 +1,10 @@
+import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
-import { Label } from '../label';
 
 import { Textarea, TextareaProps } from './textarea';
 
@@ -13,57 +13,47 @@ const meta = {
   component: Textarea,
 
   args: {
-    defaultValue: 'Front-end developer at OSS',
+    label: 'Bio',
+    rows: 3,
+    defaultValue: 'Frontend developer at OSS',
     placeholder: 'Tell about yourself',
   },
 };
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
 
-export function Basic(args: TextareaProps): JSX.Element {
-  return (
-    <>
-      <Label htmlFor="textarea-basic" mb={1}>
-        Bio
-      </Label>
-      <Textarea {...args} id="textarea-basic" />
-    </>
-  );
-}
+const Template: StoryFn<TextareaProps> = (args) => (
+  <Box width={64}>
+    <Textarea {...args} />
+  </Box>
+);
 
-export function Success(args: TextareaProps): JSX.Element {
-  return (
-    <>
-      <Label as="label" htmlFor="textarea-success" mb={1}>
-        Bio
-      </Label>
-      <Textarea {...args} id="textarea-success" success />
-    </>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Invalid(args: TextareaProps): JSX.Element {
+Basic.args = {
+  id: 'textarea-basic',
+};
+
+export function Sizes(args: TextareaProps) {
   return (
-    <>
-      <Label as="label" htmlFor="textarea-invalid" mb={1}>
-        Bio
-      </Label>
-      <Textarea {...args} id="textarea-invalid" invalid />
-    </>
+    <Flex flexDirection="column" width={64}>
+      {sizes.map((size, i) => (
+        <Box key={i} mt={i && 4}>
+          <Textarea {...args} id={`textarea-size-${size}`} size={size} />
+        </Box>
+      ))}
+    </Flex>
   );
 }
 
 export function WithIcon(args: TextareaProps) {
   return (
-    <Flex flexDirection="column">
-      <Box mt={4}>
-        <Label htmlFor="textarea-with-start-icon" mb={1}>
-          With Start Icon
-        </Label>
-
+    <Flex flexDirection="column" width={64}>
+      <Box mb={4}>
         <Textarea
           {...args}
           id="textarea-with-start-icon"
+          label="With Start Icon"
           startIcon={
             <Icon color="neutral500">
               <BiSearch />
@@ -72,65 +62,56 @@ export function WithIcon(args: TextareaProps) {
         />
       </Box>
 
-      <Box mt={4}>
-        <Label htmlFor="textarea-with-end-icon" mb={1}>
-          With End Icon
-        </Label>
-
+      <Box>
         <Textarea
           {...args}
-          id="textarea-with-end-icon"
-          startIcon={
-            <Icon color="neutral500">
+          endIcon={
+            <Icon color="primary400">
               <BiInfoCircle />
             </Icon>
           }
+          id="textarea-with-end-icon"
+          label="With End Icon"
         />
       </Box>
     </Flex>
   );
 }
 
-export function Disabled(args: TextareaProps): JSX.Element {
-  return (
-    <>
-      <Label htmlFor="textarea-disabled" mb={1}>
-        Bio
-      </Label>
-      <Textarea {...args} disabled id="textarea-disabled" />
-    </>
-  );
-}
+export const Description = Template.bind({});
 
-export function ReadOnly(args: TextareaProps): JSX.Element {
-  return (
-    <>
-      <Label htmlFor="textarea-read-only" mb={1}>
-        Bio
-      </Label>
-      <Textarea {...args} id="textarea-read-only" readOnly />
-    </>
-  );
-}
+Description.args = {
+  id: 'textarea-description',
+  description: 'This is a description.',
+};
 
-export function Sizes(args: TextareaProps): JSX.Element {
-  return (
-    <Flex flexDirection="column">
-      {sizes.map((size, i) => (
-        <Box key={i} mt={i && 4}>
-          <Label htmlFor={`textarea-size-${size}`} mb={1}>
-            Bio
-          </Label>
-          <Textarea
-            {...args}
-            id={`textarea-size-${size}`}
-            size={size}
-            value={size}
-          />
-        </Box>
-      ))}
-    </Flex>
-  );
-}
+export const Message = Template.bind({});
+
+Message.args = {
+  id: 'textarea-message',
+  description: 'This is a message',
+};
+
+export const Invalid = Template.bind({});
+
+Message.args = {
+  id: 'textarea-invalid',
+  invalid: true,
+  description: 'Something went wrong',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  id: 'textarea-disabled',
+  disabled: true,
+};
+
+export const ReadOnly = Template.bind({});
+
+Disabled.args = {
+  id: 'textarea-readonly',
+  readOnly: true,
+};
 
 export default meta;

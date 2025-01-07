@@ -15,6 +15,11 @@ export const root = style({
     '&:hover': {
       outlineColor: vars.color.primary400,
     },
+
+    '&:focus-within': {
+      outlineColor: vars.color.primary400,
+      boxShadow: vars.boxShadow.focus,
+    },
   },
 });
 
@@ -36,35 +41,17 @@ export const rootSize = {
   }),
 };
 
-export const rootFocused = style({
-  outlineColor: vars.color.primary400,
-  boxShadow: vars.boxShadow.focus,
-});
-
-export const rootSuccess = style({
-  outlineColor: vars.color.success400,
-  selectors: {
-    '&:hover': {
-      outlineColor: vars.color.success400,
-    },
-  },
-});
-
-export const rootSuccessFocused = style({
-  boxShadow: vars.boxShadow.focusSuccess,
-});
-
 export const rootInvalid = style({
   outlineColor: vars.color.danger400,
   selectors: {
     '&:hover': {
       outlineColor: vars.color.danger400,
     },
-  },
-});
 
-export const rootInvalidFocused = style({
-  boxShadow: vars.boxShadow.focusDanger,
+    '&:focus-within': {
+      boxShadow: vars.boxShadow.focusDanger,
+    },
+  },
 });
 
 export const rootDisabled = style({

@@ -40,6 +40,21 @@ export const rootSize = {
       tablet: 'auto',
     },
   }),
+  xl: atoms({
+    justifyContent: 'flex-start',
+    px: {
+      mobile: 0,
+      desktop: 12,
+    },
+    py: {
+      mobile: 0,
+      desktop: 4,
+    },
+    overflowY: {
+      mobile: 'hidden',
+      desktop: 'auto',
+    },
+  }),
 };
 
 export const content = atoms({
@@ -52,7 +67,9 @@ export const content = atoms({
 
 export const contentSize = {
   sm: atoms({
+    position: 'relative',
     maxWidth: 'sm',
+    maxHeight: 'full',
     rounded: 'xl',
     boxShadow: 'md',
     overflow: 'hidden',
@@ -60,7 +77,7 @@ export const contentSize = {
   md: atoms({
     position: {
       mobile: 'absolute',
-      tablet: 'static',
+      tablet: 'relative',
     },
     inset: 0,
     maxWidth: {
@@ -70,6 +87,7 @@ export const contentSize = {
       mobile: 'full',
       tablet: 'auto',
     },
+    maxHeight: 'full',
     rounded: {
       tablet: 'xl',
     },
@@ -82,12 +100,13 @@ export const contentSize = {
   lg: atoms({
     position: {
       mobile: 'absolute',
-      tablet: 'static',
+      tablet: 'relative',
     },
     inset: 0,
     maxWidth: {
       tablet: '4xl',
     },
+    minHeight: 'full',
     height: {
       mobile: 'full',
       tablet: 'auto',
@@ -98,7 +117,27 @@ export const contentSize = {
     boxShadow: 'md',
     overflowY: {
       mobile: 'auto',
-      tablet: 'hidden',
+      desktop: 'hidden',
+    },
+  }),
+  xl: atoms({
+    position: {
+      mobile: 'absolute',
+      desktop: 'relative',
+    },
+    inset: 0,
+    minHeight: 'full',
+    height: {
+      mobile: 'full',
+      desktop: 'auto',
+    },
+    rounded: {
+      desktop: 'xl',
+    },
+    boxShadow: 'md',
+    overflowY: {
+      mobile: 'auto',
+      desktop: 'hidden',
     },
   }),
 };

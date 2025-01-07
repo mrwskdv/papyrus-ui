@@ -1,5 +1,12 @@
 # @papyrus-ui/styles
 
+## 0.4.0
+
+### Minor Changes
+
+- 4ffa041: Adjusted font sizes of headings
+- dbcd2a8: Added CheckboxGroup and RadioGroup components
+
 ## 0.3.2
 
 ### Patch Changes

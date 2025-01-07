@@ -1,5 +1,24 @@
 # @papyrus-ui/components
 
+## 1.0.0
+
+### Minor Changes
+
+- dbcd2a8: Added CheckboxGroup and RadioGroup components
+- 54c3722: Added `xl` size for dialog
+- c6bddc5: Created InputGroup component and added it to input components
+- f0751e4: Renamed TextVariant to TextFontVariant
+- 35ca461: Added TimeInput component
+- 58c0e81: Added InputMessage component
+- 9e30cac: Added Tooltip component
+
+### Patch Changes
+
+- 6d478db: Fixed `loading` property for Autocomplete component
+- Updated dependencies [4ffa041]
+- Updated dependencies [dbcd2a8]
+  - @papyrus-ui/styles@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes

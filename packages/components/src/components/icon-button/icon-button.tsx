@@ -3,14 +3,17 @@ import {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   cloneElement,
+  ElementType,
   forwardRef,
   isValidElement,
+  ReactElement,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
 
 import { AvatarProps } from '../avatar';
 
 import * as S from './icon-button.css';
+
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
 export type IconButtonVariant =
@@ -30,12 +33,12 @@ export interface IconButtonProps
   /**
    * Specifies the element type to be used for rendering the icon-button.
    */
-  as?: React.ElementType;
+  as?: ElementType;
 
   /**
    * Specifies the avatar element to be rendered within the icon-button.
    */
-  avatar?: React.ReactElement;
+  avatar?: ReactElement;
 
   /**
    * If true, the icon-button will be disabled.
@@ -60,7 +63,7 @@ export interface IconButtonProps
   /**
    * The content to be rendered inside the icon-button.
    */
-  children?: React.ReactElement;
+  children?: ReactElement;
 }
 
 const avatarSize: Record<IconButtonSize, AvatarProps['size']> = {

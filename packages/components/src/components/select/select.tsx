@@ -7,7 +7,6 @@ import {
   forwardRef,
   isValidElement,
   memo,
-  OptionHTMLAttributes,
   ReactElement,
   ReactNode,
   RefAttributes,
@@ -110,7 +109,7 @@ export interface SelectProps<IsMulti extends boolean = false>
    * The options for the select dropdown. These are typically provided as `<option>` elements.
    * This can be an array of `<option>` elements or any other components that render options for the user to select.
    */
-  children?: ReactElement<OptionHTMLAttributes<HTMLOptionElement>, 'option'>[];
+  children?: ReactNode;
 }
 
 export interface SelectFn {

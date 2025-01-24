@@ -37,8 +37,8 @@ const meta: Meta<DialogProps> = {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
+          <Dialog.Close type="button">Cancel</Dialog.Close>
           <Button>OK</Button>
-          <Button variant="tertiary">Cancel</Button>
         </Dialog.Footer>
       </Dialog.Content>,
     ],

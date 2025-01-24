@@ -7,7 +7,6 @@ import {
   KeyboardEvent,
   memo,
   ReactElement,
-  useCallback,
   useContext,
   useRef,
 } from 'react';
@@ -40,45 +39,39 @@ export const MenuItem = memo<MenuItemProps>(
     const buttonRef = useRef<HTMLAnchorElement>(null);
     const isActive = index === activeIndex;
 
-    const handleFocus = useCallback(
-      (e: FocusEvent<HTMLAnchorElement>) => {
-        setActiveIndex(index);
-        onFocus?.(e);
-      },
-      [index, onFocus, setActiveIndex],
-    );
+    const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+      setActiveIndex(index);
+      onFocus?.(e);
+    };
 
-    const handleKeyDown = useCallback(
-      (e: KeyboardEvent<HTMLAnchorElement>) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          e.stopPropagation();
-          e.currentTarget.click();
-        }
+    const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.click();
+      }
 
-        if (!menuRef.current) {
-          onKeyDown?.(e);
-          return;
-        }
-
-        if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          e.stopPropagation();
-          const item = getPrevItem(menuRef, e.currentTarget, true);
-          item?.focus();
-        }
-
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          e.stopPropagation();
-          const item = getNextItem(menuRef, e.currentTarget, true);
-          item?.focus();
-        }
-
+      if (!menuRef.current) {
         onKeyDown?.(e);
-      },
-      [menuRef, onKeyDown],
-    );
+        return;
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getPrevItem(menuRef, e.currentTarget, true);
+        item?.focus();
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        e.stopPropagation();
+        const item = getNextItem(menuRef, e.currentTarget, true);
+        item?.focus();
+      }
+
+      onKeyDown?.(e);
+    };
 
     return (
       <MenuButton

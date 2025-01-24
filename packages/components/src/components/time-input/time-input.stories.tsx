@@ -52,7 +52,7 @@ Seconds.args = {
 
 export function Sizes(args: TimeInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <TimeInput {...args} id={`time-input-size-${size}`} size={size} />
@@ -64,7 +64,7 @@ export function Sizes(args: TimeInputProps) {
 
 export function WithIcon(args: TimeInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       <Box mb={4}>
         <TimeInput
           {...args}

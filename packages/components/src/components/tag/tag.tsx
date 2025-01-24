@@ -1,6 +1,6 @@
 'use client';
 
-import { Atoms, atoms, interactiveStyle } from '@papyrus-ui/styles';
+import { atoms, interactiveStyle, truncateStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   forwardRef,
@@ -10,43 +10,47 @@ import {
   MouseEvent,
   MouseEventHandler,
   ReactNode,
-  useCallback,
 } from 'react';
 import { BiX } from 'react-icons/bi';
 
-import { Caption } from '../caption';
 import { Icon } from '../icon';
 
 import * as S from './tag.css';
 
 export type TagSize = 'sm' | 'md';
 
-export interface TagProps
-  extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
-  bg?: Atoms['bg'];
-  borderColor?: Atoms['borderColor'];
-  color?: Atoms['color'];
+export type TagVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger';
+
+export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   disabled?: boolean;
+  readOnly?: boolean;
   removable?: boolean;
   rounded?: boolean;
   size?: TagSize;
-  children?: ReactNode;
+  variant?: TagVariant;
   onClick?: MouseEventHandler;
+  children?: ReactNode;
 }
 
 const TagComponent = forwardRef<HTMLDivElement, TagProps>(
   (
     {
-      bg = 'primary100',
-      borderColor = 'transparent',
-      color = 'primary700',
       className,
       disabled,
+      readOnly,
       removable,
       rounded,
       role,
       size = 'md',
       tabIndex,
+      variant = 'primary',
       onClick,
       onKeyDown,
       children,
@@ -56,28 +60,23 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
   ): JSX.Element => {
     const isInteractive = removable || Boolean(onClick);
 
-    const handleClick = useCallback(
-      (e: MouseEvent) => !disabled && onClick?.(e),
-      [disabled, onClick],
-    );
+    const handleClick = (e: MouseEvent) =>
+      !disabled && !readOnly && onClick?.(e);
 
-    const handleKeyDown = useCallback(
-      (e: KeyboardEvent<HTMLDivElement>) => {
-        if (disabled) {
-          return;
-        }
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+      if (disabled || readOnly) {
+        return;
+      }
 
-        if (
-          (e.code === 'Delete' && removable) ||
-          ((e.code === 'Enter' || e.code === 'Space') && !removable)
-        ) {
-          e.currentTarget.click();
-        }
+      if (
+        (e.code === 'Delete' && removable) ||
+        ((e.code === 'Enter' || e.code === 'Space') && !removable)
+      ) {
+        e.currentTarget.click();
+      }
 
-        onKeyDown?.(e);
-      },
-      [disabled, removable, onKeyDown],
-    );
+      onKeyDown?.(e);
+    };
 
     return (
       <span
@@ -86,19 +85,21 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
         className={cn(
           S.root,
           S.rootSize[size],
-          onClick && !disabled && interactiveStyle,
+          S.rootVariant[variant],
+          disabled && S.rootDisabled,
+          onClick && !disabled && !readOnly && interactiveStyle,
           removable && S.rootRemovable,
           atoms({
-            borderColor,
-            color,
-            bg,
             rounded: rounded ? 'full' : 'sm',
           }),
           className,
         )}
         role={isInteractive && !role ? 'button' : role}
         tabIndex={
-          isInteractive && !disabled && typeof tabIndex === 'undefined'
+          isInteractive &&
+          !disabled &&
+          !readOnly &&
+          typeof tabIndex === 'undefined'
             ? 0
             : tabIndex
         }
@@ -106,17 +107,15 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
-        <Caption as="span" display="inline-block" truncate>
-          {children}
-        </Caption>
+        <span className={cn(S.label, truncateStyle)}>{children}</span>
 
-        {removable && !disabled && (
+        {removable && !disabled && !readOnly && (
           <Icon
             className={S.remove}
             data-testid="clear-icon"
             fontSize="sm"
             interactive
-            ml={1}
+            ms={1}
           >
             <BiX />
           </Icon>

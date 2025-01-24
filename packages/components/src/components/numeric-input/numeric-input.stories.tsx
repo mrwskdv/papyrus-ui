@@ -37,7 +37,7 @@ export const Basic = Template.bind({});
 
 export function Sizes(args: NumericInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <NumericInput
@@ -54,7 +54,7 @@ export function Sizes(args: NumericInputProps) {
 
 export function WithIcon(args: NumericInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       <Box mb={4}>
         <NumericInput
           {...args}

@@ -36,7 +36,7 @@ Basic.args = {
 
 export function Sizes(args: TextareaProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <Textarea {...args} id={`textarea-size-${size}`} size={size} />
@@ -48,7 +48,7 @@ export function Sizes(args: TextareaProps) {
 
 export function WithIcon(args: TextareaProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       <Box mb={4}>
         <Textarea
           {...args}

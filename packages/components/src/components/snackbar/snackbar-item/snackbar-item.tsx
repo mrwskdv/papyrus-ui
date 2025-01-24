@@ -150,27 +150,21 @@ export const SnackbarItem = forwardRef<
       }
     }, [autoHideDuration, onHide, setTimeout]);
 
-    const handleMouseEnter = useCallback(
-      (e: MouseEvent<HTMLDivElement>) => {
-        clearTimeout();
-        onMouseEnter?.(e);
-      },
-      [clearTimeout, onMouseEnter],
-    );
-
-    const handleMouseLeave = useCallback(
-      (e: MouseEvent<HTMLDivElement>) => {
-        defferAutoHide();
-        onMouseLeave?.(e);
-      },
-      [defferAutoHide, onMouseLeave],
-    );
-
     useEffect(() => {
       defferAutoHide();
     }, [defferAutoHide]);
 
     const IconComponent = iconByVariant[variant];
+
+    const handleMouseEnter = (e: MouseEvent<HTMLDivElement>) => {
+      clearTimeout();
+      onMouseEnter?.(e);
+    };
+
+    const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+      defferAutoHide();
+      onMouseLeave?.(e);
+    };
 
     return (
       <Transition
@@ -195,7 +189,7 @@ export const SnackbarItem = forwardRef<
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <Flex alignItems="center" mx="-1.5">
+            <Flex align="center" mx="-1.5">
               <Box px={1.5}>
                 {isValidElement<IconBaseProps>(icon) ? (
                   cloneElement(icon, {

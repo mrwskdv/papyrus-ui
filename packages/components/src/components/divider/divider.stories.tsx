@@ -30,7 +30,7 @@ export const Direction: StoryFn<DividerProps> = (args) => (
       Vertical
     </Heading>
 
-    <Flex height={48} justifyContent="center">
+    <Flex height={48} justify="center">
       <Divider {...args} direction="vertical" />
     </Flex>
   </>

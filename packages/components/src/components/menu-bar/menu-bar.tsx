@@ -139,37 +139,6 @@ const MenuBarComponent: FC<MenuBarProps> = ({
     ],
   );
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLUListElement>) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const item = getLastItem(refs.floating);
-
-        item?.focus();
-
-        if (item?.getAttribute('aria-haspopup') === 'menu') {
-          item.click();
-        }
-      }
-
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const item = getFirstItem(refs.floating);
-
-        item?.focus();
-
-        if (item?.getAttribute('aria-haspopup') === 'menu') {
-          item.click();
-        }
-      }
-    },
-    [refs.floating],
-  );
-
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
       if (
@@ -186,6 +155,34 @@ const MenuBarComponent: FC<MenuBarProps> = ({
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [refs.floating]);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const item = getLastItem(refs.floating);
+
+      item?.focus();
+
+      if (item?.getAttribute('aria-haspopup') === 'menu') {
+        item.click();
+      }
+    }
+
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const item = getFirstItem(refs.floating);
+
+      item?.focus();
+
+      if (item?.getAttribute('aria-haspopup') === 'menu') {
+        item.click();
+      }
+    }
+  };
 
   return (
     <MenuBarContext.Provider value={menuCtx}>

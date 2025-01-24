@@ -34,7 +34,7 @@ export function Basic(args: ButtonProps) {
 
 export function Variants(args: ButtonProps) {
   return (
-    <Flex flexWrap="wrap" mt="-4" mx="-2">
+    <Flex mt="-4" mx="-2" wrap="wrap">
       {variants.map((variant, i) => (
         <Box key={i} mt={4} px={2} width="auto">
           <Button {...args} variant={variant}>
@@ -48,7 +48,7 @@ export function Variants(args: ButtonProps) {
 
 export function Sizes(args: ButtonProps) {
   return (
-    <Flex alignItems="center" flexWrap="wrap" mt="-4" mx="-2">
+    <Flex align="center" mt="-4" mx="-2" wrap="wrap">
       {sizes.map((size, i) => (
         <Box key={i} mt={4} px={2}>
           <Button {...args} size={size}>
@@ -62,7 +62,7 @@ export function Sizes(args: ButtonProps) {
 
 export function WithIcon(args: ButtonProps) {
   return (
-    <Flex flexWrap="wrap" mt="-4" mx="-2">
+    <Flex mt="-4" mx="-2" wrap="wrap">
       <Box mt={4} px={2}>
         <Button {...args} startIcon={<BiSolidLike />}>
           Start icon

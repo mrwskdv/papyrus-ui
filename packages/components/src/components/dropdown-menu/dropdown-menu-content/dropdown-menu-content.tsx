@@ -1,12 +1,10 @@
 'use client';
 
 import { FloatingFocusManager, FloatingList } from '@floating-ui/react';
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
-import cn from 'classnames';
 import { FC, HTMLAttributes, useContext } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { Flex } from '../../flex';
+import { Listbox } from '../../listbox';
 import { DropdownMenuContext } from '../dropdown-menu.context';
 
 export interface DropdownMenuContentProps
@@ -23,7 +21,6 @@ const TRANSITION_TIMEOUT = {
 
 export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
   children,
-  className,
   initialFocus = 0,
   returnFocus = true,
   ...props
@@ -53,29 +50,16 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
             modal={false}
             returnFocus={returnFocus}
           >
-            <Flex
+            <Listbox
               ref={refs.setFloating}
-              as="ul"
-              bg="white"
-              border={1}
-              borderColor="neutral100"
-              className={cn(
-                fadeStyle,
-                status === 'entered' && fadeInStyle,
-                className,
-              )}
-              flexDirection="column"
               maxHeight={80}
               maxWidth="xs"
-              py={0.5}
-              rounded="lg"
-              shadow="lg"
               style={floatingStyles}
-              zIndex={10}
+              visible={status === 'entered'}
               {...getFloatingProps(props)}
             >
               {children}
-            </Flex>
+            </Listbox>
           </FloatingFocusManager>
         )}
       </Transition>

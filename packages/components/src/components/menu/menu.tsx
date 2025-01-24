@@ -6,7 +6,6 @@ import {
   HTMLAttributes,
   isValidElement,
   KeyboardEvent,
-  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -56,27 +55,6 @@ const MenuComponent: FC<MenuProps> = ({
     [activeIndex, collapsed, onCollapsedChange, size, variant],
   );
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLUListElement>) => {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getLastItem(menuRef, true);
-        item?.focus();
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getFirstItem(menuRef, true);
-        item?.focus();
-      }
-
-      onKeyDown?.(e);
-    },
-    [onKeyDown],
-  );
-
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
       if (e.target instanceof Node && !menuRef.current?.contains(e.target)) {
@@ -90,6 +68,24 @@ const MenuComponent: FC<MenuProps> = ({
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getLastItem(menuRef, true);
+      item?.focus();
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getFirstItem(menuRef, true);
+      item?.focus();
+    }
+
+    onKeyDown?.(e);
+  };
 
   return (
     <MenuContext.Provider value={menuCxt}>

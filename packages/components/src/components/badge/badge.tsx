@@ -121,7 +121,7 @@ export const Badge: FC<BadgeProps> = ({
       {children}
 
       {typeof badgeContent === 'object' && (
-        <Box display="block" style={badgeStyle} title={title}>
+        <Box as="span" display="block" style={badgeStyle} title={title}>
           {badgeContent}
         </Box>
       )}
@@ -129,15 +129,11 @@ export const Badge: FC<BadgeProps> = ({
       {dot &&
         typeof badgeContent !== 'object' &&
         (badgeContent !== 0 || showZero) && (
-          <Box
-            bg={bg}
+          <span
+            className={cn(S.dot, atoms({ bg }))}
             data-testid="badge-dot"
-            display="block"
-            height={2}
-            rounded="full"
             style={badgeStyle}
             title={title}
-            width={2}
           />
         )}
 

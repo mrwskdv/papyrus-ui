@@ -15,9 +15,7 @@ import {
   useClick,
   offset,
 } from '@floating-ui/react';
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
 import { useDebounceCallback } from '@react-hook/debounce';
-import cn from 'classnames';
 import {
   ChangeEvent,
   FC,
@@ -50,6 +48,7 @@ import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 import { InputGroup } from '../input-group';
+import { Listbox } from '../listbox/listbox';
 import { OptionProps, Option } from '../option';
 import { Tag } from '../tag';
 
@@ -374,7 +373,7 @@ export const Autocomplete = forwardRef(
             const defaultMaxHeight =
               (OPTION_HEIGHT * MAX_OPTIONS + LIST_PY) * pxInRem;
 
-            const maxHeight = Math.min(defaultMaxHeight, availableHeight);
+            const maxHeight = Math.min(defaultMaxHeight, availableHeight - 4);
 
             Object.assign(elements.floating.style, {
               width: `${offsetWidth + 10}px`,
@@ -582,18 +581,17 @@ export const Autocomplete = forwardRef(
             <InputAction me={1}>{startIcon}</InputAction>
           )}
 
-          <Flex as="span" flex={1} flexWrap="wrap" mt="-1" mx="-0.5">
+          <Flex as="span" flex={1} mt="-1" mx="-0.5" wrap="wrap">
             {multiple &&
               selectedOptions.map((item, idx) => (
                 <Box key={idx} as="span" display="block" mt={1} px={0.5}>
                   <Tag
-                    bg={disabled ? 'neutral100' : 'primary100'}
-                    borderColor={disabled ? 'neutral200' : 'primary300'}
-                    color={disabled ? 'neutral300' : 'neutral900'}
                     data-index={idx}
-                    disabled={disabled || readOnly}
+                    disabled={disabled}
+                    readOnly={readOnly}
                     removable
                     tabIndex={-1}
+                    variant="tertiary"
                     onMouseDown={handleRemoveMouseDown}
                   >
                     {getLabel(item)}
@@ -672,22 +670,11 @@ export const Autocomplete = forwardRef(
               initialFocus={-1}
               modal={false}
             >
-              <Flex
+              <Listbox
                 ref={refs.setFloating}
-                as="ul"
-                bg="white"
-                border={1}
-                borderColor="neutral100"
-                className={cn(fadeStyle, status === 'entered' && fadeInStyle)}
-                flexDirection="column"
                 id={slug(inputId, LISTBOX_ID)}
-                overflowX="hidden"
-                overflowY="auto"
-                py={0.5}
-                rounded="lg"
-                shadow="lg"
                 style={floatingStyles}
-                zIndex={40}
+                visible={status === 'entered'}
                 {...getFloatingProps()}
               >
                 {(loading || !optionsState) && (
@@ -732,7 +719,7 @@ export const Autocomplete = forwardRef(
                       </OptionComponent>
                     );
                   })}
-              </Flex>
+              </Listbox>
             </FloatingFocusManager>
           )}
         </Transition>

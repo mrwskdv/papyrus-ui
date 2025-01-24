@@ -1,7 +1,7 @@
 import { atoms } from '@papyrus-ui/styles';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useState } from 'react';
 import {
   BiCog,
   BiEnvelope,
@@ -98,9 +98,9 @@ export const Variant: StoryFn<MenuProps> = (args) => (
 export const Collapsed: StoryFn<MenuProps> = (args) => {
   const [collapsed, setCollapsed] = useState(true);
 
-  const onCollapsedChange = useCallback((collapsed: boolean) => {
+  const onCollapsedChange = (collapsed: boolean) => {
     setCollapsed(collapsed);
-  }, []);
+  };
 
   return (
     <>

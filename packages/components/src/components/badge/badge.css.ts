@@ -1,4 +1,4 @@
-import { SPACING, vars } from '@papyrus-ui/styles';
+import { atoms, SPACING, vars } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
 
 export const counter = style({
@@ -13,4 +13,11 @@ export const counter = style({
   padding: `0 ${SPACING[1]}`,
   overflow: 'hidden',
   ...vars.typography.caption,
+});
+
+export const dot = atoms({
+  display: 'block',
+  width: 2,
+  height: 2,
+  rounded: 'full',
 });

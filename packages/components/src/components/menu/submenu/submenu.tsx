@@ -13,7 +13,6 @@ import {
   MouseEvent as ReactMouseEvent,
   ReactElement,
   ReactNode,
-  useCallback,
   useContext,
   useEffect,
   useId,
@@ -90,74 +89,6 @@ export const Submenu: FC<SubmenuProps> = ({
     [activeIndex, parent.indent, parent.menuRef, parent.size, parent.variant],
   );
 
-  const handleClick = useCallback(
-    (e: ReactMouseEvent<HTMLAnchorElement>) => {
-      setIsOpen((prev) => !prev);
-
-      if (parent.collapsed) {
-        parent.onCollapsedChange?.(false);
-      }
-
-      onClick?.(e);
-    },
-    [onClick, parent],
-  );
-
-  const handleFocus = useCallback(
-    (e: FocusEvent<HTMLAnchorElement>) => {
-      setActiveIndex(null);
-      parent.setActiveIndex(index);
-      onFocus?.(e);
-    },
-    [index, onFocus, parent],
-  );
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLAnchorElement>) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        e.stopPropagation();
-        e.currentTarget.click();
-      }
-
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getPrevItem(parent.menuRef, e.currentTarget, true);
-        item?.focus();
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getNextItem(parent.menuRef, e.currentTarget, true);
-        item?.focus();
-      }
-
-      onKeyDown?.(e);
-    },
-    [onKeyDown, parent.menuRef],
-  );
-
-  const handleMenuKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLUListElement>) => {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getLastItem(menuRef);
-        item?.focus();
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getFirstItem(menuRef);
-        item?.focus();
-      }
-    },
-    [menuRef],
-  );
-
   useEffect(() => {
     if (parent.collapsed) {
       setIsOpen(false);
@@ -177,6 +108,62 @@ export const Submenu: FC<SubmenuProps> = ({
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
+
+  const handleClick = (e: ReactMouseEvent<HTMLAnchorElement>) => {
+    setIsOpen((prev) => !prev);
+
+    if (parent.collapsed) {
+      parent.onCollapsedChange?.(false);
+    }
+
+    onClick?.(e);
+  };
+
+  const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+    setActiveIndex(null);
+    parent.setActiveIndex(index);
+    onFocus?.(e);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.click();
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getPrevItem(parent.menuRef, e.currentTarget, true);
+      item?.focus();
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getNextItem(parent.menuRef, e.currentTarget, true);
+      item?.focus();
+    }
+
+    onKeyDown?.(e);
+  };
+
+  const handleMenuKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getLastItem(menuRef);
+      item?.focus();
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getFirstItem(menuRef);
+      item?.focus();
+    }
+  };
 
   return (
     <>

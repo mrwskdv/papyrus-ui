@@ -56,7 +56,7 @@ export const InputGroup: FC<InputGroupProps> = ({
   message,
   children,
 }) => (
-  <Flex flexDirection="column">
+  <Flex direction="column">
     {label && (
       <Label
         as={htmlFor ? 'label' : 'span'}

@@ -1,11 +1,22 @@
+import { StoryFn } from '@storybook/react';
 import { toUpper } from 'lodash';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
 
-import { Tag, TagProps, TagSize } from './tag';
+import { Tag, TagProps, TagSize, TagVariant } from './tag';
 
 const sizes: TagSize[] = ['sm', 'md'];
+
+const variants: TagVariant[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'info',
+  'success',
+  'warning',
+  'danger',
+];
 
 export default {
   title: 'Data Display/Tag',
@@ -16,71 +27,66 @@ export default {
   },
 };
 
-export function Basic(args: TagProps) {
-  return <Tag {...args} />;
-}
+const Template: StoryFn<TagProps> = (args) => <Tag {...args} />;
 
-export function Sizes(args: TagProps) {
-  return (
-    <Flex alignItems="center" flexWrap="wrap" mt="-2" mx="-1">
-      {sizes.map((size, i) => (
-        <Box key={i} mt={2} px={1}>
-          <Tag {...args} size={size}>
-            {toUpper(size)}
-          </Tag>
-        </Box>
-      ))}
-    </Flex>
-  );
-}
+export const Basic = Template.bind({});
 
-export function Color(args: TagProps) {
-  return (
-    <Flex alignItems="center" flexWrap="wrap" mt="-2" mx="-1">
-      <Box mt={2} px={1}>
-        <Tag {...args}>Default</Tag>
-      </Box>
-
-      <Box mt={2} px={1}>
-        <Tag {...args} bg="highlight" color="white">
-          Accent
+export const Sizes: StoryFn<TagProps> = (args) => (
+  <Flex align="center" mt="-2" mx="-1" wrap="wrap">
+    {sizes.map((size, i) => (
+      <Box key={i} mt={2} px={1}>
+        <Tag {...args} size={size}>
+          {toUpper(size)}
         </Tag>
       </Box>
+    ))}
+  </Flex>
+);
 
-      <Box mt={2} px={1}>
-        <Tag
-          {...args}
-          bg="neutral50"
-          borderColor="neutral200"
-          color="neutral700"
-        >
-          Secondary
+export const Variants: StoryFn<TagProps> = (args) => (
+  <Flex align="center" mt="-2" mx="-1" wrap="wrap">
+    {variants.map((variant, i) => (
+      <Box key={i} mt={2} px={1}>
+        <Tag {...args} variant={variant}>
+          {toUpper(variant)}
         </Tag>
       </Box>
-    </Flex>
-  );
-}
+    ))}
+  </Flex>
+);
 
-export function Rounded(args: TagProps) {
-  return (
-    <Tag {...args} rounded>
-      Rounded tag
-    </Tag>
-  );
-}
+export const Rounded = Template.bind({});
 
-export function Clickable(args: TagProps) {
-  return (
-    <Tag {...args} onClick={() => console.log('Click')}>
-      Clickable tag
-    </Tag>
-  );
-}
+Rounded.args = {
+  rounded: true,
+};
 
-export function Removable(args: TagProps) {
-  return (
-    <Tag {...args} removable onClick={() => console.log('Remove')}>
-      Removable tag
-    </Tag>
-  );
-}
+export const Clickable = Template.bind({});
+
+Clickable.args = {
+  onClick: () => {
+    // do nothing
+  },
+  children: 'Clickable Tag',
+};
+
+export const Removable = Template.bind({});
+
+Removable.args = {
+  removable: true,
+  onClick: () => {
+    // do nothing
+  },
+  children: 'Removable Tag',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  disabled: true,
+  removable: true,
+  onClick: () => {
+    // do nothing
+  },
+  children: 'Disabled Tag',
+};

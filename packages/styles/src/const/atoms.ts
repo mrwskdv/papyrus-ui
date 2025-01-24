@@ -11,88 +11,11 @@ export const DISPLAY = [
   'inline-block',
   'flex',
   'inline-flex',
+  'grid',
+  'inline-grid',
   'inline',
   'none',
 ] as const;
-
-export const FLEX = {
-  1: '1 0 0',
-  none: 'none',
-};
-
-export const FLEX_WRAP = ['wrap', 'nowrap'] as const;
-
-export const FLEX_DIRECTION = [
-  'column',
-  'column-reverse',
-  'row',
-  'row-reverse',
-] as const;
-
-export const ALIGN_ITEMS = [
-  'baseline',
-  'center',
-  'end',
-  'flex-end',
-  'flex-start',
-  'start',
-  'stretch',
-] as const;
-
-export const ALIGN_SELF = [...ALIGN_ITEMS, 'self-end', 'self-start'] as const;
-
-export const JUSTIFY_CONTENT = [
-  ...ALIGN_ITEMS,
-  'space-around',
-  'space-between',
-  'space-evenly',
-] as const;
-
-export const ASPECT_RATIO = {
-  square: '1/1',
-  landscape: '4/3',
-  photo: '3/2',
-  widescreen: '16/9',
-  portrait: '3/4',
-  portraitPhoto: '2/3',
-  portraitWidescreen: '9/16',
-  auto: 'auto',
-};
-
-export const BORDER_RADIUS = {
-  none: 'none',
-};
-
-export const BORDER_STYLE = [
-  'solid',
-  'dashed',
-  'dotted',
-  'double',
-  'hidden',
-  'none',
-] as const;
-
-export const BORDER_WIDTH = [0, 1, 2, 4, 8] as const;
-
-export const OBJECT_FIT = ['contain', 'cover'] as const;
-
-export const ORDER = {
-  0: 0,
-  1: 1,
-  2: 2,
-  3: 3,
-  4: 4,
-  5: 5,
-  6: 6,
-  7: 7,
-  8: 8,
-  9: 9,
-  10: 10,
-  11: 11,
-  12: 12,
-  first: -9999,
-  last: 9999,
-};
 
 export const PADDING = {
   px: '1px',
@@ -172,7 +95,235 @@ export const SPACING = {
   '-96': '-24rem', // -336px
 };
 
-export const POINTER_EVENTS = ['auto', 'none'] as const;
+export const FLEX_BASIS = {
+  'auto': 'auto',
+  ...PADDING,
+  '1/2': '50%',
+  '1/3': '33.333333%',
+  '2/3': '66.666667%',
+  '1/4': '25%',
+  '2/4': '50%',
+  '3/4': '75%',
+  '1/5': '20%',
+  '2/5': '40%',
+  '3/5': '60%',
+  '4/5': '80%',
+  '1/6': '16.666667%',
+  '2/6': '33.333333%',
+  '3/6': '50%',
+  '4/6': '66.666667%',
+  '5/6': '83.333333%',
+  '1/12': '8.333333%',
+  '2/12': '16.666667%',
+  '3/12': '25%',
+  '4/12': '33.333333%',
+  '5/12': '41.666667%',
+  '6/12': '50%',
+  '7/12': '58.333333%',
+  '8/12': '66.666667%',
+  'full': '100%',
+};
+
+export const FLEX_DIRECTION = [
+  'row',
+  'column',
+  'row-reverse',
+  'column-reverse',
+] as const;
+
+export const FLEX_WRAP = ['wrap', 'wrap-reverse', 'nowrap'] as const;
+
+export const FLEX = {
+  1: '1 1 0%',
+  auto: '1 1 auto',
+  initial: '0 1 auto',
+  none: 'none',
+};
+
+export const FLEX_GROW = [1, 0] as const;
+
+export const FLEX_SHRINK = [1, 0] as const;
+
+export const ORDER = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  first: -9999,
+  last: 9999,
+  none: 0,
+};
+
+export const GRID_TEMPLATE = {
+  1: 'repeat(1, minmax(0, 1fr))',
+  2: 'repeat(2, minmax(0, 1fr))',
+  3: 'repeat(3, minmax(0, 1fr))',
+  4: 'repeat(4, minmax(0, 1fr))',
+  5: 'repeat(5, minmax(0, 1fr))',
+  6: 'repeat(6, minmax(0, 1fr))',
+  7: 'repeat(7, minmax(0, 1fr))',
+  8: 'repeat(8, minmax(0, 1fr))',
+  9: 'repeat(9, minmax(0, 1fr))',
+  10: 'repeat(10, minmax(0, 1fr))',
+  11: 'repeat(11, minmax(0, 1fr))',
+  12: 'repeat(12, minmax(0, 1fr))',
+  none: 'none',
+  subgrid: 'subgrid',
+};
+
+export const GRID_SPAN = {
+  auto: 'auto',
+  1: 'span 1 / span 1',
+  2: 'span 2 / span 2',
+  3: 'span 3 / span 3',
+  4: 'span 4 / span 4',
+  5: 'span 5 / span 5',
+  6: 'span 6 / span 6',
+  7: 'span 7 / span 7',
+  8: 'span 8 / span 8',
+  9: 'span 9 / span 9',
+  10: 'span 10 / span 10',
+  11: 'span 11 / span 11',
+  12: 'span 12 / span 12',
+  full: 'span 1 / span -1',
+};
+
+export const GRID_START_END = {
+  auto: 'auto',
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  13: 13,
+};
+
+export const GRID_AUTO = {
+  auto: 'auto',
+  min: 'min-content',
+  max: 'max-content',
+  fr: 'minmax(0, 1fr)',
+};
+export const GRID_AUTO_FLOW = {
+  'row': 'row',
+  'column': 'column',
+  'dense': 'dense',
+  'row-dense': 'row dense',
+  'column-dense': 'column dense',
+};
+
+export const GAP = PADDING;
+
+export const JUSTIFY_CONTENT = {
+  normal: 'normal',
+  start: 'flex-start',
+  end: 'flex-end',
+  center: 'center',
+  between: 'space-between',
+  around: 'space-around',
+  evenly: 'space-evenly',
+  stretch: 'stretch',
+};
+
+export const JUSTIFY_ITEMS = ['start', 'end', 'center', 'stretch'] as const;
+
+export const JUSTIFY_SELF = [...JUSTIFY_ITEMS, 'auto'] as const;
+
+export const ALIGN_CONTENT = {
+  normal: 'normal',
+  center: 'center',
+  start: 'flex-start',
+  end: 'flex-end',
+  between: 'space-between',
+  around: 'space-around',
+  evenly: 'space-evenly',
+  baseline: 'baseline',
+  stretch: 'stretch',
+};
+
+export const ALIGN_ITEMS = {
+  start: 'flex-start',
+  end: 'flex-end',
+  center: 'center',
+  baseline: 'baseline',
+  stretch: 'stretch',
+};
+
+export const ALIGN_SELF = {
+  ...ALIGN_ITEMS,
+  auto: 'auto',
+};
+
+export const PLACE_CONTENT = {
+  normal: 'normal',
+  center: 'center',
+  start: 'start',
+  end: 'end',
+  between: 'space-between',
+  around: 'space-around',
+  evenly: 'space-evenly',
+  baseline: 'baseline',
+  stretch: 'stretch',
+};
+
+export const PLACE_ITEMS = [
+  'start',
+  'end',
+  'center',
+  'baseline',
+  'stretch',
+] as const;
+
+export const PLACE_SELF = [
+  'auto',
+  'start',
+  'end',
+  'center',
+  'stretch',
+] as const;
+
+export const ASPECT_RATIO = {
+  square: '1/1',
+  landscape: '4/3',
+  photo: '3/2',
+  widescreen: '16/9',
+  portrait: '3/4',
+  portraitPhoto: '2/3',
+  portraitWidescreen: '9/16',
+  auto: 'auto',
+};
+
+export const BORDER_RADIUS = {
+  none: 'none',
+};
+
+export const BORDER_STYLE = [
+  'solid',
+  'dashed',
+  'dotted',
+  'double',
+  'hidden',
+  'none',
+] as const;
+
+export const BORDER_WIDTH = [0, 1, 2, 4, 8] as const;
+
+export const OBJECT_FIT = ['contain', 'cover'] as const;
 
 export const INSET = { ...SPACING, auto: 'auto' };
 

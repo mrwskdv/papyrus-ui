@@ -42,7 +42,7 @@ Clearable.args = {
 
 export function Sizes(args: TextInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <TextInput {...args} id={`text-input-size-${size}`} size={size} />
@@ -54,7 +54,7 @@ export function Sizes(args: TextInputProps) {
 
 export function WithIcon(args: TextInputProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       <Box mb={4}>
         <TextInput
           {...args}

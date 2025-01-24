@@ -54,7 +54,7 @@ Multiple.args = {
 
 export function Sizes(args: SelectProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <Select {...args} id={`select-size-${size}`} size={size}>
@@ -72,7 +72,7 @@ export function Sizes(args: SelectProps) {
 
 export function WithIcon(args: SelectProps) {
   return (
-    <Flex flexDirection="column" width={64}>
+    <Flex direction="column" width={64}>
       <Box mb={4}>
         <Select
           {...args}

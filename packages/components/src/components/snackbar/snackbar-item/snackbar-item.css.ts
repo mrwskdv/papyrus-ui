@@ -1,16 +1,15 @@
-import { atoms, bpUp } from '@papyrus-ui/styles';
-import { styleVariants } from '@vanilla-extract/css';
+import { atoms, bpUp, MAX_WIDTH, MIN_WIDTH, vars } from '@papyrus-ui/styles';
+import { style, styleVariants } from '@vanilla-extract/css';
 
-export const root = atoms({
-  width: 'full',
-  maxWidth: 'lg',
-  minWidth: 64,
-  rounded: 'lg',
+export const root = style({
+  width: '100%',
+  maxWidth: MAX_WIDTH['lg'],
+  minWidth: MIN_WIDTH[64],
+  borderRadius: vars.borderRadius.lg,
   color: 'white',
-  px: 4,
-  py: 3,
-  boxShadow: 'lg',
-  transition: 'base',
+  padding: '0.75rem 1rem',
+  boxShadow: vars.boxShadow.lg,
+  transition: vars.transition.base,
   overflow: 'hidden',
   pointerEvents: 'auto',
 });

@@ -6,7 +6,6 @@ import {
   HTMLProps,
   isValidElement,
   ReactElement,
-  useCallback,
   useContext,
 } from 'react';
 
@@ -22,9 +21,9 @@ export const DropdownMenuTrigger: FC<DropdownMenuTriggerProps> = ({
   const { refs, getReferenceProps, setActiveIndex } =
     useContext(DropdownMenuContext);
 
-  const handleFocus = useCallback(() => {
+  const handleFocus = () => {
     setActiveIndex(null);
-  }, [setActiveIndex]);
+  };
 
   return isValidElement<HTMLProps<HTMLButtonElement>>(children)
     ? cloneElement(children, {

@@ -39,7 +39,21 @@ import {
   INSET,
   Z_INDEX,
   OVERFLOW,
-  POINTER_EVENTS,
+  FLEX_BASIS,
+  FLEX_GROW,
+  FLEX_SHRINK,
+  GRID_TEMPLATE,
+  GRID_SPAN,
+  GRID_START_END,
+  GRID_AUTO_FLOW,
+  GRID_AUTO,
+  GAP,
+  JUSTIFY_ITEMS,
+  JUSTIFY_SELF,
+  ALIGN_CONTENT,
+  PLACE_CONTENT,
+  PLACE_ITEMS,
+  PLACE_SELF,
 } from '../const';
 
 import { vars } from './global.css';
@@ -60,8 +74,6 @@ const baseProperties = defineProperties({
     whiteSpace: WHITE_SPACE,
     objectFit: OBJECT_FIT,
     verticalAlign: VERTICAL_ALIGN,
-    transition: vars.transition,
-    pointerEvents: POINTER_EVENTS,
     zIndex: Z_INDEX,
   },
   shorthands: {
@@ -92,19 +104,43 @@ const responsiveProperties = defineProperties({
 
   properties: {
     position: POSITION,
-
     display: DISPLAY,
 
-    fontSize: vars.fontSize,
-    textAlign: TEXT_ALIGN,
-
-    flex: FLEX,
-    flexWrap: FLEX_WRAP,
+    flexBasis: FLEX_BASIS,
     flexDirection: FLEX_DIRECTION,
+    flexWrap: FLEX_WRAP,
+    flex: FLEX,
+    flexGrow: FLEX_GROW,
+    flexShrink: FLEX_SHRINK,
+    order: ORDER,
+
+    gridTemplateColumns: GRID_TEMPLATE,
+    gridColumn: GRID_SPAN,
+    gridColumnStart: GRID_START_END,
+    gridColumnEnd: GRID_START_END,
+    gridTemplateRows: GRID_TEMPLATE,
+    gridRow: GRID_SPAN,
+    gridRowStart: GRID_START_END,
+    gridRowEnd: GRID_START_END,
+
+    gridAutoFlow: GRID_AUTO_FLOW,
+    gridAutoColumns: GRID_AUTO,
+    gridAutoRows: GRID_AUTO,
+
+    rowGap: GAP,
+    columnGap: GAP,
+
+    justifyContent: JUSTIFY_CONTENT,
+    justifyItems: JUSTIFY_ITEMS,
+    justifySelf: JUSTIFY_SELF,
+
+    alignContent: ALIGN_CONTENT,
     alignItems: ALIGN_ITEMS,
     alignSelf: ALIGN_SELF,
-    justifyContent: JUSTIFY_CONTENT,
-    order: ORDER,
+
+    placeContent: PLACE_CONTENT,
+    placeItems: PLACE_ITEMS,
+    placeSelf: PLACE_SELF,
 
     aspectRatio: ASPECT_RATIO,
 
@@ -132,6 +168,9 @@ const responsiveProperties = defineProperties({
     borderInlineStartWidth: BORDER_WIDTH,
     borderInlineEndWidth: BORDER_WIDTH,
 
+    fontSize: vars.fontSize,
+    textAlign: TEXT_ALIGN,
+
     marginBottom: SPACING,
     marginLeft: SPACING,
     marginRight: SPACING,
@@ -151,6 +190,32 @@ const responsiveProperties = defineProperties({
   },
 
   shorthands: {
+    basis: ['flexBasis'],
+    direction: ['flexDirection'],
+    wrap: ['flexWrap'],
+    grow: ['flexGrow'],
+    shrink: ['flexShrink'],
+
+    column: ['gridColumn'],
+    columnStart: ['gridColumnStart'],
+    columnEnd: ['gridColumnEnd'],
+
+    row: ['gridRow'],
+    rowStart: ['gridRowStart'],
+    rowEnd: ['gridRowEnd'],
+
+    autoFlow: ['gridAutoFlow'],
+    autoColumns: ['gridAutoColumns'],
+    autoRows: ['gridAutoRows'],
+
+    templateColumns: ['gridTemplateColumns'],
+    templateRows: ['gridTemplateRows'],
+
+    gap: ['rowGap', 'columnGap'],
+
+    justify: ['justifyContent'],
+    align: ['alignItems'],
+
     rounded: [
       'borderTopLeftRadius',
       'borderTopRightRadius',
@@ -248,10 +313,41 @@ export type PositionAtoms = Pick<
 
 export type FlexAtoms = Pick<
   Atoms,
-  'alignItems' | 'justifyContent' | 'flexDirection' | 'flexWrap'
+  'align' | 'alignContent' | 'justify' | 'direction' | 'wrap'
 >;
 
-export type FlexItemAtoms = Pick<Atoms, 'alignSelf' | 'flex' | 'order'>;
+export type FlexItemAtoms = Pick<
+  Atoms,
+  'basis' | 'flex' | 'grow' | 'shrink' | 'order' | 'alignSelf'
+>;
+
+export type GridAtoms = Pick<
+  Atoms,
+  | 'autoColumns'
+  | 'autoFlow'
+  | 'autoRows'
+  | 'templateColumns'
+  | 'templateRows'
+  | 'justify'
+  | 'justifyItems'
+  | 'align'
+  | 'alignContent'
+  | 'placeContent'
+  | 'placeItems'
+>;
+
+export type GridItemAtoms = Pick<
+  Atoms,
+  | 'column'
+  | 'columnStart'
+  | 'columnEnd'
+  | 'row'
+  | 'rowStart'
+  | 'rowEnd'
+  | 'justifySelf'
+  | 'alignSelf'
+  | 'placeSelf'
+>;
 
 export type SizingAtoms = Pick<
   Atoms,
@@ -307,6 +403,8 @@ export type MarginAtoms = Pick<
   Atoms,
   'm' | 'mt' | 'mb' | 'ml' | 'mr' | 'ms' | 'me' | 'mx' | 'my'
 >;
+
+export type GapAtoms = Pick<Atoms, 'gap' | 'rowGap' | 'columnGap'>;
 
 export type PaddingAtoms = Pick<
   Atoms,

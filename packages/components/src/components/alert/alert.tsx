@@ -76,7 +76,7 @@ export const Alert: FC<AlertProps> = ({
       role={role}
       {...props}
     >
-      <Flex alignItems="center" mx="-1.5">
+      <Flex align="center" mx="-1.5">
         <Box px={1.5}>
           {isValidElement<IconBaseProps>(icon) ? (
             cloneElement(icon, {

@@ -23,8 +23,6 @@ import {
   FloatingList,
   size as sizeFn,
 } from '@floating-ui/react';
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
-import cn from 'classnames';
 import {
   ButtonHTMLAttributes,
   FC,
@@ -47,10 +45,9 @@ import {
   getNextItem,
   getPrevItem,
 } from '../../../utils/list-navigation';
+import { Listbox } from '../../listbox';
 import { MenuButton } from '../../menu-button';
 import { MenuBarContext, MenuBarContextType } from '../menu-bar.context';
-
-import * as S from './menu-bar-submenu.css';
 
 export interface SubMenuProps extends ButtonHTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
@@ -252,47 +249,41 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
     ],
   );
 
-  const handleFocus = useCallback(
-    (e: FocusEvent<HTMLAnchorElement>) => {
-      setActiveIndex(null);
-      onFocus?.(e);
-    },
-    [onFocus],
-  );
+  const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+    setActiveIndex(null);
+    onFocus?.(e);
+  };
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLAnchorElement>) => {
-      if (
-        e.key === 'Enter' ||
-        e.key === ' ' ||
-        (!parent.isNested && e.key === 'ArrowDown') ||
-        (parent.isNested && e.key === 'ArrowRight')
-      ) {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsOpen(true);
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    if (
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      (!parent.isNested && e.key === 'ArrowDown') ||
+      (parent.isNested && e.key === 'ArrowRight')
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsOpen(true);
 
-        requestAnimationFrame(() => {
-          const item = getFirstItem(refs.floating);
-          item?.focus();
-        });
-      }
+      requestAnimationFrame(() => {
+        const item = getFirstItem(refs.floating);
+        item?.focus();
+      });
+    }
 
-      if (!parent.isNested && e.key === 'ArrowUp') {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsOpen(true);
+    if (!parent.isNested && e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsOpen(true);
 
-        requestAnimationFrame(() => {
-          const item = getLastItem(refs.floating);
-          item?.focus();
-        });
-      }
+      requestAnimationFrame(() => {
+        const item = getLastItem(refs.floating);
+        item?.focus();
+      });
+    }
 
-      onKeyDown?.(e);
-    },
-    [onKeyDown, parent.isNested, refs.floating],
-  );
+    onKeyDown?.(e);
+  };
 
   useEffect(() => {
     if (!tree) {
@@ -367,18 +358,17 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
                 initialFocus={-1}
                 modal={false}
               >
-                <ul
+                <Listbox
                   ref={refs.setFloating}
-                  className={cn(
-                    S.menuList,
-                    fadeStyle,
-                    status === 'entered' && fadeInStyle,
-                  )}
+                  maxHeight={80}
+                  maxWidth="xs"
                   style={floatingStyles}
+                  visible={status === 'entered'}
+                  zIndex={10}
                   {...getFloatingProps()}
                 >
                   {children}
-                </ul>
+                </Listbox>
               </FloatingFocusManager>
             )}
           </Transition>

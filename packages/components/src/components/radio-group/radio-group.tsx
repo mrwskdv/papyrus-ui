@@ -7,7 +7,6 @@ import {
   FC,
   FocusEventHandler,
   isValidElement,
-  ReactElement,
   ReactNode,
   useEffect,
   useState,
@@ -113,7 +112,7 @@ export interface RadioGroupProps {
    * The children of the RadioGroup, typically a list of Radio components.
    * Each child should be a `Radio` component, and the group should contain more then one radio buttons.
    */
-  children?: ReactElement<RadioProps>[];
+  children?: ReactNode;
 }
 
 export const RadioGroup: FC<RadioGroupProps> = ({
@@ -162,15 +161,15 @@ export const RadioGroup: FC<RadioGroupProps> = ({
     >
       <Flex
         aria-labelledby={labelId}
+        direction={direction}
         display={block ? 'flex' : 'inline-flex'}
-        flexDirection={direction}
-        flexWrap="wrap"
         mt="-1.5"
         mx="-2"
         role="group"
+        wrap="wrap"
       >
         {Children.map(children, (child) =>
-          isValidElement(child)
+          isValidElement<RadioProps>(child)
             ? cloneElement(child, {
                 name,
                 checked: child.props.value === valueState,

@@ -2,10 +2,10 @@ import { Meta, ArgTypes, Canvas } from '@storybook/addon-docs';
 import Tag, {
   Basic,
   Sizes,
-  Color,
+  Variants,
   Rounded,
   Clickable,
-  Removable,
+  Removable, Disabled,
 } from './tag.stories';
 
 <Meta of={Tag} />
@@ -42,12 +42,11 @@ Use the `size` prop to change the size of the tag. Available sizes are `sm` and 
 
 <Canvas of={Sizes} />
 
-### Color
+### Variants
 
-Use the `color`, `borderColor`, and `bg` props to change colors of the tag. This values supports all the colors from
-the theme.
+Use `variant` prop to change the appearance of the tag.
 
-<Canvas of={Color} />
+<Canvas of={Variants} />
 
 ### Rounded
 
@@ -67,6 +66,13 @@ Use the `removable` prop to make the tag removable. In this case, the `onClick` 
 action. Also, `Del` key will trigger click event on the tag.
 
 <Canvas of={Removable} />
+
+### Disabled
+
+Use the `disabled` prop to add disabled styles to the tag.
+
+<Canvas of={Disabled} />
+
 
 ## Guidelines
 

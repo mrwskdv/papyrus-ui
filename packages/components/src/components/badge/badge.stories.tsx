@@ -27,7 +27,7 @@ export const Basic = Template.bind({});
 export const BackgroundColor = Template.bind({});
 
 BackgroundColor.args = {
-  bg: 'danger400',
+  bg: 'secondary500',
 };
 
 export const Dot = Template.bind({});

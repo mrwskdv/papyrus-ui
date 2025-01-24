@@ -18,9 +18,9 @@ export const InputAction: FC<InputActionProps> = ({
   ...props
 }): JSX.Element => (
   <Flex
-    alignItems="center"
+    align="center"
     className={cn(S.root, className)}
-    justifyContent="center"
+    justify="center"
     minWidth={6}
     {...props}
   >

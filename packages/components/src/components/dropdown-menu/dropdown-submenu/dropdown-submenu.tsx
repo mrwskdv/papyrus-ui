@@ -184,28 +184,6 @@ export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
     ],
   );
 
-  const handleFocus = useCallback(() => {
-    setActiveIndex(null);
-  }, []);
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLAnchorElement>) => {
-      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsOpen(true);
-
-        requestAnimationFrame(() => {
-          const item = getFirstItem(refs.floating);
-          item?.focus();
-        });
-      }
-
-      onKeyDown?.(e);
-    },
-    [onKeyDown, refs.floating],
-  );
-
   useEffect(() => {
     if (!tree) {
       return;
@@ -231,6 +209,25 @@ export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
   }, [tree, isOpen, nodeId, parentId]);
 
   const isActive = parent.activeIndex === item.index;
+
+  const handleFocus = () => {
+    setActiveIndex(null);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsOpen(true);
+
+      requestAnimationFrame(() => {
+        const item = getFirstItem(refs.floating);
+        item?.focus();
+      });
+    }
+
+    onKeyDown?.(e);
+  };
 
   return (
     <FloatingNode id={nodeId}>

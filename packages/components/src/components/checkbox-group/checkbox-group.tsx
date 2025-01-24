@@ -6,7 +6,6 @@ import {
   cloneElement,
   FocusEventHandler,
   isValidElement,
-  ReactElement,
   ReactNode,
   useEffect,
   useState,
@@ -116,7 +115,7 @@ export interface CheckboxGroupProps<T extends boolean | Array<string>> {
    * The children of the CheckboxGroup, typically a list of Checkbox components.
    * Each child should be a `Checkbox` component, and the group can contain one or more checkboxes.
    */
-  children?: ReactElement<CheckboxProps> | ReactElement<CheckboxProps>[];
+  children?: ReactNode;
 }
 
 export const CheckboxGroup = <T extends boolean | Array<string>>({
@@ -181,15 +180,15 @@ export const CheckboxGroup = <T extends boolean | Array<string>>({
     >
       <Flex
         aria-labelledby={labelId}
+        direction={direction}
         display={block ? 'flex' : 'inline-flex'}
-        flexDirection={direction}
-        flexWrap="wrap"
         mt="-1.5"
         mx="-2"
         role="group"
+        wrap="wrap"
       >
         {Children.map(children, (child) =>
-          isValidElement(child)
+          isValidElement<CheckboxProps>(child)
             ? cloneElement(child, {
                 name,
                 checked: Array.isArray(valueState)

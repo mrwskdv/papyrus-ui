@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms, vars } from '@papyrus-ui/styles';
 import { style } from '@vanilla-extract/css';
 
 export const root = atoms({
@@ -9,6 +9,44 @@ export const root = atoms({
   border: 1,
   overflow: 'hidden',
 });
+
+export const rootVariant = {
+  primary: atoms({
+    borderColor: 'transparent',
+    color: 'primary700',
+    bg: 'primary100',
+  }),
+  secondary: atoms({
+    borderColor: 'transparent',
+    color: 'secondary700',
+    bg: 'secondary100',
+  }),
+  tertiary: atoms({
+    borderColor: 'neutral300',
+    color: 'neutral900',
+    bg: 'neutral50',
+  }),
+  info: atoms({
+    borderColor: 'transparent',
+    color: 'info700',
+    bg: 'info100',
+  }),
+  success: atoms({
+    borderColor: 'transparent',
+    color: 'success700',
+    bg: 'success100',
+  }),
+  warning: atoms({
+    borderColor: 'transparent',
+    color: 'warning700',
+    bg: 'warning100',
+  }),
+  danger: atoms({
+    borderColor: 'transparent',
+    color: 'danger700',
+    bg: 'danger100',
+  }),
+};
 
 export const rootSize = {
   sm: atoms({
@@ -29,6 +67,16 @@ export const rootRemovable = style({
       opacity: 1,
     },
   },
+});
+
+export const rootDisabled = style({
+  opacity: '0.4',
+});
+
+export const label = style({
+  display: 'inline-block',
+  ...vars.typography.caption,
+  lineHeight: 1,
 });
 
 export const remove = style({ pointerEvents: 'auto' });

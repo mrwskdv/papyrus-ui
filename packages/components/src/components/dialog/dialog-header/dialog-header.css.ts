@@ -1,13 +1,14 @@
-import { bpUp, SPACING, vars } from '@papyrus-ui/styles';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { atoms, bpUp, vars } from '@papyrus-ui/styles';
+import { styleVariants } from '@vanilla-extract/css';
 
-export const root = style({
+export const root = atoms({
   position: 'sticky',
   top: 0,
   display: 'flex',
-  alignItems: 'center',
-  gap: SPACING[4],
-  padding: `${SPACING[3.5]} ${SPACING[4]}`,
+  align: 'center',
+  gap: 4,
+  px: 4,
+  py: 3.5,
   zIndex: 20,
 });
 

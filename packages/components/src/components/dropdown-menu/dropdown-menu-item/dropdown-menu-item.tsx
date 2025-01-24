@@ -8,7 +8,6 @@ import {
   memo,
   MouseEvent,
   ReactElement,
-  useCallback,
   useContext,
 } from 'react';
 
@@ -34,21 +33,15 @@ export const DropdownMenuItem = memo<DropdownMenuItemProps>(
     const tree = useFloatingTree();
     const isActive = item.index === activeIndex;
 
-    const handleClick = useCallback(
-      (e: MouseEvent<HTMLAnchorElement>) => {
-        tree?.events.emit('click');
-        onClick?.(e);
-      },
-      [onClick, tree?.events],
-    );
+    const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+      tree?.events.emit('click');
+      onClick?.(e);
+    };
 
-    const handleFocus = useCallback(
-      (e: FocusEvent<HTMLAnchorElement>) => {
-        setActiveIndex(item.index);
-        onFocus?.(e);
-      },
-      [item.index, onFocus, setActiveIndex],
-    );
+    const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+      setActiveIndex(item.index);
+      onFocus?.(e);
+    };
 
     return (
       <MenuButton

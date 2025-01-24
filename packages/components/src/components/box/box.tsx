@@ -1,8 +1,9 @@
 import {
-  atoms,
   Atoms,
+  atoms,
   BorderAtoms,
   FlexItemAtoms,
+  GridItemAtoms,
   MarginAtoms,
   OverflowAtoms,
   PaddingAtoms,
@@ -17,9 +18,19 @@ import { ElementType, forwardRef, HTMLAttributes } from 'react';
 
 import * as S from './box.css';
 
+export type BoxDisplayValue =
+  | 'block'
+  | 'inline-block'
+  | 'flex'
+  | 'inline-flex'
+  | 'grid'
+  | 'inline-grid'
+  | 'none';
+
 export interface BoxProps
   extends PositionAtoms,
     FlexItemAtoms,
+    GridItemAtoms,
     SizingAtoms,
     RoundedAtoms,
     BorderAtoms,
@@ -28,10 +39,8 @@ export interface BoxProps
     OverflowAtoms,
     Omit<HTMLAttributes<HTMLElement>, 'color'> {
   as?: ElementType;
-  display?: ResponsiveValue<
-    'block' | 'inline-block' | 'flex' | 'inline-flex' | 'none'
-  >;
   bg?: Atoms['bg'];
+  display?: ResponsiveValue<BoxDisplayValue>;
   shadow?: Atoms['shadow'];
 }
 

@@ -38,7 +38,7 @@ Multiple.args = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   multiple: true,
-  defaultValue: ['Peter', 'Chris', 'Stewie'],
+  defaultValue: ['Chris', 'Bryan'],
 };
 
 export const Description = Template.bind({});
@@ -68,6 +68,10 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   id: 'autocomplete-disabled',
   disabled: true,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  multiple: true,
+  value: ['Chris', 'Bryan'],
 };
 
 export const ReadOnly = Template.bind({});
@@ -75,11 +79,15 @@ export const ReadOnly = Template.bind({});
 ReadOnly.args = {
   id: 'autocomplete-readonly',
   readOnly: true,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  multiple: true,
+  value: ['Chris', 'Bryan'],
 };
 
 export function Sizes(args: AutocompleteProps) {
   return (
-    <Flex flexDirection="column" style={{ minHeight: '384px' }} width={64}>
+    <Flex direction="column" style={{ minHeight: '384px' }} width={64}>
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <Autocomplete
@@ -96,7 +104,7 @@ export function Sizes(args: AutocompleteProps) {
 
 export function WithIcon(args: AutocompleteProps) {
   return (
-    <Flex flexDirection="column" style={{ minHeight: '384px' }} width={64}>
+    <Flex direction="column" style={{ minHeight: '384px' }} width={64}>
       <Box mt={4}>
         <Autocomplete
           {...args}

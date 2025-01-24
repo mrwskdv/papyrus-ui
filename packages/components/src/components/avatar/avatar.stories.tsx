@@ -38,7 +38,7 @@ export function Basic(args: AvatarProps) {
 
 export function Sizes(args: AvatarProps) {
   return (
-    <Flex alignItems="center">
+    <Flex align="center">
       {sizes.map((size, i) => (
         <Box key={i} ml={i && 2}>
           <Avatar {...args} size={size}>

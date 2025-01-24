@@ -25,7 +25,7 @@ Basic.args = {
 };
 
 export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
-  <Flex flexWrap="wrap" mt="-8" mx="-8">
+  <Flex mt="-8" mx="-8" wrap="wrap">
     {variants.map((variant) => (
       <Box
         key={variant}
@@ -37,7 +37,7 @@ export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
           {capitalize(variant)} Variant
         </Heading>
 
-        <Flex flexDirection="column" mt="-4">
+        <Flex direction="column" mt="-4">
           {levels.map((level) => (
             <Box key={level} mt={4}>
               <Heading

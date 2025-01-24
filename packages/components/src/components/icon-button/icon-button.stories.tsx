@@ -40,7 +40,7 @@ export function Basic(args: IconButtonProps) {
 
 export function Variants(args: IconButtonProps) {
   return (
-    <Flex flexWrap="wrap" mt="-4" mx="-2">
+    <Flex mt="-4" mx="-2" wrap="wrap">
       {variants.map((variant, i) => (
         <Box key={i} mt={4} px={2} title={`${variant} variant IconButton`}>
           <IconButton
@@ -56,7 +56,7 @@ export function Variants(args: IconButtonProps) {
 
 export function Sizes(args: IconButtonProps) {
   return (
-    <Flex alignItems="center" flexWrap="wrap" mt="-4" mx="-2">
+    <Flex align="center" mt="-4" mx="-2" wrap="wrap">
       {sizes.map((size, i) => (
         <Box key={i} mt={4} px={2}>
           <IconButton {...args} size={size} title={`${size} size IconButton`} />

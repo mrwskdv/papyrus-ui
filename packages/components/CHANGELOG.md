@@ -1,5 +1,13 @@
 # @papyrus-ui/components
 
+## 0.4.1
+
+### Patch Changes
+
+- 475272b: Added Grid component and styles
+- Updated dependencies [475272b]
+  - @papyrus-ui/styles@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

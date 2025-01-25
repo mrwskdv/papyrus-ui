@@ -2765,7 +2765,7 @@ __metadata:
     rollup-plugin-banner2: "npm:^1.3.0"
     typescript: "npm:4.7.4"
   peerDependencies:
-    "@papyrus-ui/styles": ^0.4.1
+    "@papyrus-ui/styles": ^0.4.2
     "@vanilla-extract/css": ^1.15.3
     react: ^18.2.0
     react-dom: ^18.2.0

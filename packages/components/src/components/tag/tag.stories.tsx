@@ -16,6 +16,7 @@ const variants: TagVariant[] = [
   'success',
   'warning',
   'danger',
+  'ghost',
 ];
 
 export default {

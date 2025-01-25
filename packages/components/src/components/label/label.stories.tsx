@@ -18,7 +18,7 @@ Basic.args = {
 };
 
 export const TruncateLongText: StoryFn<LabelProps> = (args) => (
-  <Box maxWidth="sm">
+  <Box maxW="sm">
     <Label {...args} />
   </Box>
 );

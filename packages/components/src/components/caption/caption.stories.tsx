@@ -18,7 +18,7 @@ Basic.args = {
 };
 
 export const TruncateLongText: StoryFn<CaptionProps> = (args) => (
-  <Box maxWidth="sm">
+  <Box maxW="sm">
     <Caption {...args} />
   </Box>
 );

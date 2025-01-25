@@ -19,7 +19,7 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<AlertProps> = (args) => (
-  <Box width={80}>
+  <Box w={80}>
     <Alert {...args} />
   </Box>
 );
@@ -35,7 +35,7 @@ const VARIANTS: AlertVariant[] = [
 ];
 
 export const Variants: StoryFn<AlertProps> = (args) => (
-  <Box width={80}>
+  <Box w={80}>
     {VARIANTS.map((variant, i) => (
       <Fragment key={i}>
         <Heading level={3} mb={1.5} mt={i > 0 ? 4 : 0}>

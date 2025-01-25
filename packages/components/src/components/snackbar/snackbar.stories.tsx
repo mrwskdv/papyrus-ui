@@ -78,7 +78,7 @@ export const Basic: StoryFn<SnackbarProps> = (args) => {
     <Flex
       align="center"
       direction="column"
-      height={64}
+      h={64}
       justify="center"
       style={{
         width: '60vw',
@@ -146,7 +146,7 @@ export const Placement: StoryFn<SnackbarProps> = (args) => {
     <Flex
       align="center"
       direction="column"
-      height={64}
+      h={64}
       justify="center"
       style={{
         width: '60vw',
@@ -184,7 +184,7 @@ export const Variants: StoryFn<SnackbarProps> = (args) => (
   <Flex
     align="center"
     direction="column"
-    height={96}
+    h={96}
     justify="center"
     style={{
       width: '60vw',
@@ -211,7 +211,7 @@ export const WithAction: StoryFn<SnackbarProps> = (args) => (
   <Flex
     align="center"
     direction="column"
-    height={64}
+    h={64}
     justify="center"
     style={{
       width: '60vw',
@@ -238,7 +238,7 @@ export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
   <Flex
     align="center"
     direction="column"
-    height={64}
+    h={64}
     justify="center"
     style={{
       width: '60vw',
@@ -262,7 +262,7 @@ export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
   <Flex
     align="center"
     direction="column"
-    height={64}
+    h={64}
     justify="center"
     style={{
       width: '60vw',

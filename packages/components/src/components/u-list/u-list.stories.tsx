@@ -14,7 +14,7 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<UListProps> = (args) => (
-  <Box minWidth={[0, 96]}>
+  <Box minW={[0, 96]}>
     <UList {...args}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>
@@ -44,7 +44,7 @@ NoneType.args = {
 };
 
 export const WithIcons: StoryFn<UListProps> = (args) => (
-  <Box minWidth={[0, 96]}>
+  <Box minW={[0, 96]}>
     <UList {...args} type="none">
       <ListItem>
         <Marker role="none">

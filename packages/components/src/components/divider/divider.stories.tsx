@@ -11,7 +11,7 @@ const meta: Meta = {
 };
 
 export const Basic: StoryFn<DividerProps> = (args) => (
-  <Box width={80}>
+  <Box w={80}>
     <Divider {...args} />
   </Box>
 );
@@ -22,7 +22,7 @@ export const Direction: StoryFn<DividerProps> = (args) => (
       Horizontal
     </Heading>
 
-    <Box width={80}>
+    <Box w={80}>
       <Divider {...args} direction="horizontal" />
     </Box>
 
@@ -30,7 +30,7 @@ export const Direction: StoryFn<DividerProps> = (args) => (
       Vertical
     </Heading>
 
-    <Flex height={48} justify="center">
+    <Flex h={48} justify="center">
       <Divider {...args} direction="vertical" />
     </Flex>
   </>

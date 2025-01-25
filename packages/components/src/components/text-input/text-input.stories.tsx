@@ -22,7 +22,7 @@ export default {
 };
 
 const Template: StoryFn<TextInputProps> = (args) => (
-  <Box width={64}>
+  <Box w={64}>
     <TextInput {...args} />
   </Box>
 );
@@ -42,7 +42,7 @@ Clearable.args = {
 
 export function Sizes(args: TextInputProps) {
   return (
-    <Flex direction="column" width={64}>
+    <Flex direction="column" w={64}>
       {sizes.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <TextInput {...args} id={`text-input-size-${size}`} size={size} />
@@ -54,7 +54,7 @@ export function Sizes(args: TextInputProps) {
 
 export function WithIcon(args: TextInputProps) {
   return (
-    <Flex direction="column" width={64}>
+    <Flex direction="column" w={64}>
       <Box mb={4}>
         <TextInput
           {...args}

@@ -22,7 +22,7 @@ const meta: Meta<typeof Autocomplete> = {
 };
 
 const Template: StoryFn<AutocompleteProps> = (args) => (
-  <Box style={{ minHeight: '256px' }} width={64}>
+  <Box style={{ minHeight: '256px' }} w={64}>
     <Autocomplete {...args} options={OPTIONS_LIST} />
   </Box>
 );
@@ -87,7 +87,7 @@ ReadOnly.args = {
 
 export function Sizes(args: AutocompleteProps) {
   return (
-    <Flex direction="column" style={{ minHeight: '384px' }} width={64}>
+    <Flex direction="column" style={{ minHeight: '384px' }} w={64}>
       {SIZE_OPTIONS.map((size, i) => (
         <Box key={i} mt={i && 4}>
           <Autocomplete
@@ -104,7 +104,7 @@ export function Sizes(args: AutocompleteProps) {
 
 export function WithIcon(args: AutocompleteProps) {
   return (
-    <Flex direction="column" style={{ minHeight: '384px' }} width={64}>
+    <Flex direction="column" style={{ minHeight: '384px' }} w={64}>
       <Box mt={4}>
         <Autocomplete
           {...args}

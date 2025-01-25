@@ -21,7 +21,7 @@ export const InputAction: FC<InputActionProps> = ({
     align="center"
     className={cn(S.root, className)}
     justify="center"
-    minWidth={6}
+    minW={6}
     {...props}
   >
     {children}

@@ -30,7 +30,7 @@ export const rootSize = {
     },
   }),
   lg: atoms({
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     p: {
       mobile: 0,
       tablet: 4,
@@ -41,7 +41,7 @@ export const rootSize = {
     },
   }),
   xl: atoms({
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     px: {
       mobile: 0,
       desktop: 12,

@@ -216,6 +216,14 @@ const responsiveProperties = defineProperties({
     justify: ['justifyContent'],
     align: ['alignItems'],
 
+    w: ['width'],
+    minW: ['minWidth'],
+    maxW: ['maxWidth'],
+
+    h: ['height'],
+    minH: ['minHeight'],
+    maxH: ['maxHeight'],
+
     rounded: [
       'borderTopLeftRadius',
       'borderTopRightRadius',
@@ -351,14 +359,7 @@ export type GridItemAtoms = Pick<
 
 export type SizingAtoms = Pick<
   Atoms,
-  | 'aspectRatio'
-  | 'inset'
-  | 'width'
-  | 'minWidth'
-  | 'maxWidth'
-  | 'height'
-  | 'minHeight'
-  | 'maxHeight'
+  'aspectRatio' | 'inset' | 'w' | 'minW' | 'maxW' | 'h' | 'minH' | 'maxH'
 >;
 
 export type RoundedAtoms = Pick<

@@ -26,7 +26,8 @@ export type TagVariant =
   | 'info'
   | 'success'
   | 'warning'
-  | 'danger';
+  | 'danger'
+  | 'ghost';
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   disabled?: boolean;

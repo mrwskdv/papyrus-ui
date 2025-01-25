@@ -27,12 +27,7 @@ Basic.args = {
 export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
   <Flex mt="-8" mx="-8" wrap="wrap">
     {variants.map((variant) => (
-      <Box
-        key={variant}
-        mt={8}
-        px={8}
-        width={{ mobile: 'full', desktop: '1/2' }}
-      >
+      <Box key={variant} mt={8} px={8} w={{ mobile: 'full', desktop: '1/2' }}>
         <Heading as="h4" color="neutral500" level={6} mb={4}>
           {capitalize(variant)} Variant
         </Heading>
@@ -58,7 +53,7 @@ export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
 );
 
 export const TruncateLongText: StoryFn<TextProps> = (args) => (
-  <Box maxWidth="sm">
+  <Box maxW="sm">
     <Heading {...args} />
   </Box>
 );

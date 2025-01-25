@@ -37,7 +37,7 @@ export interface BoxProps
     PaddingAtoms,
     MarginAtoms,
     OverflowAtoms,
-    Omit<HTMLAttributes<HTMLElement>, 'color'> {
+    HTMLAttributes<HTMLElement> {
   as?: ElementType;
   bg?: Atoms['bg'];
   display?: ResponsiveValue<BoxDisplayValue>;

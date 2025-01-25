@@ -229,57 +229,54 @@ export const GRID_AUTO_FLOW = {
 
 export const GAP = PADDING;
 
-export const JUSTIFY_CONTENT = {
-  normal: 'normal',
-  start: 'flex-start',
-  end: 'flex-end',
-  center: 'center',
-  between: 'space-between',
-  around: 'space-around',
-  evenly: 'space-evenly',
-  stretch: 'stretch',
-};
+export const JUSTIFY_CONTENT = [
+  'normal',
+  'flex-start',
+  'flex-end',
+  'center',
+  'space-between',
+  'space-around',
+  'space-evenly',
+  'stretch',
+] as const;
 
 export const JUSTIFY_ITEMS = ['start', 'end', 'center', 'stretch'] as const;
 
 export const JUSTIFY_SELF = [...JUSTIFY_ITEMS, 'auto'] as const;
 
-export const ALIGN_CONTENT = {
-  normal: 'normal',
-  center: 'center',
-  start: 'flex-start',
-  end: 'flex-end',
-  between: 'space-between',
-  around: 'space-around',
-  evenly: 'space-evenly',
-  baseline: 'baseline',
-  stretch: 'stretch',
-};
+export const ALIGN_CONTENT = [
+  'normal',
+  'center',
+  'flex-start',
+  'flex-end',
+  'space-between',
+  'space-around',
+  'space-evenly',
+  'baseline',
+  'stretch',
+] as const;
 
-export const ALIGN_ITEMS = {
-  start: 'flex-start',
-  end: 'flex-end',
-  center: 'center',
-  baseline: 'baseline',
-  stretch: 'stretch',
-};
+export const ALIGN_ITEMS = [
+  'flex-start',
+  'flex-end',
+  'center',
+  'baseline',
+  'stretch',
+] as const;
 
-export const ALIGN_SELF = {
-  ...ALIGN_ITEMS,
-  auto: 'auto',
-};
+export const ALIGN_SELF = [...ALIGN_ITEMS, 'auto'] as const;
 
-export const PLACE_CONTENT = {
-  normal: 'normal',
-  center: 'center',
-  start: 'start',
-  end: 'end',
-  between: 'space-between',
-  around: 'space-around',
-  evenly: 'space-evenly',
-  baseline: 'baseline',
-  stretch: 'stretch',
-};
+export const PLACE_CONTENT = [
+  'normal',
+  'center',
+  'start',
+  'end',
+  'space-between',
+  'space-around',
+  'space-evenly',
+  'baseline',
+  'stretch',
+] as const;
 
 export const PLACE_ITEMS = [
   'start',

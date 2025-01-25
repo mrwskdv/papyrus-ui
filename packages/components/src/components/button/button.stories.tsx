@@ -36,7 +36,7 @@ export function Variants(args: ButtonProps) {
   return (
     <Flex mt="-4" mx="-2" wrap="wrap">
       {variants.map((variant, i) => (
-        <Box key={i} mt={4} px={2} width="auto">
+        <Box key={i} mt={4} px={2} w="auto">
           <Button {...args} variant={variant}>
             {variant}
           </Button>

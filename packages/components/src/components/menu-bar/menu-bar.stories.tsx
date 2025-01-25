@@ -29,7 +29,7 @@ export default {
 };
 
 const Template: StoryFn<MenuBarProps> = (args) => (
-  <Box height={64}>
+  <Box h={64}>
     <MenuBar {...args}>
       <MenuBar.Item icon={<BiHome />} selected>
         Option 1

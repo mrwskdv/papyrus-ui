@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --immutable --refresh-lockfile
 
       - name: Check dependency licenses
         run: yarn check:licenses

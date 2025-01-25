@@ -11,7 +11,7 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<OListProps> = (args) => (
-  <Box minWidth={[0, 96]}>
+  <Box minW={[0, 96]}>
     <OList {...args}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>

@@ -23,7 +23,7 @@ export default {
 };
 
 export const Basic: StoryFn<DropdownMenuProps> = (args) => (
-  <Box height={64}>
+  <Box h={64}>
     <DropdownMenu {...args}>
       <DropdownMenu.Trigger>
         <IconButton>

@@ -25,7 +25,7 @@ const meta: Meta<typeof RadioGroup> = {
 };
 
 const Template: StoryFn<typeof RadioGroup> = (args) => (
-  <Box width={args.block ? 96 : undefined}>
+  <Box w={args.block ? 96 : undefined}>
     <RadioGroup {...args} />
   </Box>
 );

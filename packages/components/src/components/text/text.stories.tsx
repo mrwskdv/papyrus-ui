@@ -56,7 +56,7 @@ BoldText.args = {
 };
 
 export const TruncateLongText: StoryFn<TextProps> = (args) => (
-  <Box maxWidth="sm">
+  <Box maxW="sm">
     <Text {...args} />
   </Box>
 );

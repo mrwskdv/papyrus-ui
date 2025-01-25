@@ -591,7 +591,6 @@ export const Autocomplete = forwardRef(
                     readOnly={readOnly}
                     removable
                     tabIndex={-1}
-                    variant="tertiary"
                     onMouseDown={handleRemoveMouseDown}
                   >
                     {getLabel(item)}
@@ -602,7 +601,7 @@ export const Autocomplete = forwardRef(
             {(!multiple ||
               selectedOptions.length === 0 ||
               (!disabled && !readOnly)) && (
-              <Box as="span" display="block" mt={1} px={0.5} width="full">
+              <Box as="span" display="block" mt={1} px={0.5} w="full">
                 <input
                   aria-activedescendant={
                     activeIndex != null

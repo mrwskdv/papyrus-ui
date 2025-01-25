@@ -46,6 +46,11 @@ export const rootVariant = {
     color: 'danger700',
     bg: 'danger100',
   }),
+  ghost: atoms({
+    borderColor: 'light600',
+    color: 'white',
+    bg: 'light300',
+  }),
 };
 
 export const rootSize = {

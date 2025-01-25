@@ -26,7 +26,7 @@ const meta: Meta<typeof CheckboxGroup> = {
 };
 
 const Template: StoryFn<typeof CheckboxGroup> = (args) => (
-  <Box width={args.block ? 96 : undefined}>
+  <Box w={args.block ? 96 : undefined}>
     <CheckboxGroup {...args} />
   </Box>
 );

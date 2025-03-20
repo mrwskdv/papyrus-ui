@@ -1,5 +1,11 @@
 # @papyrus-ui/components
 
+## 0.4.3
+
+### Patch Changes
+
+- 04282a0: Refined button and tag fonts
+
 ## 0.4.2
 
 ### Patch Changes

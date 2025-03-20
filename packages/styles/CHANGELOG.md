@@ -1,5 +1,11 @@
 # @papyrus-ui/styles
 
+## 0.4.3
+
+### Patch Changes
+
+- 3cf4121: Updated aspect ratio styles
+
 ## 0.4.2
 
 ### Patch Changes

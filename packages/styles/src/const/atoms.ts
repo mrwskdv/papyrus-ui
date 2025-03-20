@@ -295,13 +295,6 @@ export const PLACE_SELF = [
 ] as const;
 
 export const ASPECT_RATIO = {
-  square: '1/1',
-  landscape: '4/3',
-  photo: '3/2',
-  widescreen: '16/9',
-  portrait: '3/4',
-  portraitPhoto: '2/3',
-  portraitWidescreen: '9/16',
   auto: 'auto',
 };
 

@@ -130,6 +130,17 @@
     "fade": "opacity 0.15s linear",
     "collapse": "max-height 0.3s ease"
   },
+  "aspectRatio": {
+    "square": "1/1",
+    "landscapeStandard": "4/3",
+    "landscapeClassic": "3/2",
+    "landscapeWide": "16/9",
+    "landscapeUltraWide": "5/2",
+    "landscapeSuperWide": "32/9",
+    "portraitStandard": "3/4",
+    "portraitClassic": "2/3",
+    "portraitTall": "9/16"
+  },
   "typography": {
     "button": {
       "fontFamily": "'Source Sans 3', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",

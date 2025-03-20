@@ -142,7 +142,7 @@ const responsiveProperties = defineProperties({
     placeItems: PLACE_ITEMS,
     placeSelf: PLACE_SELF,
 
-    aspectRatio: ASPECT_RATIO,
+    aspectRatio: { ...vars.aspectRatio, ...ASPECT_RATIO },
 
     width: WIDTH,
     maxWidth: MAX_WIDTH,

@@ -733,6 +733,60 @@
               "type": "string",
               "isAlias": false,
               "value": "max-height 0.3s ease"
+            },
+            {
+              "name": "aspectRatio/square",
+              "type": "string",
+              "isAlias": false,
+              "value": "1/1"
+            },
+            {
+              "name": "aspectRatio/landscapeStandard",
+              "type": "string",
+              "isAlias": false,
+              "value": "4/3"
+            },
+            {
+              "name": "aspectRatio/landscapeClassic",
+              "type": "string",
+              "isAlias": false,
+              "value": "3/2"
+            },
+            {
+              "name": "aspectRatio/landscapeWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "16/9"
+            },
+            {
+              "name": "aspectRatio/landscapeUltraWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "5/2"
+            },
+            {
+              "name": "aspectRatio/landscapeSuperWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "32/9"
+            },
+            {
+              "name": "aspectRatio/portraitStandard",
+              "type": "string",
+              "isAlias": false,
+              "value": "3/4"
+            },
+            {
+              "name": "aspectRatio/portraitClassic",
+              "type": "string",
+              "isAlias": false,
+              "value": "2/3"
+            },
+            {
+              "name": "aspectRatio/portraitTall",
+              "type": "string",
+              "isAlias": false,
+              "value": "9/16"
             }
           ]
         },
@@ -1464,6 +1518,60 @@
               "type": "string",
               "isAlias": false,
               "value": "max-height 0.3s ease"
+            },
+            {
+              "name": "aspectRatio/square",
+              "type": "string",
+              "isAlias": false,
+              "value": "1/1"
+            },
+            {
+              "name": "aspectRatio/landscapeStandard",
+              "type": "string",
+              "isAlias": false,
+              "value": "4/3"
+            },
+            {
+              "name": "aspectRatio/landscapeClassic",
+              "type": "string",
+              "isAlias": false,
+              "value": "3/2"
+            },
+            {
+              "name": "aspectRatio/landscapeWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "16/9"
+            },
+            {
+              "name": "aspectRatio/landscapeUltraWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "5/2"
+            },
+            {
+              "name": "aspectRatio/landscapeSuperWide",
+              "type": "string",
+              "isAlias": false,
+              "value": "32/9"
+            },
+            {
+              "name": "aspectRatio/portraitStandard",
+              "type": "string",
+              "isAlias": false,
+              "value": "3/4"
+            },
+            {
+              "name": "aspectRatio/portraitClassic",
+              "type": "string",
+              "isAlias": false,
+              "value": "2/3"
+            },
+            {
+              "name": "aspectRatio/portraitTall",
+              "type": "string",
+              "isAlias": false,
+              "value": "9/16"
             }
           ]
         }

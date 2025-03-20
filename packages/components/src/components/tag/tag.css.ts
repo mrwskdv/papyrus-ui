@@ -7,6 +7,7 @@ export const root = atoms({
   justifyContent: 'center',
   maxWidth: 'full',
   border: 1,
+  gap: 0.5,
   overflow: 'hidden',
 });
 
@@ -79,9 +80,10 @@ export const rootDisabled = style({
 });
 
 export const label = style({
-  display: 'inline-block',
+  display: 'block',
   ...vars.typography.caption,
   lineHeight: 1,
+  marginBottom: '-0.125rem',
 });
 
 export const remove = style({ pointerEvents: 'auto' });

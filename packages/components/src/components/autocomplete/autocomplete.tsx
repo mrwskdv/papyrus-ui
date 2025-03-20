@@ -590,7 +590,9 @@ export const Autocomplete = forwardRef(
                     disabled={disabled}
                     readOnly={readOnly}
                     removable
+                    rounded
                     tabIndex={-1}
+                    variant="tertiary"
                     onMouseDown={handleRemoveMouseDown}
                   >
                     {getLabel(item)}

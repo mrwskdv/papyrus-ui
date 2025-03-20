@@ -116,7 +116,6 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
             data-testid="clear-icon"
             fontSize="sm"
             interactive
-            ms={1}
           >
             <BiX />
           </Icon>

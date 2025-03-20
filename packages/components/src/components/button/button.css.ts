@@ -225,4 +225,5 @@ export const endIcon = atoms({
 export const label = style({
   display: 'inline-block',
   ...vars.typography.button,
+  marginBottom: '-0.125rem',
 });

@@ -9,24 +9,15 @@ export const rootSize = {
     px: 4,
   }),
   md: atoms({
+    py: 3,
     px: 4,
-    py: {
-      mobile: 4,
-      tablet: 0,
-    },
   }),
   lg: atoms({
+    py: 3,
     px: 4,
-    py: {
-      mobile: 4,
-      tablet: 0,
-    },
   }),
   xl: atoms({
+    py: 3,
     px: 4,
-    py: {
-      mobile: 4,
-      desktop: 0,
-    },
   }),
 };

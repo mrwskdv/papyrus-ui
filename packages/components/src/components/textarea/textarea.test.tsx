@@ -77,7 +77,7 @@ describe('Textarea', () => {
     describe('When a user types into the input field', () => {
       it('Then it should call the `onChange` handler with the new value', async () => {
         const onChange = jest.fn();
-        render(<Textarea onChange={onChange} />);
+        render(<Textarea defaultValue="" onChange={onChange} />);
         await userEvent.type(screen.getByRole('textbox'), 'Bob');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         expect(onChange['mock'].calls[0][0].target.value).toEqual('Bob');
@@ -88,16 +88,16 @@ describe('Textarea', () => {
   describe('Given the textarea component with the `value` prop', () => {
     describe('When it is rendered', () => {
       it('Then it should render with the value', () => {
-        render(<Textarea value="Bob" />);
+        render(<Textarea readOnly value="Bob" />);
         expect(screen.getByRole('textbox')).toHaveValue('Bob');
       });
     });
 
     describe('When the `value` prop changes', () => {
       it('Then it should render with the new value', () => {
-        const { rerender } = render(<Textarea value="Bob" />);
+        const { rerender } = render(<Textarea readOnly value="Bob" />);
         expect(screen.getByRole('textbox')).toHaveValue('Bob');
-        rerender(<Textarea value="Alice" />);
+        rerender(<Textarea readOnly value="Alice" />);
         expect(screen.getByRole('textbox')).toHaveValue('Alice');
       });
     });

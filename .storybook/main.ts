@@ -6,7 +6,9 @@ import { mergeConfig } from 'vite';
 const config: StorybookConfig = {
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
+    options: {
+      strictMode: true,
+    },
   },
 
   core: {

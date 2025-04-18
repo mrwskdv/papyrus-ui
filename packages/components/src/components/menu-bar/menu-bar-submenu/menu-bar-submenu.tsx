@@ -22,6 +22,7 @@ import {
   FloatingFocusManager,
   FloatingList,
   size as sizeFn,
+  FloatingPortal,
 } from '@floating-ui/react';
 import {
   ButtonHTMLAttributes,
@@ -349,27 +350,30 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
           <Transition
             in={isOpen}
             mountOnEnter
+            nodeRef={refs.floating}
             timeout={TRANSITION_TIMEOUT}
             unmountOnExit
           >
             {(status) => (
-              <FloatingFocusManager
-                context={context}
-                initialFocus={-1}
-                modal={false}
-              >
-                <Listbox
-                  ref={refs.setFloating}
-                  maxHeight={80}
-                  maxWidth="xs"
-                  style={floatingStyles}
-                  visible={status === 'entered'}
-                  zIndex={10}
-                  {...getFloatingProps()}
+              <FloatingPortal>
+                <FloatingFocusManager
+                  context={context}
+                  initialFocus={-1}
+                  modal={false}
                 >
-                  {children}
-                </Listbox>
-              </FloatingFocusManager>
+                  <Listbox
+                    ref={refs.setFloating}
+                    maxHeight={80}
+                    maxWidth="xs"
+                    style={floatingStyles}
+                    visible={status === 'entered'}
+                    zIndex={10}
+                    {...getFloatingProps()}
+                  >
+                    {children}
+                  </Listbox>
+                </FloatingFocusManager>
+              </FloatingPortal>
             )}
           </Transition>
         </FloatingList>

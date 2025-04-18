@@ -1,5 +1,4 @@
-import { atoms, bpUp, vars } from '@papyrus-ui/styles';
-import { styleVariants } from '@vanilla-extract/css';
+import { atoms } from '@papyrus-ui/styles';
 
 export const root = atoms({
   position: 'sticky',
@@ -12,39 +11,21 @@ export const root = atoms({
   zIndex: 20,
 });
 
-export const rootSize = styleVariants({
-  sm: {},
-  md: [
-    {
-      borderColor: vars.color.neutral100,
-      borderTopWidth: 1,
-      background: vars.color.white,
-    },
-    bpUp('tablet', {
-      borderTopWidth: 0,
-      background: 'transparent',
-    }),
-  ],
-  lg: [
-    {
-      borderColor: vars.color.neutral100,
-      borderTopWidth: 1,
-      background: vars.color.white,
-    },
-    bpUp('tablet', {
-      borderTopWidth: 0,
-      background: 'transparent',
-    }),
-  ],
-  xl: [
-    {
-      borderColor: vars.color.neutral100,
-      borderTopWidth: 1,
-      background: vars.color.white,
-    },
-    bpUp('desktop', {
-      borderTopWidth: 0,
-      background: 'transparent',
-    }),
-  ],
-});
+export const rootSize = {
+  sm: '',
+  md: atoms({
+    borderTop: 1,
+    borderColor: 'neutral100',
+    bg: 'white',
+  }),
+  lg: atoms({
+    borderTop: 1,
+    borderColor: 'neutral100',
+    bg: 'white',
+  }),
+  xl: atoms({
+    borderTop: 1,
+    borderColor: 'neutral100',
+    bg: 'white',
+  }),
+};

@@ -6,7 +6,6 @@ import {
   forwardRef,
   HTMLAttributes,
   KeyboardEvent,
-  memo,
   MouseEvent,
   MouseEventHandler,
   ReactNode,
@@ -40,7 +39,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   children?: ReactNode;
 }
 
-const TagComponent = forwardRef<HTMLDivElement, TagProps>(
+export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (
     {
       className,
@@ -125,6 +124,4 @@ const TagComponent = forwardRef<HTMLDivElement, TagProps>(
   },
 );
 
-TagComponent.displayName = 'Tag';
-
-export const Tag = memo(TagComponent);
+Tag.displayName = 'Tag';

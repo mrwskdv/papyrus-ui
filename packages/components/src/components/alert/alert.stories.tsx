@@ -38,7 +38,7 @@ export const Variants: StoryFn<AlertProps> = (args) => (
   <Box w={80}>
     {VARIANTS.map((variant, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 4 : 0}>
+        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
           {capitalize(variant)}
         </Heading>
 

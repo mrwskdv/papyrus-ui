@@ -7,7 +7,6 @@ import {
   ElementType,
   forwardRef,
   isValidElement,
-  memo,
   ReactNode,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
@@ -43,7 +42,7 @@ export interface ButtonProps
   variant?: ButtonVariant;
 }
 
-const ButtonComponent = forwardRef<HTMLElement, ButtonProps>(
+export const Button = forwardRef<HTMLElement, ButtonProps>(
   (
     {
       as: As = 'button',
@@ -95,6 +94,4 @@ const ButtonComponent = forwardRef<HTMLElement, ButtonProps>(
   ),
 );
 
-ButtonComponent.displayName = 'Button';
-
-export const Button = memo(ButtonComponent);
+Button.displayName = 'Button';

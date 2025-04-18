@@ -26,7 +26,7 @@ export const Direction: StoryFn<DividerProps> = (args) => (
       <Divider {...args} direction="horizontal" />
     </Box>
 
-    <Heading level={3} mb={4} mt={8}>
+    <Heading level={3} mb={4} mt={6}>
       Vertical
     </Heading>
 

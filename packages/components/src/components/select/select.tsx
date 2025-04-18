@@ -6,7 +6,6 @@ import {
   ForwardedRef,
   forwardRef,
   isValidElement,
-  memo,
   ReactElement,
   ReactNode,
   RefAttributes,
@@ -25,7 +24,7 @@ import { InputGroup } from '../input-group';
 import * as S from './select.css';
 
 export type SelectValue<IsMulti extends boolean> = IsMulti extends true
-  ? readonly string[]
+  ? string[]
   : string | undefined;
 
 export interface SelectProps<IsMulti extends boolean = false>
@@ -116,9 +115,10 @@ export interface SelectFn {
   <IsMulti extends boolean = false>(
     props: SelectProps<IsMulti> & RefAttributes<HTMLSelectElement>,
   ): ReactElement;
+  displayName: string;
 }
 
-const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   <IsMulti extends boolean = false>(
     {
       description,
@@ -193,8 +193,6 @@ const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
       </InputGroup>
     );
   },
-);
+) as SelectFn;
 
-SelectComponent.displayName = 'Select';
-
-export const Select = memo(SelectComponent) as SelectFn;
+Select.displayName = 'Select';

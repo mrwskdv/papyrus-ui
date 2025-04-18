@@ -1,6 +1,10 @@
 'use client';
 
-import { FloatingFocusManager, FloatingList } from '@floating-ui/react';
+import {
+  FloatingFocusManager,
+  FloatingList,
+  FloatingPortal,
+} from '@floating-ui/react';
 import { FC, HTMLAttributes, useContext } from 'react';
 import { Transition } from 'react-transition-group';
 
@@ -40,31 +44,32 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
       <Transition
         in={isOpen}
         mountOnEnter
+        nodeRef={refs.floating}
         timeout={TRANSITION_TIMEOUT}
         unmountOnExit
       >
         {(status) => (
-          <FloatingFocusManager
-            context={context}
-            initialFocus={initialFocus}
-            modal={false}
-            returnFocus={returnFocus}
-          >
-            <Listbox
-              ref={refs.setFloating}
-              maxHeight={80}
-              maxWidth="xs"
-              style={floatingStyles}
-              visible={status === 'entered'}
-              {...getFloatingProps(props)}
+          <FloatingPortal>
+            <FloatingFocusManager
+              context={context}
+              initialFocus={initialFocus}
+              modal={false}
+              returnFocus={returnFocus}
             >
-              {children}
-            </Listbox>
-          </FloatingFocusManager>
+              <Listbox
+                ref={refs.setFloating}
+                maxHeight={80}
+                maxWidth="xs"
+                style={floatingStyles}
+                visible={status === 'entered'}
+                {...getFloatingProps(props)}
+              >
+                {children}
+              </Listbox>
+            </FloatingFocusManager>
+          </FloatingPortal>
         )}
       </Transition>
     </FloatingList>
   );
 };
-
-DropdownMenuContent.displayName = 'DropdownMenuContent';

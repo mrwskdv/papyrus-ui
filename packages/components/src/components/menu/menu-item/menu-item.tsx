@@ -3,9 +3,9 @@
 import {
   AnchorHTMLAttributes,
   ElementType,
+  FC,
   FocusEvent,
   KeyboardEvent,
-  memo,
   ReactElement,
   useContext,
   useRef,
@@ -24,73 +24,77 @@ export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   selected?: boolean;
 }
 
-export const MenuItem = memo<MenuItemProps>(
-  ({ disabled, icon, index, onFocus, onKeyDown, children, ...props }) => {
-    const {
-      activeIndex,
-      collapsed,
-      indent,
-      menuRef,
-      setActiveIndex,
-      size,
-      variant,
-    } = useContext(MenuContext);
+export const MenuItem: FC<MenuItemProps> = ({
+  disabled,
+  icon,
+  index,
+  onFocus,
+  onKeyDown,
+  children,
+  ...props
+}) => {
+  const {
+    activeIndex,
+    collapsed,
+    indent,
+    menuRef,
+    setActiveIndex,
+    size,
+    variant,
+  } = useContext(MenuContext);
 
-    const buttonRef = useRef<HTMLAnchorElement>(null);
-    const isActive = index === activeIndex;
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const isActive = index === activeIndex;
 
-    const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
-      setActiveIndex(index);
-      onFocus?.(e);
-    };
+  const handleFocus = (e: FocusEvent<HTMLAnchorElement>) => {
+    setActiveIndex(index);
+    onFocus?.(e);
+  };
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        e.stopPropagation();
-        e.currentTarget.click();
-      }
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.click();
+    }
 
-      if (!menuRef.current) {
-        onKeyDown?.(e);
-        return;
-      }
-
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getPrevItem(menuRef, e.currentTarget, true);
-        item?.focus();
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = getNextItem(menuRef, e.currentTarget, true);
-        item?.focus();
-      }
-
+    if (!menuRef.current) {
       onKeyDown?.(e);
-    };
+      return;
+    }
 
-    return (
-      <MenuButton
-        {...props}
-        ref={buttonRef}
-        collapsed={collapsed}
-        disabled={disabled}
-        indent={indent}
-        size={size}
-        startIcon={icon}
-        tabIndex={isActive ? 0 : -1}
-        variant={variant}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-      >
-        {children}
-      </MenuButton>
-    );
-  },
-);
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getPrevItem(menuRef, e.currentTarget, true);
+      item?.focus();
+    }
 
-MenuItem.displayName = 'MenuItem';
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = getNextItem(menuRef, e.currentTarget, true);
+      item?.focus();
+    }
+
+    onKeyDown?.(e);
+  };
+
+  return (
+    <MenuButton
+      {...props}
+      ref={buttonRef}
+      collapsed={collapsed}
+      disabled={disabled}
+      indent={indent}
+      size={size}
+      startIcon={icon}
+      tabIndex={isActive ? 0 : -1}
+      variant={variant}
+      onFocus={handleFocus}
+      onKeyDown={handleKeyDown}
+    >
+      {children}
+    </MenuButton>
+  );
+};

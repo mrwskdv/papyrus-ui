@@ -1,6 +1,6 @@
 import { atoms, Atoms, MarginAtoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
-import { CSSProperties, FC, ReactNode } from 'react';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
 
 import { Box } from '../box';
 
@@ -79,77 +79,90 @@ const transformOriginStyle: Record<BadgePosition, string> = {
   'bottom-end': 'top right',
 };
 
-export const Badge: FC<BadgeProps> = ({
-  bg = 'primary500',
-  children,
-  content,
-  dot = false,
-  offsetX = 0,
-  offsetY = 0,
-  overflowCount = 99,
-  position = 'top-end',
-  showZero,
-  title,
-  ...props
-}) => {
-  const top = position.includes('top') ? 0 - offsetY : undefined;
-  const bottom = position.includes('bottom') ? 0 - offsetY : undefined;
-  const insetInlineStart = position.includes('start') ? 0 - offsetX : undefined;
-  const insetInlineEnd = position.includes('end') ? 0 - offsetX : undefined;
+export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+  (
+    {
+      bg = 'primary500',
+      children,
+      content,
+      dot = false,
+      offsetX = 0,
+      offsetY = 0,
+      overflowCount = 99,
+      position = 'top-end',
+      showZero,
+      title,
+      ...props
+    },
+    ref,
+  ) => {
+    const top = position.includes('top') ? 0 - offsetY : undefined;
+    const bottom = position.includes('bottom') ? 0 - offsetY : undefined;
+    const insetInlineStart = position.includes('start')
+      ? 0 - offsetX
+      : undefined;
+    const insetInlineEnd = position.includes('end') ? 0 - offsetX : undefined;
 
-  const positionStyle: CSSProperties = {
-    position: 'absolute',
-    top,
-    bottom,
-    insetInlineStart,
-    insetInlineEnd,
-    transform: transformStyle[position],
-    transformOrigin: transformOriginStyle[position],
-  };
+    const positionStyle: CSSProperties = {
+      position: 'absolute',
+      top,
+      bottom,
+      insetInlineStart,
+      insetInlineEnd,
+      transform: transformStyle[position],
+      transformOrigin: transformOriginStyle[position],
+    };
 
-  const badgeContent =
-    typeof content === 'number' && content > overflowCount
-      ? `${overflowCount}+`
-      : content;
+    const badgeContent =
+      typeof content === 'number' && content > overflowCount
+        ? `${overflowCount}+`
+        : content;
 
-  const badgeStyle: CSSProperties | undefined = children
-    ? positionStyle
-    : undefined;
+    const badgeStyle: CSSProperties | undefined = children
+      ? positionStyle
+      : undefined;
 
-  return (
-    <Box as="span" display="inline-block" position="relative" {...props}>
-      {children}
+    return (
+      <Box
+        ref={ref}
+        as="span"
+        display="inline-block"
+        position="relative"
+        {...props}
+      >
+        {children}
 
-      {typeof badgeContent === 'object' && (
-        <Box as="span" display="block" style={badgeStyle} title={title}>
-          {badgeContent}
-        </Box>
-      )}
-
-      {dot &&
-        typeof badgeContent !== 'object' &&
-        (badgeContent !== 0 || showZero) && (
-          <span
-            className={cn(S.dot, atoms({ bg }))}
-            data-testid="badge-dot"
-            style={badgeStyle}
-            title={title}
-          />
-        )}
-
-      {!dot &&
-        typeof badgeContent !== 'object' &&
-        (badgeContent !== 0 || showZero) && (
-          <span
-            className={cn(S.counter, atoms({ bg }))}
-            style={badgeStyle}
-            title={title}
-          >
+        {typeof badgeContent === 'object' && (
+          <Box as="span" display="block" style={badgeStyle} title={title}>
             {badgeContent}
-          </span>
+          </Box>
         )}
-    </Box>
-  );
-};
+
+        {dot &&
+          typeof badgeContent !== 'object' &&
+          (badgeContent !== 0 || showZero) && (
+            <span
+              className={cn(S.dot, atoms({ bg }))}
+              data-testid="badge-dot"
+              style={badgeStyle}
+              title={title}
+            />
+          )}
+
+        {!dot &&
+          typeof badgeContent !== 'object' &&
+          (badgeContent !== 0 || showZero) && (
+            <span
+              className={cn(S.counter, atoms({ bg }))}
+              style={badgeStyle}
+              title={title}
+            >
+              {badgeContent}
+            </span>
+          )}
+      </Box>
+    );
+  },
+);
 
 Badge.displayName = 'Badge';

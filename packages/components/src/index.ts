@@ -40,6 +40,7 @@ export * from './components/range';
 export * from './components/select';
 export * from './components/skeleton';
 export * from './components/snackbar';
+export * from './components/table';
 export * from './components/tag';
 export * from './components/text';
 export * from './components/text-input';

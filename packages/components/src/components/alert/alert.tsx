@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms, MarginAtoms, partitionAtoms } from '@papyrus-ui/styles';
 import cn from 'classnames';
 import {
   cloneElement,
@@ -33,7 +33,9 @@ export type AlertVariant =
   | 'warning'
   | 'success';
 
-export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
+export interface AlertProps
+  extends MarginAtoms,
+    HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   icon?: ReactElement;
   message: string;
@@ -62,19 +64,21 @@ export const Alert: FC<AlertProps> = ({
   ...props
 }) => {
   const IconComponent = iconByVariant[variant];
+  const [atomProps, restProps] = partitionAtoms(props);
 
   return (
     <div
+      {...restProps}
       className={cn(
         S.root,
         S.rootVariant[variant],
         atoms({
+          ...atomProps,
           pe: onClose ? 8 : 4,
         }),
         className,
       )}
       role={role}
-      {...props}
     >
       <Flex align="center" mx="-1.5">
         <Box px={1.5}>

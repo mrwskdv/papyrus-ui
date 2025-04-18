@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import {
   ChangeEventHandler,
+  ForwardedRef,
   forwardRef,
   InputHTMLAttributes,
   ReactNode,
@@ -16,6 +17,7 @@ export interface RadioProps
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
+  ref?: ForwardedRef<HTMLInputElement>;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;

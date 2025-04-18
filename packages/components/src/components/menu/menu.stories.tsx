@@ -71,7 +71,7 @@ export const Size: StoryFn<MenuProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 4 : 0}>
+        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
           {capitalize(size)}
         </Heading>
 
@@ -85,7 +85,7 @@ export const Variant: StoryFn<MenuProps> = (args) => (
   <>
     {variants.map((variant, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 4 : 0}>
+        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
           {capitalize(variant)}
         </Heading>
 

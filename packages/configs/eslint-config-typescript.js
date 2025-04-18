@@ -39,6 +39,7 @@ module.exports = {
         '@typescript-eslint/prefer-readonly': 'error',
         '@typescript-eslint/quotes': 'off',
         '@typescript-eslint/triple-slash-reference': 'error',
+        '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/unified-signatures': 'error',
         'no-underscore-dangle': 'error',
         'require-jsdoc': 'off',

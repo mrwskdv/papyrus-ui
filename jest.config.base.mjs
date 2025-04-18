@@ -11,7 +11,7 @@ export default {
     '\\.(gif|ttf|eot|svg|png|jpg)$': '<rootDir>/__mocks__/file-mock.js',
   },
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  testPathIgnorePatterns: ['/dist/'],
   transform: {
     '\\.css\\.(js|ts)$': '@vanilla-extract/jest-transform',
     '\\.(js|ts|tsx)$': [

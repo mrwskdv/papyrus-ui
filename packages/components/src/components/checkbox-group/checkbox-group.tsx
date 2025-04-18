@@ -5,6 +5,8 @@ import {
   Children,
   cloneElement,
   FocusEventHandler,
+  ForwardedRef,
+  forwardRef,
   isValidElement,
   ReactNode,
   useEffect,
@@ -118,99 +120,107 @@ export interface CheckboxGroupProps<T extends boolean | Array<string>> {
   children?: ReactNode;
 }
 
-export const CheckboxGroup = <T extends boolean | Array<string>>({
-  block = false,
-  defaultValue,
-  description,
-  direction = 'row',
-  disabled,
-  invalid = false,
-  label,
-  message,
-  name,
-  readOnly = false,
-  value,
-  onChange,
-  onBlur,
-  onFocus,
-  children,
-}: CheckboxGroupProps<T>) => {
-  const [valueState, setValueState] = useState<T>(
-    () => value ?? defaultValue ?? ([] as Array<string> as T),
-  );
+export const CheckboxGroup = forwardRef(
+  <T extends boolean | Array<string>>(
+    {
+      block = false,
+      defaultValue,
+      description,
+      direction = 'row',
+      disabled,
+      invalid = false,
+      label,
+      message,
+      name,
+      readOnly = false,
+      value,
+      onChange,
+      onBlur,
+      onFocus,
+      children,
+    }: CheckboxGroupProps<T>,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    const [valueState, setValueState] = useState<T>(
+      () => value ?? defaultValue ?? ([] as Array<string> as T),
+    );
 
-  const labelId = useId();
+    const labelId = useId();
 
-  useEffect(() => {
-    if (typeof value !== 'undefined') {
-      setValueState(value);
-    }
-  }, [value]);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (disabled || readOnly || e.target.disabled || e.target.readOnly) {
-      return;
-    }
-
-    let nextValue: boolean | Array<string>;
-
-    if (Array.isArray(valueState)) {
-      const { value: inputValue } = e.target;
-
-      if (valueState.includes(inputValue)) {
-        nextValue = valueState.filter((item) => item !== inputValue);
-      } else {
-        nextValue = [...valueState, inputValue];
+    useEffect(() => {
+      if (typeof value !== 'undefined') {
+        setValueState(value);
       }
-    } else {
-      nextValue = !valueState;
-    }
+    }, [value]);
 
-    setValueState(nextValue as T);
-    onChange?.(nextValue as T);
-  };
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (disabled || readOnly || e.target.disabled || e.target.readOnly) {
+        return;
+      }
 
-  return (
-    <InputGroup
-      description={description}
-      id={labelId}
-      invalid={invalid}
-      label={label}
-      message={message}
-    >
-      <Flex
-        aria-labelledby={labelId}
-        direction={direction}
-        display={block ? 'flex' : 'inline-flex'}
-        mt="-1.5"
-        mx="-2"
-        role="group"
-        wrap="wrap"
+      let nextValue: boolean | Array<string>;
+
+      if (Array.isArray(valueState)) {
+        const { value: inputValue } = e.target;
+
+        if (valueState.includes(inputValue)) {
+          nextValue = valueState.filter((item) => item !== inputValue);
+        } else {
+          nextValue = [...valueState, inputValue];
+        }
+      } else {
+        nextValue = !valueState;
+      }
+
+      setValueState(nextValue as T);
+      onChange?.(nextValue as T);
+    };
+
+    return (
+      <InputGroup
+        description={description}
+        id={labelId}
+        invalid={invalid}
+        label={label}
+        message={message}
       >
-        {Children.map(children, (child) =>
-          isValidElement<CheckboxProps>(child)
-            ? cloneElement(child, {
-                name,
-                checked: Array.isArray(valueState)
-                  ? valueState.includes(child.props.value)
-                  : Boolean(valueState),
-                className: cn(
-                  atoms({
-                    flex: block ? 1 : 'none',
-                    mt: 1.5,
-                    px: 2,
-                  }),
-                  child.props.className,
-                ),
-                disabled: disabled || child.props.disabled,
-                readOnly: readOnly || child.props.readOnly,
-                onChange: handleChange,
-                onFocus,
-                onBlur,
-              })
-            : child,
-        )}
-      </Flex>
-    </InputGroup>
-  );
-};
+        <Flex
+          aria-labelledby={labelId}
+          direction={direction}
+          display={block ? 'flex' : 'inline-flex'}
+          mt="-1.5"
+          mx="-2"
+          role="group"
+          wrap="wrap"
+        >
+          {Children.map(children, (child, idx) =>
+            isValidElement<CheckboxProps>(child)
+              ? cloneElement(child, {
+                  ref: idx === Children.count(children) - 1 ? ref : undefined,
+                  name,
+                  checked: Array.isArray(valueState)
+                    ? valueState.includes(child.props.value)
+                    : Boolean(valueState),
+                  className: cn(
+                    atoms({
+                      flex: block ? 1 : 'none',
+                      mt: 1.5,
+                      px: 2,
+                    }),
+                    child.props.className,
+                  ),
+                  disabled: disabled || child.props.disabled,
+                  readOnly: readOnly || child.props.readOnly,
+                  onChange: handleChange,
+                  onFocus,
+                  onBlur,
+                })
+              : child,
+          )}
+        </Flex>
+      </InputGroup>
+    );
+  },
+);
+
+CheckboxGroup.displayName = 'CheckboxGroup';

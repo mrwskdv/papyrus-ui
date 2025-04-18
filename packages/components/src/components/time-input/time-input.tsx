@@ -130,15 +130,11 @@ function getDateByValue(value: string) {
 }
 
 function isValidDate(date: Date, hour12: boolean) {
-  if (
+  return !(
     isNaN(date.getTime()) ||
     date.getDay() !== 0 ||
     (hour12 && date.getHours() > 12)
-  ) {
-    return false;
-  }
-
-  return true;
+  );
 }
 
 function toFormattedValue(value: string | undefined, seconds: boolean) {

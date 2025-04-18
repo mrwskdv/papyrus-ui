@@ -4,8 +4,8 @@ import {
   ChangeEvent,
   Children,
   cloneElement,
-  FC,
   FocusEventHandler,
+  forwardRef,
   isValidElement,
   ReactNode,
   useEffect,
@@ -115,81 +115,89 @@ export interface RadioGroupProps {
   children?: ReactNode;
 }
 
-export const RadioGroup: FC<RadioGroupProps> = ({
-  block = false,
-  defaultValue,
-  description,
-  direction = 'row',
-  disabled = false,
-  invalid = false,
-  label,
-  message,
-  name,
-  readOnly = false,
-  value,
-  onChange,
-  onBlur,
-  onFocus,
-  children,
-}) => {
-  const [valueState, setValueState] = useState(() => value ?? defaultValue);
-  const labelId = useId();
+export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
+  (
+    {
+      block = false,
+      defaultValue,
+      description,
+      direction = 'row',
+      disabled = false,
+      invalid = false,
+      label,
+      message,
+      name,
+      readOnly = false,
+      value,
+      onChange,
+      onBlur,
+      onFocus,
+      children,
+    },
+    ref,
+  ) => {
+    const [valueState, setValueState] = useState(() => value ?? defaultValue);
+    const labelId = useId();
 
-  useEffect(() => {
-    if (typeof value !== 'undefined') {
-      setValueState(value);
-    }
-  }, [value]);
+    useEffect(() => {
+      if (typeof value !== 'undefined') {
+        setValueState(value);
+      }
+    }, [value]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (disabled || readOnly || e.target.disabled || e.target.readOnly) {
-      return;
-    }
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (disabled || readOnly || e.target.disabled || e.target.readOnly) {
+        return;
+      }
 
-    const { value: inputValue } = e.target;
-    setValueState(inputValue);
-    onChange?.(inputValue);
-  };
+      const { value: inputValue } = e.target;
+      setValueState(inputValue);
+      onChange?.(inputValue);
+    };
 
-  return (
-    <InputGroup
-      description={description}
-      id={labelId}
-      invalid={invalid}
-      label={label}
-      message={message}
-    >
-      <Flex
-        aria-labelledby={labelId}
-        direction={direction}
-        display={block ? 'flex' : 'inline-flex'}
-        mt="-1.5"
-        mx="-2"
-        role="group"
-        wrap="wrap"
+    return (
+      <InputGroup
+        description={description}
+        id={labelId}
+        invalid={invalid}
+        label={label}
+        message={message}
       >
-        {Children.map(children, (child) =>
-          isValidElement<RadioProps>(child)
-            ? cloneElement(child, {
-                name,
-                checked: child.props.value === valueState,
-                className: cn(
-                  atoms({
-                    flex: block ? 1 : 'none',
-                    mt: 1.5,
-                    px: 2,
-                  }),
-                  child.props.className,
-                ),
-                disabled: disabled || child.props.disabled,
-                readOnly: readOnly || child.props.readOnly,
-                onChange: handleChange,
-                onFocus,
-                onBlur,
-              })
-            : child,
-        )}
-      </Flex>
-    </InputGroup>
-  );
-};
+        <Flex
+          aria-labelledby={labelId}
+          direction={direction}
+          display={block ? 'flex' : 'inline-flex'}
+          mt="-1.5"
+          mx="-2"
+          role="group"
+          wrap="wrap"
+        >
+          {Children.map(children, (child, idx) =>
+            isValidElement<RadioProps>(child)
+              ? cloneElement(child, {
+                  ref: idx === Children.count(children) - 1 ? ref : undefined,
+                  name,
+                  checked: child.props.value === valueState,
+                  className: cn(
+                    atoms({
+                      flex: block ? 1 : 'none',
+                      mt: 1.5,
+                      px: 2,
+                    }),
+                    child.props.className,
+                  ),
+                  disabled: disabled || child.props.disabled,
+                  readOnly: readOnly || child.props.readOnly,
+                  onChange: handleChange,
+                  onFocus,
+                  onBlur,
+                })
+              : child,
+          )}
+        </Flex>
+      </InputGroup>
+    );
+  },
+);
+
+RadioGroup.displayName = 'RadioGroup';

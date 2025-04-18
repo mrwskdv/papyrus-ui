@@ -36,8 +36,10 @@ const meta: Meta<DialogProps> = {
             laoreet ipsum nec cursus. Sed quis bibendum odio, ac laoreet quam.
           </Dialog.Description>
         </Dialog.Body>
-        <Dialog.Footer>
-          <Dialog.Close type="button">Cancel</Dialog.Close>
+        <Dialog.Footer justify="space-between">
+          <Dialog.Close as={Button} variant="tertiary">
+            Cancel
+          </Dialog.Close>
           <Button>OK</Button>
         </Dialog.Footer>
       </Dialog.Content>,
@@ -124,7 +126,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               lectus convallis, ultrices dui non, varius massa.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer>
+          <Dialog.Footer justify="flex-end">
             <Button variant="primary" onClick={handleClose}>
               OK
             </Button>
@@ -165,13 +167,12 @@ export function Sizes(args: DialogProps): JSX.Element {
               laoreet quam.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer>
-            <Button variant="primary" onClick={handleClose}>
-              OK
-            </Button>
-
+          <Dialog.Footer justify="space-between">
             <Button variant="tertiary" onClick={handleClose}>
               Cancel
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              OK
             </Button>
           </Dialog.Footer>
         </Dialog.Content>
@@ -235,12 +236,12 @@ export function Sizes(args: DialogProps): JSX.Element {
               dapibus accumsan. Sed pharetra ligula at finibus volutpat.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer>
-            <Button variant="primary" onClick={handleClose}>
-              OK
-            </Button>
+          <Dialog.Footer justify="space-between">
             <Button variant="tertiary" onClick={handleClose}>
               Cancel
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              OK
             </Button>
           </Dialog.Footer>
         </Dialog.Content>
@@ -304,7 +305,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               dapibus accumsan. Sed pharetra ligula at finibus volutpat.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer>
+          <Dialog.Footer justify="space-between">
             <Button variant="primary" onClick={handleClose}>
               OK
             </Button>

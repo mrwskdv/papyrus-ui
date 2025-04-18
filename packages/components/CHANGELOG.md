@@ -1,5 +1,15 @@
 # @papyrus-ui/components
 
+## 0.4.4
+
+### Patch Changes
+
+- 3871bf3: Added margin atoms to Alert component
+- c580f03: Added Table component
+- 1164ea2: Added ref to ChackboxGroup and RadioGroup components
+- 4785ed6: Refined bodrder styles in Dialog component
+- 21d2d71: Fixed findDomNode deprecation warning
+
 ## 0.4.3
 
 ### Patch Changes

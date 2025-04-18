@@ -258,5 +258,3 @@ export const DropdownSubmenu: FC<DropdownSubmenuProps> = ({
     </FloatingNode>
   );
 };
-
-DropdownSubmenu.displayName = 'DropdownSubmenu';

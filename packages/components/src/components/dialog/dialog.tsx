@@ -195,8 +195,6 @@ const DialogComponent: FC<DialogProps> = ({
   );
 };
 
-DialogComponent.displayName = 'Dialog';
-
 export const Dialog = Object.assign(DialogComponent, {
   Content: DialogContent,
   Close: DialogClose,

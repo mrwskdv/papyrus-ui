@@ -2,7 +2,7 @@
 
 import { interactiveStyle } from '@papyrus-ui/styles';
 import cn from 'classnames';
-import { FC, MouseEvent, memo, useContext, ComponentType } from 'react';
+import { FC, MouseEvent, useContext, ComponentType } from 'react';
 import { BiX } from 'react-icons/bi';
 
 import { ButtonProps } from '../../button';
@@ -13,35 +13,37 @@ export interface DialogCloseProps extends Omit<ButtonProps, 'as' | 'href'> {
   as?: ComponentType<ButtonProps>;
 }
 
-export const DialogClose: FC<DialogCloseProps> = memo(
-  ({ as: Element, className, onClick, children, ...props }) => {
-    const { close } = useContext(DialogContext);
+export const DialogClose: FC<DialogCloseProps> = ({
+  as: Element,
+  className,
+  onClick,
+  children,
+  ...props
+}) => {
+  const { close } = useContext(DialogContext);
 
-    const handleClick = (e: MouseEvent<HTMLElement>) => {
-      onClick?.(e);
-      close();
-    };
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    onClick?.(e);
+    close();
+  };
 
-    if (Element) {
-      return (
-        <Element {...props} className={className} onClick={handleClick}>
-          {children}
-        </Element>
-      );
-    }
-
+  if (Element) {
     return (
-      <Icon
-        {...props}
-        className={cn(interactiveStyle, className)}
-        color="neutral900"
-        fontSize="xl"
-        onClick={handleClick}
-      >
-        <BiX />
-      </Icon>
+      <Element {...props} className={className} onClick={handleClick}>
+        {children}
+      </Element>
     );
-  },
-);
+  }
 
-DialogClose.displayName = 'DialogClose';
+  return (
+    <Icon
+      {...props}
+      className={cn(interactiveStyle, className)}
+      color="neutral900"
+      fontSize="xl"
+      onClick={handleClick}
+    >
+      <BiX />
+    </Icon>
+  );
+};

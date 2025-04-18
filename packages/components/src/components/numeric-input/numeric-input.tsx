@@ -4,7 +4,6 @@ import {
   forwardRef,
   InputHTMLAttributes,
   isValidElement,
-  memo,
   ReactElement,
   ReactNode,
   useEffect,
@@ -170,10 +169,7 @@ export interface NumericInputProps
   onChange?: (value: NumericValue) => void;
 }
 
-export const NumericInputComponent = forwardRef<
-  HTMLInputElement,
-  NumericInputProps
->(
+export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
   (
     {
       defaultValue,
@@ -248,6 +244,4 @@ export const NumericInputComponent = forwardRef<
   },
 );
 
-NumericInputComponent.displayName = 'NumericInput';
-
-export const NumericInput = memo(NumericInputComponent);
+NumericInput.displayName = 'NumericInput';

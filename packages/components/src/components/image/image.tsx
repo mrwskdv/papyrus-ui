@@ -6,7 +6,7 @@ import {
   SizingAtoms,
 } from '@papyrus-ui/styles';
 import cn from 'classnames';
-import { ImgHTMLAttributes, memo } from 'react';
+import { FC, ImgHTMLAttributes } from 'react';
 
 export interface ImageProps
   extends SizingAtoms,
@@ -15,7 +15,7 @@ export interface ImageProps
   objectFit?: Atoms['objectFit'];
 }
 
-export const Image = memo<ImageProps>(({ alt, className, ...props }) => {
+export const Image: FC<ImageProps> = ({ alt, className, ...props }) => {
   const [atomsProps, restProps] = partitionAtoms(props);
 
   return (
@@ -25,6 +25,4 @@ export const Image = memo<ImageProps>(({ alt, className, ...props }) => {
       {...restProps}
     />
   );
-});
-
-Image.displayName = 'Image';
+};

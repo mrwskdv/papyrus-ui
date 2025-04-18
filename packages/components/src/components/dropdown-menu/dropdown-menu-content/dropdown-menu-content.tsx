@@ -66,5 +66,3 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
     </FloatingList>
   );
 };
-
-DropdownMenuContent.displayName = 'DropdownMenuContent';

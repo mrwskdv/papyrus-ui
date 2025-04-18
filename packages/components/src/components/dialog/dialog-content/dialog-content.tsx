@@ -45,6 +45,7 @@ export const DialogContent: FC<DialogContentProps> = ({
     <Transition
       in={isOpen}
       mountOnEnter
+      nodeRef={refs.floating}
       timeout={TRANSITION_TIMEOUT}
       unmountOnExit
     >

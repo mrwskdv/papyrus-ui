@@ -333,19 +333,19 @@ describe('MenuBar', () => {
 
         await waitFor(() => {
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowdown}');
 
         await waitFor(() => {
-          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[4]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowup}');
 
         await waitFor(() => {
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
       });
     });
@@ -384,7 +384,7 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[4]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[5]).toHaveFocus();
         });
       });
     });
@@ -423,7 +423,7 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowleft}');
@@ -470,7 +470,7 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowright}');
@@ -521,13 +521,13 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowdown}');
 
         await waitFor(() => {
-          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[4]).toHaveFocus();
         });
 
         await userEvent.keyboard('{arrowright}');
@@ -535,7 +535,7 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(9);
-          expect(screen.getAllByRole('menuitem')[4]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[6]).toHaveFocus();
         });
       });
     });
@@ -576,7 +576,7 @@ describe('MenuBar', () => {
         await waitFor(() => {
           // Assert that the submenu is expanded
           expect(screen.getAllByRole('menuitem')).toHaveLength(6);
-          expect(screen.getAllByRole('menuitem')[2]).toHaveFocus();
+          expect(screen.getAllByRole('menuitem')[3]).toHaveFocus();
         });
 
         await userEvent.keyboard('{enter}');

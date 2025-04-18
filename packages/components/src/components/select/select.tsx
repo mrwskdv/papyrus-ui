@@ -24,7 +24,7 @@ import { InputGroup } from '../input-group';
 import * as S from './select.css';
 
 export type SelectValue<IsMulti extends boolean> = IsMulti extends true
-  ? readonly string[]
+  ? string[]
   : string | undefined;
 
 export interface SelectProps<IsMulti extends boolean = false>

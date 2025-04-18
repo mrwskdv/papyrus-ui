@@ -45,12 +45,14 @@ export const Basic = Template.bind({});
 Basic.args = {
   id: 'select-basic',
 };
+
 export const Multiple = Template.bind({});
 
 Multiple.args = {
   id: 'select-multiple',
-  multiple: true as never,
-};
+  defaultValue: [],
+  multiple: true,
+} as never;
 
 export function Sizes(args: SelectProps) {
   return (

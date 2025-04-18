@@ -200,6 +200,7 @@ export const Submenu: FC<SubmenuProps> = ({
           <Transition
             in={isOpen}
             mountOnEnter
+            nodeRef={menuRef}
             timeout={TRANSITION_TIMEOUT}
             unmountOnExit
           >

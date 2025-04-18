@@ -7,7 +7,7 @@ import { Flex } from '../flex';
 import { Tooltip, TooltipProps } from './tooltip';
 
 const meta: Meta<TooltipProps> = {
-  title: 'Components/Tooltip',
+  title: 'Feedback/Tooltip',
   component: Tooltip,
   args: {
     title: 'This is a tooltip',

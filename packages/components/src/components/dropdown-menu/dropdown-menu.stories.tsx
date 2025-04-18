@@ -9,7 +9,7 @@ import {
   BiSupport,
 } from 'react-icons/bi';
 
-import { Box } from '../box';
+import { Flex } from '../flex';
 import { IconButton } from '../icon-button';
 
 import { DropdownMenu, DropdownMenuProps } from './dropdown-menu';
@@ -23,7 +23,7 @@ export default {
 };
 
 export const Basic: StoryFn<DropdownMenuProps> = (args) => (
-  <Box h={64}>
+  <Flex h={64} justify="center" w={96}>
     <DropdownMenu {...args}>
       <DropdownMenu.Trigger>
         <IconButton>
@@ -62,5 +62,5 @@ export const Basic: StoryFn<DropdownMenuProps> = (args) => (
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu>
-  </Box>
+  </Flex>
 );

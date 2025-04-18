@@ -13,6 +13,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
 import {
@@ -141,6 +142,7 @@ export const SnackbarItem = forwardRef<
   ) => {
     const { placement } = useContext(SnackbarContext);
     const { setTimeout, clearTimeout } = useTimeout();
+    const nodeRef = useRef<HTMLDivElement>(null);
 
     const defferAutoHide = useCallback(() => {
       if (autoHideDuration) {
@@ -172,12 +174,14 @@ export const SnackbarItem = forwardRef<
         ref={ref}
         in={visible}
         mountOnEnter
+        nodeRef={nodeRef}
         timeout={TRANSITION_TIMEOUT}
         unmountOnExit
       >
         {(status, childProps) => (
           <div
             {...childProps}
+            ref={nodeRef}
             className={cn(
               S.root,
               S.rootPlacement[placement],

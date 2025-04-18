@@ -662,6 +662,7 @@ export const Autocomplete = forwardRef(
         <Transition
           in={isOpen}
           mountOnEnter
+          nodeRef={refs.floating}
           timeout={TRANSITION_TIMEOUT}
           unmountOnExit
         >

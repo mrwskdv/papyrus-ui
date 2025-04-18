@@ -64,10 +64,11 @@ export const Alert: FC<AlertProps> = ({
   ...props
 }) => {
   const IconComponent = iconByVariant[variant];
-  const [atomProps, ...restProps] = partitionAtoms(props);
+  const [atomProps, restProps] = partitionAtoms(props);
 
   return (
     <div
+      {...restProps}
       className={cn(
         S.root,
         S.rootVariant[variant],
@@ -78,7 +79,6 @@ export const Alert: FC<AlertProps> = ({
         className,
       )}
       role={role}
-      {...restProps}
     >
       <Flex align="center" mx="-1.5">
         <Box px={1.5}>

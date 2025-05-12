@@ -1735,8 +1735,8 @@
                 "fontSize": 14,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "Regular",
-                "lineHeight": 19.5,
-                "lineHeightUnit": "PIXELS",
+                "lineHeight": 150,
+                "lineHeightUnit": "PERCENT",
                 "letterSpacing": 0.800000011920929,
                 "letterSpacingUnit": "PERCENT",
                 "textCase": "ORIGINAL",
@@ -1751,8 +1751,8 @@
                 "fontSize": 14,
                 "fontFamily": "Vollkorn",
                 "fontWeight": "SemiBold",
-                "lineHeight": 19.5,
-                "lineHeightUnit": "PIXELS",
+                "lineHeight": 150,
+                "lineHeightUnit": "PERCENT",
                 "letterSpacing": 0.800000011920929,
                 "letterSpacingUnit": "PERCENT",
                 "textCase": "ORIGINAL",
@@ -2303,9 +2303,9 @@
                   {
                     "type": "DROP_SHADOW",
                     "color": {
-                      "r": 53,
-                      "g": 139,
-                      "b": 251,
+                      "r": 5,
+                      "g": 108,
+                      "b": 242,
                       "a": 0.5
                     },
                     "offset": {
@@ -2327,33 +2327,9 @@
                   {
                     "type": "DROP_SHADOW",
                     "color": {
-                      "r": 255,
-                      "g": 35,
-                      "b": 35,
-                      "a": 0.5
-                    },
-                    "offset": {
-                      "x": 0,
-                      "y": 0
-                    },
-                    "radius": 0,
-                    "spread": 4
-                  }
-                ]
-              }
-            },
-            {
-              "name": "boxShadow/focusSuccess",
-              "type": "effect",
-              "isAlias": false,
-              "value": {
-                "effects": [
-                  {
-                    "type": "DROP_SHADOW",
-                    "color": {
-                      "r": 33,
-                      "g": 194,
-                      "b": 86,
+                      "r": 226,
+                      "g": 37,
+                      "b": 37,
                       "a": 0.5
                     },
                     "offset": {

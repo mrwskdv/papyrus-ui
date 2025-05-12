@@ -47,7 +47,7 @@ export interface TextProps
   /**
    * Controls the display behavior of the text, such as block or inline-block.
    */
-  display?: ResponsiveValue<'block' | 'inline-block' | 'inline'>;
+  display?: ResponsiveValue<'block' | 'inline-block' | 'inline' | 'hidden'>;
 
   /**
    * Sets the font family variant for the text.

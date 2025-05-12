@@ -3,7 +3,6 @@ import { capitalize } from 'lodash';
 
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { TextProps } from '../text';
 
 import { Heading, HeadingLevel, HeadingProps, HeadingVariant } from './heading';
 
@@ -52,7 +51,7 @@ export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
   </Flex>
 );
 
-export const TruncateLongText: StoryFn<TextProps> = (args) => (
+export const TruncateLongText: StoryFn<HeadingProps> = (args) => (
   <Box maxW="sm">
     <Heading {...args} />
   </Box>
@@ -61,7 +60,6 @@ export const TruncateLongText: StoryFn<TextProps> = (args) => (
 TruncateLongText.args = {
   children:
     'This is a very long text that will be truncated with an ellipsis if it exceeds the width of its container.',
-  size: 'md',
   fontVariant: 'primary',
   truncate: true,
 };

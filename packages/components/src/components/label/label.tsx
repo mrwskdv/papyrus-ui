@@ -28,7 +28,7 @@ export interface LabelProps
   /**
    * Controls the display behavior of the text, such as block or inline-block.
    */
-  display?: ResponsiveValue<'block' | 'inline-block' | 'inline'>;
+  display?: ResponsiveValue<'block' | 'inline-block' | 'inline' | 'hidden'>;
 
   /**
    * Highlights the text, using a pre-defined gradiant style from the theme.

@@ -8,7 +8,6 @@ export const root = style({
   borderRadius: vars.borderRadius.md,
   borderWidth: '1px',
   borderStyle: 'solid',
-
   transition: vars.transition.base,
 });
 

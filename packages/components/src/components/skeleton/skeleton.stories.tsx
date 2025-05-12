@@ -6,12 +6,12 @@ const meta: Meta = {
   title: 'Feedback/Skeleton',
   component: Skeleton,
   args: {
-    height: 4,
+    height: 32,
     width: 96,
-    rounded: 'sm',
+    rounded: 'lg',
   },
 };
 
-export const Basic: StoryFn = (args: SkeletonProps) => <Skeleton {...args} />;
+export const Basic: StoryFn<SkeletonProps> = (args) => <Skeleton {...args} />;
 
 export default meta;

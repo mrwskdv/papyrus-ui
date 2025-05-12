@@ -60,12 +60,14 @@ const formatTypographyToken = (typography) => {
   const formattedFontWeight = fontWeightMapping[fontWeight] || '400';
 
   const formattedLineHeight =
-    lineHeightUnit === 'PERCENT' ? `${lineHeight / 100}` : `${lineHeight}px`;
+    lineHeightUnit === 'PERCENT'
+      ? `${lineHeight / 100}`
+      : `${lineHeight / 16 / (fontSize / 16)}`;
 
   const formattedLetterSpacing =
     letterSpacingUnit === 'PERCENT'
       ? `${letterSpacing / 100}em`
-      : `${letterSpacing}px`;
+      : `${letterSpacing / 16}rem`;
 
   const formattedTextTransform = textTransformMapping[textCase] || 'none';
 

@@ -1,5 +1,19 @@
 # @papyrus-ui/components
 
+## 0.5.0
+
+### Minor Changes
+
+- ee801ca: Extended Image properties and added custom element support
+- a931a1e: Added skeletons for common components
+
+### Patch Changes
+
+- Updated dependencies [cc3bb42]
+- Updated dependencies [a931a1e]
+- Updated dependencies [3f78e6d]
+  - @papyrus-ui/styles@0.5.0
+
 ## 0.4.4
 
 ### Patch Changes

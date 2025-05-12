@@ -1,5 +1,16 @@
 # @papyrus-ui/styles
 
+## 0.5.0
+
+### Minor Changes
+
+- a931a1e: Added skeletons for common components
+- 3f78e6d: Updated themes
+
+### Patch Changes
+
+- cc3bb42: Fixed typing in atoms.css.ts
+
 ## 0.4.3
 
 ### Patch Changes

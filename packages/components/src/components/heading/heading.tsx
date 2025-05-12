@@ -23,7 +23,7 @@ export interface HeadingProps
     Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'color' | 'size'> {
   as?: ElementType;
   breakWord?: boolean;
-  display?: ResponsiveValue<'block' | 'inline-block' | 'inline'>;
+  display?: ResponsiveValue<'block' | 'inline-block' | 'inline' | 'hidden'>;
   highlight?: boolean;
   level?: HeadingLevel;
   truncate?: boolean;

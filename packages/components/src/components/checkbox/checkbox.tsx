@@ -32,7 +32,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         className,
       )}
     >
-      <Box as="span" py={1}>
+      <Box as="span" py={children ? 1 : 0}>
         <input
           {...props}
           ref={ref}
@@ -41,15 +41,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
         />
       </Box>
-      <Text
-        as="span"
-        className={S.label}
-        fontVariant="primary"
-        ms={2}
-        size="md"
-      >
-        {children}
-      </Text>
+      {children && (
+        <Text as="span" className={S.label} fontVariant="primary" size="md">
+          {children}
+        </Text>
+      )}
     </label>
   ),
 );

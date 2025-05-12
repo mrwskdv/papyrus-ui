@@ -316,7 +316,15 @@ export type Atoms = Parameters<typeof atoms>[0];
 
 export type PositionAtoms = Pick<
   Atoms,
-  'position' | 'top' | 'bottom' | 'left' | 'right' | 'start' | 'end' | 'zIndex'
+  | 'position'
+  | 'inset'
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'start'
+  | 'end'
+  | 'zIndex'
 >;
 
 export type FlexAtoms = Pick<
@@ -359,7 +367,7 @@ export type GridItemAtoms = Pick<
 
 export type SizingAtoms = Pick<
   Atoms,
-  'aspectRatio' | 'inset' | 'w' | 'minW' | 'maxW' | 'h' | 'minH' | 'maxH'
+  'aspectRatio' | 'w' | 'minW' | 'maxW' | 'h' | 'minH' | 'maxH'
 >;
 
 export type RoundedAtoms = Pick<

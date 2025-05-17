@@ -1,21 +1,19 @@
 import { StyleRule } from '@vanilla-extract/css';
 
-import { BREAKPOINTS } from '../const';
-
-export type Breakpoint = keyof typeof BREAKPOINTS;
+import { breakpoints, breakpointsOrder } from '../const';
+import { Breakpoint } from '../types';
 
 function bpNext(name: Breakpoint): Breakpoint | undefined {
-  const names = Object.keys(BREAKPOINTS);
-  const idx = names.indexOf(name);
-  return names[idx + 1] as Breakpoint | undefined;
+  const idx = breakpointsOrder.indexOf(name);
+  return breakpointsOrder[idx + 1] as Breakpoint | undefined;
 }
 
 function bpMin(name: Breakpoint): number {
-  return BREAKPOINTS[name];
+  return breakpoints[name];
 }
 
 function bpMax(name: Breakpoint): number {
-  const val = BREAKPOINTS[name];
+  const val = breakpoints[name];
   return val - 0.2;
 }
 

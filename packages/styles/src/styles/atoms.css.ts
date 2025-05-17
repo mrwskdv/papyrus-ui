@@ -11,7 +11,6 @@ import {
   ASPECT_RATIO,
   BORDER_STYLE,
   BORDER_WIDTH,
-  BREAKPOINTS,
   COLOR,
   DISPLAY,
   FLEX,
@@ -54,6 +53,7 @@ import {
   PLACE_CONTENT,
   PLACE_ITEMS,
   PLACE_SELF,
+  breakpoints,
 } from '../const';
 
 import { vars } from './global.css';
@@ -95,11 +95,11 @@ const borderRadiusValues = {
 };
 
 const responsiveProperties = defineProperties({
-  conditions: mapValues(BREAKPOINTS, (bp) =>
-    bp === 0 ? {} : { '@media': `screen and (min-width: ${bp}px)` },
+  conditions: mapValues(breakpoints, (bp) =>
+    bp === 0 ? {} : { '@media': `(min-width: ${bp}px)` },
   ),
 
-  responsiveArray: ['mobile', 'mobileLg', 'tablet', 'desktop', 'desktopLg'],
+  responsiveArray: ['mobile', 'tablet', 'laptop', 'desktop'],
   defaultCondition: 'mobile',
 
   properties: {

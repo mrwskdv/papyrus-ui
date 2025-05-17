@@ -96,7 +96,6 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
       )}
 
       {!children &&
-        icon &&
         isValidElement<IconBaseProps>(icon) &&
         cloneElement(icon, {
           className: cn(S.icon, S.iconSize[size], icon.props.className),

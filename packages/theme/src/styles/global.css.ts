@@ -4,8 +4,8 @@ import {
   globalStyle,
 } from '@vanilla-extract/css';
 
-import darkMode from '../assets/themes/dark-mode.json';
-import lightMode from '../assets/themes/light-mode.json';
+import darkModeRaw from '../assets/themes/dark-mode.json';
+import lightModeRaw from '../assets/themes/light-mode.json';
 
 /**
  * Document
@@ -15,12 +15,11 @@ import lightMode from '../assets/themes/light-mode.json';
 /**
  * Define variables
  */
+export const lightModeTokens = { ...lightModeRaw };
 
-export const lightThemeTokens = { ...lightMode };
+export const darkModeTokens = { ...darkModeRaw };
 
-export const darkThemeTokens = { ...darkMode };
-
-export const vars = createThemeContract(lightThemeTokens);
+export const vars = createThemeContract(lightModeTokens);
 
 /**
  * Allow adding a border to an element by just adding a border-width.
@@ -50,7 +49,7 @@ globalStyle('body', {
 });
 
 /**
- * Set focus styles.
+ * Set focus theme.
  */
 globalStyle(':focus-visible', {
   outline: 'none',
@@ -98,8 +97,8 @@ globalStyle('label', {
 });
 
 /**
- * 1. Change the font styles in all browsers.
- * 2. Reset default input styles.
+ * 1. Change the font theme in all browsers.
+ * 2. Reset default input theme.
  * 3. Remove default padding in all browsers.
  */
 globalStyle('button, input, optgroup, select, textarea', {
@@ -137,7 +136,7 @@ globalStyle('input, select, textarea', {
 });
 
 /**
- * Reset focus styles for input components.
+ * Reset focus theme for input components.
  */
 globalStyle(
   'input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-visible, textarea:focus-visible',
@@ -147,7 +146,7 @@ globalStyle(
 );
 
 /**
- * Adjust disabled input styles.
+ * Adjust disabled input theme.
  */
 globalStyle('input:disabled, textarea:disabled, select:disabled', {
   color: vars.color.neutral900,
@@ -156,7 +155,7 @@ globalStyle('input:disabled, textarea:disabled, select:disabled', {
 });
 
 /**
- * Adjust placeholder styles for disabled inputs.
+ * Adjust placeholder theme for disabled inputs.
  */
 globalStyle(
   'input:disabled::placeholder,' +
@@ -184,7 +183,7 @@ globalStyle('textarea', {
 });
 
 /**
- * Ensure checkboxes and radio buttons have a consistent styles components across modern browsers.
+ * Ensure checkboxes and radio buttons have a consistent theme components across modern browsers.
  */
 globalStyle('[type=checkbox], [type=radio]', {
   WebkitAppearance: 'none',
@@ -281,11 +280,11 @@ globalStyle(
 );
 
 /**
- * Range input styles
+ * Range input theme
  */
 
 /**
- * Ensure range inputs have a consistent styles components across modern browsers.
+ * Ensure range inputs have a consistent theme components across modern browsers.
  */
 globalStyle('[type="range"]', {
   WebkitAppearance: 'none',
@@ -528,6 +527,6 @@ globalStyle('[hidden]', {
  * Define Themes
  */
 
-export const lightTheme = createTheme(vars, lightThemeTokens);
+export const lightMode = createTheme(vars, lightModeTokens);
 
-export const darkTheme = createTheme(vars, darkThemeTokens);
+export const darkMode = createTheme(vars, darkModeTokens);

@@ -1,6 +1,10 @@
 'use client';
 
-import { atoms, interactiveStyle, truncateStyle } from '@papyrus-ui/styles';
+import {
+  atoms,
+  interactiveStyle,
+  truncateStyle,
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   forwardRef,

@@ -7,7 +7,7 @@ import {
   ResponsiveValue,
   TextAtoms,
   truncateStyle,
-} from '@papyrus-ui/styles';
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { AllHTMLAttributes, ElementType, forwardRef } from 'react';
 

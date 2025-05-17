@@ -38,7 +38,7 @@ describe('Link', () => {
 
   describe('Given a link component with the "disabled" prop', () => {
     describe('When the disabled prop is set to true', () => {
-      it('Then the link should be rendered with disabled styles', () => {
+      it('Then the link should be rendered with disabled theme', () => {
         render(
           <Link as="button" disabled>
             Disabled Link

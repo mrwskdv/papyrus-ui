@@ -1,4 +1,5 @@
-import { bpUp, vars } from '@papyrus-ui/styles';
+import { bpUp } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const root = recipe({

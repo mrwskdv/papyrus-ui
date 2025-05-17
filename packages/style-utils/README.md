@@ -11,7 +11,7 @@ Global styles, themes and style utilities for implementing components based on t
     ```ts
     // card.css.ts
     
-    import { atoms } from '@papyrus-ui/styles';
+    import { atoms } from '@papyrus-ui/theme';
 
     export const card = atoms({
       p: 4,

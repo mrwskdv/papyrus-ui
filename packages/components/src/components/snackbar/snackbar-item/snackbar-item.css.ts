@@ -1,10 +1,11 @@
-import { atoms, bpUp, MAX_WIDTH, MIN_WIDTH, vars } from '@papyrus-ui/styles';
+import { atoms, bpUp, maxWidth, minWidth } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const root = style({
   width: '100%',
-  maxWidth: MAX_WIDTH['lg'],
-  minWidth: MIN_WIDTH[64],
+  maxWidth: maxWidth['lg'],
+  minWidth: minWidth[64],
   borderRadius: vars.borderRadius.lg,
   color: 'white',
   padding: '0.75rem 1rem',

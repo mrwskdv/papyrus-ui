@@ -1,6 +1,6 @@
 'use client';
 
-import { collapseInStyle, collapseStyle } from '@papyrus-ui/styles';
+import { collapseInStyle, collapseStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   Children,

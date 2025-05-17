@@ -1,9 +1,10 @@
-import { lightTheme } from '@papyrus-ui/styles';
-import { Link, ThemeProvider } from '@papyrus-ui/components';
+import { lightMode } from '../packages/theme';
+import { Link, ThemeProvider} from '@papyrus-ui/components';
 import { theme } from './theme';
 import { FC } from 'react';
 
-import '@papyrus-ui/styles/css/styles.css';
+import '@papyrus-ui/theme/css/theme.css';
+import '@papyrus-ui/style-utils/css/style-utils.css';
 import '@papyrus-ui/components/css/components.css';
 
 export const parameters = {
@@ -43,7 +44,7 @@ export const parameters = {
 
 export const decorators = [
   (Story: FC) => (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={lightMode}>
       <Story />
     </ThemeProvider>
   ),

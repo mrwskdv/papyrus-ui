@@ -705,6 +705,12 @@
               "value": 4
             },
             {
+              "name": "borderRadius/none",
+              "type": "string",
+              "isAlias": false,
+              "value": "none"
+            },
+            {
               "name": "color/disabled",
               "type": "color",
               "isAlias": false,
@@ -787,6 +793,24 @@
               "type": "string",
               "isAlias": false,
               "value": "9/16"
+            },
+            {
+              "name": "aspectRatio/auto",
+              "type": "string",
+              "isAlias": false,
+              "value": "auto"
+            },
+            {
+              "name": "color/currentColor",
+              "type": "string",
+              "isAlias": false,
+              "value": "currentColor"
+            },
+            {
+              "name": "color/inherit",
+              "type": "string",
+              "isAlias": false,
+              "value": "inherit"
             }
           ]
         },
@@ -1490,6 +1514,12 @@
               "value": 4
             },
             {
+              "name": "borderRadius/none",
+              "type": "string",
+              "isAlias": false,
+              "value": "none"
+            },
+            {
               "name": "color/disabled",
               "type": "color",
               "isAlias": false,
@@ -1572,6 +1602,24 @@
               "type": "string",
               "isAlias": false,
               "value": "9/16"
+            },
+            {
+              "name": "aspectRatio/auto",
+              "type": "string",
+              "isAlias": false,
+              "value": "auto"
+            },
+            {
+              "name": "color/currentColor",
+              "type": "string",
+              "isAlias": false,
+              "value": "currentColor"
+            },
+            {
+              "name": "color/inherit",
+              "type": "string",
+              "isAlias": false,
+              "value": "inherit"
             }
           ]
         }

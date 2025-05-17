@@ -1,4 +1,4 @@
-import { atoms, Atoms, fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
+import { atoms, Atoms, fadeInStyle, fadeStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes } from 'react';
 

@@ -93,7 +93,9 @@
     "dark200": "#00000033",
     "dark100": "#0000001A",
     "dark50": "#0000000D",
-    "disabled": "#16161766"
+    "disabled": "#16161766",
+    "currentColor": "currentColor",
+    "inherit": "inherit"
   },
   "fontSize": {
     "xs": "0.75rem",
@@ -120,7 +122,8 @@
     "sm": "0.25rem",
     "xs": "0.125rem",
     "button": "0.375rem",
-    "tag": "0.25rem"
+    "tag": "0.25rem",
+    "none": "none"
   },
   "gradient": {
     "highlight": "linear-gradient(90deg, #FF512F 0%, #DD2476 50%, #FF512F 100%)"
@@ -139,7 +142,8 @@
     "landscapeSuperWide": "32/9",
     "portraitStandard": "3/4",
     "portraitClassic": "2/3",
-    "portraitTall": "9/16"
+    "portraitTall": "9/16",
+    "auto": "auto"
   },
   "typography": {
     "button": {

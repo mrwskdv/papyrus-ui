@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms } from '@papyrus-ui/style-utils';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment, useState } from 'react';

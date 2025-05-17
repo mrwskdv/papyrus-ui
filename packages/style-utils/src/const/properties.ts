@@ -1,4 +1,4 @@
-export const POSITION = [
+export const position = [
   'absolute',
   'fixed',
   'relative',
@@ -6,7 +6,7 @@ export const POSITION = [
   'sticky',
 ] as const;
 
-export const DISPLAY = [
+export const display = [
   'block',
   'inline-block',
   'flex',
@@ -17,7 +17,7 @@ export const DISPLAY = [
   'none',
 ] as const;
 
-export const PADDING = {
+export const padding = {
   px: '1px',
   0: '0',
   0.5: '0.125rem', // 2px
@@ -55,9 +55,9 @@ export const PADDING = {
   96: '24rem', // 336px
 };
 
-export const SPACING = {
+export const spacing = {
   'auto': 'auto',
-  ...PADDING,
+  ...padding,
   '-px': '-1px',
   '-0.5': '-0.125rem', // -2px
   '-1': '-0.25rem', // -4px
@@ -95,9 +95,9 @@ export const SPACING = {
   '-96': '-24rem', // -336px
 };
 
-export const FLEX_BASIS = {
+export const flexBasis = {
   'auto': 'auto',
-  ...PADDING,
+  ...padding,
   '1/2': '50%',
   '1/3': '33.333333%',
   '2/3': '66.666667%',
@@ -124,27 +124,27 @@ export const FLEX_BASIS = {
   'full': '100%',
 };
 
-export const FLEX_DIRECTION = [
+export const flexDirection = [
   'row',
   'column',
   'row-reverse',
   'column-reverse',
 ] as const;
 
-export const FLEX_WRAP = ['wrap', 'wrap-reverse', 'nowrap'] as const;
+export const flexWrap = ['wrap', 'wrap-reverse', 'nowrap'] as const;
 
-export const FLEX = {
+export const flex = {
   1: '1 1 0%',
   auto: '1 1 auto',
   initial: '0 1 auto',
   none: 'none',
 };
 
-export const FLEX_GROW = [1, 0] as const;
+export const flexGrow = [1, 0] as const;
 
-export const FLEX_SHRINK = [1, 0] as const;
+export const flexShrink = [1, 0] as const;
 
-export const ORDER = {
+export const order = {
   1: 1,
   2: 2,
   3: 3,
@@ -162,7 +162,7 @@ export const ORDER = {
   none: 0,
 };
 
-export const GRID_TEMPLATE = {
+export const gridTemplate = {
   1: 'repeat(1, minmax(0, 1fr))',
   2: 'repeat(2, minmax(0, 1fr))',
   3: 'repeat(3, minmax(0, 1fr))',
@@ -179,7 +179,7 @@ export const GRID_TEMPLATE = {
   subgrid: 'subgrid',
 };
 
-export const GRID_SPAN = {
+export const gridSpan = {
   auto: 'auto',
   1: 'span 1 / span 1',
   2: 'span 2 / span 2',
@@ -196,7 +196,7 @@ export const GRID_SPAN = {
   full: 'span 1 / span -1',
 };
 
-export const GRID_START_END = {
+export const gridStartEnd = {
   auto: 'auto',
   1: 1,
   2: 2,
@@ -213,13 +213,14 @@ export const GRID_START_END = {
   13: 13,
 };
 
-export const GRID_AUTO = {
+export const gridAuto = {
   auto: 'auto',
   min: 'min-content',
   max: 'max-content',
   fr: 'minmax(0, 1fr)',
 };
-export const GRID_AUTO_FLOW = {
+
+export const gridAutoFlow = {
   'row': 'row',
   'column': 'column',
   'dense': 'dense',
@@ -227,9 +228,9 @@ export const GRID_AUTO_FLOW = {
   'column-dense': 'column dense',
 };
 
-export const GAP = PADDING;
+export const gap = padding;
 
-export const JUSTIFY_CONTENT = [
+export const justifyContent = [
   'normal',
   'flex-start',
   'flex-end',
@@ -240,11 +241,11 @@ export const JUSTIFY_CONTENT = [
   'stretch',
 ] as const;
 
-export const JUSTIFY_ITEMS = ['start', 'end', 'center', 'stretch'] as const;
+export const justifyItems = ['start', 'end', 'center', 'stretch'] as const;
 
-export const JUSTIFY_SELF = [...JUSTIFY_ITEMS, 'auto'] as const;
+export const justifySelf = [...justifyItems, 'auto'] as const;
 
-export const ALIGN_CONTENT = [
+export const alignContent = [
   'normal',
   'center',
   'flex-start',
@@ -256,7 +257,7 @@ export const ALIGN_CONTENT = [
   'stretch',
 ] as const;
 
-export const ALIGN_ITEMS = [
+export const alignItems = [
   'flex-start',
   'flex-end',
   'center',
@@ -264,9 +265,9 @@ export const ALIGN_ITEMS = [
   'stretch',
 ] as const;
 
-export const ALIGN_SELF = [...ALIGN_ITEMS, 'auto'] as const;
+export const alignSelf = [...alignItems, 'auto'] as const;
 
-export const PLACE_CONTENT = [
+export const placeContent = [
   'normal',
   'center',
   'start',
@@ -278,7 +279,7 @@ export const PLACE_CONTENT = [
   'stretch',
 ] as const;
 
-export const PLACE_ITEMS = [
+export const placeItems = [
   'start',
   'end',
   'center',
@@ -286,23 +287,9 @@ export const PLACE_ITEMS = [
   'stretch',
 ] as const;
 
-export const PLACE_SELF = [
-  'auto',
-  'start',
-  'end',
-  'center',
-  'stretch',
-] as const;
+export const placeSelf = ['auto', 'start', 'end', 'center', 'stretch'] as const;
 
-export const ASPECT_RATIO = {
-  auto: 'auto',
-};
-
-export const BORDER_RADIUS = {
-  none: 'none',
-};
-
-export const BORDER_STYLE = [
+export const borderStyle = [
   'solid',
   'dashed',
   'dotted',
@@ -311,15 +298,15 @@ export const BORDER_STYLE = [
   'none',
 ] as const;
 
-export const BORDER_WIDTH = [0, 1, 2, 4, 8] as const;
+export const borderWidth = [0, 1, 2, 4, 8] as const;
 
-export const OBJECT_FIT = ['contain', 'cover'] as const;
+export const objectFit = ['contain', 'cover'] as const;
 
-export const INSET = { ...SPACING, auto: 'auto' };
+export const inset = { ...spacing, auto: 'auto' };
 
-export const HEIGHT = {
+export const height = {
   'auto': 'auto',
-  ...PADDING,
+  ...padding,
   '1/2': '50%',
   '1/3': '33.333333%',
   '2/3': '66.666667%',
@@ -345,8 +332,8 @@ export const HEIGHT = {
   'fit': 'fit-content',
 };
 
-export const MAX_HEIGHT = {
-  ...PADDING,
+export const maxHeight = {
+  ...padding,
   none: 'none',
   full: '100%',
   screen: '100vh',
@@ -358,7 +345,7 @@ export const MAX_HEIGHT = {
   fit: 'fit-content',
 };
 
-export const MAX_WIDTH = {
+export const maxWidth = {
   'none': 'none',
   0: '0rem',
   'xs': '20rem', // 320px
@@ -379,8 +366,8 @@ export const MAX_WIDTH = {
   'prose': '65ch',
 };
 
-export const MIN_HEIGHT = {
-  ...PADDING,
+export const minHeight = {
+  ...padding,
   full: '100%',
   screen: '100vh',
   svh: '100svh',
@@ -391,8 +378,8 @@ export const MIN_HEIGHT = {
   fit: 'fit-content',
 };
 
-export const MIN_WIDTH = {
-  ...PADDING,
+export const minWidth = {
+  ...padding,
   0: '0px',
   full: '100%',
   min: 'min-content',
@@ -400,9 +387,9 @@ export const MIN_WIDTH = {
   fit: 'fit-content',
 };
 
-export const WIDTH = {
+export const width = {
   'auto': 'auto',
-  ...PADDING,
+  ...padding,
   '1/2': '50%',
   '1/3': '33.333333%',
   '2/3': '66.666667%',
@@ -436,13 +423,7 @@ export const WIDTH = {
   'fit': 'fit-content',
 };
 
-export const COLOR = {
-  currentColor: 'currentColor',
-  inherit: 'inherit',
-  transparent: 'transparent',
-};
-
-export const TEXT_ALIGN = [
+export const textAlign = [
   'left',
   'right',
   'center',
@@ -451,29 +432,27 @@ export const TEXT_ALIGN = [
   'end',
 ] as const;
 
-export const TEXT_DECORATION = [
+export const textDecoration = [
   'none',
   'underline',
   'line-through',
   'overline',
 ] as const;
 
-export const TEXT_OVERFLOW = ['ellipsis', 'clip'] as const;
+export const textOverflow = ['ellipsis', 'clip'] as const;
 
-export const TEXT_TRANSFORM = [
+export const textTransform = [
   'none',
   'uppercase',
   'lowercase',
   'capitalize',
 ] as const;
 
-export const VERTICAL_ALIGN = ['baseline', 'top', 'middle', 'bottom'] as const;
+export const whiteSpace = ['normal', 'nowrap'] as const;
 
-export const WHITE_SPACE = ['normal', 'nowrap'] as const;
+export const overflow = ['hidden', 'auto'] as const;
 
-export const OVERFLOW = ['hidden', 'auto'] as const;
-
-export const Z_INDEX = {
+export const zIndex = {
   0: 0,
   10: 10,
   20: 20,
@@ -481,3 +460,5 @@ export const Z_INDEX = {
   40: 40,
   50: 50,
 };
+
+export const defaultProperties = {};

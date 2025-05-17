@@ -12,9 +12,9 @@ The UI kit with fundamental React components based on the Papyrus UI design syst
 1. **Install via npm or yarn:**
 
     ```shell
-    npm install @papyrus-ui/components @papyrus-ui/styles @vanilla-extract/css
+    npm install @papyrus-ui/components @papyrus-ui/theme @vanilla-extract/css
     // or
-    yarn add @papyrus-ui/components @papyrus-ui/styles @vanilla-extract/css
+    yarn add @papyrus-ui/components @papyrus-ui/theme @vanilla-extract/css
     ```
 
 2. **Setting up styles and themes:**
@@ -22,9 +22,9 @@ The UI kit with fundamental React components based on the Papyrus UI design syst
    Import styles and themes into the entry component of your application.
 
     ```tsx
-    import { lightTheme } from '@papyrus-ui/styles';
+    import { lightTheme } from '@papyrus-ui/theme';
 
-    import '@papyrus-ui/styles/css/styles.css';
+    import '@papyrus-ui/theme/css/theme.css';
     import '@papyrus-ui/components/css/components.css';
     
     function App() {
@@ -40,10 +40,10 @@ The UI kit with fundamental React components based on the Papyrus UI design syst
    to dynamically apply the theme class.
 
     ```tsx
-    import { lightTheme } from '@papyrus-ui/styles';
+    import { lightTheme } from '@papyrus-ui/theme';
     import { ThemeProvider } from '@papyrus-ui/components';
     
-    import '@papyrus-ui/styles/css/styles.css';
+    import '@papyrus-ui/theme/css/theme.css';
     import '@papyrus-ui/components/css/components.css';
     
     function App() {

@@ -3,7 +3,7 @@ import {
   FlexAtoms,
   GapAtoms,
   ResponsiveValue,
-} from '@papyrus-ui/styles';
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef } from 'react';
 

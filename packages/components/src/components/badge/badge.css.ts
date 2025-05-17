@@ -1,16 +1,17 @@
-import { atoms, SPACING, vars } from '@papyrus-ui/styles';
+import { atoms, spacing } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { style } from '@vanilla-extract/css';
 
 export const counter = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  minWidth: SPACING[5],
-  height: SPACING[5],
+  minWidth: spacing[5],
+  height: spacing[5],
   borderRadius: vars.borderRadius.full,
   color: vars.color.white,
   whiteSpace: 'nowrap',
-  padding: `0 ${SPACING[1]}`,
+  padding: `0 ${spacing[1]}`,
   overflow: 'hidden',
   ...vars.typography.caption,
 });

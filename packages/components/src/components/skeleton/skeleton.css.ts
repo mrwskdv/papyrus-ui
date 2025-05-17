@@ -1,4 +1,4 @@
-import { vars } from '@papyrus-ui/styles';
+import { vars } from '@papyrus-ui/theme';
 import { style, keyframes } from '@vanilla-extract/css';
 
 const pulse = keyframes({

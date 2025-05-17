@@ -1,4 +1,4 @@
-import { vars } from '@papyrus-ui/styles';
+import { vars } from '@papyrus-ui/theme';
 import { style } from '@vanilla-extract/css';
 
 export const root = style({

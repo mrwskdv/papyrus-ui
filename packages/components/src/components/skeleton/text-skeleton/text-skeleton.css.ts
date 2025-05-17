@@ -1,5 +1,5 @@
-import { vars } from '@papyrus-ui/styles';
-import { calculateTextHeight } from '@papyrus-ui/styles/src/utils/calculate-text-height';
+import { calculateTextHeight } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 

@@ -1,4 +1,5 @@
-import { atoms, SPACING, vars } from '@papyrus-ui/styles';
+import { atoms, spacing } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const rootDirection = {
@@ -126,7 +127,7 @@ export const linkCollapsed = style({
   flexDirection: 'column',
   minWidth: 0,
   height: '3rem',
-  padding: `0 ${SPACING[2]}`,
+  padding: `0 ${spacing[2]}`,
 });
 
 export const indent = atoms({
@@ -196,7 +197,7 @@ export const iconDisabledVariant = styleVariants({
 export const label = style({
   display: 'block',
   ...vars.typography.body.md.primary.regular,
-  margin: `0 ${SPACING[1]}`,
+  margin: `0 ${spacing[1]}`,
 });
 
 export const labelDirection = {

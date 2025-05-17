@@ -1,6 +1,6 @@
 'use client';
 
-import { lightTheme } from '@papyrus-ui/styles';
+import { lightMode } from '@papyrus-ui/theme';
 import { FC, ReactNode, useLayoutEffect } from 'react';
 
 export interface ThemeProviderProps {
@@ -9,7 +9,7 @@ export interface ThemeProviderProps {
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
-  theme = lightTheme,
+  theme = lightMode,
   children,
 }): JSX.Element => {
   useLayoutEffect(() => {

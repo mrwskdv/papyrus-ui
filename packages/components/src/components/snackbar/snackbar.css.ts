@@ -1,4 +1,4 @@
-import { bpUp } from '@papyrus-ui/styles';
+import { bpUp } from '@papyrus-ui/style-utils';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const root = style({

@@ -1,4 +1,5 @@
-import { SPACING, vars } from '@papyrus-ui/styles';
+import { spacing } from '@papyrus-ui/style-utils';
+import { vars } from '@papyrus-ui/theme';
 import { globalStyle, style, styleVariants } from '@vanilla-extract/css';
 
 export const root = style({
@@ -23,11 +24,11 @@ export const rootSize = styleVariants({
 });
 
 globalStyle(`${rootSize.md} th, .${root}.${rootSize.md}  td`, {
-  padding: SPACING[3],
+  padding: spacing[3],
 });
 
 globalStyle(`${rootSize.sm} th, .${root}.${rootSize.sm}  td`, {
-  padding: `${SPACING[1.5]} ${SPACING[3]}`,
+  padding: `${spacing[1.5]} ${spacing[3]}`,
 });
 
 export const rootFontVariant = styleVariants({

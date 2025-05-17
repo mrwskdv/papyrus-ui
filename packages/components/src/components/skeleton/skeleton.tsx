@@ -4,8 +4,9 @@ import {
   PositionAtoms,
   ResponsiveValue,
   SizingAtoms,
-} from '@papyrus-ui/styles';
-import { MarginAtoms, RoundedAtoms } from '@papyrus-ui/styles/src';
+  MarginAtoms,
+  RoundedAtoms,
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 

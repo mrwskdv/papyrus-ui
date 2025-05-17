@@ -111,3 +111,6 @@ sw.js
 
 # styles build output
 css
+
+# nx cache
+.nx

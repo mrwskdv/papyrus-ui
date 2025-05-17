@@ -1,4 +1,4 @@
-import { truncateStyle } from '@papyrus-ui/styles';
+import { truncateStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,

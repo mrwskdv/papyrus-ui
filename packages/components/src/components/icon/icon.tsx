@@ -5,7 +5,7 @@ import {
   interactiveStyle,
   MarginAtoms,
   partitionAtoms,
-} from '@papyrus-ui/styles';
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes, ReactElement } from 'react';
 

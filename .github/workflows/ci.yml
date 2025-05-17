@@ -1,6 +1,9 @@
 name: Continuous Integration
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   ci:
@@ -8,8 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Enable Corepack
         run: corepack enable
@@ -17,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 18
           cache: yarn
 
       # https://github.com/actions/cache/blob/main/examples.md#node---yarn
@@ -28,7 +29,6 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         id: yarn-cache
-
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable --refresh-lockfile
+        run: yarn install
 
       - name: Check dependency licenses
         run: yarn check:licenses
@@ -52,12 +52,3 @@ jobs:
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v3
-
-      - name: Create release PR or publish to npm
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        uses: changesets/action@master
-        with:
-          publish: yarn release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

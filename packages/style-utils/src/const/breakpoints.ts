@@ -7,4 +7,9 @@ export const breakpoints: Record<Breakpoint, number> = {
   desktop: 1280,
 };
 
-export const breakpointsOrder: Breakpoint[] = ['mobile', 'tablet', 'desktop'];
+export const breakpointsOrder: Breakpoint[] = [
+  'mobile',
+  'tablet',
+  'laptop',
+  'desktop',
+];

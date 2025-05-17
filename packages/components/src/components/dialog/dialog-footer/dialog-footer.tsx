@@ -1,6 +1,6 @@
 'use client';
 
-import { atoms, Atoms } from '@papyrus-ui/styles';
+import { atoms, Atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes, ReactNode, useContext } from 'react';
 

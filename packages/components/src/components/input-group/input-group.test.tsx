@@ -57,7 +57,7 @@ describe('Given the InputGroup component with a message', () => {
       );
       const message = screen.getByText('Username is required');
       expect(message).toBeInTheDocument();
-      expect(message).toHaveAttribute('role', 'alert'); // Assuming error styles are applied.
+      expect(message).toHaveAttribute('role', 'alert'); // Assuming error theme are applied.
     });
   });
 

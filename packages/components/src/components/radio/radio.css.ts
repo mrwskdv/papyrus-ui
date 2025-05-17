@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms } from '@papyrus-ui/style-utils';
 import { style } from '@vanilla-extract/css';
 
 export const root = style({

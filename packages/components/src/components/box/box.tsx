@@ -12,7 +12,7 @@ import {
   ResponsiveValue,
   RoundedAtoms,
   SizingAtoms,
-} from '@papyrus-ui/styles';
+} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { ElementType, forwardRef, HTMLAttributes } from 'react';
 

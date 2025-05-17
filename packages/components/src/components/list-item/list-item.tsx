@@ -1,4 +1,4 @@
-import { atoms, Atoms, highlightStyle } from '@papyrus-ui/styles';
+import { atoms, Atoms, highlightStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, LiHTMLAttributes, Ref } from 'react';
 

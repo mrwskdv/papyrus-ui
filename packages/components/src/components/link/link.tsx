@@ -1,4 +1,4 @@
-import { interactiveStyle } from '@papyrus-ui/styles';
+import { interactiveStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,

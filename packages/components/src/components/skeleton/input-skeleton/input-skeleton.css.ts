@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms } from '@papyrus-ui/style-utils';
 
 export const rootSize = {
   sm: atoms({

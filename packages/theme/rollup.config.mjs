@@ -78,7 +78,7 @@ export default [
         exclude: [/modern-normalize/],
       }),
       postcss({
-        extract: 'css/styles.css',
+        extract: 'css/theme.css',
         sourceMap: true,
       }),
       del({
@@ -88,10 +88,10 @@ export default [
     ],
   },
   {
-    input: 'css/styles.css',
+    input: 'css/theme.css',
     output: [
       {
-        file: 'css/styles.min.css'
+        file: 'css/theme.min.css'
       },
     ],
     plugins: [

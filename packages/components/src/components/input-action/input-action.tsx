@@ -1,4 +1,4 @@
-import { Atoms } from '@papyrus-ui/styles';
+import { Atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes, ReactNode } from 'react';
 

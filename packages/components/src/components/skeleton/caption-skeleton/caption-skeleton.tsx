@@ -1,4 +1,4 @@
-import { Atoms, MarginAtoms } from '@papyrus-ui/styles';
+import { Atoms, MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 

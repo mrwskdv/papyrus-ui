@@ -1,4 +1,4 @@
-import { MarginAtoms } from '@papyrus-ui/styles';
+import { MarginAtoms } from '@papyrus-ui/style-utils';
 import {
   Children,
   cloneElement,

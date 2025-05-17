@@ -1,4 +1,4 @@
-import { atoms, Atoms, partitionAtoms } from '@papyrus-ui/styles';
+import { atoms, Atoms, partitionAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes, ReactNode, useMemo } from 'react';
 import { TransitionGroup } from 'react-transition-group';

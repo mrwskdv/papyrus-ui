@@ -1,4 +1,4 @@
-import { atoms } from '@papyrus-ui/styles';
+import { atoms } from '@papyrus-ui/style-utils';
 
 export const rootSize = {
   'xs': atoms({ width: 5, height: 5 }), // 20px

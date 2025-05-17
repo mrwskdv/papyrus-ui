@@ -1,6 +1,6 @@
 'use client';
 
-import { interactiveStyle } from '@papyrus-ui/styles';
+import { interactiveStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, MouseEvent, useContext, ComponentType } from 'react';
 import { BiX } from 'react-icons/bi';

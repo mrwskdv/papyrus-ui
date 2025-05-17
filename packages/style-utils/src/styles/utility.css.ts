@@ -1,8 +1,7 @@
+import { vars } from '@papyrus-ui/theme';
 import { style } from '@vanilla-extract/css';
 
-import { MAX_HEIGHT } from '../const';
-
-import { vars } from './global.css';
+import { maxHeight } from '../const';
 
 /**
  * Typography
@@ -47,7 +46,7 @@ export const collapseStyle = style({
 });
 
 export const collapseInStyle = style({
-  maxHeight: MAX_HEIGHT[96],
+  maxHeight: maxHeight[96],
 });
 
 /**

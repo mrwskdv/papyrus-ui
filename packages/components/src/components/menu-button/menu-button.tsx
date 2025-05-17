@@ -1,6 +1,6 @@
 'use client';
 
-import { fadeInStyle, fadeStyle, truncateStyle } from '@papyrus-ui/styles';
+import { fadeInStyle, fadeStyle, truncateStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,

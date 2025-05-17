@@ -5,7 +5,7 @@ import {
   FloatingOverlay,
   FloatingPortal,
 } from '@floating-ui/react';
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/styles';
+import { fadeInStyle, fadeStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes, ReactNode, useContext } from 'react';
 import { Transition } from 'react-transition-group';

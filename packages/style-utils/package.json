@@ -1,9 +1,8 @@
 {
-  "name": "@papyrus-ui/styles",
+  "name": "@papyrus-ui/style-utils",
   "version": "0.5.0",
-  "description": "Global styles, themes and style utilities for implementing components based on the Papyrus UI design system.",
+  "description": "Style utilities for implementing components based on the Papyrus UI design system.",
   "files": [
-    "CHANGELOG.md",
     "css",
     "dist",
     "fonts",
@@ -35,17 +34,17 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
+    "@papyrus-ui/theme": "^0.5.0",
     "@vanilla-extract/css": "^1.15.3"
   },
   "devDependencies": {
+    "@papyrus-ui/theme": "^0.5.0",
     "@types/lodash": "^4.14.182",
     "@vanilla-extract/css": "^1.15.3",
     "typescript": "4.7.4"
   },
   "dependencies": {
     "@vanilla-extract/sprinkles": "^1.6.2",
-    "hex-to-rgba": "^2.0.1",
-    "lodash": "^4.17.21",
-    "modern-normalize": "^2.0.0"
+    "lodash": "^4.17.21"
   }
 }

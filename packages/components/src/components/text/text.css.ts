@@ -1,4 +1,4 @@
-import { vars } from '@papyrus-ui/styles';
+import { vars } from '@papyrus-ui/theme';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const root = recipe({

@@ -4,8 +4,11 @@ const path = require('path');
 const { kebabCase } = require('lodash');
 
 const PAPYRUS_COLLECTION = 'Papyrus UI';
-const INPUT_FILE_PATH = 'design-tokens.json';
-const OUTPUT_DIR_PATH = 'packages/styles/src/assets/themes/';
+
+const INPUT_FILE_PATH =
+  'packages/theme/src/assets/design-tokens/design-tokens.json';
+
+const OUTPUT_DIR_PATH = 'packages/theme/src/assets/themes/';
 
 const FALLBACK_FONTS =
   "system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";

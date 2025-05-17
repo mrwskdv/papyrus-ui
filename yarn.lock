@@ -2747,7 +2747,8 @@ __metadata:
   resolution: "@papyrus-ui/components@workspace:packages/components"
   dependencies:
     "@floating-ui/react": "npm:^0.27.7"
-    "@papyrus-ui/styles": "npm:^0.5.0"
+    "@papyrus-ui/style-utils": "npm:^0.5.0"
+    "@papyrus-ui/theme": "npm:^0.5.0"
     "@react-hook/debounce": "npm:^4.0.0"
     "@types/lodash": "npm:^4.14.182"
     "@types/react": "npm:^18.0.28"
@@ -2765,7 +2766,8 @@ __metadata:
     rollup-plugin-banner2: "npm:^1.3.0"
     typescript: "npm:4.7.4"
   peerDependencies:
-    "@papyrus-ui/styles": ^0.5.0
+    "@papyrus-ui/style-utils": ^0.5.0
+    "@papyrus-ui/theme": ^0.5.0
     "@vanilla-extract/css": ^1.15.3
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -2793,15 +2795,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@papyrus-ui/styles@npm:^0.5.0, @papyrus-ui/styles@workspace:packages/styles":
+"@papyrus-ui/style-utils@npm:^0.5.0, @papyrus-ui/style-utils@workspace:packages/style-utils":
   version: 0.0.0-use.local
-  resolution: "@papyrus-ui/styles@workspace:packages/styles"
+  resolution: "@papyrus-ui/style-utils@workspace:packages/style-utils"
   dependencies:
+    "@papyrus-ui/theme": "npm:^0.5.0"
     "@types/lodash": "npm:^4.14.182"
     "@vanilla-extract/css": "npm:^1.15.3"
     "@vanilla-extract/sprinkles": "npm:^1.6.2"
-    hex-to-rgba: "npm:^2.0.1"
     lodash: "npm:^4.17.21"
+    typescript: "npm:4.7.4"
+  peerDependencies:
+    "@papyrus-ui/theme": ^0.5.0
+    "@vanilla-extract/css": ^1.15.3
+  languageName: unknown
+  linkType: soft
+
+"@papyrus-ui/theme@npm:^0.5.0, @papyrus-ui/theme@workspace:packages/theme":
+  version: 0.0.0-use.local
+  resolution: "@papyrus-ui/theme@workspace:packages/theme"
+  dependencies:
+    "@vanilla-extract/css": "npm:^1.15.3"
     modern-normalize: "npm:^2.0.0"
     typescript: "npm:4.7.4"
   peerDependencies:
@@ -8793,13 +8807,6 @@ __metadata:
   dependencies:
     function-bind: "npm:^1.1.2"
   checksum: 10c0/3769d434703b8ac66b209a4cca0737519925bbdb61dd887f93a16372b14694c63ff4e797686d87c90f08168e81082248b9b028bad60d4da9e0d1148766f56eb9
-  languageName: node
-  linkType: hard
-
-"hex-to-rgba@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "hex-to-rgba@npm:2.0.1"
-  checksum: 10c0/ddf67c1c48eea0154086bf10b36dacb950f05eebfcd740e9968018364a3ca239d39396758c9eaf0f7877c1a17ec2a059692ac7bb87f2e8fa6a8c34d8c084f63d
   languageName: node
   linkType: hard
 

@@ -44,15 +44,15 @@ export const rootSize = {
     justifyContent: 'flex-start',
     px: {
       mobile: 0,
-      desktop: 12,
+      laptop: 12,
     },
     py: {
       mobile: 0,
-      desktop: 4,
+      laptop: 4,
     },
     overflowY: {
       mobile: 'hidden',
-      desktop: 'auto',
+      laptop: 'auto',
     },
   }),
 };
@@ -117,27 +117,27 @@ export const contentSize = {
     boxShadow: 'md',
     overflowY: {
       mobile: 'auto',
-      desktop: 'hidden',
+      tablet: 'hidden',
     },
   }),
   xl: atoms({
     position: {
       mobile: 'absolute',
-      desktop: 'relative',
+      laptop: 'relative',
     },
     inset: 0,
     minHeight: 'full',
     height: {
       mobile: 'full',
-      desktop: 'auto',
+      laptop: 'auto',
     },
     rounded: {
-      desktop: 'xl',
+      laptop: 'xl',
     },
     boxShadow: 'md',
     overflowY: {
       mobile: 'auto',
-      desktop: 'hidden',
+      laptop: 'hidden',
     },
   }),
 };

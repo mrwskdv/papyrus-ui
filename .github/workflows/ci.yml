@@ -1,16 +1,19 @@
 name: Continuous Integration
 
-on:
-  push:
-    branches-ignore:
-      - main
+on: [ push ]
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+
+    # when release PR is opened
+    if: github.event.pull_request.merged == false
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Enable Corepack
         run: corepack enable

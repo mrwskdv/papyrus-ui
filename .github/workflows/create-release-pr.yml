@@ -49,6 +49,7 @@ jobs:
             core.setOutput('stdout', result.stdout)
         env:
           PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
+          BRANCH_SUFFIX: timestamp
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
@@ -62,7 +63,7 @@ jobs:
           assignees: ${{ github.actor }}
           signoff: false
           branch: release/${{ env.PACKAGE_VERSION }}
-          branch-suffix: timestamp
+          branch-suffix: ${{ env.BRANCH_SUFFIX }}
           delete-branch: true
           title: 'v${{ env.PACKAGE_VERSION }}'
           body: |
@@ -78,7 +79,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'ci.yml',
-              ref: 'heads/release/${{ env.PACKAGE_VERSION }}',
+              ref: 'release/${{ env.PACKAGE_VERSION }}-${{ env.BRANCH_SUFFIX }}',
             })
 
       - name: Check Pull Request

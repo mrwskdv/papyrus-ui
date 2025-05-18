@@ -36,7 +36,7 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com
 
       - name: Set PACKAGE_VERSION
-        run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version) TIMESTAMP=$(date +"%T")" >> $GITHUB_ENV
 
       - name: Set GitHub Release Note
         id: release_note
@@ -49,7 +49,6 @@ jobs:
             core.setOutput('stdout', result.stdout)
         env:
           PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
-          BRANCH_SUFFIX: timestamp
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
@@ -63,7 +62,7 @@ jobs:
           assignees: ${{ github.actor }}
           signoff: false
           branch: release/${{ env.PACKAGE_VERSION }}
-          branch-suffix: ${{ env.BRANCH_SUFFIX }}
+          branch-suffix: ${{ env.TIMESTAMP }}
           delete-branch: true
           title: 'v${{ env.PACKAGE_VERSION }}'
           body: |
@@ -79,7 +78,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'ci.yml',
-              ref: 'release/${{ env.PACKAGE_VERSION }}-${{ env.BRANCH_SUFFIX }}',
+              ref: 'release/${{ env.PACKAGE_VERSION }}-${{ env.TIMESTAMP }}',
             })
 
       - name: Check Pull Request

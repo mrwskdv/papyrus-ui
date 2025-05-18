@@ -39,7 +39,7 @@ jobs:
         run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
 
       - name: Set TIMESTAMP
-        run: echo "TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+        run: echo "TIMESTAMP='$(date +%s)'" >> $GITHUB_ENV
 
       - name: Set GitHub Release Note
         id: release_note

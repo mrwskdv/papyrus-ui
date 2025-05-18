@@ -13,7 +13,6 @@ on:
           - major
 
 permissions:
-  actions: write
   contents: write
   issues: write
   pull-requests: write
@@ -67,18 +66,6 @@ jobs:
           body: |
             ${{ steps.release_note.outputs.stdout }}
           labels: "Type: Release"
-
-      - name: Trigger Workflow
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'ci.yml',
-              ref: 'release/${{ env.PACKAGE_VERSION }}',
-            })
 
       - name: Check Pull Request
         run: |

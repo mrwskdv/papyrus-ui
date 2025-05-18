@@ -38,9 +38,6 @@ jobs:
       - name: Set PACKAGE_VERSION
         run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
 
-      - name: Set TIMESTAMP
-        run: echo `TIMESTAMP="$(date +%s)"` >> $GITHUB_ENV
-
       - name: Set GitHub Release Note
         id: release_note
         uses: actions/github-script@v6
@@ -65,7 +62,6 @@ jobs:
           assignees: ${{ github.actor }}
           signoff: false
           branch: release/${{ env.PACKAGE_VERSION }}
-          branch-suffix: ${{ env.TIMESTAMP }}
           delete-branch: true
           title: 'v${{ env.PACKAGE_VERSION }}'
           body: |
@@ -81,7 +77,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'ci.yml',
-              ref: 'release/${{ env.PACKAGE_VERSION }}-${{ env.TIMESTAMP }}',
+              ref: 'release/${{ env.PACKAGE_VERSION }}',
             })
 
       - name: Check Pull Request

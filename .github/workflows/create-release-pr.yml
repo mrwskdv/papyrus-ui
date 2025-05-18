@@ -78,7 +78,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'ci.yml',
-              ref: '${{ github.head_ref }}',
+              ref: 'release/${{ env.PACKAGE_VERSION }}',
             })
 
       - name: Check Pull Request

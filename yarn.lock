@@ -2639,8 +2639,8 @@ __metadata:
   resolution: "@papyrus-ui/components@workspace:packages/components"
   dependencies:
     "@floating-ui/react": "npm:^0.27.7"
-    "@papyrus-ui/style-utils": "npm:^0.5.0"
-    "@papyrus-ui/theme": "npm:^0.5.0"
+    "@papyrus-ui/style-utils": "npm:^0.6.0"
+    "@papyrus-ui/theme": "npm:^0.6.0"
     "@react-hook/debounce": "npm:^4.0.0"
     "@types/lodash": "npm:^4.14.182"
     "@types/react": "npm:^18.0.28"
@@ -2687,11 +2687,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@papyrus-ui/style-utils@npm:^0.5.0, @papyrus-ui/style-utils@workspace:packages/style-utils":
+"@papyrus-ui/style-utils@npm:^0.6.0, @papyrus-ui/style-utils@workspace:packages/style-utils":
   version: 0.0.0-use.local
   resolution: "@papyrus-ui/style-utils@workspace:packages/style-utils"
   dependencies:
-    "@papyrus-ui/theme": "npm:^0.5.0"
+    "@papyrus-ui/theme": "npm:^0.6.0"
     "@types/lodash": "npm:^4.14.182"
     "@vanilla-extract/css": "npm:^1.15.3"
     "@vanilla-extract/sprinkles": "npm:^1.6.2"
@@ -2703,7 +2703,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@papyrus-ui/theme@npm:^0.5.0, @papyrus-ui/theme@workspace:packages/theme":
+"@papyrus-ui/theme@npm:^0.6.0, @papyrus-ui/theme@workspace:packages/theme":
   version: 0.0.0-use.local
   resolution: "@papyrus-ui/theme@workspace:packages/theme"
   dependencies:

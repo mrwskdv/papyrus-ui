@@ -1,6 +1,6 @@
 {
   "name": "@papyrus-ui/components",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "The UI kit with fundamental React components based on the Papyrus UI design system.",
   "files": [
     "css",
@@ -41,8 +41,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@papyrus-ui/style-utils": "^0.6.0",
-    "@papyrus-ui/theme": "^0.6.0",
+    "@papyrus-ui/style-utils": "^0.7.0",
+    "@papyrus-ui/theme": "^0.7.0",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",

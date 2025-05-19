@@ -11,8 +11,10 @@ jobs:
       - name: Apply labels
         uses: bcoe/conventional-release-labels@v1
         with:
+          ignored_types: [],
           type_labels: '{
             "build": "Type: Build",
+            "chore": "Type: Chore",
             "ci": "Type: CI",
             "docs": "Type: Documentation",
             "feat": "Type: Feature",

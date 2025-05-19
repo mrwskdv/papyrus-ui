@@ -2,7 +2,7 @@
   "name": "papyrus-ui",
   "private": true,
   "engines": {
-    "node": ">=16.x"
+    "node": ">=18.x"
   },
   "workspaces": [
     "packages/*"
@@ -14,6 +14,12 @@
     "build:style-utils": "lerna run --scope @papyrus-ui/style-utils --stream build",
     "build:components": "lerna run --scope @papyrus-ui/components --stream build",
     "check:licenses": "license-checker --production --summary --failOn=GPLv3",
+    "ci:release": "lerna publish from-package --yes",
+    "ci:versionup:patch": "lerna version patch --no-push --no-git-tag-version --yes && npm run commit-version",
+    "ci:versionup:minor": "lerna version minor --no-push --no-git-tag-version --yes && npm run commit-version",
+    "ci:versionup:major": "lerna version major --no-push --no-git-tag-version --yes && npm run commit-version",
+    "commit": "node @commitlint/prompt-cli/cli.js",
+    "commit-version": "git add . && git commit -m \"chore(release): v`node -p 'require(\"./lerna.json\").version'`\"",
     "format": "yarn format:ts && yarn format:js && yarn format:json && yarn format:yaml",
     "format:ts": "prettier --parser typescript --write \"**/*.{ts,tsx}\" --loglevel error",
     "format:js": "prettier --write \"**/*.js\"  --loglevel error",
@@ -23,17 +29,18 @@
     "lint": "eslint . --cache",
     "lint:fix": "yarn lint --fix",
     "lint:quiet": "yarn lint --quiet",
-    "precommit": "lint-staged",
-    "prepare": "husky install",
-    "release": "changeset publish",
+    "prepare": "husky",
+    "release": "lerna publish from-package",
     "test": "jest --config jest.config.mjs --passWithNoTests",
     "test:ci": "mkdir -p __reports__ && yarn test --json --outputFile=__reports__/jest-results.json --ci --coverage --runInBand",
     "test:watch": "yarn test --watch",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "versionup": "lerna version"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.0",
-    "@changesets/cli": "^2.16.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/config-workspace-scopes": "^19.8.1",
     "@eslint/js": "^8.35.0",
     "@faker-js/faker": "^8.4.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -72,9 +79,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "faker": "^6.6.6",
     "glob": "^9.3.2",
-    "husky": "^8.0.3",
+    "husky": "^9.1.7",
     "jest": "27.5.1",
     "jest-axe": "^9.0.0",
     "lerna": "^6.4.1",
@@ -92,7 +98,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^8.4.7",
     "typescript": "4.7.4",
-    "vite": "^6.0.7"
+    "vite": "^6.3.5"
   },
   "packageManager": "yarn@4.6.0"
 }

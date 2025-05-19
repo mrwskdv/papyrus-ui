@@ -1,9 +1,8 @@
 {
   "name": "@papyrus-ui/configs",
-  "version": "0.1.1",
+  "version": "0.6.0",
   "description": "Shareable configurations for JavaScript and TypeScript projects based on Google style guides.",
   "files": [
-    "CHANGELOG.md",
     "eslint-config.js",
     "eslint-config-react.js",
     "eslint-config-typescript.js",

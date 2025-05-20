@@ -24,3 +24,5 @@ export const AvatarSkeleton: FC<AvatarSkeletonProps> = ({
     rounded="full"
   />
 );
+
+AvatarSkeleton.displayName = 'AvatarSkeleton';

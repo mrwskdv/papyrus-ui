@@ -77,3 +77,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 We welcome contributions to enhance Papyrus UI. To contribute, fork the repository, make your changes, and submit a pull
 request. If you encounter issues or have suggestions, please open an issue on GitHub.
+

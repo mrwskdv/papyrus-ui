@@ -6,7 +6,7 @@ on:
 
 permissions:
   pull-requests: write
-
+  issues: write
 
 jobs:
   label:
@@ -16,7 +16,7 @@ jobs:
         uses: bcoe/conventional-release-labels@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          type_labels: | 
+          type_labels: |
             {
               "build": "Type: Build",
               "ci": "Type: CI",

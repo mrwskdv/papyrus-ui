@@ -5,7 +5,6 @@
   "files": [
     "css",
     "dist",
-    "fonts",
     "package.json",
     "README.md"
   ],

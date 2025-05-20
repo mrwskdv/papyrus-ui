@@ -1,11 +1,9 @@
 changelog:
   exclude:
     labels:
-      - "Type: Chore"
       - 'Type: Meta'
       - 'Type: Question'
       - 'Type: Release'
-      - 'Type: Revert'
 
   categories:
     - title: 🛡️ Security Fixes

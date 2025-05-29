@@ -1,7 +1,7 @@
 import { keyframes, style } from '@vanilla-extract/css';
 
 const spin = keyframes({
-  0: {
+  '0%': {
     transform: 'rotate(0)',
   },
   '100%': {

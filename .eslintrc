@@ -6,28 +6,16 @@
   ],
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx"
-      ],
+      "files": ["**/*.ts", "**/*.tsx"],
       "parserOptions": {
         "tsconfigRootDir": ".",
-        "project": [
-          "./tsconfig.json"
-        ]
+        "project": ["./tsconfig.json"]
       }
     },
     {
       "files": [
-        "**/*.stories.tsx"
-      ],
-      "rules": {
-        "import/no-default-export": "off"
-      }
-    },
-    {
-      "files": [
-        "**/*.stories.tsx"
+        "**/*.stories.tsx",
+        "./packages/components/src/plugins/**/*.ts"
       ],
       "rules": {
         "import/no-default-export": "off"

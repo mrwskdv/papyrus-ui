@@ -2,71 +2,56 @@
 
 The UI kit with fundamental React components based on the Papyrus UI design system.
 
-## Getting Started:
+## Usage
 
-1. **Install via npm or yarn:**
+Add the plugin to your `tailwind.config.js` or `tailwind.config.mjs`:
 
-    ```shell
-    npm install @papyrus-ui/components @papyrus-ui/style-utils @papyrus-ui/theme @vanilla-extract/css
-    // or
-    yarn add @papyrus-ui/components @papyrus-ui/style-utils @papyrus-ui/theme @vanilla-extract/css
-    ```
-   
-2. **Setting up styles and themes:**
+```javascript
+import papyrusUI from '@papyrus-ui/components';
 
-    Import styles and themes into the entry component of your application.
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    // your content configuration
+  ],
+  plugins: [papyrusUI],
+};
+```
 
-    ```tsx
-    import { lightTheme } from '@papyrus-ui/theme';
+## Features
 
-    import '@papyrus-ui/theme/css/theme.css';
-    import '@papyrus-ui/style-utils/css/style-utils.css';
-    import '@papyrus-ui/components/css/components.css';
-    
-    function App() {
-      return (
-        <html className={lightTheme}>
-          {/* Your application content */}
-        </html>
-      );
-    }
-    ```
+The plugin includes:
 
-    If you have a client-side rendered app where direct access to the HTML document is limited, use ThemeProvider
-    to dynamically apply the theme class.
+### Colors
 
-    ```tsx
-    import { lightTheme } from '@papyrus-ui/theme';
-    import { ThemeProvider } from '@papyrus-ui/components';
-    
-    import '@papyrus-ui/theme/css/theme.css';
-    import '@papyrus-ui/style-utils/css/style-utils.css';
-    import '@papyrus-ui/components/css/components.css';
-    
-    function App() {
-      return (
-        <ThemeProvider theme={lightTheme}>
-          {/* Your application content */}
-        </ThemeProvider>
-      );
-    }
-    ```
+- Primary colors (50-900)
+- Secondary colors (50-900)
+- Info colors (50-900)
+- Success colors (50-900)
+- Warning colors (50-900)
+- Danger colors (50-900)
+- Neutral colors (50-900)
+- Light colors (50-900)
+- Dark colors (50-900)
 
-3. **Using components across your application:**
+### Typography
 
-    Import components and integrate them into your app.
+- Heading styles (h1-h6) for both primary and secondary fonts
+- Desktop and mobile variants for h1 and h2
+- Body text styles in multiple sizes
+- Button, caption, and label text styles
+- Complete configuration for:
+  - Font sizes
+  - Line heights
+  - Font weights
+  - Letter spacing
+  - Text transforms
 
-    ```tsx
-    import { Button } from '@papyrus-ui/components';
-    
-    function Example() {
-      return <Button>Click Me!</Button>;
-    }
-    ```
+### Font Families
 
-   Customize and extend components as needed to suit your application's requirements.
+- Source Sans 3 (Primary)
+- Vollkorn (Secondary)
 
 ## Contributing
 
-We welcome contributions to enhance Papyrus UI. To contribute, fork the repository, make your changes, and submit a pull
-request. If you encounter issues or have suggestions, please open an issue on GitHub.
+For more information about contributing to this package, please contact the Papyrus UI team.

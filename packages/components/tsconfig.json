@@ -8,8 +8,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "esnext"],
-    "module": "es6",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -19,15 +19,8 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es6"
+    "target": "ESNext"
   },
-  "include": ["src/**/*"],
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.stories.tsx",
-    "**/*.docs.mdx",
-    "**/test-utils.tsx"
-  ],
-  "typeRoots": ["./src/types"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["dist"],
 }

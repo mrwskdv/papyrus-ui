@@ -1,9 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import { toUpper } from 'lodash';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
-
 import { Tag, TagProps, TagSize, TagVariant } from './tag';
 
 const sizes: TagSize[] = ['sm', 'md'];
@@ -33,27 +30,27 @@ const Template: StoryFn<TagProps> = (args) => <Tag {...args} />;
 export const Basic = Template.bind({});
 
 export const Sizes: StoryFn<TagProps> = (args) => (
-  <Flex align="center" mt="-2" mx="-1" wrap="wrap">
+  <div className="flex items-center -mt-2 -mx-1 flex-wrap">
     {sizes.map((size, i) => (
-      <Box key={i} mt={2} px={1}>
+      <div key={i} className="mt-2 px-1">
         <Tag {...args} size={size}>
           {toUpper(size)}
         </Tag>
-      </Box>
+      </div>
     ))}
-  </Flex>
+  </div>
 );
 
 export const Variants: StoryFn<TagProps> = (args) => (
-  <Flex align="center" mt="-2" mx="-1" wrap="wrap">
+  <div className="flex items-center -mt-2 -mx-1 flex-wrap">
     {variants.map((variant, i) => (
-      <Box key={i} mt={2} px={1}>
+      <div key={i} className="mt-2 px-1">
         <Tag {...args} variant={variant}>
           {toUpper(variant)}
         </Tag>
-      </Box>
+      </div>
     ))}
-  </Flex>
+  </div>
 );
 
 export const Rounded = Template.bind({});

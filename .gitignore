@@ -114,3 +114,6 @@ css
 
 # nx cache
 .nx
+
+# storybook build output
+storybook-static

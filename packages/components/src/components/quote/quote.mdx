@@ -5,16 +5,15 @@ import Quote, {
   SecondaryFont,
   SecondaryVariant,
   SmallText,
-  TertiaryVariant
-} from "./quote.stories";
-import {Meta, ArgsTable, Canvas} from "@storybook/addon-docs";
+  TertiaryVariant,
+} from './quote.stories';
+import { Meta, ArgTypes, Canvas } from '@storybook/addon-docs';
 
 <Meta of={Quote} />
 
 # Quote
 
 The `Quote` component is used to display block quotes, offering different text sizes and variants to fit various use cases.
-
 
 ## When to use
 
@@ -60,7 +59,6 @@ A small-sized quote:
 
 <Canvas of={SmallText} />
 
-
 ## Guidelines
 
 - **Readable Text Size**: Choose the appropriate size (sm, md) based on the length and emphasis of the quote.
@@ -69,11 +67,4 @@ A small-sized quote:
 
 ## Component API
 
-<ArgsTable />
-
-
-
-
-
-
-
+<ArgTypes />

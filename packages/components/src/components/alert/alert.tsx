@@ -1,4 +1,3 @@
-import { atoms, MarginAtoms, partitionAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   cloneElement,
@@ -18,13 +17,9 @@ import {
   BiX,
 } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Heading } from '../heading';
 import { Icon } from '../icon';
 import { Text } from '../text';
-
-import * as S from './alert.css';
 
 export type AlertVariant =
   | 'primary'
@@ -33,9 +28,7 @@ export type AlertVariant =
   | 'warning'
   | 'success';
 
-export interface AlertProps
-  extends MarginAtoms,
-    HTMLAttributes<HTMLDivElement> {
+export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   icon?: ReactElement;
   message: string;
@@ -52,6 +45,22 @@ const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
   success: BiCheckCircle,
 };
 
+const rootVariantClasses = {
+  primary: 'border-primary-200 bg-primary-50 text-primary-600',
+  info: 'border-info-200 bg-info-50 text-info-600',
+  success: 'border-success-200 bg-success-50 text-success-600',
+  warning: 'border-warning-200 bg-warning-50 text-warning-600',
+  danger: 'border-danger-200 bg-danger-50 text-danger-600',
+};
+
+const iconVariantClasses = {
+  primary: 'text-primary-500',
+  info: 'text-info-500',
+  success: 'text-success-500',
+  warning: 'text-warning-500',
+  danger: 'text-danger-500',
+};
+
 export const Alert: FC<AlertProps> = ({
   closeLabel = 'Close',
   icon,
@@ -64,59 +73,55 @@ export const Alert: FC<AlertProps> = ({
   ...props
 }) => {
   const IconComponent = iconByVariant[variant];
-  const [atomProps, restProps] = partitionAtoms(props);
 
   return (
     <div
-      {...restProps}
+      {...props}
       className={cn(
-        S.root,
-        S.rootVariant[variant],
-        atoms({
-          ...atomProps,
-          pe: onClose ? 8 : 4,
-        }),
+        'relative rounded-lg border ps-4 py-3 overflow-hidden',
+        rootVariantClasses[variant],
+        onClose ? 'pe-8' : 'pe-4',
         className,
       )}
       role={role}
     >
-      <Flex align="center" mx="-1.5">
-        <Box px={1.5}>
+      <div className="flex items-center -mx-1.5">
+        <div className="px-1.5">
           {isValidElement<IconBaseProps>(icon) ? (
             cloneElement(icon, {
               className: cn(
-                S.icon,
-                S.iconVariant[variant],
+                'text-3xl',
+                iconVariantClasses[variant],
                 icon.props.className,
               ),
             })
           ) : (
-            <IconComponent className={cn(S.icon, S.iconVariant[variant])} />
+            <IconComponent
+              className={cn('text-3xl', iconVariantClasses[variant])}
+            />
           )}
-        </Box>
+        </div>
 
-        <Box flex={1} overflow="hidden" px={1.5}>
+        <div className="flex-1 overflow-hidden px-1.5">
           {children ? (
             <>
-              <Heading as="div" level={5} mb={1}>
+              <Heading as="div" className="mb-1" level={5}>
                 {message}
               </Heading>
-              <Text as="div" color="neutral900" mt={1} size="sm">
+              <Text as="div" className="mt-1 text-neutral-900" size="sm">
                 {children}
               </Text>
             </>
           ) : (
             <Text as="div">{message}</Text>
           )}
-        </Box>
-      </Flex>
+        </div>
+      </div>
 
       {onClose && (
         <Icon
           aria-label={closeLabel}
-          className={S.close}
-          color="neutral700"
-          interactive
+          className="absolute top-3 end-3 text-md text-neutral-700 hover:text-neutral-500"
           role="button"
           tabIndex={0}
           onClick={onClose}

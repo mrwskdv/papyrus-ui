@@ -363,11 +363,9 @@ export const MenuBarSubmenu: FC<SubMenuProps> = ({
                 >
                   <Listbox
                     ref={refs.setFloating}
-                    maxHeight={80}
-                    maxWidth="xs"
+                    className="max-h-80 max-w-xs z-10"
                     style={floatingStyles}
                     visible={status === 'entered'}
-                    zIndex={10}
                     {...getFloatingProps()}
                   >
                     {children}

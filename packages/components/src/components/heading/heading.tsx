@@ -1,65 +1,47 @@
-import {
-  atoms,
-  breakWordStyle,
-  highlightStyle,
-  MarginAtoms,
-  partitionAtoms,
-  ResponsiveValue,
-  TextAtoms,
-  truncateStyle,
-} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { AllHTMLAttributes, ElementType, forwardRef } from 'react';
 
-import * as S from './heading.css';
-
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-
 export type HeadingVariant = 'primary' | 'secondary';
 
 export interface HeadingProps
-  extends TextAtoms,
-    MarginAtoms,
-    Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'color' | 'size'> {
+  extends Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'size'> {
   as?: ElementType;
-  breakWord?: boolean;
-  display?: ResponsiveValue<'block' | 'inline-block' | 'inline' | 'hidden'>;
-  highlight?: boolean;
   level?: HeadingLevel;
-  truncate?: boolean;
   fontVariant?: HeadingVariant;
 }
 
 export const Heading = forwardRef<HTMLElement, HeadingProps>(
   (
-    {
-      as,
-      breakWord,
-      className,
-      highlight,
-      level = 1,
-      truncate,
-      fontVariant = 'primary',
-      children,
-      ...props
-    },
+    { as, className, level = 1, fontVariant = 'primary', children, ...props },
     ref,
   ) => {
-    const [atomsProps, restProps] = partitionAtoms(props);
     const Element = as ?? `h${level}`;
-
     return (
       <Element
-        {...restProps}
         ref={ref}
         className={cn(
-          S.root({ level, fontVariant }),
-          highlight && highlightStyle,
-          breakWord && breakWordStyle,
-          truncate && truncateStyle,
-          atoms(atomsProps),
+          fontVariant === 'primary' && 'font-sans',
+          fontVariant === 'secondary' && 'font-serif',
+          level === 1 &&
+            (fontVariant === 'primary'
+              ? 'text-h1-sans xl:text-h1-sans-desktop'
+              : 'text-h1-serif xl:text-h1-serif-desktop'),
+          level === 2 &&
+            (fontVariant === 'primary'
+              ? 'text-h2-sans xl:text-h2-sans-desktop'
+              : 'text-h2-serif xl:text-h2-serif-desktop'),
+          level === 3 &&
+            (fontVariant === 'primary' ? 'text-h3-sans' : 'text-h3-serif'),
+          level === 4 &&
+            (fontVariant === 'primary' ? 'text-h4-sans' : 'text-h4-serif'),
+          level === 5 &&
+            (fontVariant === 'primary' ? 'text-h5-sans' : 'text-h5-serif'),
+          level === 6 &&
+            (fontVariant === 'primary' ? 'text-h6-sans' : 'text-h6-serif'),
           className,
         )}
+        {...props}
       >
         {children}
       </Element>

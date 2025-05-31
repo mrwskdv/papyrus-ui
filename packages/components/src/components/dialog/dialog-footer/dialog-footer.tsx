@@ -1,22 +1,17 @@
 'use client';
 
-import { atoms, Atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes, ReactNode, useContext } from 'react';
 
 import { DialogContext } from '../dialog.context';
 
-import * as S from './dialog-footer.css';
-
 export interface DialogFooterProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  justify?: Atoms['justifyContent'];
   children: ReactNode;
 }
 
 export const DialogFooter: FC<DialogFooterProps> = ({
   className,
-  justify,
   children,
   ...props
 }) => {
@@ -25,9 +20,9 @@ export const DialogFooter: FC<DialogFooterProps> = ({
   return (
     <div
       className={cn(
-        S.root,
-        S.rootSize[size],
-        atoms({ justifyContent: justify }),
+        'sticky bottom-0 flex items-center gap-4 py-3.5 px-4 z-20',
+        size !== 'sm' && 'border-t border-neutral-100 bg-white',
+        className?.includes('justify') ? '' : 'justify-between',
         className,
       )}
       {...props}

@@ -1,15 +1,11 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 
 import { IconButtonProps } from '../../icon-button';
 import { Skeleton } from '../skeleton';
 
-import * as S from './icon-button-skeleton.css';
-
 export interface IconButtonSkeletonProps
   extends Pick<IconButtonProps, 'rounded' | 'size'>,
-    MarginAtoms,
     Omit<HTMLAttributes<HTMLDivElement>, 'children'> {}
 
 export const IconButtonSkeleton: FC<IconButtonSkeletonProps> = ({
@@ -17,11 +13,23 @@ export const IconButtonSkeleton: FC<IconButtonSkeletonProps> = ({
   rounded,
   size = 'md',
   ...props
-}) => (
-  <Skeleton
-    {...props}
-    className={cn(S.rootSize[size], rounded && S.rootRounded, className)}
-    display="inline-block"
-    rounded="md"
-  />
-);
+}) => {
+  const sizeClasses: Record<string, string> = {
+    sm: 'w-7 h-7',
+    md: 'w-9 h-9',
+    lg: 'w-12 h-12',
+  };
+
+  return (
+    <Skeleton
+      className={cn(
+        sizeClasses[size],
+        rounded ? 'rounded-full' : 'rounded-md',
+        className,
+      )}
+      {...props}
+    />
+  );
+};
+
+IconButtonSkeleton.displayName = 'IconButtonSkeleton';

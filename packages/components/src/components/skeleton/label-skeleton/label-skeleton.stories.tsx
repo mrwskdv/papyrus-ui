@@ -6,7 +6,7 @@ const meta: Meta<LabelSkeletonProps> = {
   title: 'Feedback/Skeleton/LabelSkeleton',
   component: LabelSkeleton,
   args: {
-    w: 20,
+    className: 'w-20',
   },
 };
 

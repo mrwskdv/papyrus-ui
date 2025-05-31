@@ -4,12 +4,10 @@ import { BiLoader } from 'react-icons/bi';
 
 import { Icon, IconProps } from '../icon';
 
-import * as S from './loader.css';
-
 export type LoaderProps = Omit<IconProps, 'children'>;
 
 export const Loader: FC<LoaderProps> = ({ className, ...props }) => (
-  <Icon className={cn(S.root, className)} {...props}>
+  <Icon className={cn('animate-spin', className)} {...props}>
     <BiLoader />
   </Icon>
 );

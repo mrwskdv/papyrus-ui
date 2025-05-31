@@ -15,13 +15,10 @@ import { IconBaseProps } from 'react-icons';
 import { BiChevronDown } from 'react-icons/bi';
 
 import { useId } from '../../utils/use-id';
-import { Box } from '../box';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
 import { InputGroup } from '../input-group';
-
-import * as S from './select.css';
 
 export type SelectValue<IsMulti extends boolean> = IsMulti extends true
   ? string[]
@@ -121,6 +118,7 @@ export interface SelectFn {
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   <IsMulti extends boolean = false>(
     {
+      className,
       description,
       disabled,
       htmlSize,
@@ -150,6 +148,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <InputGroup
+        className={className}
         description={description}
         htmlFor={inputId}
         invalid={invalid}
@@ -158,16 +157,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       >
         <InputBox disabled={disabled} invalid={invalid} size={size}>
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="mr-1">{startIcon}</InputAction>
           )}
 
-          <Box flex={1} position="relative">
+          <div className="flex-1 relative">
             <select
               ref={ref}
-              className={cn(
-                S.input,
-                multiple ? S.inputMultiple : S.inputSingle,
-              )}
+              className={cn('relative z-10', multiple ? 'pr-4' : 'pr-7')}
               disabled={disabled}
               multiple={multiple}
               size={htmlSize}
@@ -178,16 +174,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             </select>
 
             {!multiple && (
-              <InputAction className={S.endAction}>
+              <InputAction className="absolute top-0 right-0 bottom-0 m-auto">
                 <Icon color={disabled ? 'neutral300' : 'neutral900'}>
                   <BiChevronDown />
                 </Icon>
               </InputAction>
             )}
-          </Box>
+          </div>
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>

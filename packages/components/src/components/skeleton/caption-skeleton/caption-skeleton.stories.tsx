@@ -6,7 +6,7 @@ const meta: Meta<CaptionSkeletonProps> = {
   title: 'Feedback/Skeleton/CaptionSkeleton',
   component: CaptionSkeleton,
   args: {
-    w: 14,
+    className: 'w-9',
   },
 };
 

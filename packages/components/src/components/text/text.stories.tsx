@@ -1,7 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react';
 
-import { Box } from '../box';
-
 import { Text, TextProps } from './text';
 
 const meta: Meta = {
@@ -53,38 +51,6 @@ BoldText.args = {
   size: 'md',
   fontVariant: 'primary',
   bold: true,
-};
-
-export const TruncateLongText: StoryFn<TextProps> = (args) => (
-  <Box maxW="sm">
-    <Text {...args} />
-  </Box>
-);
-
-TruncateLongText.args = {
-  children:
-    'This is a very long text that will be truncated with an ellipsis if it exceeds the width of its container.',
-  size: 'md',
-  fontVariant: 'primary',
-  truncate: true,
-};
-
-export const ColoredText = Template.bind({});
-
-ColoredText.args = {
-  children: 'This text uses the color property from the theme.',
-  size: 'md',
-  fontVariant: 'primary',
-  color: 'success500',
-};
-
-export const HighlightText = Template.bind({});
-
-HighlightText.args = {
-  children: 'This text is highlighted.',
-  size: 'md',
-  fontVariant: 'primary',
-  highlight: true,
 };
 
 export default meta;

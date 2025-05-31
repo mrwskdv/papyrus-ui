@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/style-utils';
 import { vars } from '@papyrus-ui/theme';
 import { style, styleVariants } from '@vanilla-extract/css';
 
@@ -182,44 +181,6 @@ export const rootVariant = styleVariants({
       },
     },
   },
-});
-
-export const rootSize = {
-  sm: atoms({
-    minWidth: 24,
-    height: 7,
-    px: 2,
-  }),
-  md: atoms({
-    minWidth: 28,
-    height: 9,
-    px: 3,
-  }),
-  lg: atoms({
-    minWidth: 36,
-    height: 12,
-    px: 4,
-  }),
-};
-
-export const rootBlock = style({
-  width: '100%',
-});
-
-export const rootRounded = style({
-  borderRadius: vars.borderRadius.full,
-});
-
-export const icon = atoms({
-  fontSize: 'lg',
-});
-
-export const startIcon = atoms({
-  me: 2,
-});
-
-export const endIcon = atoms({
-  ms: 2,
 });
 
 export const label = style({

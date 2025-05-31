@@ -8,7 +8,7 @@ const meta: Meta = {
   args: {
     fontVariant: 'primary',
     size: 'md',
-    width: 56,
+    className: 'w-64',
   },
 };
 

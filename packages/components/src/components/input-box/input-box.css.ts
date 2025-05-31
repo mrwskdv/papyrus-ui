@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/style-utils';
 import { vars } from '@papyrus-ui/theme';
 import { style } from '@vanilla-extract/css';
 
@@ -23,24 +22,6 @@ export const root = style({
     },
   },
 });
-
-export const rootSize = {
-  sm: atoms({
-    minHeight: 7,
-    px: 1.5,
-    py: 0.5,
-  }),
-  md: atoms({
-    minHeight: 9,
-    px: 2,
-    py: 1.5,
-  }),
-  lg: atoms({
-    minHeight: 11,
-    px: 2.5,
-    py: 3,
-  }),
-};
 
 export const rootInvalid = style({
   outlineColor: vars.color.danger400,

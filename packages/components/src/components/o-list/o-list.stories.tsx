@@ -1,6 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../box';
 import { ListItem } from '../list-item';
 
 import { OList, OListProps } from './o-list';
@@ -11,13 +10,13 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<OListProps> = (args) => (
-  <Box minW={[0, 96]}>
+  <div className="min-w-0 sm:min-w-96">
     <OList {...args}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>
       <ListItem>Item 3</ListItem>
     </OList>
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -44,12 +43,6 @@ export const BoldText = Template.bind({});
 
 BoldText.args = {
   bold: true,
-};
-
-export const ColoredText = Template.bind({});
-
-ColoredText.args = {
-  color: 'success500',
 };
 
 export default meta;

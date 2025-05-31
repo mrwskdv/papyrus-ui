@@ -1,4 +1,3 @@
-import { interactiveStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,
@@ -6,8 +5,6 @@ import {
   ElementType,
   forwardRef,
 } from 'react';
-
-import * as S from './link.css';
 
 export interface LinkProps
   extends Omit<ButtonHTMLAttributes<HTMLElement>, 'type' | 'color'>,
@@ -23,7 +20,9 @@ export const Link = forwardRef<HTMLElement, LinkProps>(
     <Element
       ref={ref}
       className={cn(
-        !disabled ? [S.root, interactiveStyle] : S.rootDisabled,
+        !disabled
+          ? 'text-primary-500 transition-colors cursor-pointer hover:text-primary-300'
+          : 'text-neutral-300',
         className,
       )}
       disabled={disabled}

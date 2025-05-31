@@ -1,18 +1,5 @@
-import { atoms, spacing } from '@papyrus-ui/style-utils';
 import { vars } from '@papyrus-ui/theme';
 import { style, styleVariants } from '@vanilla-extract/css';
-
-export const rootDirection = {
-  vertical: atoms({
-    px: 1,
-    py: 0.5,
-  }),
-  horizontal: atoms({
-    flex: 1,
-    px: 0.5,
-    py: 1,
-  }),
-};
 
 export const link = style({
   position: 'relative',
@@ -24,21 +11,6 @@ export const link = style({
   transition: vars.transition.base,
   cursor: 'pointer',
 });
-
-export const linkSize = {
-  sm: atoms({
-    px: 1,
-    py: 0.5,
-  }),
-  md: atoms({
-    px: 1.5,
-    py: 1.5,
-  }),
-  lg: atoms({
-    px: 2.5,
-    py: 3,
-  }),
-};
 
 export const linkVariant = styleVariants({
   primary: {
@@ -127,46 +99,8 @@ export const linkCollapsed = style({
   flexDirection: 'column',
   minWidth: 0,
   height: '3rem',
-  padding: `0 ${spacing[2]}`,
+  padding: `0 0.5rem`,
 });
-
-export const indent = atoms({
-  display: 'block',
-});
-
-export const icon = atoms({
-  fontSize: 'xl',
-  mx: 1,
-});
-
-export const iconVariant = {
-  primary: atoms({
-    color: 'neutral500',
-  }),
-  secondary: atoms({
-    color: 'neutral500',
-  }),
-  ghost: atoms({
-    color: 'white',
-  }),
-};
-
-export const iconCollapsed = atoms({
-  fontSize: '2xl',
-  mb: 0.5,
-});
-
-export const iconCollapsedVariant = {
-  primary: atoms({
-    color: 'neutral900',
-  }),
-  secondary: atoms({
-    color: 'neutral900',
-  }),
-  ghost: atoms({
-    color: 'white',
-  }),
-};
 
 export const iconSelectedVariant = styleVariants({
   primary: {
@@ -197,30 +131,7 @@ export const iconDisabledVariant = styleVariants({
 export const label = style({
   display: 'block',
   ...vars.typography.body.md.primary.regular,
-  margin: `0 ${spacing[1]}`,
-});
-
-export const labelDirection = {
-  vertical: atoms({
-    flex: 1,
-  }),
-  horizontal: '',
-};
-
-export const labelVariant = {
-  primary: atoms({
-    color: 'neutral900',
-  }),
-  secondary: atoms({
-    color: 'neutral900',
-  }),
-  ghost: atoms({
-    color: 'white',
-  }),
-};
-
-export const labelSelected = style({
-  ...vars.typography.body.md.primary.bold,
+  margin: `0 0.25rem`,
 });
 
 export const labelSelectedVariant = styleVariants({
@@ -230,23 +141,6 @@ export const labelSelectedVariant = styleVariants({
   },
   ghost: {},
 });
-
-export const labelCollapsed = style({
-  ...vars.typography.caption,
-  textAlign: 'center',
-});
-
-export const labelCollapsedVariant = {
-  primary: atoms({
-    color: 'neutral500',
-  }),
-  secondary: atoms({
-    color: 'neutral500',
-  }),
-  ghost: atoms({
-    color: 'white',
-  }),
-};
 
 export const labelCollapsedSelectedVariant = styleVariants({
   primary: {
@@ -273,40 +167,6 @@ export const labelDisabledVariant = styleVariants({
     color: vars.color.light400,
   },
 });
-
-export const endIconVariant = {
-  primary: atoms({
-    color: 'neutral900',
-  }),
-  secondary: atoms({
-    color: 'neutral900',
-  }),
-  ghost: atoms({
-    color: 'white',
-  }),
-};
-
-export const underline = atoms({
-  position: 'absolute',
-  display: 'block',
-  rounded: 'full',
-  bg: 'primary500',
-});
-
-export const underlineDirection = {
-  vertical: atoms({
-    top: 1,
-    bottom: 1,
-    left: '-1',
-    width: 1,
-  }),
-  horizontal: atoms({
-    bottom: '-1',
-    left: 1,
-    right: 1,
-    height: 1,
-  }),
-};
 
 export const underlineDanger = style({
   background: vars.color.danger500,

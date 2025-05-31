@@ -1,7 +1,15 @@
 import { StyleRule } from '@vanilla-extract/css';
 
-import { breakpoints, breakpointsOrder } from '../const';
-import { Breakpoint } from '../types';
+export type Breakpoint = 'mobile' | 'tablet' | 'laptop' | 'desktop';
+
+export const breakpoints = {
+  mobile: 0,
+  tablet: 640,
+  laptop: 1024,
+  desktop: 1280,
+};
+
+export const breakpointsOrder = ['mobile', 'tablet', 'laptop', 'desktop'];
 
 function bpNext(name: Breakpoint): Breakpoint | undefined {
   const idx = breakpointsOrder.indexOf(name);

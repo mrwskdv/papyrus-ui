@@ -1,8 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
@@ -22,9 +20,9 @@ export default {
 };
 
 const Template: StoryFn<TimeInputProps> = (args) => (
-  <Box w={64}>
+  <div className="w-64">
     <TimeInput {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -52,20 +50,20 @@ Seconds.args = {
 
 export function Sizes(args: TimeInputProps) {
   return (
-    <Flex direction="column" w={64}>
+    <div className="flex flex-col w-64">
       {sizes.map((size, i) => (
-        <Box key={i} mt={i && 4}>
+        <div key={i} className={i ? 'mt-4' : ''}>
           <TimeInput {...args} id={`time-input-size-${size}`} size={size} />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: TimeInputProps) {
   return (
-    <Flex direction="column" w={64}>
-      <Box mb={4}>
+    <div className="flex flex-col w-64">
+      <div className="mb-4">
         <TimeInput
           {...args}
           id="time-input-with-start-icon"
@@ -76,9 +74,9 @@ export function WithIcon(args: TimeInputProps) {
             </Icon>
           }
         />
-      </Box>
+      </div>
 
-      <Box>
+      <div>
         <TimeInput
           {...args}
           endIcon={
@@ -89,8 +87,8 @@ export function WithIcon(args: TimeInputProps) {
           id="time-input-with-end-icon"
           label="With End Icon"
         />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

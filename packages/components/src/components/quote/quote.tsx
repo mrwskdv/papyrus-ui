@@ -1,24 +1,18 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes } from 'react';
 
 import { Text, TextSize, TextFontVariant } from '../text';
 
-import * as S from './quote.css';
-
 export type QuoteVariant = 'primary' | 'secondary' | 'tertiary';
 
-export interface QuoteProps
-  extends MarginAtoms,
-    Omit<HTMLAttributes<HTMLQuoteElement>, 'color' | 'size'> {
-  /**
-   * If true, the component will break words that don't fit within the container.
-   * Useful when displaying long quotes without proper word breaks.
-   *
-   * @default false
-   */
-  breakWord?: boolean;
+const lineVariantClasses = {
+  primary: 'bg-primary-400',
+  secondary: 'bg-secondary-400',
+  tertiary: 'bg-neutral-300',
+};
 
+export interface QuoteProps
+  extends Omit<HTMLAttributes<HTMLQuoteElement>, 'color' | 'size'> {
   /**
    * Sets the variant of the text inside the quote.
    *
@@ -47,10 +41,15 @@ export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>(
       {...props}
       ref={ref}
       as="blockquote"
-      className={cn(S.root, className)}
+      className={cn('relative ps-4', className)}
     >
       {children}
-      <span className={cn(S.line, S.lineVariant[variant])} />
+      <span
+        className={cn(
+          'absolute top-0 bottom-0 left-0 block w-1 rounded-full',
+          lineVariantClasses[variant],
+        )}
+      />
     </Text>
   ),
 );

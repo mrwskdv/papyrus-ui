@@ -1,8 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
@@ -35,9 +33,9 @@ export default {
 };
 
 const Template: StoryFn<SelectProps> = (args) => (
-  <Box w={64}>
+  <div className="w-64">
     <Select {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -56,9 +54,9 @@ Multiple.args = {
 
 export function Sizes(args: SelectProps) {
   return (
-    <Flex direction="column" w={64}>
+    <div className="flex flex-col w-64">
       {SIZE_OPTIONS.map((size, i) => (
-        <Box key={i} mt={i && 4}>
+        <div key={i} className={i ? 'mt-4' : ''}>
           <Select {...args} id={`select-size-${size}`} size={size}>
             {SELECT_OPTIONS.map((val, idx) => (
               <option key={idx} value={idx}>
@@ -66,16 +64,16 @@ export function Sizes(args: SelectProps) {
               </option>
             ))}
           </Select>
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: SelectProps) {
   return (
-    <Flex direction="column" w={64}>
-      <Box mb={4}>
+    <div className="flex flex-col w-64">
+      <div className="mb-4">
         <Select
           {...args}
           id="select-with-start-icon"
@@ -92,9 +90,9 @@ export function WithIcon(args: SelectProps) {
             </option>
           ))}
         </Select>
-      </Box>
+      </div>
 
-      <Box>
+      <div>
         <Select
           {...args}
           endIcon={
@@ -111,8 +109,8 @@ export function WithIcon(args: SelectProps) {
             </option>
           ))}
         </Select>
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

@@ -1,26 +1,11 @@
-import {
-  atoms,
-  breakWordStyle,
-  highlightStyle,
-  MarginAtoms,
-  partitionAtoms,
-  ResponsiveValue,
-  TextAtoms,
-  truncateStyle,
-} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { AllHTMLAttributes, ElementType, forwardRef } from 'react';
 
-import * as S from './text.css';
-
 export type TextSize = 'md' | 'sm';
-
 export type TextFontVariant = 'primary' | 'secondary';
 
 export interface TextProps
-  extends TextAtoms,
-    MarginAtoms,
-    Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'color' | 'size'> {
+  extends Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'color' | 'size'> {
   /**
    * Specifies the HTML element type to render the text as.
    * Can be any valid HTML element (e.g., 'p', 'span', 'div', etc.).
@@ -37,30 +22,11 @@ export interface TextProps
   bold?: boolean;
 
   /**
-   * Controls whether the text should break words to avoid overflow.
-   * Useful for handling long text content that doesn't naturally break.
-   *
-   * @default false
-   */
-  breakWord?: boolean;
-
-  /**
-   * Controls the display behavior of the text, such as block or inline-block.
-   */
-  display?: ResponsiveValue<'block' | 'inline-block' | 'inline' | 'hidden'>;
-
-  /**
    * Sets the font family variant for the text.
    *
    * @default 'primary'
    */
   fontVariant?: TextFontVariant;
-  /**
-   * Highlights the text, using a pre-defined gradiant style from the theme.
-   *
-   * @default false
-   */
-  highlight?: boolean;
 
   /**
    * Defines the size of the text.
@@ -68,13 +34,6 @@ export interface TextProps
    * @default 'md'
    */
   size?: TextSize;
-
-  /**
-   * Truncates the text with an ellipsis if it overflows its container.
-   *
-   * @default false
-   */
-  truncate?: boolean;
 }
 
 export const Text = forwardRef<HTMLElement, TextProps>(
@@ -83,35 +42,57 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       as: Element = 'p',
       bold = false,
       className,
-      highlight = false,
-      breakWord = false,
       size = 'md',
-      truncate = false,
       fontVariant = 'primary',
       children,
       ...props
-    }: TextProps,
+    },
     ref,
-  ) => {
-    const [atomsProps, restProps] = partitionAtoms(props);
-
-    return (
-      <Element
-        ref={ref}
-        className={cn(
-          S.root({ bold, size, fontVariant }),
-          atoms(atomsProps),
-          highlight && highlightStyle,
-          breakWord && breakWordStyle,
-          truncate && truncateStyle,
-          className,
-        )}
-        {...restProps}
-      >
-        {children}
-      </Element>
-    );
-  },
+  ) => (
+    <Element
+      ref={ref}
+      className={cn(
+        fontVariant === 'primary' && 'font-sans',
+        fontVariant === 'secondary' && 'font-serif',
+        size === 'md' &&
+          fontVariant === 'primary' &&
+          !bold &&
+          'text-body-md-primary',
+        size === 'md' &&
+          fontVariant === 'primary' &&
+          bold &&
+          'text-body-md-primary-bold',
+        size === 'md' &&
+          fontVariant === 'secondary' &&
+          !bold &&
+          'text-body-md-secondary',
+        size === 'md' &&
+          fontVariant === 'secondary' &&
+          bold &&
+          'text-body-md-secondary-bold',
+        size === 'sm' &&
+          fontVariant === 'primary' &&
+          !bold &&
+          'text-body-sm-primary',
+        size === 'sm' &&
+          fontVariant === 'primary' &&
+          bold &&
+          'text-body-sm-primary-bold',
+        size === 'sm' &&
+          fontVariant === 'secondary' &&
+          !bold &&
+          'text-body-sm-secondary',
+        size === 'sm' &&
+          fontVariant === 'secondary' &&
+          bold &&
+          'text-body-sm-secondary-bold',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Element>
+  ),
 );
 
 Text.displayName = 'Text';

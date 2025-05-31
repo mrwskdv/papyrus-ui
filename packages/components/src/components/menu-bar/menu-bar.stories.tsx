@@ -1,4 +1,5 @@
 import { StoryFn } from '@storybook/react';
+import cn from 'classnames';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
 import {
@@ -10,7 +11,6 @@ import {
   BiSupport,
 } from 'react-icons/bi';
 
-import { Box } from '../box';
 import { Divider } from '../divider';
 import { Heading } from '../heading';
 
@@ -29,7 +29,7 @@ export default {
 };
 
 const Template: StoryFn<MenuBarProps> = (args) => (
-  <Box h={64}>
+  <div className="h-64">
     <MenuBar {...args}>
       <MenuBar.Item icon={<BiHome />} selected>
         Option 1
@@ -62,8 +62,8 @@ const Template: StoryFn<MenuBarProps> = (args) => (
         Option 6
       </MenuBar.Item>
     </MenuBar>
-    <Divider color="neutral200" />
-  </Box>
+    <Divider className="text-neutral-200" />
+  </div>
 );
 
 export const Basic: StoryFn<MenuBarProps> = Template.bind({});
@@ -72,7 +72,7 @@ export const Size: StoryFn<MenuBarProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
+        <Heading className={cn('mb-1.5', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(size)}
         </Heading>
 
@@ -86,7 +86,7 @@ export const Variant: StoryFn<MenuBarProps> = (args) => (
   <>
     {variants.map((variant, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
+        <Heading className={cn('mb-1.5', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(variant)}
         </Heading>
 

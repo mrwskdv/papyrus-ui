@@ -1,6 +1,5 @@
 'use client';
 
-import { fadeInStyle, fadeStyle, truncateStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,
@@ -38,6 +37,57 @@ export interface MenuButtonProps
   variant?: MenuButtonVariant;
 }
 
+const rootDirectionClasses = {
+  vertical: 'px-1 py-0.5',
+  horizontal: 'flex-1 px-0.5 py-1',
+};
+
+const linkSizeClasses = {
+  sm: 'px-1 py-0.5',
+  md: 'px-1.5 py-1.5',
+  lg: 'px-2.5 py-3',
+};
+
+const iconVariantClasses = {
+  primary: 'text-neutral-500',
+  secondary: 'text-neutral-500',
+  ghost: 'text-white',
+};
+
+const iconCollapsedVariantClasses = {
+  primary: 'text-neutral-900',
+  secondary: 'text-neutral-900',
+  ghost: 'text-white',
+};
+
+const labelDirectionClasses = {
+  vertical: 'flex-1',
+  horizontal: '',
+};
+
+const labelVariantClasses = {
+  primary: 'text-neutral-900',
+  secondary: 'text-neutral-900',
+  ghost: 'text-white',
+};
+
+const labelCollapsedVariantClasses = {
+  primary: 'text-neutral-500',
+  secondary: 'text-neutral-500',
+  ghost: 'text-white',
+};
+
+const endIconVariantClasses = {
+  primary: 'text-neutral-900',
+  secondary: 'text-neutral-900',
+  ghost: 'text-white',
+};
+
+const underlineDirectionClasses = {
+  vertical: 'top-1 bottom-1 -left-1 w-1',
+  horizontal: '-bottom-1 left-1 right-1 h-1',
+};
+
 export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
   (
     {
@@ -60,14 +110,14 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
     },
     ref,
   ) => (
-    <li className={cn(S.rootDirection[direction], className)} role="none">
+    <li className={cn(rootDirectionClasses[direction], className)} role="none">
       <Element
         ref={ref}
         aria-disabled={disabled}
         aria-selected={selected}
         className={cn(
-          S.link,
-          S.linkSize[size],
+          'relative flex justify-center items-center rounded-md text-start transition-colors cursor-pointer',
+          linkSizeClasses[size],
           S.linkVariant[variant],
           active && S.linkActiveVariant[variant],
           selected && [
@@ -82,7 +132,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
       >
         {direction === 'vertical' && !collapsed && indent > 0 && (
           <span
-            className={S.indent}
+            className="block"
             style={{ width: `${indent * INDENT_BASE}rem` }}
           />
         )}
@@ -91,8 +141,8 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
           cloneElement(startIcon, {
             className: cn(
               collapsed
-                ? [S.iconCollapsed, S.iconCollapsedVariant[variant]]
-                : [S.icon, S.iconVariant[variant]],
+                ? ['font-2xl mb-0.5', iconCollapsedVariantClasses[variant]]
+                : ['font-xl mx-1', iconVariantClasses[variant]],
               selected && S.iconSelectedVariant[variant],
               danger && S.iconDanger,
               disabled && S.iconDisabledVariant[variant],
@@ -102,22 +152,21 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
 
         <span
           className={cn(
-            S.labelDirection[direction],
+            labelDirectionClasses[direction],
             collapsed
               ? [
-                  S.labelCollapsed,
-                  S.labelCollapsedVariant[variant],
+                  'text-caption text-center',
+                  labelCollapsedVariantClasses[variant],
                   selected && S.labelCollapsedSelectedVariant[variant],
-                  direction === 'horizontal' && truncateStyle,
+                  direction === 'horizontal' && 'truncate',
                 ]
               : [
-                  S.label,
-                  S.labelVariant[variant],
+                  'block text-body-md-primary mx-1 truncate',
+                  labelVariantClasses[variant],
                   selected && [
-                    S.labelSelected,
+                    'text-body-md-primary-bold',
                     S.labelSelectedVariant[variant],
                   ],
-                  truncateStyle,
                 ],
             danger && S.labelDanger,
             disabled && S.labelDisabledVariant[variant],
@@ -130,8 +179,8 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
           isValidElement<IconBaseProps>(endIcon) &&
           cloneElement(endIcon, {
             className: cn(
-              S.icon,
-              S.endIconVariant[variant],
+              'font-xl mx-1',
+              endIconVariantClasses[variant],
               selected && S.iconSelectedVariant[variant],
               danger && S.iconDanger,
               disabled && S.iconDisabledVariant[variant],
@@ -142,11 +191,10 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
         {variant === 'primary' && !disabled && (
           <span
             className={cn(
-              S.underline,
-              S.underlineDirection[direction],
+              'absolute block rounded-full bg-primary-500 opacity-0 transition',
+              underlineDirectionClasses[direction],
               danger && S.underlineDanger,
-              fadeStyle,
-              selected && fadeInStyle,
+              selected && 'opacity-100',
             )}
           />
         )}

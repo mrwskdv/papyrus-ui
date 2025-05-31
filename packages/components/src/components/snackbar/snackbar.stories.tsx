@@ -5,9 +5,7 @@ import { useRef, useState } from 'react';
 import { BiBell } from 'react-icons/bi';
 
 import { Avatar } from '../avatar';
-import { Box } from '../box';
 import { Button } from '../button';
-import { Flex } from '../flex';
 
 import { Snackbar, SnackbarProps } from './snackbar';
 import { SnackbarItem, SnackbarItemVariant } from './snackbar-item';
@@ -75,14 +73,9 @@ export const Basic: StoryFn<SnackbarProps> = (args) => {
   };
 
   return (
-    <Flex
-      align="center"
-      direction="column"
-      h={64}
-      justify="center"
-      style={{
-        width: '60vw',
-      }}
+    <div
+      className="flex flex-col items-center justify-center h-64"
+      style={{ width: '60vw' }}
     >
       <Button onClick={onPush}>Push Message</Button>
 
@@ -97,7 +90,7 @@ export const Basic: StoryFn<SnackbarProps> = (args) => {
           </Snackbar.Item>
         ))}
       </Snackbar>
-    </Flex>
+    </div>
   );
 };
 
@@ -143,24 +136,19 @@ export const Placement: StoryFn<SnackbarProps> = (args) => {
   };
 
   return (
-    <Flex
-      align="center"
-      direction="column"
-      h={64}
-      justify="center"
-      style={{
-        width: '60vw',
-      }}
+    <div
+      className="flex flex-col items-center justify-center h-64"
+      style={{ width: '60vw' }}
     >
-      <Flex justify="center" mt="-4" mx="-2" wrap="wrap">
+      <div className="flex justify-center -mt-4 -mx-2 flex-wrap">
         {placements.map((placement) => (
-          <Box key={placement} mt={4} px={2}>
+          <div key={placement} className="mt-4 px-2">
             <Button variant="tertiary" onClick={() => onPush(placement)}>
               {capitalize(placement)}
             </Button>
-          </Box>
+          </div>
         ))}
-      </Flex>
+      </div>
 
       {placements.map((placement) => (
         <Snackbar {...args} key={placement} placement={placement}>
@@ -176,19 +164,14 @@ export const Placement: StoryFn<SnackbarProps> = (args) => {
           ))}
         </Snackbar>
       ))}
-    </Flex>
+    </div>
   );
 };
 
 export const Variants: StoryFn<SnackbarProps> = (args) => (
-  <Flex
-    align="center"
-    direction="column"
-    h={96}
-    justify="center"
-    style={{
-      width: '60vw',
-    }}
+  <div
+    className="flex flex-col items-center justify-center h-96"
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       {variants.map((variant) => (
@@ -204,18 +187,13 @@ export const Variants: StoryFn<SnackbarProps> = (args) => (
         </Snackbar.Item>
       ))}
     </Snackbar>
-  </Flex>
+  </div>
 );
 
 export const WithAction: StoryFn<SnackbarProps> = (args) => (
-  <Flex
-    align="center"
-    direction="column"
-    h={64}
-    justify="center"
-    style={{
-      width: '60vw',
-    }}
+  <div
+    className="flex flex-col items-center justify-center h-64"
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
@@ -231,18 +209,13 @@ export const WithAction: StoryFn<SnackbarProps> = (args) => (
         {capitalize(faker.lorem.words({ min: 1, max: 3 }))}
       </Snackbar.Item>
     </Snackbar>
-  </Flex>
+  </div>
 );
 
 export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
-  <Flex
-    align="center"
-    direction="column"
-    h={64}
-    justify="center"
-    style={{
-      width: '60vw',
-    }}
+  <div
+    className="flex flex-col items-center justify-center h-64"
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
@@ -255,18 +228,13 @@ export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
         {capitalize(faker.lorem.words({ min: 1, max: 3 }))}
       </Snackbar.Item>
     </Snackbar>
-  </Flex>
+  </div>
 );
 
 export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
-  <Flex
-    align="center"
-    direction="column"
-    h={64}
-    justify="center"
-    style={{
-      width: '60vw',
-    }}
+  <div
+    className="flex flex-col items-center justify-center h-64"
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
@@ -283,7 +251,7 @@ export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
         {capitalize(faker.lorem.words({ min: 1, max: 3 }))}
       </Snackbar.Item>
     </Snackbar>
-  </Flex>
+  </div>
 );
 
 export default meta;

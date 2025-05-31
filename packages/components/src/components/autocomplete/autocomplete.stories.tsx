@@ -1,8 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
@@ -22,9 +20,9 @@ const meta: Meta<typeof Autocomplete> = {
 };
 
 const Template: StoryFn<AutocompleteProps> = (args) => (
-  <Box style={{ minHeight: '256px' }} w={64}>
+  <div className="min-h-[256px] w-64">
     <Autocomplete {...args} options={OPTIONS_LIST} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({
@@ -87,25 +85,25 @@ ReadOnly.args = {
 
 export function Sizes(args: AutocompleteProps) {
   return (
-    <Flex direction="column" style={{ minHeight: '384px' }} w={64}>
+    <div className="flex flex-col min-h-[384px] w-64">
       {SIZE_OPTIONS.map((size, i) => (
-        <Box key={i} mt={i && 4}>
+        <div key={i} className={i ? 'mt-4' : ''}>
           <Autocomplete
             {...args}
             id={`autocomplete-size-${size}`}
             options={OPTIONS_LIST}
             size={size}
           />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: AutocompleteProps) {
   return (
-    <Flex direction="column" style={{ minHeight: '384px' }} w={64}>
-      <Box mt={4}>
+    <div className="flex flex-col min-h-[384px] w-64">
+      <div className="mt-4">
         <Autocomplete
           {...args}
           id="autocomplete-with-start-icon"
@@ -117,9 +115,9 @@ export function WithIcon(args: AutocompleteProps) {
             </Icon>
           }
         />
-      </Box>
+      </div>
 
-      <Box mt={4}>
+      <div className="mt-4">
         <Autocomplete
           {...args}
           endIcon={
@@ -131,8 +129,8 @@ export function WithIcon(args: AutocompleteProps) {
           label="With End Icon"
           options={OPTIONS_LIST}
         />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

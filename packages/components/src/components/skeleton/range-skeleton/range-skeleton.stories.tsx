@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../../box';
-
 import { RangeSkeleton, RangeSkeletonProps } from './range-skeleton';
 
 const meta: Meta<RangeSkeletonProps> = {
@@ -10,9 +8,9 @@ const meta: Meta<RangeSkeletonProps> = {
 };
 
 const Template: StoryFn<RangeSkeletonProps> = (args) => (
-  <Box w={96}>
+  <div className="w-80">
     <RangeSkeleton {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});

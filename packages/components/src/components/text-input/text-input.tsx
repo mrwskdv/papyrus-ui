@@ -198,7 +198,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="me-1">{startIcon}</InputAction>
           )}
 
           <input
@@ -215,12 +215,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           />
 
           {isClearable && (
-            <InputAction ms={1}>
+            <InputAction className="ms-1">
               <Icon
                 aria-label={clearLabel}
+                className="text-xl"
                 color="neutral700"
                 data-testid="clear-icon"
-                fontSize="xl"
                 interactive
                 role="button"
                 tabIndex={-1}
@@ -232,7 +232,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>

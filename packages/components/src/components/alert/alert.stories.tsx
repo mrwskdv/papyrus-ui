@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from '@storybook/react';
+import cn from 'classnames';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
 import { BiBell } from 'react-icons/bi';
 
 import { Avatar } from '../avatar';
-import { Box } from '../box';
 import { Heading } from '../heading';
 
 import { Alert, AlertProps, AlertVariant } from './alert';
@@ -19,9 +19,9 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<AlertProps> = (args) => (
-  <Box w={80}>
+  <div className="w-80">
     <Alert {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -35,10 +35,10 @@ const VARIANTS: AlertVariant[] = [
 ];
 
 export const Variants: StoryFn<AlertProps> = (args) => (
-  <Box w={80}>
+  <div className="w-80">
     {VARIANTS.map((variant, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
+        <Heading className={cn('mb-1.5', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(variant)}
         </Heading>
 
@@ -49,7 +49,7 @@ export const Variants: StoryFn<AlertProps> = (args) => (
         />
       </Fragment>
     ))}
-  </Box>
+  </div>
 );
 
 export const WithCloseButton = Template.bind({});

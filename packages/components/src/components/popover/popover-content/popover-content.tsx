@@ -1,11 +1,9 @@
 import { FloatingFocusManager, FloatingPortal } from '@floating-ui/react';
-import { fadeInStyle, fadeStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes, useContext } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { useMergeRefs } from '../../../utils/use-merge-refs';
-import { Box } from '../../box';
 import { PopoverContext } from '../popover.context';
 
 export type PopoverContentProps = HTMLAttributes<HTMLDivElement>;
@@ -34,22 +32,21 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
         {(status) => (
           <FloatingPortal>
             <FloatingFocusManager context={context} modal={modal}>
-              <Box
+              <div
                 ref={meredRef}
                 className={cn(
-                  fadeStyle,
-                  status === 'entered' && fadeInStyle,
+                  'z-40 opacity-0 transition',
+                  status === 'entered' && 'opacity-100',
                   className,
                 )}
                 style={{
                   ...floatingStyles,
                   ...style,
                 }}
-                zIndex={40}
                 {...getFloatingProps(props)}
               >
                 {children}
-              </Box>
+              </div>
             </FloatingFocusManager>
           </FloatingPortal>
         )}

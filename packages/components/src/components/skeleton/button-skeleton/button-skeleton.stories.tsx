@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../../box';
-
 import { ButtonSkeleton, ButtonSkeletonProps } from './button-skeleton';
 
 const meta: Meta<ButtonSkeletonProps> = {
@@ -33,9 +31,9 @@ SizeLg.args = {
 };
 
 export const Block: StoryFn<ButtonSkeletonProps> = (args) => (
-  <Box w={96}>
+  <div className="w-96">
     <Template {...args} block />{' '}
-  </Box>
+  </div>
 );
 
 export const Rounded = Template.bind({});

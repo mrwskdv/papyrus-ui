@@ -1,4 +1,3 @@
-import { truncateStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   AnchorHTMLAttributes,
@@ -31,21 +30,74 @@ export type ButtonVariant =
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>,
     AnchorHTMLAttributes<HTMLElement> {
+  /**
+   * Specifies the element type to be used for rendering the button.
+   */
   as?: ElementType;
+
+  /**
+   * If `true`, the button will take the full width of its container.
+   */
   block?: boolean;
+  /**
+   * The content of the button.
+   */
+  children?: ReactNode;
+
+  /**
+   * If `true`, the button will be disabled.
+   *
+   * @default false
+   */
   disabled?: boolean;
+
+  /**
+   * If `true`, the button will show a loading indicator.
+   *
+   * @default false
+   */
   loading?: boolean;
+
+  /**
+   * If `true`, the button will have a rounded appearance.
+   *
+   * @default false
+   */
   rounded?: boolean;
+
+  /**
+   * The size of the button.
+   *
+   * @default 'md'
+   */
   size?: ButtonSize;
+
+  /**
+   * The icon to be displayed at the start of the button.
+   */
   startIcon?: ReactNode;
+
+  /**
+   * The icon to be displayed at the end of the button.
+   */
   endIcon?: ReactNode;
+
+  /**
+   * The visual variant of the button.
+   */
   variant?: ButtonVariant;
 }
+
+const sizeMap: Record<ButtonSize, string> = {
+  sm: 'min-w-24 h-7 px-2',
+  md: 'min-w-28 h-9 px-3',
+  lg: 'min-w-36 h-12 px-4',
+};
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
   (
     {
-      as: As = 'button',
+      as: Element = 'button',
       block = false,
       rounded = false,
       size = 'md',
@@ -60,37 +112,35 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
     },
     ref,
   ) => (
-    <As
+    <Element
       ref={ref}
       className={cn(
         S.root,
-        S.rootSize[size],
         S.rootVariant[variant],
-        block && S.rootBlock,
-        rounded && S.rootRounded,
+        sizeMap[size],
+        block && 'w-full',
+        rounded ? 'rounded-full' : 'rounded-md',
         className,
       )}
-      type={As === 'button' && type == null ? 'button' : type}
+      type={Element === 'button' && type == null ? 'button' : type}
       {...props}
     >
-      {loading && <Loader fontSize="lg" />}
+      {loading && <Loader className="font-size-lg" />}
 
       {!loading &&
         isValidElement<IconBaseProps>(startIcon) &&
         cloneElement(startIcon, {
-          className: cn(S.icon, S.startIcon, startIcon.props.className),
+          className: cn('text-lg leading-none me-2', startIcon.props.className),
         })}
 
-      {!loading && (
-        <span className={cn(S.label, truncateStyle)}>{children}</span>
-      )}
+      {!loading && <span className={cn(S.label, 'truncate')}>{children}</span>}
 
       {!loading &&
         isValidElement<IconBaseProps>(endIcon) &&
         cloneElement(endIcon, {
-          className: cn(S.icon, S.endIcon, endIcon.props.className),
+          className: cn('text-lg leading-none ms-2', endIcon.props.className),
         })}
-    </As>
+    </Element>
   ),
 );
 

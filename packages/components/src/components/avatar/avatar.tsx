@@ -1,6 +1,4 @@
-import { atoms, Atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
-import { startCase } from 'lodash';
 import {
   cloneElement,
   FC,
@@ -14,16 +12,9 @@ import { IconBaseProps } from 'react-icons';
 
 import { Text } from '../text';
 
-import * as S from './avatar.css';
-
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
-  /**
-   * Background color for the avatar.
-   */
-  bg?: Atoms['bg'];
-
   /**
    * image element to be rendered within the avatar.
    */
@@ -51,34 +42,48 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 function formatText(str = ''): string {
-  return startCase(str)
+  return str
     .split(' ')
     .slice(0, 2)
-    .map((w) => w[0])
+    .map((w) => w[0]?.toUpperCase())
     .join('');
 }
 
+const sizeMap: Record<AvatarSize, string> = {
+  'xs': 'w-5 h-5',
+  'sm': 'w-6 h-6',
+  'md': 'w-8 h-8',
+  'lg': 'w-12 h-12',
+  'xl': 'w-16 h-16',
+  '2xl': 'w-20 h-20',
+};
+
+const textSizeMap: Record<AvatarSize, string> = {
+  'xs': 'text-xs',
+  'sm': 'text-xs',
+  'md': 'text-base',
+  'lg': 'text-2xl',
+  'xl': 'text-3xl',
+  '2xl': 'text-4xl',
+};
+
+const iconSizeMap: Record<AvatarSize, string> = {
+  'xs': 'text-sm',
+  'sm': 'text-base',
+  'md': 'text-xl',
+  'lg': 'text-3xl',
+  'xl': 'text-4xl',
+  '2xl': 'text-5xl',
+};
+
 export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
-  (
-    {
-      bg = 'primary400',
-      icon,
-      placeholder,
-      size = 'md',
-      className,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
+  ({ icon, placeholder, size = 'md', className, children, ...props }, ref) => (
     <span
       ref={ref}
       className={cn(
-        S.root,
-        S.rootSize[size],
-        atoms({
-          bg,
-        }),
+        'relative inline-flex items-center justify-center rounded-full overflow-hidden',
+        sizeMap[size],
+        className?.includes('bg-') ? '' : 'bg-primary-400',
         className,
       )}
       {...props}
@@ -87,9 +92,7 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
         <Text
           as="span"
           bold
-          className={cn(S.text, S.textSize[size])}
-          color="white"
-          whiteSpace="nowrap"
+          className={cn('absolute leading-none text-white', textSizeMap[size])}
         >
           {formatText(placeholder)}
         </Text>
@@ -98,13 +101,20 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
       {!children &&
         isValidElement<IconBaseProps>(icon) &&
         cloneElement(icon, {
-          className: cn(S.icon, S.iconSize[size], icon.props.className),
+          className: cn(
+            'absolute text-white',
+            iconSizeMap[size],
+            icon.props.className,
+          ),
         })}
 
       {children &&
         isValidElement<ImgHTMLAttributes<HTMLImageElement>>(children) &&
         cloneElement(children, {
-          className: cn(S.image, children.props.className),
+          className: cn(
+            'absolute w-full h-full object-cover',
+            children.props.className,
+          ),
         })}
     </span>
   ),

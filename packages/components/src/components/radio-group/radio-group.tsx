@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   ChangeEvent,
@@ -13,7 +12,6 @@ import {
 } from 'react';
 
 import { useId } from '../../utils/use-id';
-import { Flex } from '../flex';
 import { InputGroup } from '../input-group';
 import { RadioProps } from '../radio';
 
@@ -27,6 +25,11 @@ export interface RadioGroupProps {
    * @default false
    */
   block?: boolean;
+
+  /**
+   * The class name for the radio group.
+   */
+  className?: string;
 
   /**
    * The default value for the radio group.
@@ -119,6 +122,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
   (
     {
       block = false,
+      className,
       defaultValue,
       description,
       direction = 'row',
@@ -157,20 +161,21 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
 
     return (
       <InputGroup
+        className={className}
         description={description}
         id={labelId}
         invalid={invalid}
         label={label}
         message={message}
       >
-        <Flex
+        <div
           aria-labelledby={labelId}
-          direction={direction}
-          display={block ? 'flex' : 'inline-flex'}
-          mt="-1.5"
-          mx="-2"
+          className={cn(
+            'flex flex-wrap gap-x-6 gap-y-2',
+            direction === 'row' ? 'flex-row' : 'flex-col',
+            block ? 'flex' : 'inline-flex',
+          )}
           role="group"
-          wrap="wrap"
         >
           {Children.map(children, (child, idx) =>
             isValidElement<RadioProps>(child)
@@ -179,11 +184,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                   name,
                   checked: child.props.value === valueState,
                   className: cn(
-                    atoms({
-                      flex: block ? 1 : 'none',
-                      mt: 1.5,
-                      px: 2,
-                    }),
+                    block ? 'flex-1' : 'flex-none',
                     child.props.className,
                   ),
                   disabled: disabled || child.props.disabled,
@@ -194,7 +195,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                 })
               : child,
           )}
-        </Flex>
+        </div>
       </InputGroup>
     );
   },

@@ -4,7 +4,6 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import { Decorator, Preview } from '@storybook/react';
 
 import '@papyrus-ui/theme/css/theme.css';
-import '@papyrus-ui/style-utils/css/style-utils.css';
 import '@papyrus-ui/components/css/components.css';
 
 import { withThemeProvider } from './decorators/with-theme-provider';

@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Heading } from '../heading';
 
 import { Divider, DividerProps } from './divider';
@@ -11,28 +9,28 @@ const meta: Meta = {
 };
 
 export const Basic: StoryFn<DividerProps> = (args) => (
-  <Box w={80}>
+  <div className="w-80">
     <Divider {...args} />
-  </Box>
+  </div>
 );
 
 export const Direction: StoryFn<DividerProps> = (args) => (
   <>
-    <Heading level={3} mb={4}>
+    <Heading className="mb-4" level={3}>
       Horizontal
     </Heading>
 
-    <Box w={80}>
+    <div className="w-80">
       <Divider {...args} direction="horizontal" />
-    </Box>
+    </div>
 
-    <Heading level={3} mb={4} mt={6}>
+    <Heading className="mb-4 mt-6" level={3}>
       Vertical
     </Heading>
 
-    <Flex h={48} justify="center">
+    <div className="flex h-48 justify-center">
       <Divider {...args} direction="vertical" />
-    </Flex>
+    </div>
   </>
 );
 export default meta;

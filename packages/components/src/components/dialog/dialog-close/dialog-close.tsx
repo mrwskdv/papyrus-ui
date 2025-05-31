@@ -1,6 +1,5 @@
 'use client';
 
-import { interactiveStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, MouseEvent, useContext, ComponentType } from 'react';
 import { BiX } from 'react-icons/bi';
@@ -38,9 +37,11 @@ export const DialogClose: FC<DialogCloseProps> = ({
   return (
     <Icon
       {...props}
-      className={cn(interactiveStyle, className)}
+      className={cn(
+        'text-xl text-neutral-900 transition-colors cursor-pointer hover:text-neutral-600',
+        className,
+      )}
       color="neutral900"
-      fontSize="xl"
       onClick={handleClick}
     >
       <BiX />

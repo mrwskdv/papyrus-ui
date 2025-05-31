@@ -1,27 +1,30 @@
-import { Atoms, MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
 import { InputBoxProps } from '../../input-box';
 import { Skeleton } from '../skeleton';
 
-import * as S from './input-skeleton.css';
-
 export interface InputSkeletonProps
   extends Pick<InputBoxProps, 'size'>,
-    MarginAtoms,
     Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  h?: Atoms['h'];
+  className?: string;
 }
 
-export const InputSkeleton: FC<InputSkeletonProps> = ({
-  className,
+export const InputSkeleton = ({
   size = 'md',
-  ...props
-}) => (
-  <Skeleton
-    {...props}
-    className={cn(S.rootSize[size], className)}
-    rounded="md"
-  />
-);
+  className,
+}: InputSkeletonProps) => {
+  const sizeClasses: Record<string, string> = {
+    sm: 'min-h-7',
+    md: 'min-h-9',
+    lg: 'min-h-11',
+  };
+
+  return (
+    <Skeleton
+      className={cn('w-full rounded-md', sizeClasses[size], className)}
+    />
+  );
+};
+
+InputSkeleton.displayName = 'InputSkeleton';

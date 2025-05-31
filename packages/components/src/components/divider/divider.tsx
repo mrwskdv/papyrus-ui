@@ -1,37 +1,25 @@
-import {
-  Atoms,
-  atoms,
-  MarginAtoms,
-  partitionAtoms,
-} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC } from 'react';
 
-import * as S from './divider.css';
-
 export type DividerDirection = 'horizontal' | 'vertical';
 
-export interface DividerProps extends MarginAtoms {
-  color?: Atoms['color'];
+export interface DividerProps {
   direction?: DividerDirection;
   className?: string;
 }
+
+const directionClass: Record<DividerDirection, string> = {
+  horizontal: 'w-full h-px',
+  vertical: 'h-full w-px',
+};
 
 export const Divider: FC<DividerProps> = ({
   direction = 'horizontal',
   className,
   ...props
-}) => {
-  const [atomsProps, restProps] = partitionAtoms(props);
-  return (
-    <div
-      className={cn(
-        S.root,
-        S.rootDirection[direction],
-        atoms(atomsProps),
-        className,
-      )}
-      {...restProps}
-    />
-  );
-};
+}) => (
+  <div
+    {...props}
+    className={cn('bg-current', directionClass[direction], className)}
+  />
+);

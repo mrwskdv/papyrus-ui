@@ -1,6 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../box';
 import { Radio } from '../radio';
 
 import { RadioGroup } from './radio-group';
@@ -25,9 +24,9 @@ const meta: Meta<typeof RadioGroup> = {
 };
 
 const Template: StoryFn<typeof RadioGroup> = (args) => (
-  <Box w={args.block ? 96 : undefined}>
+  <div className={args.block ? 'w-96' : ''}>
     <RadioGroup {...args} />
-  </Box>
+  </div>
 );
 
 export const RowLayout = Template.bind({});

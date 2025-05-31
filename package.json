@@ -10,9 +10,8 @@
   ],
   "scripts": {
     "docs": "storybook dev -p 6006",
-    "build": "yarn build:theme && yarn build:style-utils && yarn build:components",
+    "build": "yarn build:theme && yarn build:components",
     "build:theme": "lerna run --scope @papyrus-ui/theme --stream build",
-    "build:style-utils": "lerna run --scope @papyrus-ui/style-utils --stream build",
     "build:components": "lerna run --scope @papyrus-ui/components --stream build",
     "build:docs": "storybook build",
     "check:licenses": "license-checker --production --summary --failOn=GPLv3",

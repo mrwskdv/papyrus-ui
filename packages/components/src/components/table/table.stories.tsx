@@ -1,4 +1,5 @@
 import { StoryFn } from '@storybook/react';
+import cn from 'classnames';
 import { capitalize } from 'lodash';
 import { Fragment } from 'react';
 
@@ -46,7 +47,7 @@ export const Sizes: StoryFn<TableProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={3} mt={i > 0 ? 6 : 0}>
+        <Heading className={cn('mb-3', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(size)}
         </Heading>
 

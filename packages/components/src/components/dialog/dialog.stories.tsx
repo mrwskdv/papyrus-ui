@@ -1,9 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
-import { Box } from '../box';
 import { Button } from '../button';
-import { Flex } from '../flex';
 
 import { Dialog, DialogProps } from './dialog';
 import { DialogSize } from './dialog.types';
@@ -36,11 +34,11 @@ const meta: Meta<DialogProps> = {
             laoreet ipsum nec cursus. Sed quis bibendum odio, ac laoreet quam.
           </Dialog.Description>
         </Dialog.Body>
-        <Dialog.Footer justify="space-between">
+        <Dialog.Footer>
           <Dialog.Close as={Button} variant="tertiary">
             Cancel
           </Dialog.Close>
-          <Button>OK</Button>
+          <Dialog.Close as={Button}>OK</Dialog.Close>
         </Dialog.Footer>
       </Dialog.Content>,
     ],
@@ -83,31 +81,31 @@ export function Sizes(args: DialogProps): JSX.Element {
 
   return (
     <>
-      <Flex>
-        <Box mr={4}>
+      <div className="flex">
+        <div className="mr-4">
           <Button variant="tertiary" onClick={handleOpenSmallDialog}>
             Open Small Dialog
           </Button>
-        </Box>
+        </div>
 
-        <Box mr={4}>
+        <div className="mr-4">
           <Button variant="tertiary" onClick={handleOpenMediumDialog}>
             Open Medium Dialog
           </Button>
-        </Box>
+        </div>
 
-        <Box mr={4}>
+        <div className="mr-4">
           <Button variant="tertiary" onClick={handleOpenLargeDialog}>
             Open Large Dialog
           </Button>
-        </Box>
+        </div>
 
-        <Box>
+        <div>
           <Button variant="tertiary" onClick={handleOpenExtraLargeDialog}>
             Open Extra Large Dialog
           </Button>
-        </Box>
-      </Flex>
+        </div>
+      </div>
 
       <Dialog
         {...args}
@@ -126,7 +124,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               lectus convallis, ultrices dui non, varius massa.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer justify="flex-end">
+          <Dialog.Footer className="justify-end">
             <Button variant="primary" onClick={handleClose}>
               OK
             </Button>
@@ -167,7 +165,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               laoreet quam.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer justify="space-between">
+          <Dialog.Footer>
             <Button variant="tertiary" onClick={handleClose}>
               Cancel
             </Button>
@@ -236,7 +234,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               dapibus accumsan. Sed pharetra ligula at finibus volutpat.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer justify="space-between">
+          <Dialog.Footer>
             <Button variant="tertiary" onClick={handleClose}>
               Cancel
             </Button>
@@ -305,7 +303,7 @@ export function Sizes(args: DialogProps): JSX.Element {
               dapibus accumsan. Sed pharetra ligula at finibus volutpat.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer justify="space-between">
+          <Dialog.Footer>
             <Button variant="primary" onClick={handleClose}>
               OK
             </Button>

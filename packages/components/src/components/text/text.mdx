@@ -5,9 +5,6 @@ import Text, {
   PrimaryFont,
   SecondaryFont,
   BoldText,
-  TruncateLongText,
-  ColoredText,
-  HighlightText,
 } from './text.stories';
 
 <Meta of={Text} />
@@ -49,33 +46,6 @@ You can switch between the primary and secondary font families using the `fontVa
 Use `bold` property for bold text.
 
 <Canvas of={BoldText} />
-
-### Truncate Long Text
-
-You can enable text truncation to handle overflow text with an ellipsis (...).
-
-<Canvas of={TruncateLongText} />
-
-### Colored Text
-
-Use `color` property to use different color from the theme.
-
-<Canvas of={ColoredText} />
-
-### Highlighted text
-
-Use `highlight` property to highlight text with a gradient defined in theme.
-
-<Canvas of={HighlightText} />
-
-## Guidelines
-
-- **Choose the right size**: Use 'md' for body content and 'sm' for smaller, secondary text like captions.
-
-- **Consider truncation**: Use the truncate prop for text that may overflow its container, ensuring readability without
-  breaking layout.
-
-- **Word Breaking**: Use breakWord when you have long or unbreakable content that may overflow the container.
 
 ## Accessibility
 

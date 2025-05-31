@@ -1,6 +1,5 @@
 'use client';
 
-import { collapseInStyle, collapseStyle } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   Children,
@@ -34,8 +33,6 @@ import { Icon } from '../../icon';
 import { MenuButton } from '../../menu-button';
 import { MenuItemProps } from '../menu-item';
 import { MenuContext, MenuContextType } from '../menu.context';
-
-import * as S from './submenu.css';
 
 export interface SubmenuProps
   extends Omit<HTMLAttributes<HTMLAnchorElement>, 'href'> {
@@ -209,9 +206,8 @@ export const Submenu: FC<SubmenuProps> = ({
                 ref={menuRef}
                 aria-labelledby={buttonId}
                 className={cn(
-                  S.menuList,
-                  collapseStyle,
-                  status === 'entered' && collapseInStyle,
+                  'flex flex-col max-h-0 py-0.5 transition-all overflow-y-hidden',
+                  status === 'entered' && 'max-h-96',
                 )}
                 id={menuId}
                 role="menu"

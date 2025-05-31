@@ -2,8 +2,6 @@ import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { BiInfoCircle, BiSolidPurchaseTag } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
@@ -28,34 +26,34 @@ export default {
 };
 
 const Template: StoryFn<NumericInputProps> = (args) => (
-  <Box w={64}>
+  <div className="w-64">
     <NumericInput {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
 
 export function Sizes(args: NumericInputProps) {
   return (
-    <Flex direction="column" w={64}>
+    <div className="flex flex-col w-64">
       {sizes.map((size, i) => (
-        <Box key={i} mt={i && 4}>
+        <div key={i} className={i ? 'mt-4' : ''}>
           <NumericInput
             {...args}
             id={`numeric-input-size-${size}`}
             label={capitalize(size)}
             size={size}
           />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: NumericInputProps) {
   return (
-    <Flex direction="column" w={64}>
-      <Box mb={4}>
+    <div className="flex flex-col w-64">
+      <div className="mb-4">
         <NumericInput
           {...args}
           id="numeric-input-with-start-icon"
@@ -66,9 +64,9 @@ export function WithIcon(args: NumericInputProps) {
             </Icon>
           }
         />
-      </Box>
+      </div>
 
-      <Box>
+      <div>
         <NumericInput
           {...args}
           endIcon={
@@ -79,8 +77,8 @@ export function WithIcon(args: NumericInputProps) {
           id="numeric-input-with-end-icon"
           label="With End Icon"
         />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

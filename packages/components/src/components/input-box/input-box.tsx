@@ -42,6 +42,12 @@ export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
   size?: InputBoxSize;
 }
 
+const sizeMap: Record<InputBoxSize, string> = {
+  sm: 'min-h-7 px-1.5 py-0.5',
+  md: 'min-h-9 px-2 py-1.5',
+  lg: 'min-h-11 px-2.5 py-3',
+};
+
 export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
   (
     {
@@ -59,7 +65,7 @@ export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
       ref={ref}
       className={cn(
         S.root,
-        S.rootSize[size],
+        sizeMap[size],
         invalid && S.rootInvalid,
         disabled && S.rootDisabled,
         readOnly && S.rootReadonly,

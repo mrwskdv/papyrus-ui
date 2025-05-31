@@ -294,7 +294,7 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="me-1">{startIcon}</InputAction>
           )}
 
           <PatternFormat
@@ -313,7 +313,7 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
           />
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>

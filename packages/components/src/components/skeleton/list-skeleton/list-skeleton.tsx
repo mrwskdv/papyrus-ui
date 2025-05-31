@@ -1,4 +1,4 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
+import cn from 'classnames';
 import {
   Children,
   cloneElement,
@@ -8,27 +8,26 @@ import {
   ReactNode,
 } from 'react';
 
-import { Box } from '../../box';
 import { ListItemSkeletonProps } from '../list-item-skeleton';
 
 export interface ListSkeletonProps
   extends Pick<ListItemSkeletonProps, 'fontVariant' | 'size'>,
-    MarginAtoms,
     HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
 export const ListSkeleton: FC<ListSkeletonProps> = ({
+  className,
   fontVariant,
   size,
   children,
   ...props
 }) => (
-  <Box {...props} ps={6}>
+  <div {...props} className={cn('ps-6', className)}>
     {Children.map(children, (child) =>
       isValidElement<ListItemSkeletonProps>(child)
         ? cloneElement(child, { fontVariant, size })
         : child,
     )}
-  </Box>
+  </div>
 );

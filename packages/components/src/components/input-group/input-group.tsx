@@ -1,11 +1,16 @@
+import cn from 'classnames';
 import { FC, ReactNode } from 'react';
 
-import { Flex } from '../flex';
 import { InputMessage } from '../input-message';
 import { Label } from '../label';
 import { Text } from '../text';
 
 export interface InputGroupProps {
+  /**
+   * The class name to be applied to the input group.
+   */
+  className?: string;
+
   /**
    * Optional description text for the input field, providing additional context or instructions for the user.
    * Appears above the input field to guide the user on the expected input.
@@ -48,6 +53,7 @@ export interface InputGroupProps {
 }
 
 export const InputGroup: FC<InputGroupProps> = ({
+  className,
   description,
   htmlFor,
   id,
@@ -56,21 +62,20 @@ export const InputGroup: FC<InputGroupProps> = ({
   message,
   children,
 }) => (
-  <Flex direction="column">
+  <div className={cn('flex flex-col', className)}>
     {label && (
       <Label
         as={htmlFor ? 'label' : 'span'}
-        display="block"
+        className={description ? 'mb-2' : 'mb-4'}
         htmlFor={htmlFor}
         id={id}
-        mb={description ? 0.5 : 1}
       >
         {label}
       </Label>
     )}
 
     {description && (
-      <Text mb={1.5} size="sm">
+      <Text className="mb-1.5" size="sm">
         {description}
       </Text>
     )}
@@ -78,9 +83,9 @@ export const InputGroup: FC<InputGroupProps> = ({
     {children}
 
     {message && (
-      <InputMessage invalid={invalid} mt={0.5}>
+      <InputMessage className="mt-0.5" invalid={invalid}>
         {message}
       </InputMessage>
     )}
-  </Flex>
+  </div>
 );

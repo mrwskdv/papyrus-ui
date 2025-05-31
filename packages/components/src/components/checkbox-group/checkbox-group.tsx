@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import {
   ChangeEvent,
@@ -15,7 +14,6 @@ import {
 
 import { useId } from '../../utils/use-id';
 import { CheckboxProps } from '../checkbox';
-import { Flex } from '../flex';
 import { InputGroup } from '../input-group';
 
 export type CheckboxGroupDirection = 'row' | 'column';
@@ -28,6 +26,11 @@ export interface CheckboxGroupProps<T extends boolean | Array<string>> {
    * @default false
    */
   block?: boolean;
+
+  /**
+   * The class name for the checkbox group.
+   */
+  className?: string;
 
   /**
    * The default value for the checkbox group.
@@ -124,6 +127,7 @@ export const CheckboxGroup = forwardRef(
   <T extends boolean | Array<string>>(
     {
       block = false,
+      className,
       defaultValue,
       description,
       direction = 'row',
@@ -178,20 +182,20 @@ export const CheckboxGroup = forwardRef(
 
     return (
       <InputGroup
+        className={className}
         description={description}
         id={labelId}
         invalid={invalid}
         label={label}
         message={message}
       >
-        <Flex
+        <div
           aria-labelledby={labelId}
-          direction={direction}
-          display={block ? 'flex' : 'inline-flex'}
-          mt="-1.5"
-          mx="-2"
-          role="group"
-          wrap="wrap"
+          className={cn(
+            'flex flex-wrap gap-x-6 gap-y-2',
+            direction === 'row' ? 'flex-row' : 'flex-col',
+            block ? 'flex' : 'inline-flex',
+          )}
         >
           {Children.map(children, (child, idx) =>
             isValidElement<CheckboxProps>(child)
@@ -202,11 +206,7 @@ export const CheckboxGroup = forwardRef(
                     ? valueState.includes(child.props.value)
                     : Boolean(valueState),
                   className: cn(
-                    atoms({
-                      flex: block ? 1 : 'none',
-                      mt: 1.5,
-                      px: 2,
-                    }),
+                    block ? 'flex-1' : 'flex-none',
                     child.props.className,
                   ),
                   disabled: disabled || child.props.disabled,
@@ -217,7 +217,7 @@ export const CheckboxGroup = forwardRef(
                 })
               : child,
           )}
-        </Flex>
+        </div>
       </InputGroup>
     );
   },

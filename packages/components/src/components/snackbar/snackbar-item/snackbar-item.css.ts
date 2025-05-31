@@ -1,11 +1,12 @@
-import { atoms, bpUp, maxWidth, minWidth } from '@papyrus-ui/style-utils';
 import { vars } from '@papyrus-ui/theme';
 import { style, styleVariants } from '@vanilla-extract/css';
 
+import { bpUp } from '../../../utils/bp';
+
 export const root = style({
   width: '100%',
-  maxWidth: maxWidth['lg'],
-  minWidth: minWidth[64],
+  maxWidth: '32rem',
+  minWidth: '16rem',
   borderRadius: vars.borderRadius.lg,
   color: 'white',
   padding: '0.75rem 1rem',
@@ -350,26 +351,4 @@ export const rootVisiblePlacement = styleVariants({
       },
     }),
   ],
-});
-
-export const rootVariant = {
-  primary: atoms({
-    bg: 'primary600',
-  }),
-  info: atoms({
-    bg: 'info600',
-  }),
-  success: atoms({
-    bg: 'success600',
-  }),
-  warning: atoms({
-    bg: 'warning600',
-  }),
-  danger: atoms({
-    bg: 'danger600',
-  }),
-};
-
-export const icon = atoms({
-  fontSize: '3xl',
 });

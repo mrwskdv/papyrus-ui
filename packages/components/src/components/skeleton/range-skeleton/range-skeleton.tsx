@@ -1,16 +1,22 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
+import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 
-import { Flex } from '../../flex';
 import { Skeleton } from '../skeleton';
 
-export interface RangeSkeletonProps
-  extends MarginAtoms,
-    Omit<HTMLAttributes<HTMLDivElement>, 'children'> {}
+export type RangeSkeletonProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+>;
 
-export const RangeSkeleton: FC<RangeSkeletonProps> = (props) => (
-  <Flex {...props} align="center" justify="center" position="relative" py={2}>
-    <Skeleton h={1} rounded="full" w="full" />
-    <Skeleton h={3} position="absolute" rounded="full" w={3} />
-  </Flex>
+export const RangeSkeleton: FC<RangeSkeletonProps> = ({
+  className,
+  ...props
+}) => (
+  <div
+    className={cn('flex items-center justify-center relative py-2', className)}
+    {...props}
+  >
+    <Skeleton className="h-1 w-full rounded-full" />
+    <Skeleton className="absolute h-3 w-3 rounded-full" />
+  </div>
 );

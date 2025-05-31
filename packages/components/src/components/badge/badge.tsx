@@ -1,28 +1,13 @@
-import { atoms, Atoms, MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { CSSProperties, forwardRef, ReactNode } from 'react';
 
-import { Box } from '../box';
-
-import * as S from './badge.css';
-
 type BadgePosition = 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
 
-export interface BadgeProps extends MarginAtoms {
-  /**
-   * Background color of the badge.
-   */
-  bg?: Atoms['bg'];
-
+export interface BadgeProps {
   /**
    * The content to be displayed within the badge. Can be a numerical value, text, or any ReactNode.
    */
   content?: ReactNode;
-
-  /**
-   * The children of the badge component. Usually, the element to which the badge is applied.
-   */
-  children?: ReactNode;
 
   /**
    * Additional class name(s) to be applied to the badge component.
@@ -63,6 +48,11 @@ export interface BadgeProps extends MarginAtoms {
    * The title of the badge. This is used for accessibility purposes.
    */
   title?: string;
+
+  /**
+   * The children of the badge component. Usually, the element to which the badge is applied.
+   */
+  children?: ReactNode;
 }
 
 const transformStyle: Record<BadgePosition, string> = {
@@ -82,8 +72,7 @@ const transformOriginStyle: Record<BadgePosition, string> = {
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
-      bg = 'primary500',
-      children,
+      className,
       content,
       dot = false,
       offsetX = 0,
@@ -92,6 +81,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       position = 'top-end',
       showZero,
       title,
+      children,
       ...props
     },
     ref,
@@ -123,26 +113,33 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       : undefined;
 
     return (
-      <Box
-        ref={ref}
-        as="span"
-        display="inline-block"
-        position="relative"
+      <span
         {...props}
+        ref={ref}
+        className="inline-block relative"
+        style={badgeStyle}
       >
         {children}
 
         {typeof badgeContent === 'object' && (
-          <Box as="span" display="block" style={badgeStyle} title={title}>
+          <span
+            className={cn('block', className)}
+            style={badgeStyle}
+            title={title}
+          >
             {badgeContent}
-          </Box>
+          </span>
         )}
 
         {dot &&
           typeof badgeContent !== 'object' &&
           (badgeContent !== 0 || showZero) && (
             <span
-              className={cn(S.dot, atoms({ bg }))}
+              className={cn(
+                'block w-2 h-2 rounded-full',
+                className?.includes('bg-') ? '' : `bg-primary-500`,
+                className,
+              )}
               data-testid="badge-dot"
               style={badgeStyle}
               title={title}
@@ -153,14 +150,18 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
           typeof badgeContent !== 'object' &&
           (badgeContent !== 0 || showZero) && (
             <span
-              className={cn(S.counter, atoms({ bg }))}
+              className={cn(
+                'flex items-center justify-center min-w-5 h-5 rounded-full text-white whitespace-nowrap px-1 overflow-hidden text-xs font-medium',
+                className?.includes('bg-') ? '' : `bg-primary-500`,
+                className,
+              )}
               style={badgeStyle}
               title={title}
             >
               {badgeContent}
             </span>
           )}
-      </Box>
+      </span>
     );
   },
 );

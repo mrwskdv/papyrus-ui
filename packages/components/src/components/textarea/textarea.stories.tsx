@@ -1,8 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputBoxSize } from '../input-box';
 
@@ -23,9 +21,9 @@ const meta = {
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
 
 const Template: StoryFn<TextareaProps> = (args) => (
-  <Box w={64}>
+  <div className="w-64">
     <Textarea {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -36,20 +34,20 @@ Basic.args = {
 
 export function Sizes(args: TextareaProps) {
   return (
-    <Flex direction="column" w={64}>
+    <div className="flex flex-col w-64">
       {sizes.map((size, i) => (
-        <Box key={i} mt={i && 4}>
+        <div key={i} className={i ? 'mt-4' : ''}>
           <Textarea {...args} id={`textarea-size-${size}`} size={size} />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: TextareaProps) {
   return (
-    <Flex direction="column" w={64}>
-      <Box mb={4}>
+    <div className="flex flex-col w-64">
+      <div className="mb-4">
         <Textarea
           {...args}
           id="textarea-with-start-icon"
@@ -60,9 +58,9 @@ export function WithIcon(args: TextareaProps) {
             </Icon>
           }
         />
-      </Box>
+      </div>
 
-      <Box>
+      <div>
         <Textarea
           {...args}
           endIcon={
@@ -73,8 +71,8 @@ export function WithIcon(args: TextareaProps) {
           id="textarea-with-end-icon"
           label="With End Icon"
         />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

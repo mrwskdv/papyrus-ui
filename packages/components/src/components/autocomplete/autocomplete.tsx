@@ -42,8 +42,6 @@ import { Maybe } from '../../types';
 import { slug } from '../../utils/slug';
 import { useId } from '../../utils/use-id';
 import { useMergeRefs } from '../../utils/use-merge-refs';
-import { Box } from '../box';
-import { Flex } from '../flex';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox, InputBoxSize } from '../input-box';
@@ -578,13 +576,13 @@ export const Autocomplete = forwardRef(
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="me-1">{startIcon}</InputAction>
           )}
 
-          <Flex as="span" flex={1} mt="-1" mx="-0.5" wrap="wrap">
+          <span className="flex flex-1 -mt-1 -mx-0.5 flex-wrap">
             {multiple &&
               selectedOptions.map((item, idx) => (
-                <Box key={idx} as="span" display="block" mt={1} px={0.5}>
+                <span key={idx} className="block mt-1 px-0.5">
                   <Tag
                     data-index={idx}
                     disabled={disabled}
@@ -597,13 +595,13 @@ export const Autocomplete = forwardRef(
                   >
                     {getLabel(item)}
                   </Tag>
-                </Box>
+                </span>
               ))}
 
             {(!multiple ||
               selectedOptions.length === 0 ||
               (!disabled && !readOnly)) && (
-              <Box as="span" display="block" mt={1} px={0.5} w="full">
+              <span className="block mt-1 px-0.5 w-full">
                 <input
                   aria-activedescendant={
                     activeIndex != null
@@ -631,19 +629,19 @@ export const Autocomplete = forwardRef(
                     onKeyDown: handleInputKeyDown,
                   })}
                 />
-              </Box>
+              </span>
             )}
-          </Flex>
+          </span>
 
           {!disabled &&
             !readOnly &&
             isFocused &&
             (inputValue.length > 0 || selectedOptions.length > 0) && (
-              <InputAction ms={1}>
+              <InputAction className="ms-1">
                 <Icon
                   aria-label={clearLabel}
+                  className="text-lg"
                   color="neutral700"
-                  fontSize="lg"
                   interactive
                   role="button"
                   tabIndex={-1}
@@ -655,7 +653,7 @@ export const Autocomplete = forwardRef(
             )}
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
 

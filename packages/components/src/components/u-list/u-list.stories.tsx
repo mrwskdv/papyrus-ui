@@ -1,7 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { BiCog, BiGridAlt, BiStats } from 'react-icons/bi';
 
-import { Box } from '../box';
 import { Icon } from '../icon';
 import { ListItem } from '../list-item';
 import { Marker } from '../marker';
@@ -14,13 +13,13 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<UListProps> = (args) => (
-  <Box minW={[0, 96]}>
+  <div className="min-w-0 sm:min-w-96">
     <UList {...args}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>
       <ListItem>Item 3</ListItem>
     </UList>
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});
@@ -44,7 +43,7 @@ NoneType.args = {
 };
 
 export const WithIcons: StoryFn<UListProps> = (args) => (
-  <Box minW={[0, 96]}>
+  <div className="min-w-0 sm:min-w-96">
     <UList {...args} type="none">
       <ListItem>
         <Marker role="none">
@@ -71,7 +70,7 @@ export const WithIcons: StoryFn<UListProps> = (args) => (
         Item 3
       </ListItem>
     </UList>
-  </Box>
+  </div>
 );
 
 export const SmallText = Template.bind({});
@@ -96,12 +95,6 @@ export const BoldText = Template.bind({});
 
 BoldText.args = {
   bold: true,
-};
-
-export const ColoredText = Template.bind({});
-
-ColoredText.args = {
-  color: 'success500',
 };
 
 export default meta;

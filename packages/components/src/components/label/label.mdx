@@ -1,9 +1,4 @@
-import Label, {
-  Basic,
-  ColoredText,
-  HighlightText,
-  TruncateLongText,
-} from './label.stories';
+import Label, { Basic } from './label.stories';
 import { Meta, ArgTypes, Canvas } from '@storybook/addon-docs';
 
 <Meta of={Label} />
@@ -23,24 +18,6 @@ elements.
 ### Basic
 
 <Canvas of={Basic} />
-
-### Truncate Long Text
-
-You can enable text truncation to handle overflow text with an ellipsis (...).
-
-<Canvas of={TruncateLongText} />
-
-### Colored Text
-
-Use `color` property to use different color from the theme.
-
-<Canvas of={ColoredText} />
-
-### Highlighted text
-
-Use `highlight` property to highlight text with a gradient defined in theme.
-
-<Canvas of={HighlightText} />
 
 ## Guidelines
 

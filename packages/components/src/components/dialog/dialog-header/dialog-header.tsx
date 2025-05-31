@@ -5,8 +5,6 @@ import { FC, HTMLAttributes, ReactNode, useContext } from 'react';
 
 import { DialogContext } from '../dialog.context';
 
-import * as S from './dialog-header.css';
-
 export interface DialogHeaderProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: ReactNode;
@@ -21,7 +19,14 @@ export const DialogHeader: FC<DialogHeaderProps> = ({
   const { size } = useContext(DialogContext);
 
   return (
-    <div className={cn(S.root, S.rootSize[size], className)} {...props}>
+    <div
+      className={cn(
+        'sticky top-0 flex items-center gap-4 px-4 py-3.5 z-20',
+        size !== 'sm' && 'border-b border-neutral-100 bg-white',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </div>
   );

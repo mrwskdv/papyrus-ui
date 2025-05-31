@@ -1,9 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
-
 import { Heading, HeadingLevel, HeadingProps, HeadingVariant } from './heading';
 
 const meta: Meta = {
@@ -24,56 +21,31 @@ Basic.args = {
 };
 
 export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (
-  <Flex mt="-8" mx="-8" wrap="wrap">
+  <div className="flex flex-wrap mt-8 -mx-6">
     {variants.map((variant) => (
-      <Box key={variant} mt={8} px={8} w={{ mobile: 'full', desktop: '1/2' }}>
-        <Heading as="h4" color="neutral500" level={6} mb={4}>
-          {capitalize(variant)} Variant
+      <div key={variant} className="w-full lg:w-1/2 px-6">
+        <Heading as="h4" className="text-neutral-500 mb-3" level={6}>
+          {capitalize(variant)}
         </Heading>
 
-        <Flex direction="column" mt="-4">
+        <div className="flex flex-col -mt-4">
           {levels.map((level) => (
-            <Box key={level} mt={4}>
+            <div key={level} className="mt-4">
               <Heading
                 {...args}
                 as="div"
+                className="whitespace-nowrap"
                 fontVariant={variant}
                 level={level}
-                whiteSpace="nowrap"
               >
                 Heading H{level}
               </Heading>
-            </Box>
+            </div>
           ))}
-        </Flex>
-      </Box>
+        </div>
+      </div>
     ))}
-  </Flex>
+  </div>
 );
-
-export const TruncateLongText: StoryFn<HeadingProps> = (args) => (
-  <Box maxW="sm">
-    <Heading {...args} />
-  </Box>
-);
-
-TruncateLongText.args = {
-  children:
-    'This is a very long text that will be truncated with an ellipsis if it exceeds the width of its container.',
-  fontVariant: 'primary',
-  truncate: true,
-};
-
-export const ColoredText = Template.bind({});
-ColoredText.args = {
-  children: 'This text uses the color property from the theme.',
-  color: 'success500',
-};
-
-export const HighlightText = Template.bind({});
-HighlightText.args = {
-  children: 'This text is highlighted.',
-  highlight: true,
-};
 
 export default meta;

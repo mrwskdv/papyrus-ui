@@ -1,8 +1,5 @@
 import { BiSolidLike } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
-
 import { Button, ButtonProps, ButtonSize, ButtonVariant } from './button';
 
 const variants: ButtonVariant[] = [
@@ -34,47 +31,47 @@ export function Basic(args: ButtonProps) {
 
 export function Variants(args: ButtonProps) {
   return (
-    <Flex mt="-4" mx="-2" wrap="wrap">
+    <div className="flex flex-wrap -mt-4 -mx-2">
       {variants.map((variant, i) => (
-        <Box key={i} mt={4} px={2} w="auto">
+        <div key={i} className="mt-4 px-2 w-auto">
           <Button {...args} variant={variant}>
             {variant}
           </Button>
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function Sizes(args: ButtonProps) {
   return (
-    <Flex align="center" mt="-4" mx="-2" wrap="wrap">
+    <div className="flex items-center flex-wrap -mt-4 -mx-2">
       {sizes.map((size, i) => (
-        <Box key={i} mt={4} px={2}>
+        <div key={i} className="mt-4 px-2">
           <Button {...args} size={size}>
             {size}
           </Button>
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function WithIcon(args: ButtonProps) {
   return (
-    <Flex mt="-4" mx="-2" wrap="wrap">
-      <Box mt={4} px={2}>
+    <div className="flex flex-wrap -mt-4 -mx-2">
+      <div className="mt-4 px-2">
         <Button {...args} startIcon={<BiSolidLike />}>
           Start icon
         </Button>
-      </Box>
+      </div>
 
-      <Box mt={4} px={2}>
+      <div className="mt-4 px-2">
         <Button {...args} endIcon={<BiSolidLike />}>
           End icon
         </Button>
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 

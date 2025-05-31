@@ -1,9 +1,3 @@
-import {
-  Atoms,
-  atoms,
-  MarginAtoms,
-  partitionAtoms,
-} from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { forwardRef, HTMLAttributes } from 'react';
 
@@ -14,27 +8,13 @@ import * as S from './u-list.css';
 export type UListType = 'disc' | 'dash' | 'none';
 
 export interface UListProps
-  extends MarginAtoms,
-    Omit<HTMLAttributes<HTMLUListElement>, 'color' | 'size' | 'type'> {
+  extends Omit<HTMLAttributes<HTMLUListElement>, 'size' | 'type'> {
   /**
    * Applies bold styling to the text.
    *
    * @default false
    */
   bold?: boolean;
-
-  /**
-   * Controls whether the text should break words to avoid overflow.
-   * Useful for handling long text content that doesn't naturally break.
-   *
-   * @default false
-   */
-  breakWord?: boolean;
-
-  /**
-   * Sets the text color from the theme.
-   */
-  color?: Atoms['color'];
 
   /**
    * Sets the font family variant for the text.
@@ -59,20 +39,16 @@ export interface UListProps
 }
 
 export const UList = forwardRef<HTMLUListElement, UListProps>(
-  ({ className, type = 'disc', children, ...props }, ref) => {
-    const [atomsProps, restProps] = partitionAtoms(props);
-
-    return (
-      <Text
-        ref={ref}
-        as="ul"
-        className={cn(S.root, S.rootType[type], atoms(atomsProps), className)}
-        {...restProps}
-      >
-        {children}
-      </Text>
-    );
-  },
+  ({ className, type = 'disc', children, ...props }, ref) => (
+    <Text
+      ref={ref}
+      as="ul"
+      className={cn(S.root, S.rootType[type], className)}
+      {...props}
+    >
+      {children}
+    </Text>
+  ),
 );
 
 UList.displayName = 'UList';

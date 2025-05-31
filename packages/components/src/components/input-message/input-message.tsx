@@ -1,11 +1,9 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
+import cn from 'classnames';
 import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 import { Text } from '../text';
 
-export interface InputMessageProps
-  extends MarginAtoms,
-    Omit<HTMLAttributes<HTMLDivElement>, 'color' | 'role' | 'size'> {
+export interface InputMessageProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * If `true`, render message text as an error message, otherwise renders it as a hint.
    *
@@ -19,14 +17,17 @@ export interface InputMessageProps
 }
 
 export const InputMessage = forwardRef<HTMLDivElement, InputMessageProps>(
-  ({ invalid, children, ...props }, ref) => (
+  ({ className, invalid, children, ...props }, ref) => (
     <Text
-      {...props}
       ref={ref}
       as="div"
-      color={invalid ? 'danger500' : 'neutral500'}
+      className={cn(
+        invalid ? 'text-danger-500' : 'text-neutral-500',
+        className,
+      )}
       role={invalid ? 'alert' : 'status'}
       size="sm"
+      {...props}
     >
       {children}
     </Text>

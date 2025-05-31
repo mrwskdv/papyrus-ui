@@ -7,10 +7,7 @@ import {
   ReactNode,
 } from 'react';
 
-import { Box } from '../box';
 import { Text } from '../text';
-
-import * as S from './radio.css';
 
 export interface RadioProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
@@ -27,12 +24,12 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, disabled, readOnly, children, ...props }, ref) => (
     <label
       className={cn(
-        S.root,
-        (disabled || readOnly) && S.rootDisabled,
+        'inline-flex items-baseline gap-x-2',
+        disabled || readOnly ? 'cursor-default' : 'pointer',
         className,
       )}
     >
-      <Box as="span" py={1}>
+      <span className={children ? 'py-1' : ''}>
         <input
           {...props}
           ref={ref}
@@ -40,10 +37,12 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           readOnly={readOnly}
           type="radio"
         />
-      </Box>
-      <Text as="span" className={S.label} ms={2}>
-        {children}
-      </Text>
+      </span>
+      {children && (
+        <Text as="span" className="flex-1">
+          {children}
+        </Text>
+      )}
     </label>
   ),
 );

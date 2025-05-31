@@ -1,8 +1,6 @@
 import { BiSolidLike } from 'react-icons/bi';
 
 import { Avatar } from '../avatar';
-import { Box } from '../box';
-import { Flex } from '../flex';
 
 import {
   IconButton,
@@ -40,29 +38,33 @@ export function Basic(args: IconButtonProps) {
 
 export function Variants(args: IconButtonProps) {
   return (
-    <Flex mt="-4" mx="-2" wrap="wrap">
+    <div className="flex flex-wrap -mt-4 -mx-2">
       {variants.map((variant, i) => (
-        <Box key={i} mt={4} px={2} title={`${variant} variant IconButton`}>
+        <div
+          key={i}
+          className="mt-4 px-2"
+          title={`${variant} variant IconButton`}
+        >
           <IconButton
             {...args}
             title={`${variant} variant IconButton`}
             variant={variant}
           />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function Sizes(args: IconButtonProps) {
   return (
-    <Flex align="center" mt="-4" mx="-2" wrap="wrap">
+    <div className="flex items-center flex-wrap -mt-4 -mx-2">
       {sizes.map((size, i) => (
-        <Box key={i} mt={4} px={2}>
+        <div key={i} className="mt-4 px-2">
           <IconButton {...args} size={size} title={`${size} size IconButton`} />
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 

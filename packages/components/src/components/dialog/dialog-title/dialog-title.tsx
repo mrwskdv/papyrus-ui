@@ -7,8 +7,6 @@ import { FC, HTMLAttributes, useContext, useLayoutEffect } from 'react';
 import { Heading } from '../../heading';
 import { DialogContext } from '../dialog.context';
 
-import * as S from './dialog-title.css';
-
 export type DialogTitleProps = Omit<
   HTMLAttributes<HTMLElement>,
   'color' | 'size'
@@ -33,10 +31,9 @@ export const DialogTitle: FC<DialogTitleProps> = ({
   return (
     <Heading
       as="h1"
-      className={cn(S.root, className)}
+      className={cn('flex-1 text-neutral-900 truncate', className)}
       id={id}
       level={5}
-      truncate
       {...props}
     >
       {children}

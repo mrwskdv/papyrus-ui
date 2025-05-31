@@ -129,7 +129,7 @@ export const Textarea: FC<TextareaProps> = forwardRef<
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="me-1">{startIcon}</InputAction>
           )}
 
           <textarea
@@ -140,7 +140,7 @@ export const Textarea: FC<TextareaProps> = forwardRef<
           />
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>

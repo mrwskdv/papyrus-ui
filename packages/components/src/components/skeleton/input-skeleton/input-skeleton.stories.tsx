@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { Box } from '../../box';
-
 import { InputSkeleton, InputSkeletonProps } from './input-skeleton';
 
 const meta: Meta<InputSkeletonProps> = {
@@ -13,9 +11,9 @@ const meta: Meta<InputSkeletonProps> = {
 };
 
 const Template: StoryFn<InputSkeletonProps> = (args) => (
-  <Box w={96}>
+  <div className="w-96">
     <InputSkeleton {...args} />
-  </Box>
+  </div>
 );
 
 export const Basic = Template.bind({});

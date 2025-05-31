@@ -17,7 +17,6 @@ import { getFirstItem, getLastItem } from '../../utils/list-navigation';
 
 import { MenuItem, MenuItemProps } from './menu-item';
 import { MenuContext, MenuContextType } from './menu.context';
-import * as S from './menu.css';
 import { MenuSize, MenuVariant } from './menu.types';
 import { Submenu } from './submenu';
 
@@ -27,6 +26,12 @@ export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
   variant?: MenuVariant;
   onCollapsedChange?: (collapsed: boolean) => void;
 }
+
+const variantClasses = {
+  primary: 'bg-white',
+  secondary: 'bg-white',
+  ghost: 'bg-primary-700',
+};
 
 const MenuComponent: FC<MenuProps> = ({
   collapsed = false,
@@ -92,7 +97,11 @@ const MenuComponent: FC<MenuProps> = ({
       <ul
         {...props}
         ref={menuRef}
-        className={cn(S.root, S.rootVariant[variant], className)}
+        className={cn(
+          'flex flex-col -my-0.5',
+          variantClasses[variant],
+          className,
+        )}
         role="menu"
         tabIndex={activeIndex == null ? 0 : -1}
         onKeyDown={handleKeyDown}

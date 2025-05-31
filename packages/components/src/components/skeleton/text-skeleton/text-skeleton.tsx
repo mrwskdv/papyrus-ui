@@ -1,22 +1,12 @@
-import { Atoms, MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 
-import { Flex, FlexProps } from '../../flex';
-import { TextProps } from '../../text';
+import { Text, TextProps } from '../../text';
 import { Skeleton } from '../skeleton';
-
-import * as S from './text-skeleton.css';
 
 export interface TextSkeletonProps
   extends Pick<TextProps, 'fontVariant' | 'size'>,
-    Pick<FlexProps, 'display'>,
-    MarginAtoms,
-    Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  w?: Atoms['w'];
-  minW?: Atoms['minW'];
-  maxW?: Atoms['maxW'];
-}
+    Omit<HTMLAttributes<HTMLDivElement>, 'children'> {}
 
 export const TextSkeleton: FC<TextSkeletonProps> = ({
   className,
@@ -24,12 +14,16 @@ export const TextSkeleton: FC<TextSkeletonProps> = ({
   size = 'md',
   ...props
 }) => (
-  <Flex
+  <Text
+    as="div"
+    className={cn('relative flex flex-col justify-center', className)}
+    fontVariant={fontVariant}
+    size={size}
     {...props}
-    className={cn(S.root({ fontVariant, size }), className)}
-    direction="column"
-    justify="center"
   >
-    <Skeleton className={S.skeleton} rounded="sm" w="full" />
-  </Flex>
+    <span aria-hidden="true" className="invisible">
+      Aa
+    </span>
+    <Skeleton className="absolute h-[1em] w-full rounded-sm" />
+  </Text>
 );

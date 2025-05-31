@@ -1,28 +1,34 @@
-import { MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
-import { FC, HTMLAttributes } from 'react';
 
-import { AvatarProps } from '../../avatar';
 import { Skeleton } from '../skeleton';
 
-import * as S from './avatar-skeleton.css';
+export interface AvatarSkeletonProps {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  className?: string;
+}
 
-export interface AvatarSkeletonProps
-  extends Pick<AvatarProps, 'size'>,
-    MarginAtoms,
-    Omit<HTMLAttributes<HTMLDivElement>, 'children'> {}
-
-export const AvatarSkeleton: FC<AvatarSkeletonProps> = ({
-  className,
+export const AvatarSkeleton = ({
   size = 'md',
-  ...props
-}) => (
-  <Skeleton
-    {...props}
-    className={cn(S.rootSize[size], className)}
-    display="inline-block"
-    rounded="full"
-  />
-);
+  className,
+}: AvatarSkeletonProps) => {
+  const sizeClasses: Record<string, string> = {
+    'xs': 'w-5 h-5',
+    'sm': 'w-6 h-6',
+    'md': 'w-8 h-8',
+    'lg': 'w-12 h-12',
+    'xl': 'w-16 h-16',
+    '2xl': 'w-20 h-20',
+  };
+
+  return (
+    <Skeleton
+      className={cn(
+        'relative inline-block rounded-full',
+        sizeClasses[size],
+        className,
+      )}
+    />
+  );
+};
 
 AvatarSkeleton.displayName = 'AvatarSkeleton';

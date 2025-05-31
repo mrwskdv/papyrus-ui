@@ -222,7 +222,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction me={1}>{startIcon}</InputAction>
+            <InputAction className="me-1">{startIcon}</InputAction>
           )}
 
           <NumericFormat
@@ -236,7 +236,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
           />
 
           {isValidElement(endIcon) && (
-            <InputAction ms={1}>{endIcon}</InputAction>
+            <InputAction className="ms-1">{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>

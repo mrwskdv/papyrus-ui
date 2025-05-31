@@ -27,7 +27,7 @@ export const Basic = Template.bind({});
 export const BackgroundColor = Template.bind({});
 
 BackgroundColor.args = {
-  bg: 'secondary500',
+  className: 'bg-secondary-500',
 };
 
 export const Dot = Template.bind({});
@@ -79,7 +79,7 @@ export const CustomContent = Template.bind({});
 
 CustomContent.args = {
   content: (
-    <Icon color="danger400" fontSize="md">
+    <Icon className="text-danger-400 text-md">
       <BiError />
     </Icon>
   ),

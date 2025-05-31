@@ -58,8 +58,7 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
             >
               <Listbox
                 ref={refs.setFloating}
-                maxHeight={80}
-                maxWidth="xs"
+                className="max-h-80 max-w-xs"
                 style={floatingStyles}
                 visible={status === 'entered'}
                 {...getFloatingProps(props)}

@@ -139,15 +139,7 @@ export const theme: Config['theme'] = {
     },
     fontSize: {
       // Headings - Primary
-      'h1-primary-desktop': [
-        '3rem',
-        {
-          lineHeight: '1.112',
-          fontWeight: '800',
-          letterSpacing: '0.004em',
-        },
-      ],
-      'h1-primary-mobile': [
+      'h1-sans': [
         '2.25rem',
         {
           lineHeight: '1.112',
@@ -155,15 +147,15 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.008em',
         },
       ],
-      'h2-primary-desktop': [
-        '1.75rem',
+      'h1-sans-desktop': [
+        '3rem',
         {
           lineHeight: '1.112',
-          fontWeight: '600',
-          letterSpacing: '0.008em',
+          fontWeight: '800',
+          letterSpacing: '0.004em',
         },
       ],
-      'h2-primary-mobile': [
+      'h2-sans': [
         '1.5rem',
         {
           lineHeight: '1.112',
@@ -171,7 +163,15 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h3-primary': [
+      'h2-sans-desktop': [
+        '1.75rem',
+        {
+          lineHeight: '1.112',
+          fontWeight: '600',
+          letterSpacing: '0.008em',
+        },
+      ],
+      'h3-sans': [
         '1.25rem',
         {
           lineHeight: '1.112',
@@ -179,7 +179,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h4-primary': [
+      'h4-sans': [
         '1.125rem',
         {
           lineHeight: '1.112',
@@ -187,7 +187,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h5-primary': [
+      'h5-sans': [
         '1rem',
         {
           lineHeight: '1.112',
@@ -195,7 +195,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h6-primary': [
+      'h6-sans': [
         '0.875rem',
         {
           lineHeight: '1.112',
@@ -204,15 +204,7 @@ export const theme: Config['theme'] = {
         },
       ],
       // Headings - Secondary
-      'h1-secondary-desktop': [
-        '3rem',
-        {
-          lineHeight: '1.112',
-          fontWeight: '500',
-          letterSpacing: '0.004em',
-        },
-      ],
-      'h1-secondary-mobile': [
+      'h1-serif': [
         '2.25rem',
         {
           lineHeight: '1.112',
@@ -220,15 +212,15 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.008em',
         },
       ],
-      'h2-secondary-desktop': [
-        '1.75rem',
+      'h1-serif-desktop': [
+        '3rem',
         {
           lineHeight: '1.112',
-          fontWeight: '700',
-          letterSpacing: '0.008em',
+          fontWeight: '500',
+          letterSpacing: '0.004em',
         },
       ],
-      'h2-secondary-mobile': [
+      'h2-serif': [
         '1.5rem',
         {
           lineHeight: '1.112',
@@ -236,7 +228,15 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.008em',
         },
       ],
-      'h3-secondary': [
+      'h2-serif-desktop': [
+        '1.75rem',
+        {
+          lineHeight: '1.112',
+          fontWeight: '700',
+          letterSpacing: '0.008em',
+        },
+      ],
+      'h3-serif': [
         '1.25rem',
         {
           lineHeight: '1.112',
@@ -244,7 +244,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h4-secondary': [
+      'h4-serif': [
         '1.125rem',
         {
           lineHeight: '1.112',
@@ -252,7 +252,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h5-secondary': [
+      'h5-serif': [
         '1rem',
         {
           lineHeight: '1.112',
@@ -260,7 +260,7 @@ export const theme: Config['theme'] = {
           letterSpacing: '0.012em',
         },
       ],
-      'h6-secondary': [
+      'h6-serif': [
         '0.875rem',
         {
           lineHeight: '1.112',

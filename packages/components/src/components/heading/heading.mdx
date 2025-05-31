@@ -1,5 +1,5 @@
-import Heading, {Basic, ColoredText, HighlightText, TruncateLongText, VariantsAndSizes} from './heading.stories'
-import { Canvas, Meta, ArgTypes } from "@storybook/addon-docs";
+import Heading, { Basic, VariantsAndSizes } from './heading.stories';
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs';
 
 <Meta of={Heading} />
 
@@ -23,34 +23,16 @@ Variants and Sizes combination overview.
 
 <Canvas of={VariantsAndSizes} />
 
-### Truncate Long Text
-
-You can enable text truncation to handle overflow text with an ellipsis (...).
-
-<Canvas of={TruncateLongText} />
-
-### Colored Text
-
-Use `color` property to use different color from the theme.
-
-<Canvas of={ColoredText} />
-
-### Highlighted text
-
-Use `highlight` property to highlight text with a gradient defined in theme.
-
-<Canvas of={HighlightText} />
-
 ## Guidelines
 
 - **Choose the right size**: The larger size typically matches higher heading hierarchy and vice-versa, according to its
-tag (`h1`, `h2`, etc.)
+  tag (`h1`, `h2`, etc.)
 
 - **Consider truncation**: Use the truncate prop for text that may overflow its container, ensuring readability without
-breaking layout.
+  breaking layout.
 
 - **Word Breaking**: Use breakWord when you have long or unbreakable content inside the quote that may overflow the
-container.
+  container.
 
 ## Accessibility
 
@@ -67,7 +49,3 @@ container.
 ## Component API
 
 <ArgTypes />
-
-
-
-

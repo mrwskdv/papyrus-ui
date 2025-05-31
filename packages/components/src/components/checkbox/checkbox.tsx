@@ -7,10 +7,7 @@ import {
   ReactNode,
 } from 'react';
 
-import { Box } from '../box';
 import { Text } from '../text';
-
-import * as S from './checkbox.css';
 
 export interface CheckboxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
@@ -27,12 +24,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, disabled, readOnly, children, ...props }, ref) => (
     <label
       className={cn(
-        S.root,
-        (disabled || readOnly) && S.rootDisabled,
+        'inline-flex items-baseline gap-2',
+        disabled || readOnly ? 'cursor-default' : 'pointer',
         className,
       )}
     >
-      <Box as="span" py={children ? 1 : 0}>
+      <span className={children ? 'py-1' : ''}>
         <input
           {...props}
           ref={ref}
@@ -40,9 +37,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           readOnly={readOnly}
           type="checkbox"
         />
-      </Box>
+      </span>
       {children && (
-        <Text as="span" className={S.label} fontVariant="primary" size="md">
+        <Text as="span" className="flex-1">
           {children}
         </Text>
       )}

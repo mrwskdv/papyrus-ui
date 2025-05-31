@@ -31,7 +31,6 @@ import {
 import { MenuBarItem } from './menu-bar-item';
 import { MenuBarSubmenu } from './menu-bar-submenu';
 import { MenuBarContext, MenuBarContextType } from './menu-bar.context';
-import * as S from './menu-bar.css';
 import { MenuBarSize, MenuBarVariant } from './menu-bar.types';
 
 export interface MenuBarProps extends HTMLAttributes<HTMLUListElement> {
@@ -184,13 +183,24 @@ const MenuBarComponent: FC<MenuBarProps> = ({
     }
   };
 
+  const variantClasses: Record<string, string> = {
+    primary: 'bg-white',
+    secondary: 'bg-white',
+    ghost: 'bg-primary-700',
+  };
+
   return (
     <MenuBarContext.Provider value={menuCtx}>
       <FloatingTree>
         <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
           <ul
             ref={refs.setFloating}
-            className={cn(S.root, S.rootVariant[variant], block && S.rootBlock)}
+            className={cn(
+              'inline-flex -mx-0.5',
+              variantClasses[variant],
+              block && 'w-full',
+              props.className,
+            )}
             {...getFloatingProps({
               role: 'menubar',
               tabIndex: activeIndex == null ? 0 : -1,

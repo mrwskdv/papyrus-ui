@@ -1,31 +1,26 @@
-import { Atoms, MarginAtoms } from '@papyrus-ui/style-utils';
 import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 
-import { Flex, FlexProps } from '../../flex';
+import { Caption } from '../../caption';
 import { Skeleton } from '../skeleton';
 
-import * as S from './caption-skeleton.css';
-
-export interface CaptionSkeletonProps
-  extends Pick<FlexProps, 'display'>,
-    MarginAtoms,
-    Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-  w?: Atoms['w'];
-  minW?: Atoms['minW'];
-  maxW?: Atoms['maxW'];
-}
+export type CaptionSkeletonProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+>;
 
 export const CaptionSkeleton: FC<CaptionSkeletonProps> = ({
   className,
   ...props
 }) => (
-  <Flex
+  <Caption
+    as="div"
+    className={cn('relative flex flex-col justify-center', className)}
     {...props}
-    className={cn(S.root, className)}
-    direction="column"
-    justify="center"
   >
-    <Skeleton className={S.skeleton} rounded="sm" />
-  </Flex>
+    <span aria-hidden="true" className="invisible">
+      Aa
+    </span>
+    <Skeleton className="absolute h-[1em] w-full rounded-sm" />
+  </Caption>
 );

@@ -1,5 +1,6 @@
-import { bpUp } from '@papyrus-ui/style-utils';
 import { style, styleVariants } from '@vanilla-extract/css';
+
+import { bpUp } from '../../utils/bp';
 
 export const root = style({
   display: 'flex',

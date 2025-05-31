@@ -1,8 +1,5 @@
 import { BiUser } from 'react-icons/bi';
 
-import { Box } from '../box';
-import { Flex } from '../flex';
-
 import { Avatar, AvatarProps, AvatarSize } from './avatar';
 
 const sizes: AvatarSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
@@ -18,50 +15,50 @@ export default {
 
 export function Basic(args: AvatarProps) {
   return (
-    <Flex>
-      <Box mr={2}>
+    <div className="flex">
+      <div className="mr-2">
         <Avatar {...args}>
           <img alt="Profile" src="https://i.pravatar.cc/300" />
         </Avatar>
-      </Box>
+      </div>
 
-      <Box mr={2}>
-        <Avatar {...args} bg="secondary400" />
-      </Box>
+      <div className="mr-2">
+        <Avatar {...args} className="bg-secondary-400" />
+      </div>
 
-      <Box>
+      <div>
         <Avatar {...args} icon={<BiUser />} />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }
 
 export function Sizes(args: AvatarProps) {
   return (
-    <Flex align="center">
+    <div className="flex items-center">
       {sizes.map((size, i) => (
-        <Box key={i} ml={i && 2}>
+        <div key={i} className={i ? 'ml-2' : ''}>
           <Avatar {...args} size={size}>
             <img alt="Profile" src="https://i.pravatar.cc/300" />
           </Avatar>
-        </Box>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 }
 
 export function Rounded(args: AvatarProps) {
   return (
-    <Flex>
-      <Box mr={2}>
+    <div className="flex">
+      <div className="mr-2">
         <Avatar {...args}>
           <img alt="Profile" src="https://i.pravatar.cc/300" />
         </Avatar>
-      </Box>
+      </div>
 
-      <Box>
+      <div>
         <Avatar {...args} icon={<BiUser />} />
-      </Box>
-    </Flex>
+      </div>
+    </div>
   );
 }

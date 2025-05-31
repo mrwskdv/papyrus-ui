@@ -1,7 +1,6 @@
+import cn from 'classnames';
 import { FC, HTMLAttributes } from 'react';
 
-import { Box } from '../../box';
-import { Flex } from '../../flex';
 import { Skeleton } from '../skeleton';
 
 export type CheckboxSkeletonProps = HTMLAttributes<HTMLDivElement>;
@@ -10,8 +9,8 @@ export const CheckboxSkeleton: FC<CheckboxSkeletonProps> = ({
   children,
   ...props
 }) => (
-  <Flex {...props} align="baseline" columnGap={2} display="inline-flex">
-    <Skeleton h={4} my={children ? 1 : 0} rounded="sm" w={4} />
-    {children && <Box flex={1}>{children}</Box>}
-  </Flex>
+  <div {...props} className="flex items-start gap-x-2 inline-flex">
+    <Skeleton className={cn('h-4 rounded-sm w-4', children ? 'my-1' : '')} />
+    {children && <div className="flex-1">{children}</div>}
+  </div>
 );

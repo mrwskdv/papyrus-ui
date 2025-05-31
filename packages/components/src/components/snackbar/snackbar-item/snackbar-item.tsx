@@ -27,9 +27,7 @@ import { Transition } from 'react-transition-group';
 
 import { useTimeout } from '../../../utils/use-timeout';
 import { AlertVariant } from '../../alert';
-import { Box } from '../../box';
 import { Button } from '../../button';
-import { Flex } from '../../flex';
 import { Heading } from '../../heading';
 import { IconButton } from '../../icon-button';
 import { Text } from '../../text';
@@ -115,6 +113,14 @@ const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
   success: BiCheckCircle,
 };
 
+const rootVariantClasses = {
+  primary: 'bg-primary-600',
+  info: 'bg-info-600',
+  success: 'bg-success-600',
+  warning: 'bg-warning-600',
+  danger: 'bg-danger-600',
+};
+
 export const SnackbarItem = forwardRef<
   Transition<HTMLElement>,
   SnackbarItemProps
@@ -186,43 +192,43 @@ export const SnackbarItem = forwardRef<
               S.root,
               S.rootPlacement[placement],
               status === 'entered' && S.rootVisiblePlacement[placement],
-              S.rootVariant[variant],
+              rootVariantClasses[variant],
               className,
             )}
             role={role}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <Flex align="center" mx="-1.5">
-              <Box px={1.5}>
+            <div className="flex items-center -mx-1.5">
+              <div className="px-1.5">
                 {isValidElement<IconBaseProps>(icon) ? (
                   cloneElement(icon, {
-                    className: cn(S.icon, icon.props.className),
+                    className: cn('text-3xl', icon.props.className),
                   })
                 ) : (
-                  <IconComponent className={S.icon} />
+                  <IconComponent className="text-3xl" />
                 )}
-              </Box>
+              </div>
 
-              <Box flex={1} overflow="hidden" px={1.5}>
+              <div className="flex-1 overflow-hidden px-1.5">
                 {children ? (
                   <>
-                    <Heading as="div" level={5} mb={1} truncate>
+                    <Heading as="div" className="mb-1 truncate" level={5}>
                       {message}
                     </Heading>
-                    <Text as="div" mt={1} size="sm" truncate>
+                    <Text as="div" className="mt-1 truncate" size="sm">
                       {children}
                     </Text>
                   </>
                 ) : (
-                  <Text as="div" truncate>
+                  <Text as="div" className="truncate">
                     {message}
                   </Text>
                 )}
-              </Box>
+              </div>
 
               {actionLabel && onActionClick && (
-                <Box px={1.5}>
+                <div className="px-1.5">
                   <Button
                     data-testid="action"
                     rounded
@@ -232,11 +238,11 @@ export const SnackbarItem = forwardRef<
                   >
                     {actionLabel}
                   </Button>
-                </Box>
+                </div>
               )}
 
               {onDismiss && (
-                <Box px={1.5}>
+                <div className="px-1.5">
                   <IconButton
                     aria-label={dismissLabel}
                     rounded
@@ -246,9 +252,9 @@ export const SnackbarItem = forwardRef<
                   >
                     <BiX />
                   </IconButton>
-                </Box>
+                </div>
               )}
-            </Flex>
+            </div>
           </div>
         )}
       </Transition>

@@ -1,4 +1,3 @@
-import { atoms } from '@papyrus-ui/style-utils';
 import { StoryFn } from '@storybook/react';
 import { capitalize } from 'lodash';
 import { Fragment, useState } from 'react';
@@ -71,7 +70,7 @@ export const Size: StoryFn<MenuProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
+        <Heading className={`mb-1.5 mt-${i > 0 ? '6' : '0'}`} level={3}>
           {capitalize(size)}
         </Heading>
 
@@ -85,7 +84,7 @@ export const Variant: StoryFn<MenuProps> = (args) => (
   <>
     {variants.map((variant, i) => (
       <Fragment key={i}>
-        <Heading level={3} mb={1.5} mt={i > 0 ? 6 : 0}>
+        <Heading className="mb-1.5 mt-6" level={3}>
           {capitalize(variant)}
         </Heading>
 
@@ -104,12 +103,7 @@ export const Collapsed: StoryFn<MenuProps> = (args) => {
 
   return (
     <>
-      <IconButton
-        className={atoms({
-          m: 1,
-        })}
-        onClick={() => setCollapsed(!collapsed)}
-      >
+      <IconButton className="m-1" onClick={() => setCollapsed(!collapsed)}>
         {collapsed ? <BiRightIndent /> : <BiLeftIndent />}
       </IconButton>
 

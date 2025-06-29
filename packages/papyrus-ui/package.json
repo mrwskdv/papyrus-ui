@@ -34,7 +34,6 @@
   },
   "scripts": {
     "build": "vite build",
-    "clean": "rimraf css dist",
     "test": "jest --config jest.config.mjs --passWithNoTests",
     "test:watch": "yarn test --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit"

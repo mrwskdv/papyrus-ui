@@ -7,13 +7,12 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleNameMapper: {
-    'minireset\.css': '<rootDir>/__mocks__/style-mock.js',
+    'minireset.css': '<rootDir>/__mocks__/style-mock.js',
     '\\.(gif|ttf|eot|svg|png|jpg)$': '<rootDir>/__mocks__/file-mock.js',
   },
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/dist/'],
   transform: {
-    '\\.css\\.(js|ts)$': '@vanilla-extract/jest-transform',
     '\\.(js|ts|tsx)$': [
       '@swc/jest',
       {
@@ -23,7 +22,7 @@ export default {
               runtime: 'automatic',
             },
           },
-        }
+        },
       },
     ],
   },

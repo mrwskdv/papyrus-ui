@@ -1,8 +1,8 @@
 {
   "extends": [
-    "./node_modules/@papyrus-ui/configs/eslint-config",
-    "./node_modules/@papyrus-ui/configs/eslint-config-typescript",
-    "./node_modules/@papyrus-ui/configs/eslint-config-react"
+    "./node_modules/@papyrus-ui/code-style/eslint-config",
+    "./node_modules/@papyrus-ui/code-style/eslint-config-typescript",
+    "./node_modules/@papyrus-ui/code-style/eslint-config-react"
   ],
   "overrides": [
     {
@@ -15,10 +15,16 @@
     {
       "files": [
         "**/*.stories.tsx",
-        "./packages/components/src/plugins/**/*.ts"
+        "./packages/papyrus-ui/src/plugin/index.ts"
       ],
       "rules": {
         "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["./**/*.test.{ts,tsx}"],
+      "rules": {
+        "@typescript-eslint/no-unsafe-call": "off"
       }
     }
   ]

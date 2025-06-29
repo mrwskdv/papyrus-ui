@@ -1,12 +1,7 @@
-import { Link } from '@papyrus-ui/components';
+import { Link } from 'papyrus-ui';
 import { theme } from './theme';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import { Decorator, Preview } from '@storybook/react';
-
-import '@papyrus-ui/theme/css/theme.css';
-import '@papyrus-ui/components/css/components.css';
-
-import { withThemeProvider } from './decorators/with-theme-provider';
 
 import './style.css';
 
@@ -55,7 +50,6 @@ export const decorators: Decorator[] = [
     },
     defaultTheme: 'light',
   }),
-  withThemeProvider(),
 ];
 
 export default preview;

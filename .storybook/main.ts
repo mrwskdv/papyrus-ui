@@ -1,6 +1,5 @@
 import { dirname, join, resolve } from 'path';
 import { StorybookConfig } from '@storybook/react-vite';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 import { mergeConfig } from 'vite';
@@ -42,7 +41,6 @@ const config: StorybookConfig = {
           ],
         },
       },
-      plugins: [vanillaExtractPlugin()],
     });
   },
 };

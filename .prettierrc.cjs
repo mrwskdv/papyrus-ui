@@ -1,1 +1,1 @@
-module.exports = require('@papyrus-ui/configs/prettier-config');
+module.exports = require('@papyrus-ui/code-style/prettier-config');

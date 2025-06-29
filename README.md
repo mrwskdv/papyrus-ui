@@ -1,79 +1,229 @@
 # Papyrus UI
 
-The UI kit with fundamental React components based on the Papyrus UI design system.
+A modern React UI kit with fundamental components built on Tailwind CSS, designed for rapid application development with a consistent design system.
 
-## Packages:
+## Features
 
-- **@papyrus-ui/components**: The UI kit with fundamental React components.
-- **@papyrus-ui/base**: Global styles, themes, and style utilities.
-- **@papyrus-ui/configs**: Reusable eslint and prettier configurations based on Google Style Guide.
+- 🎨 **Design System**: Consistent, accessible components following modern design principles
+- ⚡ **Tailwind CSS**: Built with Tailwind CSS for rapid styling and customization
+- 🎯 **TypeScript**: Full TypeScript support with comprehensive type definitions
+- 🔧 **Customizable**: Easy theming and customization through Tailwind config
+- 📱 **Responsive**: Mobile-first responsive design out of the box
 
-## Getting Started:
-1. **Install via npm or yarn:**
+## Packages
 
-    ```shell
-    npm install @papyrus-ui/components @papyrus-ui/theme @vanilla-extract/css
-    // or
-    yarn add @papyrus-ui/components @papyrus-ui/theme @vanilla-extract/css
-    ```
+- **papyrus-ui**: The main UI kit with fundamental React components built with Tailwind CSS
+- **@papyrus-ui/code-style**: Reusable ESLint and Prettier configurations based on Google Style Guide
 
-2. **Setting up styles and themes:**
+## Quick Start
 
-   Import styles and themes into the entry component of your application.
+### 1. Installation
 
-    ```tsx
-    import { lightTheme } from '@papyrus-ui/theme';
+Install the package using npm or yarn:
 
-    import '@papyrus-ui/theme/css/theme.css';
-    import '@papyrus-ui/components/css/components.css';
-    
-    function App() {
-      return (
-        <html className={lightTheme}>
-          {/* Your application content */}
-        </html>
-      );
-    }
-    ```
+```bash
+npm install tailwindcss papyrus-ui
+# or
+yarn add tailwindcss papyrus-ui
+```
 
-   If you have a client-side rendered app where direct access to the HTML document is limited, use ThemeProvider
-   to dynamically apply the theme class.
+### 2. Setup Tailwind CSS
 
-    ```tsx
-    import { lightTheme } from '@papyrus-ui/theme';
-    import { ThemeProvider } from '@papyrus-ui/components';
-    
-    import '@papyrus-ui/theme/css/theme.css';
-    import '@papyrus-ui/components/css/components.css';
-    
-    function App() {
-      return (
-        <ThemeProvider theme={lightTheme}>
-          {/* Your application content */}
-        </ThemeProvider>
-      );
-    }
-    ```
+Create a `tailwind.config.js` file in your project root:
 
-3. **Using components across your application:**
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/papyrus-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+  presets: [require('papyrus-ui/plugin')],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
 
-   Import components and integrate them into your app.
+### 4. Use Components
 
-    ```tsx
-    import { Button } from '@papyrus-ui/components';
-    
-    function Example() {
-      return <Button>Click Me!</Button>;
-    }
-    ```
+Start using components in your application:
 
-   Customize and extend components as needed to suit your application's requirements.
+```tsx
+import { Button, TextInput, Tag } from 'papyrus-ui';
+
+function App() {
+  return (
+    <div className="p-4">
+      <Button>Click Me!</Button>
+      <TextInput placeholder="Enter text..." />
+      <Tag>Label</Tag>
+    </div>
+  );
+}
+```
+
+## Component Library
+
+The library includes a comprehensive set of 40+ components organized into logical categories:
+
+### 🎯 **Core Interactive Elements**
+
+- **Button** - Primary interaction element for actions and navigation
+- **IconButton** - Compact button optimized for icon-only interactions
+- **Link** - Accessible navigation link with hover states
+
+### 📝 **Form Components**
+
+- **TextInput** - Text field with error states and validation
+- **NumericInput** - Number input with formatting and step controls
+- **TimeInput** - Time picker supporting 12/24 hour formats
+- **Textarea** - Multi-line text area with error handling
+- **Select** - Dropdown for single or multiple option selection
+- **Checkbox** - Multi-option selection input
+- **CheckboxGroup** - Coordinated checkbox group with shared state
+- **Radio** - Single-option selection from multiple choices
+- **RadioGroup** - Radio button group with single-selection logic
+- **Range** - Slider input with real-time value display
+- **Autocomplete** - Input with type-ahead suggestions and filtering
+- **InputMessage** - Validation feedback and user guidance messages
+
+### 🏷️ **Data Display**
+
+- **Tag** - Visual element for categories and status indicators
+- **Badge** - Compact notification badge for counts and alerts
+- **Avatar** - User representation with fallback to initials
+- **Skeleton** - Loading placeholder that maintains layout
+- **Icon** - Consistent SVG icon wrapper with uniform sizing
+
+### 📊 **Data Presentation**
+
+- **Table** - Feature-rich table with variants, borders, and striped rows
+
+### 📝 **Typography**
+
+- **Heading** - Semantic heading hierarchy (h1-h6) with consistent styling
+- **Text** - Typography component for paragraphs and content
+- **Label** - Accessible form labels with essential context
+- **Caption** - Caption text for images and supplementary info
+- **Quote** - Blockquote with citation support
+- **OList** - Ordered lists with various styling options
+- **UList** - Unordered lists with customizable bullets
+- **Marker** - Custom marker container for unordered lists
+
+### 🎨 **Layout & Structure**
+
+- **Divider** - Clean separators for visual organization
+
+### 🎪 **Overlays & Modals**
+
+- **Dialog** - Modal system with backdrop and focus management
+- **Popover** - Floating content overlay with smart positioning
+- **Tooltip** - Information popup on hover, click, or focus
+- **Snackbar** - Discreet notification with auto-dismiss
+
+### 🍽️ **Navigation & Menus**
+
+- **Menu** - Dropdown navigation with keyboard accessibility
+- **MenuBar** - Horizontal navigation bar for applications
+- **DropdownMenu** - Context-sensitive menu with positioning
+
+### ⚡ **Feedback & States**
+
+- **Alert** - Prominent notification for critical messages
+- **Loader** - Loading indicator in various sizes
+
+## Customization
+
+### Theme Customization
+
+You can customize the design system by extending the Tailwind configuration:
+
+```js
+module.exports = {
+  presets: [require('papyrus-ui/plugin')],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+        },
+        secondary: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+        },
+      },
+      borderRadius: {
+        xl: '1rem',
+      },
+    },
+  },
+};
+```
+
+### Component Variants
+
+Most components support multiple variants and sizes:
+
+```tsx
+// Button variants
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="tertiary">Tertiary</Button>
+
+// Button sizes
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
-We welcome contributions to enhance Papyrus UI. To contribute, fork the repository, make your changes, and submit a pull
-request. If you encounter issues or have suggestions, please open an issue on GitHub.
+We welcome contributions to enhance Papyrus UI! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add some amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/papyrus-ui.git
+
+# Install dependencies
+cd papyrus-ui
+yarn install
+
+# Start development
+yarn dev
+
+# Run tests
+yarn test
+
+# Build the package
+yarn build
+```
+
+For bug reports and feature requests, please [open an issue](https://github.com/your-username/papyrus-ui/issues) on GitHub.

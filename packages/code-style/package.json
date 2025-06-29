@@ -1,6 +1,6 @@
 {
   "name": "@papyrus-ui/code-style",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Shareable configurations for JavaScript and TypeScript projects based on Google style guides.",
   "type": "commonjs",
   "files": [

@@ -1,9 +1,9 @@
-import { create } from '@storybook/theming';
+import { create } from "@storybook/theming";
 
 export const theme = create({
-  base: 'light',
-  brandTitle: 'Renew',
-  brandImage: '/images/logo.svg',
-  colorPrimary: '#FF512F',
-  colorSecondary: '#056CF2',
+  base: "light",
+  brandTitle: "Papyrus UI",
+  brandImage: "/images/logo.svg",
+  colorPrimary: "#9333ea",
+  colorSecondary: "#4f46e5",
 });

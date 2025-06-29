@@ -68,6 +68,13 @@ jobs:
             ${{ steps.release_note.outputs.stdout }}
           labels: "Type: Release"
 
+      - name: Trigger CI
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: release-pr-created
+    
       - name: Check Pull Request
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"

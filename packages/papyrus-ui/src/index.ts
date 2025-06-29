@@ -10,6 +10,7 @@ export * from "./components/dialog";
 export * from "./components/divider";
 export * from "./components/dropdown-menu";
 export * from "./components/heading";
+export * from "./components/icon";
 export * from "./components/icon-button";
 export * from "./components/input-action";
 export * from "./components/input-box";

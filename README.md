@@ -19,12 +19,10 @@ A modern React UI kit with fundamental components built on Tailwind CSS, designe
 
 ### 1. Installation
 
-Install the package using npm or yarn:
+Install the package using npm:
 
 ```bash
 npm install tailwindcss papyrus-ui
-# or
-yarn add tailwindcss papyrus-ui
 ```
 
 ### 2. Setup Tailwind CSS
@@ -214,16 +212,16 @@ git clone https://github.com/your-username/papyrus-ui.git
 
 # Install dependencies
 cd papyrus-ui
-yarn install
+npm install
 
 # Start development
-yarn dev
+npm run docs
 
 # Run tests
-yarn test
+npm test
 
 # Build the package
-yarn build
+npm run build
 ```
 
 For bug reports and feature requests, please [open an issue](https://github.com/your-username/papyrus-ui/issues) on GitHub.

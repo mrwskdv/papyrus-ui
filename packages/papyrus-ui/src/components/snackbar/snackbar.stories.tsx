@@ -1,18 +1,18 @@
-import { faker } from '@faker-js/faker';
-import { StoryFn } from '@storybook/react';
-import { capitalize } from 'lodash';
-import { useRef, useState } from 'react';
-import { BiBell } from 'react-icons/bi';
+import { faker } from "@faker-js/faker";
+import { StoryFn } from "@storybook/react";
+import { capitalize } from "lodash";
+import { useRef, useState } from "react";
+import { BiBell } from "react-icons/bi";
 
-import { Avatar } from '../avatar';
-import { Button } from '../button';
-import { Icon } from '../icon';
+import { Avatar } from "../avatar";
+import { Button } from "../button";
+import { Icon } from "../icon";
 
-import { Snackbar, SnackbarProps } from './snackbar';
-import { SnackbarItem, SnackbarItemVariant } from './snackbar-item';
+import { Snackbar, SnackbarProps } from "./snackbar";
+import { SnackbarItem, SnackbarItemVariant } from "./snackbar-item";
 
 const meta = {
-  title: 'Feedback/Snackbar',
+  title: "Feedback/Snackbar",
   component: Snackbar,
   subcomponents: {
     SnackbarItem,
@@ -22,12 +22,12 @@ const meta = {
 const AUTO_HIDE_DURATION = 3000;
 
 const variants: SnackbarItemVariant[] = [
-  'primary',
-  'secondary',
-  'info',
-  'success',
-  'warning',
-  'danger',
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "danger",
 ];
 
 interface SnackbarItemState {
@@ -67,7 +67,7 @@ const Template: StoryFn<SnackbarProps> = (args) => {
   return (
     <div
       className="flex flex-col items-center justify-center h-96"
-      style={{ width: '60vw' }}
+      style={{ width: "60vw" }}
     >
       <Button onClick={onPush}>Push Message</Button>
 
@@ -91,13 +91,13 @@ export const Basic = Template.bind({});
 export const Placement = Template.bind({});
 
 Placement.args = {
-  placement: 'bottom-start',
+  placement: "bottom-start",
 };
 
 export const Variants: StoryFn<SnackbarProps> = (args) => (
   <div
     className="flex flex-col items-center justify-center h-96"
-    style={{ width: '60vw' }}
+    style={{ width: "60vw" }}
   >
     <Snackbar {...args}>
       {variants.map((variant) => (
@@ -119,7 +119,7 @@ export const Variants: StoryFn<SnackbarProps> = (args) => (
 export const WithAction: StoryFn<SnackbarProps> = (args) => (
   <div
     className="flex flex-col items-center justify-center h-96"
-    style={{ width: '60vw' }}
+    style={{ width: "60vw" }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
@@ -141,7 +141,7 @@ export const WithAction: StoryFn<SnackbarProps> = (args) => (
 export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
   <div
     className="flex flex-col items-center justify-center h-96"
-    style={{ width: '60vw' }}
+    style={{ width: "60vw" }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
@@ -164,7 +164,7 @@ export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
 export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
   <div
     className="flex flex-col items-center justify-center h-96"
-    style={{ width: '60vw' }}
+    style={{ width: "60vw" }}
   >
     <Snackbar {...args}>
       <Snackbar.Item

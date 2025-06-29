@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ChangeEvent,
@@ -12,19 +12,19 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { IconBaseProps } from 'react-icons';
-import { BiX } from 'react-icons/bi';
+} from "react";
+import { IconBaseProps } from "react-icons";
+import { BiX } from "react-icons/bi";
 
-import { useId } from '../../utils/use-id';
-import { useMergeRefs } from '../../utils/use-merge-refs';
-import { Icon } from '../icon';
-import { InputAction } from '../input-action';
-import { InputBox, InputBoxSize } from '../input-box';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { useMergeRefs } from "../../utils/use-merge-refs";
+import { Icon } from "../icon";
+import { InputAction } from "../input-action";
+import { InputBox, InputBoxSize } from "../input-box";
+import { InputGroup } from "../input-group";
 
 export interface TextInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   /**
    * If `true`, the clear button will be displayed if the input's value is not empty.
    *
@@ -120,7 +120,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       description,
       disabled,
       clearable,
-      clearLabel = 'Clear',
+      clearLabel = "Clear",
       id,
       invalid,
       label,
@@ -135,10 +135,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onBlur,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [valueState, setValueState] = useState(
-      () => defaultValue ?? value ?? '',
+      () => defaultValue ?? value ?? ""
     );
 
     const [focused, setFocused] = useState(false);
@@ -150,7 +150,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       clearable && !disabled && !readOnly && focused && valueState.length > 0;
 
     useEffect(() => {
-      if (typeof value !== 'undefined') {
+      if (typeof value !== "undefined") {
         setValueState(value);
       }
     }, [value]);
@@ -180,7 +180,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       e.preventDefault();
       e.stopPropagation();
       inputRef.current?.focus();
-      changeValue('');
+      changeValue("");
     };
 
     return (
@@ -236,7 +236,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         </InputBox>
       </InputGroup>
     );
-  },
+  }
 );
 
-TextInput.displayName = 'TextInput';
+TextInput.displayName = "TextInput";

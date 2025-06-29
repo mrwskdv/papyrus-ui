@@ -1,14 +1,14 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { TextSkeleton, TextSkeletonProps } from './text-skeleton';
+import { TextSkeleton, TextSkeletonProps } from "./text-skeleton";
 
 const meta: Meta = {
-  title: 'Feedback/Skeleton/TextSkeleton',
+  title: "Feedback/Skeleton/TextSkeleton",
   component: TextSkeleton,
   args: {
-    fontVariant: 'primary',
-    size: 'md',
-    className: 'w-64',
+    fontVariant: "primary",
+    size: "md",
+    className: "w-64",
   },
 };
 
@@ -21,7 +21,7 @@ export const Basic = Template.bind({});
 export const Small = Template.bind({});
 
 Small.args = {
-  size: 'sm',
+  size: "sm",
 };
 
 export default meta;

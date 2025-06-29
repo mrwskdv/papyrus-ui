@@ -8,14 +8,14 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-} from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
-import { userEvent } from '@testing-library/user-event';
-import { configureAxe } from 'jest-axe';
-import { ReactElement } from 'react';
+  renderHook,
+} from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
+import { configureAxe } from "jest-axe";
+import { ReactElement } from "react";
 
-import '@testing-library/jest-dom/extend-expect';
-import 'jest-axe/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
+import "jest-axe/extend-expect";
 
 export type RenderFn<T = unknown> = (
   component: ReactElement,
@@ -24,7 +24,7 @@ export type RenderFn<T = unknown> = (
 
 export const render: RenderFn<RenderResult> = (
   component,
-  options: RenderOptions,
+  options?: RenderOptions
 ) => renderTest(component, options);
 
 export const axe = configureAxe({

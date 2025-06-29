@@ -1,12 +1,12 @@
-import cn from 'classnames';
-import { FC, HTMLAttributes } from 'react';
+import cn from "classnames";
+import { FC, HTMLAttributes } from "react";
 
-import { Caption } from '../../caption';
-import { Skeleton } from '../skeleton';
+import { Caption } from "../../caption";
+import { Skeleton } from "../skeleton";
 
 export type CaptionSkeletonProps = Omit<
   HTMLAttributes<HTMLDivElement>,
-  'children'
+  "children"
 >;
 
 export const CaptionSkeleton: FC<CaptionSkeletonProps> = ({
@@ -15,7 +15,7 @@ export const CaptionSkeleton: FC<CaptionSkeletonProps> = ({
 }) => (
   <Caption
     as="div"
-    className={cn('relative flex flex-col justify-center', className)}
+    className={cn("relative flex flex-col justify-center", className)}
     {...props}
   >
     <span aria-hidden="true" className="invisible">

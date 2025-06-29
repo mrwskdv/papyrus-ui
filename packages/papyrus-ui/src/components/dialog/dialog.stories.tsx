@@ -1,13 +1,13 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { useState } from 'react';
+import { Meta, StoryFn } from "@storybook/react";
+import { useState } from "react";
 
-import { Button } from '../button';
+import { Button } from "../button";
 
-import { Dialog, DialogProps } from './dialog';
-import { DialogSize } from './dialog.types';
+import { Dialog, DialogProps } from "./dialog";
+import { DialogSize } from "./dialog.types";
 
 const meta: Meta<DialogProps> = {
-  title: 'Feedback/Dialog',
+  title: "Feedback/Dialog",
   component: Dialog,
   args: {
     children: [
@@ -53,26 +53,26 @@ export const Basic = Template.bind({});
 
 export function Sizes(args: DialogProps): JSX.Element {
   const [open, setOpen] = useState(false);
-  const [dialogSize, setDialogSize] = useState<DialogSize>('md');
+  const [dialogSize, setDialogSize] = useState<DialogSize>("md");
 
   function handleOpenSmallDialog() {
     setOpen(true);
-    setDialogSize('sm');
+    setDialogSize("sm");
   }
 
   function handleOpenMediumDialog() {
     setOpen(true);
-    setDialogSize('md');
+    setDialogSize("md");
   }
 
   function handleOpenLargeDialog() {
     setOpen(true);
-    setDialogSize('lg');
+    setDialogSize("lg");
   }
 
   function handleOpenExtraLargeDialog() {
     setOpen(true);
-    setDialogSize('xl');
+    setDialogSize("xl");
   }
 
   function handleClose() {
@@ -109,7 +109,7 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === 'sm'}
+        isOpen={open && dialogSize === "sm"}
         size="sm"
         onClose={handleClose}
       >
@@ -134,7 +134,7 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === 'md'}
+        isOpen={open && dialogSize === "md"}
         size="md"
         onClose={handleClose}
       >
@@ -178,7 +178,7 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === 'lg'}
+        isOpen={open && dialogSize === "lg"}
         size="lg"
         onClose={handleClose}
       >
@@ -247,7 +247,7 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === 'xl'}
+        isOpen={open && dialogSize === "xl"}
         size="xl"
         onClose={handleClose}
       >

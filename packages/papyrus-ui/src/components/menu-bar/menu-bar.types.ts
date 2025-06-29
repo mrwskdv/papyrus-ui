@@ -1,3 +1,3 @@
-export type MenuBarSize = 'sm' | 'md' | 'lg';
+export type MenuBarSize = "sm" | "md" | "lg";
 
-export type MenuBarVariant = 'primary' | 'secondary' | 'ghost';
+export type MenuBarVariant = "primary" | "secondary" | "ghost";

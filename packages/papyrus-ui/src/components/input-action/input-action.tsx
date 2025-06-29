@@ -1,5 +1,5 @@
-import cn from 'classnames';
-import { forwardRef, HTMLAttributes, ReactNode } from 'react';
+import cn from "classnames";
+import { forwardRef, HTMLAttributes, ReactNode } from "react";
 
 export interface InputActionProps extends HTMLAttributes<HTMLSpanElement> {
   children?: ReactNode;
@@ -10,14 +10,14 @@ export const InputAction = forwardRef<HTMLDivElement, InputActionProps>(
     <div
       ref={ref}
       className={cn(
-        'flex items-center justify-center min-w-6 text-lg',
-        className,
+        "flex items-center justify-center min-w-6 text-lg",
+        className
       )}
       {...props}
     >
       {children}
     </div>
-  ),
+  )
 );
 
-InputAction.displayName = 'InputAction';
+InputAction.displayName = "InputAction";

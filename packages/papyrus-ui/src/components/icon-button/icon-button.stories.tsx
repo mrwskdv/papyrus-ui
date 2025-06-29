@@ -1,31 +1,31 @@
-import { startCase } from 'lodash';
-import { BiSolidLike } from 'react-icons/bi';
+import { startCase } from "lodash";
+import { BiSolidLike } from "react-icons/bi";
 
-import { Avatar } from '../avatar';
+import { Avatar } from "../avatar";
 
 import {
   IconButton,
   IconButtonProps,
   IconButtonSize,
   IconButtonVariant,
-} from './icon-button';
+} from "./icon-button";
 
 const variants: IconButtonVariant[] = [
-  'primary',
-  'secondary',
-  'tertiary',
-  'plain',
-  'info',
-  'success',
-  'warning',
-  'danger',
-  'ghost',
+  "primary",
+  "secondary",
+  "tertiary",
+  "plain",
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "ghost",
 ];
 
-const sizes: IconButtonSize[] = ['sm', 'md', 'lg'];
+const sizes: IconButtonSize[] = ["sm", "md", "lg"];
 
 export default {
-  title: 'Inputs/IconButton',
+  title: "Inputs/IconButton",
   component: IconButton,
 
   args: {
@@ -42,7 +42,7 @@ export function Variants(args: IconButtonProps) {
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap justify-center -mt-4 -mx-2">
         {variants
-          .filter((variant) => variant !== 'ghost')
+          .filter((variant) => variant !== "ghost")
           .map((variant, i) => (
             <div
               key={i}
@@ -60,7 +60,7 @@ export function Variants(args: IconButtonProps) {
       <div className="bg-gradient-to-br from-secondary-800 to-primary-900 py-2">
         <div className="flex flex-wrap justify-center -mt-4 -mx-2">
           {variants
-            .filter((variant) => variant === 'ghost')
+            .filter((variant) => variant === "ghost")
             .map((variant, i) => (
               <div key={i} className="mt-4 px-2">
                 <IconButton {...args} variant={variant} />

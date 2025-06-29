@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   autoUpdate,
@@ -15,7 +15,7 @@ import {
   OffsetOptions,
   FloatingTree,
   useFloatingTree,
-} from '@floating-ui/react';
+} from "@floating-ui/react";
 import {
   FC,
   KeyboardEvent,
@@ -25,23 +25,23 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
 import {
   getFirstItem,
   getLastItem,
   getNextItem,
   getPrevItem,
-} from '../../utils/list-navigation';
+} from "../../utils/list-navigation";
 
-import { DropdownMenuContent } from './dropdown-menu-content';
-import { DropdownMenuItem } from './dropdown-menu-item';
-import { DropdownMenuTrigger } from './dropdown-menu-trigger';
+import { DropdownMenuContent } from "./dropdown-menu-content";
+import { DropdownMenuItem } from "./dropdown-menu-item";
+import { DropdownMenuTrigger } from "./dropdown-menu-trigger";
 import {
   DropdownMenuContext,
   DropdownMenuContextType,
-} from './dropdown-menu.context';
-import { DropdownSubmenu } from './dropdown-submenu';
+} from "./dropdown-menu.context";
+import { DropdownSubmenu } from "./dropdown-submenu";
 
 export type DropdownMenuPlacement = Placement;
 
@@ -59,7 +59,7 @@ const DEFAULT_OFFSET: OffsetOptions = {
 export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
   children,
   offset = DEFAULT_OFFSET,
-  placement = 'bottom-start',
+  placement = "bottom-start",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -69,7 +69,7 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
 
   const { floatingStyles, refs, context } = useFloating<HTMLElement>({
     open: isOpen,
-    strategy: 'fixed',
+    strategy: "fixed",
     onOpenChange: setIsOpen,
     placement,
     middleware: [offsetFn(offset), flip({ padding: 4 }), shift({ padding: 4 })],
@@ -77,7 +77,7 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
   });
 
   const click = useClick(context, {
-    event: 'mousedown',
+    event: "mousedown",
     toggle: true,
     ignoreMouse: false,
     keyboardHandlers: false,
@@ -85,7 +85,7 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
 
   const dismiss = useDismiss(context);
 
-  const role = useRole(context, { role: 'menu' });
+  const role = useRole(context, { role: "menu" });
 
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
@@ -94,51 +94,51 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [click, role, dismiss, typeahead],
+    [click, role, dismiss, typeahead]
   );
 
   const handleMenuKeyDown = useCallback(
     (e: KeyboardEvent<HTMLUListElement>) => {
-      if (e.key === 'ArrowUp') {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
         e.stopPropagation();
         const item = getLastItem(refs.floating);
         item?.focus();
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === "ArrowDown") {
         e.preventDefault();
         e.stopPropagation();
         const item = getFirstItem(refs.floating);
         item?.focus();
       }
     },
-    [refs.floating],
+    [refs.floating]
   );
 
   const handleMenuItemKeyDown = useCallback(
     (e: KeyboardEvent<HTMLAnchorElement>) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         e.stopPropagation();
         e.currentTarget.click();
       }
 
-      if (e.key === 'ArrowUp') {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
         e.stopPropagation();
         const item = getPrevItem(refs.floating, e.currentTarget);
         item?.focus();
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === "ArrowDown") {
         e.preventDefault();
         e.stopPropagation();
         const item = getNextItem(refs.floating, e.currentTarget);
         item?.focus();
       }
     },
-    [refs.floating],
+    [refs.floating]
   );
 
   const menuCtx = useMemo<DropdownMenuContextType>(
@@ -182,7 +182,7 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
       handleMenuKeyDown,
       isOpen,
       refs,
-    ],
+    ]
   );
 
   useEffect(() => {
@@ -194,10 +194,10 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
       setIsOpen(false);
     }
 
-    tree.events.on('click', handleTreeClick);
+    tree.events.on("click", handleTreeClick);
 
     return () => {
-      tree.events.off('click', handleTreeClick);
+      tree.events.off("click", handleTreeClick);
     };
   }, [tree]);
 
@@ -211,10 +211,10 @@ export const DropdownMenuComponent: FC<DropdownMenuProps> = ({
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [refs.floating]);
 

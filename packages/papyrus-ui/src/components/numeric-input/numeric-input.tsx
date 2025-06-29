@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   forwardRef,
@@ -8,21 +8,21 @@ import {
   ReactNode,
   useEffect,
   useState,
-} from 'react';
-import { IconBaseProps } from 'react-icons';
-import { NumericFormat, NumberFormatValues } from 'react-number-format';
+} from "react";
+import { IconBaseProps } from "react-icons";
+import { NumericFormat, NumberFormatValues } from "react-number-format";
 
-import { useId } from '../../utils/use-id';
-import { InputAction } from '../input-action';
-import { InputBox, InputBoxSize } from '../input-box';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { InputAction } from "../input-action";
+import { InputBox, InputBoxSize } from "../input-box";
+import { InputGroup } from "../input-group";
 
 export type NumericValue = number | null;
 
 export interface NumericInputProps
   extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
-    'defaultValue' | 'size' | 'type' | 'value' | 'onChange'
+    "defaultValue" | "size" | "type" | "value" | "onChange"
   > {
   /**
    * If `true`, allows leading zeros in the numeric input.
@@ -154,7 +154,7 @@ export interface NumericInputProps
   /**
    * Defines the style of the thousands grouping, such as `'thousand'`, `'lakh'`, or `'wan'`.
    */
-  thousandsGroupStyle?: 'thousand' | 'lakh' | 'wan' | 'none';
+  thousandsGroupStyle?: "thousand" | "lakh" | "wan" | "none";
 
   /**
    * The current value of the input. This prop is used to control the value of the input.
@@ -180,7 +180,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
       label,
       message,
       readOnly,
-      size = 'md',
+      size = "md",
       startIcon,
       endIcon,
       value,
@@ -188,14 +188,14 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
 
       ...props
     },
-    ref,
+    ref
   ) => {
     const [valueState, setValueState] = useState<NumericValue>(
-      value ?? defaultValue ?? null,
+      value ?? defaultValue ?? null
     );
 
     const inputId = useId(id);
-    const inputValue = valueState ?? '';
+    const inputValue = valueState ?? "";
 
     useEffect(() => {
       if (value !== undefined) {
@@ -242,7 +242,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
         </InputBox>
       </InputGroup>
     );
-  },
+  }
 );
 
-NumericInput.displayName = 'NumericInput';
+NumericInput.displayName = "NumericInput";

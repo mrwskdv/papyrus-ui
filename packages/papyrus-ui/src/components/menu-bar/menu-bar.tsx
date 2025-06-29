@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   autoUpdate,
@@ -8,8 +8,8 @@ import {
   useInteractions,
   useRole,
   useTypeahead,
-} from '@floating-ui/react';
-import cn from 'classnames';
+} from "@floating-ui/react";
+import cn from "classnames";
 import {
   FC,
   HTMLAttributes,
@@ -19,19 +19,19 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
 import {
   getFirstItem,
   getLastItem,
   getNextItem,
   getPrevItem,
-} from '../../utils/list-navigation';
+} from "../../utils/list-navigation";
 
-import { MenuBarItem } from './menu-bar-item';
-import { MenuBarSubmenu } from './menu-bar-submenu';
-import { MenuBarContext, MenuBarContextType } from './menu-bar.context';
-import { MenuBarSize, MenuBarVariant } from './menu-bar.types';
+import { MenuBarItem } from "./menu-bar-item";
+import { MenuBarSubmenu } from "./menu-bar-submenu";
+import { MenuBarContext, MenuBarContextType } from "./menu-bar.context";
+import { MenuBarSize, MenuBarVariant } from "./menu-bar.types";
 
 export interface MenuBarProps extends HTMLAttributes<HTMLUListElement> {
   block?: boolean;
@@ -43,8 +43,8 @@ export interface MenuBarProps extends HTMLAttributes<HTMLUListElement> {
 const MenuBarComponent: FC<MenuBarProps> = ({
   block = false,
   collapsed = false,
-  size = 'md',
-  variant = 'secondary',
+  size = "md",
+  variant = "secondary",
   children,
   ...props
 }) => {
@@ -54,11 +54,11 @@ const MenuBarComponent: FC<MenuBarProps> = ({
 
   const { refs, context, floatingStyles } = useFloating<HTMLElement>({
     open: true,
-    strategy: 'fixed',
+    strategy: "fixed",
     whileElementsMounted: autoUpdate,
   });
 
-  const role = useRole(context, { role: 'menu' });
+  const role = useRole(context, { role: "menu" });
 
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
@@ -70,35 +70,35 @@ const MenuBarComponent: FC<MenuBarProps> = ({
 
   const handleMenuItemKeyDown = useCallback(
     (e: KeyboardEvent<HTMLButtonElement>) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         e.stopPropagation();
         e.currentTarget.click();
       }
 
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         e.preventDefault();
         e.stopPropagation();
         const item = getPrevItem(refs.floating, e.currentTarget);
         item?.focus();
 
-        if (item?.getAttribute('aria-haspopup') === 'menu') {
+        if (item?.getAttribute("aria-haspopup") === "menu") {
           item.click();
         }
       }
 
-      if (e.key === 'ArrowRight') {
+      if (e.key === "ArrowRight") {
         e.preventDefault();
         e.stopPropagation();
         const item = getNextItem(refs.floating, e.currentTarget);
         item?.focus();
 
-        if (item?.getAttribute('aria-haspopup') === 'menu') {
+        if (item?.getAttribute("aria-haspopup") === "menu") {
           item.click();
         }
       }
     },
-    [refs.floating],
+    [refs.floating]
   );
 
   const menuCtx = useMemo<MenuBarContextType>(
@@ -135,7 +135,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
       refs,
       size,
       variant,
-    ],
+    ]
   );
 
   useEffect(() => {
@@ -148,15 +148,15 @@ const MenuBarComponent: FC<MenuBarProps> = ({
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [refs.floating]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
-    if (e.key === 'ArrowLeft') {
+    if (e.key === "ArrowLeft") {
       e.preventDefault();
       e.stopPropagation();
 
@@ -164,12 +164,12 @@ const MenuBarComponent: FC<MenuBarProps> = ({
 
       item?.focus();
 
-      if (item?.getAttribute('aria-haspopup') === 'menu') {
+      if (item?.getAttribute("aria-haspopup") === "menu") {
         item.click();
       }
     }
 
-    if (e.key === 'ArrowRight') {
+    if (e.key === "ArrowRight") {
       e.preventDefault();
       e.stopPropagation();
 
@@ -177,7 +177,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
 
       item?.focus();
 
-      if (item?.getAttribute('aria-haspopup') === 'menu') {
+      if (item?.getAttribute("aria-haspopup") === "menu") {
         item.click();
       }
     }
@@ -190,12 +190,12 @@ const MenuBarComponent: FC<MenuBarProps> = ({
           <ul
             ref={refs.setFloating}
             className={cn(
-              'inline-flex gap-1 focus:outline-none focus-visible:ring',
-              block && 'w-full',
-              props.className,
+              "inline-flex gap-1 focus:outline-none focus-visible:ring",
+              block && "w-full",
+              props.className
             )}
             {...getFloatingProps({
-              role: 'menubar',
+              role: "menubar",
               tabIndex: activeIndex == null ? 0 : -1,
               onKeyDown: handleKeyDown,
             })}

@@ -1,26 +1,26 @@
-import { StoryFn } from '@storybook/react';
-import { capitalize } from 'lodash';
-import { BiInfoCircle, BiSolidPurchaseTag } from 'react-icons/bi';
+import { StoryFn } from "@storybook/react";
+import { capitalize } from "lodash";
+import { BiInfoCircle, BiSolidPurchaseTag } from "react-icons/bi";
 
-import { Icon } from '../icon';
-import { InputBoxSize } from '../input-box';
+import { Icon } from "../icon";
+import { InputBoxSize } from "../input-box";
 
-import { NumericInput, NumericInputProps } from './numeric-input';
+import { NumericInput, NumericInputProps } from "./numeric-input";
 
-const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
+const sizes: InputBoxSize[] = ["sm", "md", "lg"];
 
 export default {
-  title: 'Inputs/NumericInput',
+  title: "Inputs/NumericInput",
   component: NumericInput,
 
   args: {
-    label: 'Max Price',
+    label: "Max Price",
     allowNegative: false,
     decimalScale: 2,
     defaultValue: 1999,
     fixedDecimalScale: true,
-    placeholder: '$ 0.00',
-    prefix: '$ ',
+    placeholder: "$ 0.00",
+    prefix: "$ ",
     thousandSeparator: true,
   },
 };
@@ -37,7 +37,7 @@ export function Sizes(args: NumericInputProps) {
   return (
     <div className="flex flex-col w-64">
       {sizes.map((size, i) => (
-        <div key={i} className={i ? 'mt-4' : ''}>
+        <div key={i} className={i ? "mt-4" : ""}>
           <NumericInput
             {...args}
             id={`numeric-input-size-${size}`}
@@ -85,34 +85,34 @@ export function WithIcon(args: NumericInputProps) {
 export const Description = Template.bind({});
 
 Description.args = {
-  id: 'numeric-input-description',
-  description: 'This is a description.',
+  id: "numeric-input-description",
+  description: "This is a description.",
 };
 
 export const Message = Template.bind({});
 
 Message.args = {
-  id: 'numeric-input-message',
-  message: 'This is a message',
+  id: "numeric-input-message",
+  message: "This is a message",
 };
 
 export const Invalid = Template.bind({});
 
 Invalid.args = {
-  id: 'numeric-input-invalid',
+  id: "numeric-input-invalid",
   invalid: true,
 };
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  id: 'numeric-input-disabled',
+  id: "numeric-input-disabled",
   disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 
 ReadOnly.args = {
-  id: 'numeric-input-basic',
+  id: "numeric-input-basic",
   readOnly: true,
 };

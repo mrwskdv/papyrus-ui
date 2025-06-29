@@ -1,12 +1,12 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { InputSkeleton, InputSkeletonProps } from './input-skeleton';
+import { InputSkeleton, InputSkeletonProps } from "./input-skeleton";
 
 const meta: Meta<InputSkeletonProps> = {
-  title: 'Feedback/Skeleton/InputSkeleton',
+  title: "Feedback/Skeleton/InputSkeleton",
   component: InputSkeleton,
   args: {
-    size: 'md',
+    size: "md",
   },
 };
 
@@ -21,13 +21,13 @@ export const Basic = Template.bind({});
 export const SizeSm = Template.bind({});
 
 SizeSm.args = {
-  size: 'sm',
+  size: "sm",
 };
 
 export const SizeLg = Template.bind({});
 
 SizeLg.args = {
-  size: 'lg',
+  size: "lg",
 };
 
 export default meta;

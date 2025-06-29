@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import cn from 'classnames';
+import cn from "classnames";
 import {
   ChangeEvent,
   ForwardedRef,
@@ -10,15 +10,15 @@ import {
   ReactNode,
   RefAttributes,
   SelectHTMLAttributes,
-} from 'react';
-import { IconBaseProps } from 'react-icons';
-import { BiChevronDown } from 'react-icons/bi';
+} from "react";
+import { IconBaseProps } from "react-icons";
+import { BiChevronDown } from "react-icons/bi";
 
-import { useId } from '../../utils/use-id';
-import { Icon } from '../icon';
-import { InputAction } from '../input-action';
-import { InputBox, InputBoxSize } from '../input-box';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { Icon } from "../icon";
+import { InputAction } from "../input-action";
+import { InputBox, InputBoxSize } from "../input-box";
+import { InputGroup } from "../input-group";
 
 export type SelectValue<IsMulti extends boolean> = IsMulti extends true
   ? string[]
@@ -27,7 +27,7 @@ export type SelectValue<IsMulti extends boolean> = IsMulti extends true
 export interface SelectProps<IsMulti extends boolean = false>
   extends Omit<
     SelectHTMLAttributes<HTMLSelectElement>,
-    'defaultValue' | 'size' | 'value' | 'onChange'
+    "defaultValue" | "size" | "value" | "onChange"
   > {
   /**
    * The default value of the uncontrolled input.
@@ -110,7 +110,7 @@ export interface SelectProps<IsMulti extends boolean = false>
 
 export interface SelectFn {
   <IsMulti extends boolean = false>(
-    props: SelectProps<IsMulti> & RefAttributes<HTMLSelectElement>,
+    props: SelectProps<IsMulti> & RefAttributes<HTMLSelectElement>
   ): ReactElement;
   displayName: string;
 }
@@ -126,7 +126,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       invalid,
       label,
       message,
-      size = 'md',
+      size = "md",
       startIcon,
       endIcon,
       multiple,
@@ -134,7 +134,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       children,
       ...props
     }: SelectProps<IsMulti>,
-    ref: ForwardedRef<HTMLSelectElement>,
+    ref: ForwardedRef<HTMLSelectElement>
   ) => {
     const inputId = useId(id);
 
@@ -164,8 +164,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <select
               ref={ref}
               className={cn(
-                'select-base relative z-10',
-                multiple ? 'pr-4' : 'pr-7',
+                "select-base relative z-10",
+                multiple ? "pr-4" : "pr-7"
               )}
               disabled={disabled}
               multiple={multiple}
@@ -178,7 +178,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
             {!multiple && (
               <InputAction className="absolute top-0 right-0 bottom-0 m-auto">
-                <Icon className={cn(disabled ? 'text-black/40' : 'text-black')}>
+                <Icon className={cn(disabled ? "text-black/40" : "text-black")}>
                   <BiChevronDown />
                 </Icon>
               </InputAction>
@@ -191,7 +191,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </InputBox>
       </InputGroup>
     );
-  },
+  }
 ) as SelectFn;
 
-Select.displayName = 'Select';
+Select.displayName = "Select";

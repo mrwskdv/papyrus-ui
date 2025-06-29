@@ -1,14 +1,14 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { BiBell, BiSolidError } from 'react-icons/bi';
+import { Meta, StoryFn } from "@storybook/react";
+import { BiBell, BiSolidError } from "react-icons/bi";
 
-import { Avatar } from '../avatar';
-import { Icon } from '../icon';
-import { IconButton } from '../icon-button';
+import { Avatar } from "../avatar";
+import { Icon } from "../icon";
+import { IconButton } from "../icon-button";
 
-import { Badge, BadgeProps } from './badge';
+import { Badge, BadgeProps } from "./badge";
 
 const meta: Meta = {
-  title: 'Data Display/Badge',
+  title: "Data Display/Badge",
   component: Badge,
   args: {
     content: 5,
@@ -27,7 +27,7 @@ export const Basic = Template.bind({});
 export const BackgroundColor = Template.bind({});
 
 BackgroundColor.args = {
-  className: 'bg-primary-500',
+  className: "bg-primary-500",
 };
 
 export const Dot = Template.bind({});
@@ -53,7 +53,7 @@ ZeroCount.args = {
 export const Position = Template.bind({});
 
 Position.args = {
-  position: 'bottom-end',
+  position: "bottom-end",
 };
 
 export const Offset = Template.bind({});

@@ -1,23 +1,23 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { capitalize } from 'lodash';
+import { Meta, StoryFn } from "@storybook/react";
+import { capitalize } from "lodash";
 
-import { Heading, HeadingLevel, HeadingProps, HeadingVariant } from './heading';
+import { Heading, HeadingLevel, HeadingProps, HeadingVariant } from "./heading";
 
 const meta: Meta = {
-  title: 'Typography/Heading',
+  title: "Typography/Heading",
   component: Heading,
 };
 
 const levels: HeadingLevel[] = [1, 2, 3, 4, 5, 6];
 
-const variants: HeadingVariant[] = ['primary', 'secondary'];
+const variants: HeadingVariant[] = ["primary", "secondary"];
 
 const Template: StoryFn<HeadingProps> = (args) => <Heading {...args} />;
 
 export const Basic = Template.bind({});
 
 Basic.args = {
-  children: 'This is a heading',
+  children: "This is a heading",
 };
 
 export const VariantsAndSizes: StoryFn<HeadingProps> = (args) => (

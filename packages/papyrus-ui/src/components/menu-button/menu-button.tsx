@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import cn from 'classnames';
+import cn from "classnames";
 import {
   AnchorHTMLAttributes,
   ElementType,
   forwardRef,
   ReactNode,
-} from 'react';
+} from "react";
 
-import { Icon } from '../icon';
+import { Icon } from "../icon";
 
-export type MenuButtonDirection = 'vertical' | 'horizontal';
+export type MenuButtonDirection = "vertical" | "horizontal";
 
-export type MenuButtonSize = 'sm' | 'md' | 'lg';
+export type MenuButtonSize = "sm" | "md" | "lg";
 
-export type MenuButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type MenuButtonVariant = "primary" | "secondary" | "ghost";
 
 const INDENT_BASE = 1.625;
 
@@ -35,232 +35,232 @@ export interface MenuButtonProps
 }
 
 const rootDirectionClasses = {
-  vertical: 'px-1',
-  horizontal: 'flex-1 py-1',
+  vertical: "px-1",
+  horizontal: "flex-1 py-1",
 };
 
 const linkDefaultClasses =
-  'relative flex justify-center items-center gap-1 rounded-md text-start transition-colors cursor-pointer focus:outline-none focus-visible:ring';
+  "relative flex justify-center items-center gap-1 rounded-md text-start transition-colors cursor-pointer focus:outline-none focus-visible:ring";
 
 const linkSizeClasses = {
-  sm: 'px-1.5 py-0.5',
-  md: 'p-1.5',
-  lg: 'p-3',
+  sm: "px-1.5 py-0.5",
+  md: "p-1.5",
+  lg: "p-3",
 };
 
 const linkDefaultVariantClasses = {
   primary: {
-    base: 'text-neutral-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-neutral-700 bg-black/10 active:bg-black/20',
+    base: "text-neutral-700 hover:bg-black/10 active:bg-black/20",
+    active: "text-neutral-700 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-neutral-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-neutral-700 bg-black/10 active:bg-black/20',
+    base: "text-neutral-700 hover:bg-black/10 active:bg-black/20",
+    active: "text-neutral-700 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-white hover:bg-white/30 active:bg-white/40',
-    active: 'text-white bg-white/30 active:bg-white/40',
+    base: "text-white hover:bg-white/30 active:bg-white/40",
+    active: "text-white bg-white/30 active:bg-white/40",
   },
 };
 
 const linkDefaultSelectedVariantClasses = {
   primary: {
-    base: 'text-neutral-700 hover:bg-black/10 active:bg-black/20',
-    active: 'ext-neutral-700 bg-black/10 active:bg-black/20',
+    base: "text-neutral-700 hover:bg-black/10 active:bg-black/20",
+    active: "ext-neutral-700 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-secondary-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-700 bg-black/10 active:bg-black/20',
+    base: "text-secondary-700 hover:bg-black/10 active:bg-black/20",
+    active: "text-secondary-700 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-white bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-white bg-secondary-500',
+    base: "text-white bg-secondary-600 hover:bg-secondary-500",
+    active: "text-white bg-secondary-500",
   },
 };
 
 const linkDefaultDangerVariantClasses = {
   primary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-danger-500 hover:bg-white/30 active:bg-white/40',
-    active: 'text-danger-500 bg-white/30 active:bg-white/40',
+    base: "text-danger-500 hover:bg-white/30 active:bg-white/40",
+    active: "text-danger-500 bg-white/30 active:bg-white/40",
   },
 };
 
 const linkDefaultDangerSelectedVariantClasses = {
   primary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-danger-500 bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-danger-500 bg-secondary-500',
+    base: "text-danger-500 bg-secondary-600 hover:bg-secondary-500",
+    active: "text-danger-500 bg-secondary-500",
   },
 };
 
 const linkCollapsedClasses =
-  'relative flex flex-col justify-center items-center gap-0.5 min-w-0 h-12 rounded-md text-center transition-colors p-1 cursor-pointer';
+  "relative flex flex-col justify-center items-center gap-0.5 min-w-0 h-12 rounded-md text-center transition-colors p-1 cursor-pointer";
 
 const linkCollapsedVariantClasses = {
   primary: {
-    base: 'text-neutral-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-neutral-600 bg-black/10 active:bg-black/20',
+    base: "text-neutral-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-neutral-600 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-neutral-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-neutral-600 bg-black/10 active:bg-black/20',
+    base: "text-neutral-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-neutral-600 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-white hover:bg-white/30 active:bg-white/40',
-    active: 'text-white bg-white/30 active:bg-white/40',
+    base: "text-white hover:bg-white/30 active:bg-white/40",
+    active: "text-white bg-white/30 active:bg-white/40",
   },
 };
 
 const linkCollapsedSelectedVariantClasses = {
   primary: {
-    base: 'text-neutral-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-neutral-700 bg-black/10 active:bg-black/20',
+    base: "text-neutral-700 hover:bg-black/10 active:bg-black/20",
+    active: "text-neutral-700 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-secondary-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-700 bg-black/10 active:bg-black/20',
+    base: "text-secondary-700 hover:bg-black/10 active:bg-black/20",
+    active: "text-secondary-700 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-white bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-white bg-secondary-500',
+    base: "text-white bg-secondary-600 hover:bg-secondary-500",
+    active: "text-white bg-secondary-500",
   },
 };
 
 const linkCollapsedDangerVariantClasses = {
   primary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-danger-500 hover:bg-white/30 active:bg-white/40',
-    active: 'text-danger-500 bg-white/30 active:bg-white/40',
+    base: "text-danger-500 hover:bg-white/30 active:bg-white/40",
+    active: "text-danger-500 bg-white/30 active:bg-white/40",
   },
 };
 
 const linkCollapsedDangerSelectedVariantClasses = {
   primary: {
-    base: 'text-danger-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-danger-600 bg-black/10 active:bg-black/20',
+    base: "text-danger-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-danger-600 bg-black/10 active:bg-black/20",
   },
   secondary: {
-    base: 'text-secondary-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-600 bg-black/10 active:bg-black/20',
+    base: "text-secondary-600 hover:bg-black/10 active:bg-black/20",
+    active: "text-secondary-600 bg-black/10 active:bg-black/20",
   },
   ghost: {
-    base: 'text-danger-500 bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-danger-500 bg-secondary-500',
+    base: "text-danger-500 bg-secondary-600 hover:bg-secondary-500",
+    active: "text-danger-500 bg-secondary-500",
   },
 };
 
-const iconDefaultClasses = 'text-xl';
+const iconDefaultClasses = "text-xl";
 
 const iconDefaultVariantClasses = {
-  primary: 'text-neutral-600',
-  secondary: 'text-neutral-600',
-  ghost: 'text-white',
+  primary: "text-neutral-600",
+  secondary: "text-neutral-600",
+  ghost: "text-white",
 };
 
 const iconDefaultSelectedVariantClasses = {
-  primary: 'text-secondary-600',
-  secondary: 'text-secondary-600',
-  ghost: 'text-white',
+  primary: "text-secondary-600",
+  secondary: "text-secondary-600",
+  ghost: "text-white",
 };
 
 const iconDefaultDangerVariantClasses = {
-  primary: 'text-danger-600',
-  secondary: 'text-danger-600',
-  ghost: 'text-danger-500',
+  primary: "text-danger-600",
+  secondary: "text-danger-600",
+  ghost: "text-danger-500",
 };
 
 const iconDefaultDangerSelectedVariantClasses = {
-  primary: 'text-danger-600',
-  secondary: 'text-danger-600',
-  ghost: 'text-danger-500',
+  primary: "text-danger-600",
+  secondary: "text-danger-600",
+  ghost: "text-danger-500",
 };
 
-const iconCollapsedClasses = 'text-2xl';
+const iconCollapsedClasses = "text-2xl";
 
 const iconCollapsedVariantClasses = {
-  primary: 'text-neutral-700',
-  secondary: 'text-neutral-700',
-  ghost: 'text-white',
+  primary: "text-neutral-700",
+  secondary: "text-neutral-700",
+  ghost: "text-white",
 };
 
 const iconCollapsedSelectedVariantClasses = {
-  primary: 'text-secondary-600',
-  secondary: 'text-secondary-600',
-  ghost: 'text-white',
+  primary: "text-secondary-600",
+  secondary: "text-secondary-600",
+  ghost: "text-white",
 };
 
 const iconCollapsedDangerVariantClasses = {
-  primary: 'text-danger-600',
-  secondary: 'text-danger-600',
-  ghost: 'text-danger-500',
+  primary: "text-danger-600",
+  secondary: "text-danger-600",
+  ghost: "text-danger-500",
 };
 
 const iconCollapsedDangerSelectedVariantClasses = {
-  primary: 'text-danger-600',
-  secondary: 'text-secondary-600',
-  ghost: 'text-danger-500',
+  primary: "text-danger-600",
+  secondary: "text-secondary-600",
+  ghost: "text-danger-500",
 };
 
-const labelDefaultClasses = 'block text-body-md-primary mx-1 truncate';
+const labelDefaultClasses = "block text-body-md-primary mx-1 truncate";
 
 const labelDefaultSelectedClasses =
-  'block text-body-md-primary-bold mx-1 truncate';
+  "block text-body-md-primary-bold mx-1 truncate";
 
-const labelCollapsedClasses = 'text-caption text-center truncate';
+const labelCollapsedClasses = "text-caption text-center truncate";
 
 const labelDirectionClasses = {
-  vertical: 'flex-1',
-  horizontal: '',
+  vertical: "flex-1",
+  horizontal: "",
 };
 
 const underlineDirectionClasses = {
-  vertical: 'top-1 bottom-1 -left-1 w-1',
-  horizontal: '-bottom-1 left-1 right-1 h-1',
+  vertical: "top-1 bottom-1 -left-1 w-1",
+  horizontal: "-bottom-1 left-1 right-1 h-1",
 };
 
 export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
   (
     {
-      as: Element = 'a',
+      as: Element = "a",
       active,
       className,
       collapsed,
       danger,
-      direction = 'vertical',
+      direction = "vertical",
       disabled,
       indent = 0,
-      role = 'menuitem',
+      role = "menuitem",
       selected,
-      size = 'md',
+      size = "md",
       startIcon,
       endIcon,
-      variant = 'secondary',
+      variant = "secondary",
       children,
       ...props
     },
-    ref,
+    ref
   ) => (
     <li className={cn(rootDirectionClasses[direction], className)} role="none">
       <Element
@@ -325,12 +325,12 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
                 linkCollapsedDangerSelectedVariantClasses[variant].active,
             ],
           ],
-          disabled && 'pointer-events-none opacity-disabled',
+          disabled && "pointer-events-none opacity-disabled"
         )}
         role={role}
         {...props}
       >
-        {direction === 'vertical' && !collapsed && indent > 0 && (
+        {direction === "vertical" && !collapsed && indent > 0 && (
           <span
             className="block"
             style={{ width: `${indent * INDENT_BASE}rem` }}
@@ -362,7 +362,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
                   selected &&
                     iconCollapsedDangerSelectedVariantClasses[variant],
                 ],
-              ],
+              ]
             )}
           >
             {startIcon}
@@ -376,7 +376,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
               !selected && labelDefaultClasses,
               selected && labelDefaultSelectedClasses,
             ],
-            collapsed && labelCollapsedClasses,
+            collapsed && labelCollapsedClasses
           )}
         >
           {children}
@@ -384,20 +384,20 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
 
         {!collapsed && endIcon && <Icon className="text-xl">{endIcon}</Icon>}
 
-        {variant === 'primary' && !disabled && (
+        {variant === "primary" && !disabled && (
           <span
             className={cn(
-              'absolute block rounded-full opacity-0 transition',
+              "absolute block rounded-full opacity-0 transition",
               underlineDirectionClasses[direction],
-              !danger && 'bg-secondary-600',
-              danger && 'bg-danger-600',
-              selected && 'opacity-100',
+              !danger && "bg-secondary-600",
+              danger && "bg-danger-600",
+              selected && "opacity-100"
             )}
           />
         )}
       </Element>
     </li>
-  ),
+  )
 );
 
-MenuButton.displayName = 'MenuButton';
+MenuButton.displayName = "MenuButton";

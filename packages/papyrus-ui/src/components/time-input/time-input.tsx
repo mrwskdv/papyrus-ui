@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   forwardRef,
@@ -9,19 +9,19 @@ import {
   useEffect,
   useState,
   ReactNode,
-} from 'react';
-import { IconBaseProps } from 'react-icons';
-import { NumberFormatValues, PatternFormat } from 'react-number-format';
+} from "react";
+import { IconBaseProps } from "react-icons";
+import { NumberFormatValues, PatternFormat } from "react-number-format";
 
-import { useId } from '../../utils/use-id';
-import { InputAction } from '../input-action';
-import { InputBox, InputBoxSize } from '../input-box';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { InputAction } from "../input-action";
+import { InputBox, InputBoxSize } from "../input-box";
+import { InputGroup } from "../input-group";
 
 export interface TimeInputProps
   extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
-    'defaultValue' | 'size' | 'type' | 'value' | 'onChange'
+    "defaultValue" | "size" | "type" | "value" | "onChange"
   > {
   /**
    * The default value of the uncontrolled input.
@@ -114,18 +114,18 @@ export interface TimeInputProps
   onChange?: (value: string) => void;
 }
 
-const SECONDS_FORMAT = '##:##:##';
+const SECONDS_FORMAT = "##:##:##";
 
-const MINUTES_FORMAT = '##:##';
+const MINUTES_FORMAT = "##:##";
 
-const MASK = '_';
+const MASK = "_";
 
-const SECONDS_DEFAULT_VALUE = '00:00:00';
+const SECONDS_DEFAULT_VALUE = "00:00:00";
 
-const MINUTES_DEFAULT_VALUE = '00:00';
+const MINUTES_DEFAULT_VALUE = "00:00";
 
 function getDateByValue(value: string) {
-  const parts = value.split(':').map((part) => parseInt(part, 10));
+  const parts = value.split(":").map((part) => parseInt(part, 10));
   return new Date(0, 0, 0, parts[0], parts[1], parts[2] ?? 0);
 }
 
@@ -140,23 +140,23 @@ function isValidDate(date: Date, hour12: boolean) {
 function toFormattedValue(value: string | undefined, seconds: boolean) {
   if (seconds) {
     return value
-      ? value.replaceAll(MASK, '0').replace(/(\d{2})(\d{2})(\d{2})/, '$1:$2:$3')
+      ? value.replaceAll(MASK, "0").replace(/(\d{2})(\d{2})(\d{2})/, "$1:$2:$3")
       : SECONDS_DEFAULT_VALUE;
   }
 
   return value
-    ? value.replaceAll(MASK, '0').replace(/(\d{2})(\d{2})/, '$1:$2')
+    ? value.replaceAll(MASK, "0").replace(/(\d{2})(\d{2})/, "$1:$2")
     : MINUTES_DEFAULT_VALUE;
 }
 
 function fromDate(date: Date) {
-  return date.toTimeString().split(' ')[0];
+  return date.toTimeString().split(" ")[0];
 }
 
 function incrementTimeValue(
   value: string | undefined,
   hour12: boolean,
-  seconds: boolean,
+  seconds: boolean
 ) {
   const formattedValue = toFormattedValue(value, seconds);
   const date = getDateByValue(formattedValue);
@@ -177,7 +177,7 @@ function incrementTimeValue(
 function decrementTimeValue(
   value: string | undefined,
   hour12: boolean,
-  seconds: boolean,
+  seconds: boolean
 ) {
   const formattedValue = toFormattedValue(value, seconds);
   const date = getDateByValue(formattedValue);
@@ -196,7 +196,7 @@ function decrementTimeValue(
 }
 
 function toRawValue(value: string) {
-  return value.replace(/:/g, '');
+  return value.replace(/:/g, "");
 }
 
 export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
@@ -212,14 +212,14 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
       message,
       readOnly = false,
       seconds = false,
-      size = 'md',
+      size = "md",
       startIcon,
       endIcon,
       value,
       onChange,
       ...props
     },
-    ref,
+    ref
   ) => {
     const [valueState, setValueState] = useState(() => value ?? defaultValue);
 
@@ -242,8 +242,8 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
 
     const isAllowed = (values: NumberFormatValues) => {
       const [p1, p2, p3] = values.formattedValue
-        .replaceAll(MASK, '0')
-        .split(':')
+        .replaceAll(MASK, "0")
+        .split(":")
         .map((v) => parseInt(v, 10));
 
       const [hrs, min, sec] = [p1, p2, p3 ?? 0];
@@ -264,12 +264,12 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'ArrowUp') {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
         changeValue(incrementTimeValue(valueState, hour12, seconds));
       }
 
-      if (e.key === 'ArrowDown') {
+      if (e.key === "ArrowDown") {
         e.preventDefault();
         changeValue(decrementTimeValue(valueState, hour12, seconds));
       }
@@ -319,7 +319,7 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
         </InputBox>
       </InputGroup>
     );
-  },
+  }
 );
 
-TimeInput.displayName = 'TimeInput';
+TimeInput.displayName = "TimeInput";

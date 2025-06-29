@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   AnchorHTMLAttributes,
@@ -9,11 +9,11 @@ import {
   ReactElement,
   useContext,
   useRef,
-} from 'react';
+} from "react";
 
-import { getNextItem, getPrevItem } from '../../../utils/list-navigation';
-import { MenuButton } from '../../menu-button';
-import { MenuContext } from '../menu.context';
+import { getNextItem, getPrevItem } from "../../../utils/list-navigation";
+import { MenuButton } from "../../menu-button";
+import { MenuContext } from "../menu.context";
 
 export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   as?: ElementType;
@@ -52,7 +52,7 @@ export const MenuItem: FC<MenuItemProps> = ({
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       e.stopPropagation();
       e.currentTarget.click();
@@ -63,14 +63,14 @@ export const MenuItem: FC<MenuItemProps> = ({
       return;
     }
 
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       e.stopPropagation();
       const item = getPrevItem(menuRef, e.currentTarget, true);
       item?.focus();
     }
 
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       e.stopPropagation();
       const item = getNextItem(menuRef, e.currentTarget, true);

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import cn from 'classnames';
+import cn from "classnames";
 import {
   ComponentType,
   forwardRef,
@@ -12,32 +12,32 @@ import {
   useContext,
   useEffect,
   useRef,
-} from 'react';
-import { IconBaseProps } from 'react-icons';
+} from "react";
+import { IconBaseProps } from "react-icons";
 import {
   BiCheckCircle,
   BiError,
   BiErrorCircle,
   BiInfoCircle,
   BiX,
-} from 'react-icons/bi';
-import { Transition } from 'react-transition-group';
+} from "react-icons/bi";
+import { Transition } from "react-transition-group";
 
-import { useTimeout } from '../../../utils/use-timeout';
-import { Button } from '../../button';
-import { Heading } from '../../heading';
-import { Icon } from '../../icon';
-import { IconButton } from '../../icon-button';
-import { Text } from '../../text';
-import { SnackbarContext } from '../snackbar.context';
+import { useTimeout } from "../../../utils/use-timeout";
+import { Button } from "../../button";
+import { Heading } from "../../heading";
+import { Icon } from "../../icon";
+import { IconButton } from "../../icon-button";
+import { Text } from "../../text";
+import { SnackbarContext } from "../snackbar.context";
 
 export type SnackbarItemVariant =
-  | 'primary'
-  | 'secondary'
-  | 'info'
-  | 'danger'
-  | 'warning'
-  | 'success';
+  | "primary"
+  | "secondary"
+  | "info"
+  | "danger"
+  | "warning"
+  | "success";
 
 export interface SnackbarItemProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -115,30 +115,30 @@ const iconByVariant: Record<
 };
 
 const rootVariantClasses = {
-  primary: 'bg-secondary-700',
-  secondary: 'bg-black/80',
-  info: 'bg-info-700',
-  success: 'bg-success-700',
-  warning: 'bg-warning-700',
-  danger: 'bg-danger-700',
+  primary: "bg-secondary-700",
+  secondary: "bg-black/80",
+  info: "bg-info-700",
+  success: "bg-success-700",
+  warning: "bg-warning-700",
+  danger: "bg-danger-700",
 };
 
 const rootPlacementClasses = {
-  'top': 'snackbar-item-top',
-  'top-start': 'snackbar-item-top-start',
-  'top-end': 'snackbar-item-top-end',
-  'bottom': 'snackbar-item-bottom',
-  'bottom-start': 'snackbar-item-bottom-start',
-  'bottom-end': 'snackbar-item-bottom-end',
+  top: "snackbar-item-top",
+  "top-start": "snackbar-item-top-start",
+  "top-end": "snackbar-item-top-end",
+  bottom: "snackbar-item-bottom",
+  "bottom-start": "snackbar-item-bottom-start",
+  "bottom-end": "snackbar-item-bottom-end",
 };
 
 const rootVisiblePlacementClasses = {
-  'top': 'snackbar-item-visible-top',
-  'top-start': 'snackbar-item-visible-top-start',
-  'top-end': 'snackbar-item-visible-top-end',
-  'bottom': 'snackbar-item-visible-bottom',
-  'bottom-start': 'snackbar-item-visible-bottom-start',
-  'bottom-end': 'snackbar-item-visible-bottom-end',
+  top: "snackbar-item-visible-top",
+  "top-start": "snackbar-item-visible-top-start",
+  "top-end": "snackbar-item-visible-top-end",
+  bottom: "snackbar-item-visible-bottom",
+  "bottom-start": "snackbar-item-visible-bottom-start",
+  "bottom-end": "snackbar-item-visible-bottom-end",
 };
 
 export const SnackbarItem = forwardRef<
@@ -151,12 +151,12 @@ export const SnackbarItem = forwardRef<
       autoHideDuration,
       children,
       className,
-      dismissLabel = 'Dismiss',
+      dismissLabel = "Dismiss",
       icon,
       in: visible = true,
       message,
-      role = 'alert',
-      variant = 'secondary',
+      role = "alert",
+      variant = "secondary",
       onActionClick,
       onDismiss,
       onHide,
@@ -164,7 +164,7 @@ export const SnackbarItem = forwardRef<
       onMouseLeave,
       ...props
     },
-    ref,
+    ref
   ) => {
     const { placement } = useContext(SnackbarContext);
     const { setTimeout, clearTimeout } = useTimeout();
@@ -209,11 +209,11 @@ export const SnackbarItem = forwardRef<
             {...childProps}
             ref={nodeRef}
             className={cn(
-              'snackbar-item',
+              "snackbar-item",
               rootPlacementClasses[placement],
-              status === 'entered' && rootVisiblePlacementClasses[placement],
+              status === "entered" && rootVisiblePlacementClasses[placement],
               rootVariantClasses[variant],
-              className,
+              className
             )}
             role={role}
             onMouseEnter={handleMouseEnter}
@@ -271,7 +271,7 @@ export const SnackbarItem = forwardRef<
         )}
       </Transition>
     );
-  },
+  }
 );
 
-SnackbarItem.displayName = 'SnackbarItem';
+SnackbarItem.displayName = "SnackbarItem";

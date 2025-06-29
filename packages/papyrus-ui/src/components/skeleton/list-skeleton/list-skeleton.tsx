@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import cn from "classnames";
 import {
   Children,
   cloneElement,
@@ -6,12 +6,12 @@ import {
   HTMLAttributes,
   isValidElement,
   ReactNode,
-} from 'react';
+} from "react";
 
-import { TextSkeletonProps } from '../text-skeleton';
+import { TextSkeletonProps } from "../text-skeleton";
 
 export interface ListSkeletonProps
-  extends Pick<TextSkeletonProps, 'fontVariant' | 'size'>,
+  extends Pick<TextSkeletonProps, "fontVariant" | "size">,
     HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
@@ -23,11 +23,11 @@ export const ListSkeleton: FC<ListSkeletonProps> = ({
   children,
   ...props
 }) => (
-  <div {...props} className={cn('ps-[1.5em] spacing-y-[0.5em]', className)}>
+  <div {...props} className={cn("ps-[1.5em] spacing-y-[0.5em]", className)}>
     {Children.map(children, (child) =>
       isValidElement<TextSkeletonProps>(child)
         ? cloneElement(child, { fontVariant, size })
-        : child,
+        : child
     )}
   </div>
 );

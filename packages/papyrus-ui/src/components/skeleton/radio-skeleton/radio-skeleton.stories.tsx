@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { TextSkeleton } from '../text-skeleton';
+import { TextSkeleton } from "../text-skeleton";
 
-import { RadioSkeleton, RadioSkeletonProps } from './radio-skeleton';
+import { RadioSkeleton, RadioSkeletonProps } from "./radio-skeleton";
 
 const meta: Meta<RadioSkeletonProps> = {
-  title: 'Feedback/Skeleton/RadioSkeleton',
+  title: "Feedback/Skeleton/RadioSkeleton",
   component: RadioSkeleton,
   args: {
     children: (

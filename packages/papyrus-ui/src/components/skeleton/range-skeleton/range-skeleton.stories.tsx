@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { RangeSkeleton, RangeSkeletonProps } from './range-skeleton';
+import { RangeSkeleton, RangeSkeletonProps } from "./range-skeleton";
 
 const meta: Meta<RangeSkeletonProps> = {
-  title: 'Feedback/Skeleton/RangeSkeleton',
+  title: "Feedback/Skeleton/RangeSkeleton",
   component: RangeSkeleton,
 };
 

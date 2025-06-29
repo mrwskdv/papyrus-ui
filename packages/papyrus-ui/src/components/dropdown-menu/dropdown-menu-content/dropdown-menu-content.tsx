@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import {
   FloatingFocusManager,
   FloatingList,
   FloatingPortal,
-} from '@floating-ui/react';
-import { FC, HTMLAttributes, useContext } from 'react';
-import { Transition } from 'react-transition-group';
+} from "@floating-ui/react";
+import { FC, HTMLAttributes, useContext } from "react";
+import { Transition } from "react-transition-group";
 
-import { Listbox } from '../../listbox';
-import { DropdownMenuContext } from '../dropdown-menu.context';
+import { Listbox } from "../../listbox";
+import { DropdownMenuContext } from "../dropdown-menu.context";
 
 export interface DropdownMenuContentProps
   extends HTMLAttributes<HTMLDivElement> {
@@ -60,7 +60,7 @@ export const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
                 ref={refs.setFloating}
                 className="max-h-80 max-w-xs"
                 style={floatingStyles}
-                visible={status === 'entered'}
+                visible={status === "entered"}
                 {...getFloatingProps(props)}
               >
                 {children}

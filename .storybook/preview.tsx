@@ -1,32 +1,32 @@
-import { Link } from 'papyrus-ui';
-import { theme } from './theme';
-import { withThemeByClassName } from '@storybook/addon-themes';
-import { Decorator, Preview } from '@storybook/react';
+import { Link } from "papyrus-ui";
+import { theme } from "./theme";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import { Decorator, Preview } from "@storybook/react";
 
-import './style.css';
+import "./style.css";
 
 const preview: Preview = {
   parameters: {
-    layout: 'centered',
-    viewMode: 'docs',
+    layout: "centered",
+    viewMode: "docs",
     backgrounds: {
-      default: 'White',
+      default: "White",
       values: [
         {
-          name: 'Primary',
-          value: '#056CF2',
+          name: "Primary",
+          value: "#056CF2",
         },
         {
-          name: 'Tertiary',
-          value: '#f7f7f7',
+          name: "Tertiary",
+          value: "#f7f7f7",
         },
         {
-          name: 'White',
-          value: '#ffffff',
+          name: "White",
+          value: "#ffffff",
         },
         {
-          name: 'Black',
-          value: '#000000',
+          name: "Black",
+          value: "#000000",
         },
       ],
     },
@@ -45,10 +45,10 @@ const preview: Preview = {
 export const decorators: Decorator[] = [
   withThemeByClassName({
     themes: {
-      light: 'light',
-      dark: 'dark',
+      light: "light",
+      dark: "dark",
     },
-    defaultTheme: 'light',
+    defaultTheme: "light",
   }),
 ];
 

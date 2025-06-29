@@ -1,12 +1,12 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { LabelSkeleton, LabelSkeletonProps } from './label-skeleton';
+import { LabelSkeleton, LabelSkeletonProps } from "./label-skeleton";
 
 const meta: Meta<LabelSkeletonProps> = {
-  title: 'Feedback/Skeleton/LabelSkeleton',
+  title: "Feedback/Skeleton/LabelSkeleton",
   component: LabelSkeleton,
   args: {
-    className: 'w-20',
+    className: "w-20",
   },
 };
 

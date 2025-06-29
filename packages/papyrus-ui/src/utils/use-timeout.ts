@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
 export type TimeoutKey = number | string | undefined;
 
@@ -8,7 +8,7 @@ export interface TimeoutAPI {
   setTimeout: (
     fn: () => void | Promise<void>,
     timeout?: number,
-    key?: TimeoutKey,
+    key?: TimeoutKey
   ) => void;
 }
 
@@ -29,24 +29,24 @@ export function useTimeout(): TimeoutAPI {
     (
       fn: () => void | Promise<void>,
       timeout?: number,
-      key?: TimeoutKey,
+      key?: TimeoutKey
     ): void => {
       clearTimeout(key);
       timeouts.current.set(
         key,
         setTimeout(() => {
           void fn();
-        }, timeout),
+        }, timeout)
       );
     },
-    [],
+    []
   );
 
   useEffect(
     () => () => {
       clearTimeouts();
     },
-    [clearTimeouts],
+    [clearTimeouts]
   );
 
   return { setTimeout: set, clearTimeout: clear, clearTimeouts };

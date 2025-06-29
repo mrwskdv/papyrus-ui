@@ -1,13 +1,13 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { BiCog, BiGridAlt, BiStats } from 'react-icons/bi';
+import { Meta, StoryFn } from "@storybook/react";
+import { BiCog, BiGridAlt, BiStats } from "react-icons/bi";
 
-import { Icon } from '../icon';
-import { Marker } from '../marker';
+import { Icon } from "../icon";
+import { Marker } from "../marker";
 
-import { UList, UListProps } from './u-list';
+import { UList, UListProps } from "./u-list";
 
 const meta: Meta = {
-  title: 'Typography/UList',
+  title: "Typography/UList",
   component: UList,
 };
 
@@ -26,19 +26,19 @@ export const Basic = Template.bind({});
 export const DiscType = Template.bind({});
 
 DiscType.args = {
-  type: 'disc',
+  type: "disc",
 };
 
 export const DashType = Template.bind({});
 
 DashType.args = {
-  type: 'dash',
+  type: "dash",
 };
 
 export const NoneType = Template.bind({});
 
 NoneType.args = {
-  type: 'none',
+  type: "none",
 };
 
 export const WithIcons: StoryFn<UListProps> = (args) => (
@@ -75,19 +75,19 @@ export const WithIcons: StoryFn<UListProps> = (args) => (
 export const SmallText = Template.bind({});
 
 SmallText.args = {
-  size: 'sm',
+  size: "sm",
 };
 
 export const PrimaryFont = Template.bind({});
 
 PrimaryFont.args = {
-  fontVariant: 'primary',
+  fontVariant: "primary",
 };
 
 export const SecondaryFont = Template.bind({});
 
 SecondaryFont.args = {
-  fontVariant: 'secondary',
+  fontVariant: "secondary",
 };
 
 export const BoldText = Template.bind({});

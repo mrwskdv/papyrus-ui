@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ExtendedRefs, FloatingContext } from '@floating-ui/react';
-import { createContext, HTMLAttributes } from 'react';
+import { ExtendedRefs, FloatingContext } from "@floating-ui/react";
+import { createContext, HTMLAttributes } from "react";
 
-import { DialogSize } from './dialog.types';
+import { DialogSize } from "./dialog.types";
 
 export interface DialogContextType {
   context: FloatingContext;
@@ -14,10 +14,10 @@ export interface DialogContextType {
   size: DialogSize;
   close: () => void;
   getFloatingProps: (
-    userProps?: HTMLAttributes<Element>,
+    userProps?: HTMLAttributes<Element>
   ) => Record<string, unknown>;
   getReferenceProps: (
-    userProps?: HTMLAttributes<Element>,
+    userProps?: HTMLAttributes<Element>
   ) => Record<string, unknown>;
   setDescriptionId: (descriptionId: string | undefined) => void;
   setLabelId: (titleId: string | undefined) => void;
@@ -29,7 +29,7 @@ export const DialogContext = createContext<DialogContextType>({
   labelId: undefined,
   isOpen: false,
   refs: {} as ExtendedRefs<Element>,
-  size: 'md',
+  size: "md",
   close: () => {
     // Do nothing
   },

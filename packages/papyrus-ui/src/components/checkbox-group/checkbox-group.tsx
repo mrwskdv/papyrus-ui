@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import cn from "classnames";
 import {
   ChangeEvent,
   Children,
@@ -10,13 +10,13 @@ import {
   ReactNode,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
-import { useId } from '../../utils/use-id';
-import { CheckboxProps } from '../checkbox';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { CheckboxProps } from "../checkbox";
+import { InputGroup } from "../input-group";
 
-export type CheckboxGroupDirection = 'row' | 'column';
+export type CheckboxGroupDirection = "row" | "column";
 
 export interface CheckboxGroupProps<T extends boolean | Array<string>> {
   /**
@@ -130,7 +130,7 @@ export const CheckboxGroup = forwardRef(
       className,
       defaultValue,
       description,
-      direction = 'row',
+      direction = "row",
       disabled,
       invalid = false,
       label,
@@ -143,16 +143,16 @@ export const CheckboxGroup = forwardRef(
       onFocus,
       children,
     }: CheckboxGroupProps<T>,
-    ref: ForwardedRef<HTMLInputElement>,
+    ref: ForwardedRef<HTMLInputElement>
   ) => {
     const [valueState, setValueState] = useState<T>(
-      () => value ?? defaultValue ?? ([] as Array<string> as T),
+      () => value ?? defaultValue ?? ([] as Array<string> as T)
     );
 
     const labelId = useId();
 
     useEffect(() => {
-      if (typeof value !== 'undefined') {
+      if (typeof value !== "undefined") {
         setValueState(value);
       }
     }, [value]);
@@ -192,9 +192,9 @@ export const CheckboxGroup = forwardRef(
         <div
           aria-labelledby={labelId}
           className={cn(
-            'flex flex-wrap gap-x-6 gap-y-2',
-            direction === 'row' ? 'flex-row' : 'flex-col',
-            block ? 'flex' : 'inline-flex',
+            "flex flex-wrap gap-x-6 gap-y-2",
+            direction === "row" ? "flex-row" : "flex-col",
+            block ? "flex" : "inline-flex"
           )}
         >
           {Children.map(children, (child, idx) =>
@@ -206,8 +206,8 @@ export const CheckboxGroup = forwardRef(
                     ? valueState.includes(child.props.value)
                     : Boolean(valueState),
                   className: cn(
-                    block ? 'flex-1' : 'flex-none',
-                    child.props.className,
+                    block ? "flex-1" : "flex-none",
+                    child.props.className
                   ),
                   disabled: disabled || child.props.disabled,
                   readOnly: readOnly || child.props.readOnly,
@@ -215,12 +215,12 @@ export const CheckboxGroup = forwardRef(
                   onFocus,
                   onBlur,
                 })
-              : child,
+              : child
           )}
         </div>
       </InputGroup>
     );
-  },
+  }
 );
 
-CheckboxGroup.displayName = 'CheckboxGroup';
+CheckboxGroup.displayName = "CheckboxGroup";

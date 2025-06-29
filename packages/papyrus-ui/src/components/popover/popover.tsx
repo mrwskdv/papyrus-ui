@@ -13,24 +13,24 @@ import {
   useInteractions,
   useRole,
   useFocus,
-} from '@floating-ui/react';
-import { FC, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+} from "@floating-ui/react";
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
-import { PopoverArrow as Arrow } from './popover-arrow';
-import { PopoverContent as Content } from './popover-content';
-import { PopoverTrigger as Trigger } from './popover-trigger';
-import { PopoverContext, PopoverContextType } from './popover.context';
+import { PopoverArrow as Arrow } from "./popover-arrow";
+import { PopoverContent as Content } from "./popover-content";
+import { PopoverTrigger as Trigger } from "./popover-trigger";
+import { PopoverContext, PopoverContextType } from "./popover.context";
 
 declare type PopoverRole =
-  | 'tooltip'
-  | 'dialog'
-  | 'alertdialog'
-  | 'menu'
-  | 'listbox'
-  | 'grid'
-  | 'tree';
+  | "tooltip"
+  | "dialog"
+  | "alertdialog"
+  | "menu"
+  | "listbox"
+  | "grid"
+  | "tree";
 
-export type PopoverTrigger = 'click' | 'focus' | 'hover';
+export type PopoverTrigger = "click" | "focus" | "hover";
 
 export interface PopoverProps {
   arrowPadding?: number;
@@ -53,9 +53,9 @@ const PopoverComponent: FC<PopoverProps> = ({
   open,
   overflowPadding,
   modal = false,
-  placement = 'bottom',
+  placement = "bottom",
   role,
-  trigger = 'click',
+  trigger = "click",
   onOpenChange,
   children,
 }) => {
@@ -74,8 +74,8 @@ const PopoverComponent: FC<PopoverProps> = ({
         padding: arrowPadding,
       }),
       flip({
-        crossAxis: placement.includes('-'),
-        fallbackAxisSideDirection: 'end',
+        crossAxis: placement.includes("-"),
+        fallbackAxisSideDirection: "end",
         padding: overflowPadding,
       }),
       shift({ padding: overflowPadding }),
@@ -91,16 +91,16 @@ const PopoverComponent: FC<PopoverProps> = ({
   });
 
   const clickProps = useClick(context, {
-    enabled: !isControlled && triggers.includes('click'),
+    enabled: !isControlled && triggers.includes("click"),
   });
 
   const focusProps = useFocus(context, {
-    enabled: !isControlled && triggers.includes('focus'),
+    enabled: !isControlled && triggers.includes("focus"),
   });
 
   const hoverProps = useHover(context, {
     move: false,
-    enabled: !isControlled && triggers.includes('hover'),
+    enabled: !isControlled && triggers.includes("hover"),
   });
 
   const dismissProps = useDismiss(context);
@@ -134,7 +134,7 @@ const PopoverComponent: FC<PopoverProps> = ({
       modal,
       openState,
       refs,
-    ],
+    ]
   );
 
   useEffect(() => {

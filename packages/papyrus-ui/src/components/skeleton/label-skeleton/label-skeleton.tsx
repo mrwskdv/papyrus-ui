@@ -1,12 +1,12 @@
-import cn from 'classnames';
-import { FC, HTMLAttributes } from 'react';
+import cn from "classnames";
+import { FC, HTMLAttributes } from "react";
 
-import { Label } from '../../label';
-import { Skeleton } from '../skeleton';
+import { Label } from "../../label";
+import { Skeleton } from "../skeleton";
 
 export type LabelSkeletonProps = Omit<
   HTMLAttributes<HTMLDivElement>,
-  'children'
+  "children"
 >;
 
 export const LabelSkeleton: FC<LabelSkeletonProps> = ({
@@ -15,7 +15,7 @@ export const LabelSkeleton: FC<LabelSkeletonProps> = ({
 }) => (
   <Label
     as="div"
-    className={cn('relative flex flex-col justify-center', className)}
+    className={cn("relative flex flex-col justify-center", className)}
     {...props}
   >
     <span aria-hidden="true" className="invisible">

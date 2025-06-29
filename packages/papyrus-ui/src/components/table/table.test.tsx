@@ -1,20 +1,20 @@
-import { render, screen } from '../../utils/test-utils';
+import { render, screen } from "../../utils/test-utils";
 
-import { Table } from './table';
+import { Table } from "./table";
 
-describe('Table', () => {
-  describe('Given a table with default props', () => {
-    describe('When component is rendered', () => {
-      it('Then a <table> element should be in the document', () => {
+describe("Table", () => {
+  describe("Given a table with default props", () => {
+    describe("When component is rendered", () => {
+      it("Then a <table> element should be in the document", () => {
         render(<Table />);
-        expect(screen.queryByRole('table')).toBeInTheDocument();
+        expect(screen.queryByRole("table")).toBeInTheDocument();
       });
     });
   });
 
-  describe('Given a table with children', () => {
-    describe('When component is rendered', () => {
-      it('Then provided children should be displayed inside the table', () => {
+  describe("Given a table with children", () => {
+    describe("When component is rendered", () => {
+      it("Then provided children should be displayed inside the table", () => {
         render(
           <Table>
             <thead>
@@ -29,12 +29,12 @@ describe('Table', () => {
                 <td>Data 2</td>
               </tr>
             </tbody>
-          </Table>,
+          </Table>
         );
-        expect(screen.getByText('Header 1')).toBeInTheDocument();
-        expect(screen.getByText('Header 2')).toBeInTheDocument();
-        expect(screen.getByText('Data 1')).toBeInTheDocument();
-        expect(screen.getByText('Data 2')).toBeInTheDocument();
+        expect(screen.getByText("Header 1")).toBeInTheDocument();
+        expect(screen.getByText("Header 2")).toBeInTheDocument();
+        expect(screen.getByText("Data 1")).toBeInTheDocument();
+        expect(screen.getByText("Data 2")).toBeInTheDocument();
       });
     });
   });

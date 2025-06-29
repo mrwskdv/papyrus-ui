@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import cn from "classnames";
 import {
   cloneElement,
   FC,
@@ -7,12 +7,12 @@ import {
   ImgHTMLAttributes,
   isValidElement,
   ReactElement,
-} from 'react';
+} from "react";
 
-import { Icon } from '../icon';
-import { Text } from '../text';
+import { Icon } from "../icon";
+import { Text } from "../text";
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -41,50 +41,50 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   size?: AvatarSize;
 }
 
-function formatText(str = ''): string {
+function formatText(str = ""): string {
   return str
-    .split(' ')
+    .split(" ")
     .slice(0, 2)
     .map((w) => w[0]?.toUpperCase())
-    .join('');
+    .join("");
 }
 
 const sizeMap: Record<AvatarSize, string> = {
-  'xs': 'w-5 h-5',
-  'sm': 'w-6 h-6',
-  'md': 'w-8 h-8',
-  'lg': 'w-12 h-12',
-  'xl': 'w-16 h-16',
-  '2xl': 'w-20 h-20',
+  xs: "w-5 h-5",
+  sm: "w-6 h-6",
+  md: "w-8 h-8",
+  lg: "w-12 h-12",
+  xl: "w-16 h-16",
+  "2xl": "w-20 h-20",
 };
 
 const textSizeMap: Record<AvatarSize, string> = {
-  'xs': 'text-xs',
-  'sm': 'text-xs',
-  'md': 'text-base',
-  'lg': 'text-2xl',
-  'xl': 'text-3xl',
-  '2xl': 'text-4xl',
+  xs: "text-xs",
+  sm: "text-xs",
+  md: "text-base",
+  lg: "text-2xl",
+  xl: "text-3xl",
+  "2xl": "text-4xl",
 };
 
 const iconSizeMap: Record<AvatarSize, string> = {
-  'xs': 'text-sm',
-  'sm': 'text-base',
-  'md': 'text-xl',
-  'lg': 'text-3xl',
-  'xl': 'text-4xl',
-  '2xl': 'text-5xl',
+  xs: "text-sm",
+  sm: "text-base",
+  md: "text-xl",
+  lg: "text-3xl",
+  xl: "text-4xl",
+  "2xl": "text-5xl",
 };
 
 export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ icon, placeholder, size = 'md', className, children, ...props }, ref) => (
+  ({ icon, placeholder, size = "md", className, children, ...props }, ref) => (
     <span
       ref={ref}
       className={cn(
-        'relative inline-flex items-center justify-center rounded-full overflow-hidden',
+        "relative inline-flex items-center justify-center rounded-full overflow-hidden",
         sizeMap[size],
-        className?.includes('bg-') ? '' : 'bg-secondary-500',
-        className,
+        className?.includes("bg-") ? "" : "bg-secondary-500",
+        className
       )}
       {...props}
     >
@@ -92,14 +92,14 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
         <Text
           as="span"
           bold
-          className={cn('absolute leading-none text-white', textSizeMap[size])}
+          className={cn("absolute leading-none text-white", textSizeMap[size])}
         >
           {formatText(placeholder)}
         </Text>
       )}
 
       {!children && icon && (
-        <Icon className={cn('absolute text-white', iconSizeMap[size])}>
+        <Icon className={cn("absolute text-white", iconSizeMap[size])}>
           {icon}
         </Icon>
       )}
@@ -108,12 +108,12 @@ export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
         isValidElement<ImgHTMLAttributes<HTMLImageElement>>(children) &&
         cloneElement(children, {
           className: cn(
-            'absolute w-full h-full object-cover',
-            children.props.className,
+            "absolute w-full h-full object-cover",
+            children.props.className
           ),
         })}
     </span>
-  ),
+  )
 );
 
-Avatar.displayName = 'Avatar';
+Avatar.displayName = "Avatar";

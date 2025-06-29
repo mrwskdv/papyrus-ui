@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { ExtendedRefs, FloatingContext } from '@floating-ui/react';
+import { ExtendedRefs, FloatingContext } from "@floating-ui/react";
 import {
   createContext,
   CSSProperties,
@@ -8,9 +8,9 @@ import {
   HTMLProps,
   MutableRefObject,
   SetStateAction,
-} from 'react';
+} from "react";
 
-import { MenuBarSize, MenuBarVariant } from './menu-bar.types';
+import { MenuBarSize, MenuBarVariant } from "./menu-bar.types";
 
 export interface MenuBarContextType {
   activeIndex: number | null;
@@ -19,7 +19,7 @@ export interface MenuBarContextType {
   elementsRef: MutableRefObject<Array<HTMLElement | null>>;
   floatingStyles: CSSProperties;
   getFloatingProps: (
-    userProps?: HTMLProps<HTMLElement>,
+    userProps?: HTMLProps<HTMLElement>
   ) => Record<string, unknown>;
   getItemProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   isOpen: boolean;
@@ -46,6 +46,6 @@ export const MenuBarContext = createContext<MenuBarContextType>({
   setActiveIndex: () => {
     // Do nothing
   },
-  size: 'md',
-  variant: 'secondary',
+  size: "md",
+  variant: "secondary",
 });

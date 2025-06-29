@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       semver:
-        description: 'New Version(semver)'
+        description: "New Version(semver)"
         required: true
-        default: 'patch'
+        default: "patch"
         type: choice
         options:
           - patch
@@ -63,7 +63,7 @@ jobs:
           signoff: false
           branch: release/${{ env.PACKAGE_VERSION }}
           delete-branch: true
-          title: 'v${{ env.PACKAGE_VERSION }}'
+          title: "v${{ env.PACKAGE_VERSION }}"
           body: |
             ${{ steps.release_note.outputs.stdout }}
           labels: "Type: Release"

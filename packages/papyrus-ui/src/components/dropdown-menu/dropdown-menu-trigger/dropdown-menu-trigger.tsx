@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   cloneElement,
@@ -7,9 +7,9 @@ import {
   isValidElement,
   ReactElement,
   useContext,
-} from 'react';
+} from "react";
 
-import { DropdownMenuContext } from '../dropdown-menu.context';
+import { DropdownMenuContext } from "../dropdown-menu.context";
 
 export interface DropdownMenuTriggerProps {
   children: ReactElement;

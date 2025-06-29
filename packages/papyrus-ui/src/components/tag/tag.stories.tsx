@@ -1,27 +1,27 @@
-import { StoryFn } from '@storybook/react';
-import { toUpper } from 'lodash';
+import { StoryFn } from "@storybook/react";
+import { toUpper } from "lodash";
 
-import { Tag, TagProps, TagSize, TagVariant } from './tag';
+import { Tag, TagProps, TagSize, TagVariant } from "./tag";
 
-const sizes: TagSize[] = ['sm', 'md'];
+const sizes: TagSize[] = ["sm", "md"];
 
 const variants: TagVariant[] = [
-  'primary',
-  'secondary',
-  'tertiary',
-  'info',
-  'success',
-  'warning',
-  'danger',
-  'ghost',
+  "primary",
+  "secondary",
+  "tertiary",
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "ghost",
 ];
 
 export default {
-  title: 'Data Display/Tag',
+  title: "Data Display/Tag",
   component: Tag,
 
   args: {
-    children: 'tag title',
+    children: "tag title",
   },
 };
 
@@ -45,7 +45,7 @@ export const Variants: StoryFn<TagProps> = (args) => (
   <div className="flex flex-col gap-3">
     <div className="flex flex-wrap justify-center -mt-4 -mx-2">
       {variants
-        .filter((variant) => variant !== 'ghost')
+        .filter((variant) => variant !== "ghost")
         .map((variant, i) => (
           <div key={i} className="mt-2 px-1">
             <Tag {...args} variant={variant}>
@@ -57,7 +57,7 @@ export const Variants: StoryFn<TagProps> = (args) => (
     <div className="bg-gradient-to-br from-secondary-800 to-primary-900 py-2">
       <div className="flex flex-wrap justify-center -mt-4 -mx-2">
         {variants
-          .filter((variant) => variant === 'ghost')
+          .filter((variant) => variant === "ghost")
           .map((variant, i) => (
             <div key={i} className="mt-4 px-2">
               <Tag {...args} variant={variant}>
@@ -82,7 +82,7 @@ Clickable.args = {
   onClick: () => {
     // do nothing
   },
-  children: 'Clickable Tag',
+  children: "Clickable Tag",
 };
 
 export const Removable = Template.bind({});
@@ -92,7 +92,7 @@ Removable.args = {
   onClick: () => {
     // do nothing
   },
-  children: 'Removable Tag',
+  children: "Removable Tag",
 };
 
 export const Disabled = Template.bind({});
@@ -103,5 +103,5 @@ Disabled.args = {
   onClick: () => {
     // do nothing
   },
-  children: 'Disabled Tag',
+  children: "Disabled Tag",
 };

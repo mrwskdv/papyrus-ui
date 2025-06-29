@@ -2,6 +2,7 @@
   "name": "@papyrus-ui/code-style",
   "version": "0.7.0",
   "description": "Shareable configurations for JavaScript and TypeScript projects based on Google style guides.",
+  "type": "commonjs",
   "files": [
     "eslint-config.js",
     "eslint-config-react.js",

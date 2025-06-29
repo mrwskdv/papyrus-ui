@@ -1,20 +1,20 @@
-import { RefObject } from 'react';
+import { RefObject } from "react";
 
 function getItems(menuRef: RefObject<HTMLElement>, getAllItems: boolean) {
   if (!menuRef.current) {
     return [];
   }
 
-  const listRole = menuRef.current.getAttribute('role');
-  const itemRole = listRole === 'tablist' ? 'tab' : 'menuitem';
+  const listRole = menuRef.current.getAttribute("role");
+  const itemRole = listRole === "tablist" ? "tab" : "menuitem";
 
   if (getAllItems) {
     const nodes = menuRef.current.querySelectorAll<HTMLElement>(
-      `[role=${itemRole}]`,
+      `[role=${itemRole}]`
     );
 
     return Array.from(nodes).filter(
-      (item) => item.getAttribute('aria-disabled') !== 'true',
+      (item) => item.getAttribute("aria-disabled") !== "true"
     );
   }
 
@@ -23,15 +23,15 @@ function getItems(menuRef: RefObject<HTMLElement>, getAllItems: boolean) {
     .filter(
       (node) =>
         node instanceof Element &&
-        node.getAttribute('role') === itemRole &&
-        node.getAttribute('aria-disabled') !== 'true',
+        node.getAttribute("role") === itemRole &&
+        node.getAttribute("aria-disabled") !== "true"
     ) as HTMLElement[];
 }
 
 export function getNextItem(
   menuRef: RefObject<HTMLElement>,
   current: HTMLElement,
-  getAllItems = false,
+  getAllItems = false
 ): HTMLElement | undefined {
   const items = getItems(menuRef, getAllItems);
   const currIdx = items.findIndex((item) => item === current);
@@ -42,7 +42,7 @@ export function getNextItem(
 export function getPrevItem(
   menuRef: RefObject<HTMLElement>,
   current: HTMLElement,
-  getAllItems = false,
+  getAllItems = false
 ): HTMLElement | undefined {
   const items = getItems(menuRef, getAllItems);
   const currIdx = items.findIndex((item) => item === current);
@@ -52,7 +52,7 @@ export function getPrevItem(
 
 export function getFirstItem(
   menuRef: RefObject<HTMLElement>,
-  getAllItems = false,
+  getAllItems = false
 ): HTMLElement | undefined {
   const items = getItems(menuRef, getAllItems);
   return items[0];
@@ -60,7 +60,7 @@ export function getFirstItem(
 
 export function getLastItem(
   menuRef: RefObject<HTMLElement>,
-  getAllItems = false,
+  getAllItems = false
 ): HTMLElement | undefined {
   const items = getItems(menuRef, getAllItems);
   return items[items.length - 1];

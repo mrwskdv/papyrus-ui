@@ -1,14 +1,14 @@
-import { StoryFn } from '@storybook/react';
-import type { Meta } from '@storybook/react';
+import { StoryFn } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
-import { Link, LinkProps } from './link';
+import { Link, LinkProps } from "./link";
 
 const meta: Meta = {
-  title: 'Typography/Link',
+  title: "Typography/Link",
   component: Link,
   args: {
-    href: '#',
-    children: 'This is a link',
+    href: "#",
+    children: "This is a link",
   },
 };
 
@@ -19,18 +19,18 @@ export const Basic = Template.bind({});
 export const AsButton = Template.bind({});
 
 AsButton.args = {
-  as: 'button',
+  as: "button",
   href: undefined,
-  children: 'This is a button',
+  children: "This is a button",
 };
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  as: 'button',
+  as: "button",
   href: undefined,
   disabled: true,
-  children: 'This is a button',
+  children: "This is a button",
 };
 
 export default meta;

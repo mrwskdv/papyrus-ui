@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import cn from 'classnames';
+import cn from "classnames";
 import {
   Children,
   cloneElement,
@@ -18,23 +18,23 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import { BiChevronUp } from 'react-icons/bi';
-import { Transition } from 'react-transition-group';
+} from "react";
+import { BiChevronUp } from "react-icons/bi";
+import { Transition } from "react-transition-group";
 
-import { Maybe } from '../../../types';
+import { Maybe } from "../../../types";
 import {
   getFirstItem,
   getLastItem,
   getNextItem,
   getPrevItem,
-} from '../../../utils/list-navigation';
-import { MenuButton } from '../../menu-button';
-import { MenuItemProps } from '../menu-item';
-import { MenuContext, MenuContextType } from '../menu.context';
+} from "../../../utils/list-navigation";
+import { MenuButton } from "../../menu-button";
+import { MenuItemProps } from "../menu-item";
+import { MenuContext, MenuContextType } from "../menu.context";
 
 export interface SubmenuProps
-  extends Omit<HTMLAttributes<HTMLAnchorElement>, 'href'> {
+  extends Omit<HTMLAttributes<HTMLAnchorElement>, "href"> {
   disabled?: boolean;
   icon?: ReactElement;
   index?: number;
@@ -82,7 +82,7 @@ export const Submenu: FC<SubmenuProps> = ({
       variant: parent.variant,
       setActiveIndex,
     }),
-    [activeIndex, parent.indent, parent.menuRef, parent.size, parent.variant],
+    [activeIndex, parent.indent, parent.menuRef, parent.size, parent.variant]
   );
 
   useEffect(() => {
@@ -98,10 +98,10 @@ export const Submenu: FC<SubmenuProps> = ({
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
@@ -122,20 +122,20 @@ export const Submenu: FC<SubmenuProps> = ({
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       e.stopPropagation();
       e.currentTarget.click();
     }
 
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       e.stopPropagation();
       const item = getPrevItem(parent.menuRef, e.currentTarget, true);
       item?.focus();
     }
 
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       e.stopPropagation();
       const item = getNextItem(parent.menuRef, e.currentTarget, true);
@@ -146,14 +146,14 @@ export const Submenu: FC<SubmenuProps> = ({
   };
 
   const handleMenuKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       e.stopPropagation();
       const item = getLastItem(menuRef);
       item?.focus();
     }
 
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       e.stopPropagation();
       const item = getFirstItem(menuRef);
@@ -167,12 +167,12 @@ export const Submenu: FC<SubmenuProps> = ({
         {...props}
         ref={buttonRef}
         aria-controls={isOpen ? menuId : undefined}
-        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-expanded={isOpen ? "true" : "false"}
         aria-haspopup="menu"
         collapsed={parent.collapsed}
         disabled={disabled}
         endIcon={
-          <BiChevronUp className={cn(!isOpen ? 'rotate-180' : 'rotate-0')} />
+          <BiChevronUp className={cn(!isOpen ? "rotate-180" : "rotate-0")} />
         }
         id={buttonId}
         indent={parent.indent}
@@ -203,8 +203,8 @@ export const Submenu: FC<SubmenuProps> = ({
                 ref={menuRef}
                 aria-labelledby={buttonId}
                 className={cn(
-                  'flex flex-col gap-1 max-h-0 transition-all overflow-y-hidden py-1',
-                  status === 'entered' && 'max-h-96',
+                  "flex flex-col gap-1 max-h-0 transition-all overflow-y-hidden py-1",
+                  status === "entered" && "max-h-96"
                 )}
                 id={menuId}
                 role="menu"
@@ -214,7 +214,7 @@ export const Submenu: FC<SubmenuProps> = ({
                 {Children.map(children, (child, i) =>
                   isValidElement<MenuItemProps>(child)
                     ? cloneElement(child, { index: i })
-                    : null,
+                    : null
                 )}
               </ul>
             )}

@@ -1,16 +1,16 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { Checkbox, CheckboxProps } from './checkbox';
+import { Checkbox, CheckboxProps } from "./checkbox";
 
 const meta: Meta<CheckboxProps> = {
-  title: 'Inputs/Checkbox',
+  title: "Inputs/Checkbox",
   component: Checkbox,
 
   args: {
-    name: 'checkbox',
-    value: 'true',
-    id: 'checkbox',
-    children: 'Checkbox',
+    name: "checkbox",
+    value: "true",
+    id: "checkbox",
+    children: "Checkbox",
   },
 };
 
@@ -21,7 +21,7 @@ export const Basic = Template.bind({});
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  id: 'checkbox-disabled',
+  id: "checkbox-disabled",
 
   disabled: true,
 };

@@ -1,10 +1,10 @@
-import { FloatingFocusManager, FloatingPortal } from '@floating-ui/react';
-import cn from 'classnames';
-import { forwardRef, HTMLAttributes, useContext } from 'react';
-import { Transition } from 'react-transition-group';
+import { FloatingFocusManager, FloatingPortal } from "@floating-ui/react";
+import cn from "classnames";
+import { forwardRef, HTMLAttributes, useContext } from "react";
+import { Transition } from "react-transition-group";
 
-import { useMergeRefs } from '../../../utils/use-merge-refs';
-import { PopoverContext } from '../popover.context';
+import { useMergeRefs } from "../../../utils/use-merge-refs";
+import { PopoverContext } from "../popover.context";
 
 export type PopoverContentProps = HTMLAttributes<HTMLDivElement>;
 
@@ -35,9 +35,9 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
               <div
                 ref={meredRef}
                 className={cn(
-                  'z-40 opacity-0 transition-opacity',
-                  status === 'entered' && 'opacity-100',
-                  className,
+                  "z-40 opacity-0 transition-opacity",
+                  status === "entered" && "opacity-100",
+                  className
                 )}
                 style={{
                   ...floatingStyles,
@@ -52,7 +52,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
         )}
       </Transition>
     );
-  },
+  }
 );
 
-PopoverContent.displayName = 'PopoverContent';
+PopoverContent.displayName = "PopoverContent";

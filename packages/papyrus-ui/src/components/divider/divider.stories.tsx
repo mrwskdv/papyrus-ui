@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { Heading } from '../heading';
+import { Heading } from "../heading";
 
-import { Divider, DividerProps } from './divider';
+import { Divider, DividerProps } from "./divider";
 
 const meta: Meta = {
-  title: 'Layout/Divider',
+  title: "Layout/Divider",
 };
 
 export const Basic: StoryFn<DividerProps> = (args) => (

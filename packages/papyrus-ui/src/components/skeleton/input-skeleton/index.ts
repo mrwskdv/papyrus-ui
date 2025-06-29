@@ -1,1 +1,1 @@
-export * from './input-skeleton';
+export * from "./input-skeleton";

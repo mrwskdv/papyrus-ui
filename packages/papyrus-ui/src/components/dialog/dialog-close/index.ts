@@ -1,1 +1,1 @@
-export * from './dialog-close';
+export * from "./dialog-close";

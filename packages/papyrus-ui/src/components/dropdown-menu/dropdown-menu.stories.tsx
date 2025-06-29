@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/react';
+import { StoryFn } from "@storybook/react";
 import {
   BiCog,
   BiDotsVerticalRounded,
@@ -7,14 +7,14 @@ import {
   BiHome,
   BiStats,
   BiSupport,
-} from 'react-icons/bi';
+} from "react-icons/bi";
 
-import { IconButton } from '../icon-button';
+import { IconButton } from "../icon-button";
 
-import { DropdownMenu, DropdownMenuProps } from './dropdown-menu';
+import { DropdownMenu, DropdownMenuProps } from "./dropdown-menu";
 
 export default {
-  title: 'Navigation/DropdownMenu',
+  title: "Navigation/DropdownMenu",
   component: DropdownMenu,
 };
 

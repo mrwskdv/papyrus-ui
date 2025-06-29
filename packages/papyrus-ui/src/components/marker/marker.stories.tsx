@@ -1,13 +1,13 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { BiCheck } from 'react-icons/bi';
+import { Meta, StoryFn } from "@storybook/react";
+import { BiCheck } from "react-icons/bi";
 
-import { Icon } from '../icon';
-import { UList } from '../u-list';
+import { Icon } from "../icon";
+import { UList } from "../u-list";
 
-import { Marker, MarkerProps } from './marker';
+import { Marker, MarkerProps } from "./marker";
 
 const meta: Meta = {
-  title: 'Typography/Marker',
+  title: "Typography/Marker",
   component: Marker,
   args: {
     children: (

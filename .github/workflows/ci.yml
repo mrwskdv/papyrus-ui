@@ -15,43 +15,35 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: yarn
-
-      # https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+          node-version: 22
+          cache: npm
 
       - name: Cache dependencies
         uses: actions/cache@v4
-        id: yarn-cache
+        id: npm-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: yarn install
+        run: npm ci
 
       - name: Check dependency licenses
-        run: yarn check:licenses
+        run: npm run check:licenses
 
       - name: Build packages
-        run: yarn build
+        run: npm run build
 
       - name: Lint code
-        run: yarn lint
+        run: npm run lint
 
       - name: Run unit tests
-        run: yarn test:ci
+        run: npm run test:ci
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v3

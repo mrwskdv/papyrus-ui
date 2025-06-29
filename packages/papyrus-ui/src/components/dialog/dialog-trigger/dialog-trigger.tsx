@@ -4,9 +4,9 @@ import {
   isValidElement,
   ReactElement,
   useContext,
-} from 'react';
+} from "react";
 
-import { DialogContext } from '../dialog.context';
+import { DialogContext } from "../dialog.context";
 
 export interface DialogTriggerProps {
   children: ReactElement;

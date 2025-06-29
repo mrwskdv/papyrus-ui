@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useFloatingTree, useListItem } from '@floating-ui/react';
+import { useFloatingTree, useListItem } from "@floating-ui/react";
 import {
   AnchorHTMLAttributes,
   ElementType,
@@ -9,13 +9,13 @@ import {
   MouseEvent,
   ReactElement,
   useContext,
-} from 'react';
+} from "react";
 
-import { MenuButton } from '../../menu-button';
-import { DropdownMenuContext } from '../dropdown-menu.context';
+import { MenuButton } from "../../menu-button";
+import { DropdownMenuContext } from "../dropdown-menu.context";
 
 export interface DropdownMenuItemProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children"> {
   as?: ElementType;
   danger?: boolean;
   disabled?: boolean;
@@ -40,7 +40,7 @@ export const DropdownMenuItem: FC<DropdownMenuItemProps> = ({
   const isActive = item.index === activeIndex;
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    tree?.events.emit('click');
+    tree?.events.emit("click");
     onClick?.(e);
   };
 

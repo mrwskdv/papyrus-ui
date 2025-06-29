@@ -1,7 +1,7 @@
-import { StoryFn } from '@storybook/react';
-import cn from 'classnames';
-import { capitalize } from 'lodash';
-import { Fragment } from 'react';
+import { StoryFn } from "@storybook/react";
+import cn from "classnames";
+import { capitalize } from "lodash";
+import { Fragment } from "react";
 import {
   BiCog,
   BiEnvelope,
@@ -9,22 +9,22 @@ import {
   BiHome,
   BiStats,
   BiSupport,
-} from 'react-icons/bi';
+} from "react-icons/bi";
 
-import { Divider } from '../divider';
-import { Heading } from '../heading';
+import { Divider } from "../divider";
+import { Heading } from "../heading";
 
-import { MenuBar, MenuBarProps } from './menu-bar';
+import { MenuBar, MenuBarProps } from "./menu-bar";
 
-const variants: MenuBarProps['variant'][] = ['primary', 'secondary', 'ghost'];
+const variants: MenuBarProps["variant"][] = ["primary", "secondary", "ghost"];
 
-const sizes: MenuBarProps['size'][] = ['sm', 'md', 'lg'];
+const sizes: MenuBarProps["size"][] = ["sm", "md", "lg"];
 
 export default {
-  title: 'Navigation/MenuBar',
+  title: "Navigation/MenuBar",
   component: MenuBar,
   args: {
-    variant: 'secondary',
+    variant: "secondary",
   },
 };
 
@@ -62,7 +62,7 @@ const Template: StoryFn<MenuBarProps> = (args) => (
         Option 6
       </MenuBar.Item>
     </MenuBar>
-    {args.variant === 'primary' && <Divider className="text-neutral-200" />}
+    {args.variant === "primary" && <Divider className="text-neutral-200" />}
   </div>
 );
 
@@ -72,7 +72,7 @@ export const Size: StoryFn<MenuBarProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading className={cn('mb-1.5', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
+        <Heading className={cn("mb-1.5", i > 0 ? "mt-6" : "mt-0")} level={3}>
           {capitalize(size)}
         </Heading>
 
@@ -88,13 +88,13 @@ export const Variant: StoryFn<MenuBarProps> = (args) => (
       <div
         key={i}
         className={
-          variant === 'ghost'
-            ? 'bg-gradient-to-br from-secondary-800 to-primary-900 px-2 py-4'
-            : 'px-2'
+          variant === "ghost"
+            ? "bg-gradient-to-br from-secondary-800 to-primary-900 px-2 py-4"
+            : "px-2"
         }
       >
         <Heading
-          className={variant === 'ghost' ? 'text-white mb-3' : 'mb-3'}
+          className={variant === "ghost" ? "text-white mb-3" : "mb-3"}
           level={3}
         >
           {capitalize(variant)}

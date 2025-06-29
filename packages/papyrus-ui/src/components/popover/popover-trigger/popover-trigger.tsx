@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   cloneElement,
@@ -7,9 +7,9 @@ import {
   isValidElement,
   ReactElement,
   useContext,
-} from 'react';
+} from "react";
 
-import { PopoverContext } from '../popover.context';
+import { PopoverContext } from "../popover.context";
 
 export interface DialogTriggerProps {
   children: ReactElement;

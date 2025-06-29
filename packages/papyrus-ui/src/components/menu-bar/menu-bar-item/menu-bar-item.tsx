@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useFloatingTree, useListItem } from '@floating-ui/react';
+import { useFloatingTree, useListItem } from "@floating-ui/react";
 import {
   AnchorHTMLAttributes,
   ElementType,
@@ -9,13 +9,13 @@ import {
   MouseEvent,
   ReactElement,
   useContext,
-} from 'react';
+} from "react";
 
-import { MenuButton } from '../../menu-button';
-import { MenuBarContext } from '../menu-bar.context';
+import { MenuButton } from "../../menu-button";
+import { MenuBarContext } from "../menu-bar.context";
 
 export interface MenuBarItemProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children"> {
   as?: ElementType;
   danger?: boolean;
   disabled?: boolean;
@@ -47,7 +47,7 @@ export const MenuBarItem: FC<MenuBarItemProps> = ({
   const isActive = item.index === activeIndex;
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    tree?.events.emit('click');
+    tree?.events.emit("click");
     onClick?.(e);
   };
 
@@ -60,8 +60,8 @@ export const MenuBarItem: FC<MenuBarItemProps> = ({
     <MenuButton
       ref={item.ref}
       collapsed={collapsed}
-      direction={isNested ? 'vertical' : 'horizontal'}
-      size={isNested ? 'sm' : size}
+      direction={isNested ? "vertical" : "horizontal"}
+      size={isNested ? "sm" : size}
       startIcon={icon}
       tabIndex={isActive ? 0 : -1}
       variant={variant}

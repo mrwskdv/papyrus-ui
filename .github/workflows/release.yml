@@ -14,7 +14,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [ closed ]
+    types: [closed]
   workflow_dispatch: # force release
 
 jobs:
@@ -81,36 +81,28 @@ jobs:
 
       - name: Set PACKAGE_VERSION
         run: echo "PACKAGE_VERSION=$(cat lerna.json | jq -r .version)" >> $GITHUB_ENV
-      # https://github.com/actions/cache/blob/main/examples.md#node---yarn
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
-          node-version: 18
+          cache: npm
+          node-version: 22
           registry-url: https://registry.npmjs.org
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache dependencies
         uses: actions/cache@v4
-        id: yarn-cache
+        id: npm-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node-
 
       - name: Install
-        run: yarn install
+        run: npm ci
 
       - name: Build packages
-        run: yarn build
+        run: npm run build
 
       - name: Publish
         run: npm run ci:release

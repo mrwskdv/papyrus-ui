@@ -3,13 +3,13 @@ import {
   forwardRef,
   InputHTMLAttributes,
   ReactNode,
-} from 'react';
+} from "react";
 
-import { useId } from '../../utils/use-id';
-import { InputGroup } from '../input-group';
+import { useId } from "../../utils/use-id";
+import { InputGroup } from "../input-group";
 
 export interface RangeProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   /**
    * The default value of the uncontrolled input.
    * This is used when the component is uncontrolled and does not have a `value` prop.
@@ -85,7 +85,7 @@ export const Range = forwardRef<HTMLInputElement, RangeProps>(
         <input ref={ref} className="range-input" type="range" {...props} />
       </InputGroup>
     );
-  },
+  }
 );
 
-Range.displayName = 'Range';
+Range.displayName = "Range";

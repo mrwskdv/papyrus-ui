@@ -1,15 +1,15 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from "@storybook/react";
 
-import { Checkbox } from '../checkbox';
+import { Checkbox } from "../checkbox";
 
-import { CheckboxGroup } from './checkbox-group';
+import { CheckboxGroup } from "./checkbox-group";
 
 const meta: Meta<typeof CheckboxGroup> = {
-  title: 'Inputs/CheckboxGroup',
+  title: "Inputs/CheckboxGroup",
   component: CheckboxGroup,
   args: {
-    label: 'Checkbox Group',
-    name: 'checkboxGroup',
+    label: "Checkbox Group",
+    name: "checkboxGroup",
     children: [
       <Checkbox key={1} value="1">
         Label 1
@@ -25,7 +25,7 @@ const meta: Meta<typeof CheckboxGroup> = {
 };
 
 const Template: StoryFn<typeof CheckboxGroup> = (args) => (
-  <div className={args.block ? 'w-96' : ''}>
+  <div className={args.block ? "w-96" : ""}>
     <CheckboxGroup {...args} />
   </div>
 );
@@ -33,7 +33,7 @@ const Template: StoryFn<typeof CheckboxGroup> = (args) => (
 export const SingleCheckbox = Template.bind({});
 
 SingleCheckbox.args = {
-  label: 'Single Checkbox',
+  label: "Single Checkbox",
   defaultValue: false, // Single checkbox selection, default value can be a boolean (false or true)
   children: <Checkbox value="true">I agree with terms and conditions</Checkbox>,
 };
@@ -41,37 +41,37 @@ SingleCheckbox.args = {
 export const RowLayout = Template.bind({});
 
 RowLayout.args = {
-  direction: 'row', // Displays checkboxes horizontally in a row
+  direction: "row", // Displays checkboxes horizontally in a row
 };
 
 export const BlockLayout = Template.bind({});
 
 BlockLayout.args = {
   block: true, // Ensures checkboxes take up equal space when displayed in a row
-  direction: 'row',
+  direction: "row",
 };
 
 export const ColumnLayout = Template.bind({});
 ColumnLayout.args = {
-  direction: 'column', // Displays checkboxes vertically in a column
+  direction: "column", // Displays checkboxes vertically in a column
 };
 
 export const Description = Template.bind({});
 
 Description.args = {
-  description: 'Lorem ipsum dolor sit amet.',
+  description: "Lorem ipsum dolor sit amet.",
 };
 
 export const Message = Template.bind({});
 
 Message.args = {
-  message: 'Just a hint',
+  message: "Just a hint",
 };
 
 export const ErrorMessage = Template.bind({});
 
 ErrorMessage.args = {
-  message: 'Something is wrong',
+  message: "Something is wrong",
   invalid: true, // Marks the group as invalid, typically for form validation
 };
 
@@ -84,7 +84,7 @@ Disabled.args = {
 export const ReadOnly = Template.bind({});
 
 ReadOnly.args = {
-  defaultValue: ['1', '2'],
+  defaultValue: ["1", "2"],
   readOnly: true, // Ensures checkboxes are not interactable
 };
 

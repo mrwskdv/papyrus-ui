@@ -1,24 +1,24 @@
-import { StoryFn } from '@storybook/react';
-import { BiInfoCircle, BiSearch } from 'react-icons/bi';
+import { StoryFn } from "@storybook/react";
+import { BiInfoCircle, BiSearch } from "react-icons/bi";
 
-import { Icon } from '../icon';
-import { InputBoxSize } from '../input-box';
+import { Icon } from "../icon";
+import { InputBoxSize } from "../input-box";
 
-import { Textarea, TextareaProps } from './textarea';
+import { Textarea, TextareaProps } from "./textarea";
 
 const meta = {
-  title: 'Inputs/Textarea',
+  title: "Inputs/Textarea",
   component: Textarea,
 
   args: {
-    label: 'Bio',
+    label: "Bio",
     rows: 3,
-    defaultValue: 'Frontend developer at OSS',
-    placeholder: 'Tell about yourself',
+    defaultValue: "Frontend developer at OSS",
+    placeholder: "Tell about yourself",
   },
 };
 
-const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
+const sizes: InputBoxSize[] = ["sm", "md", "lg"];
 
 const Template: StoryFn<TextareaProps> = (args) => (
   <div className="w-64">
@@ -29,14 +29,14 @@ const Template: StoryFn<TextareaProps> = (args) => (
 export const Basic = Template.bind({});
 
 Basic.args = {
-  id: 'textarea-basic',
+  id: "textarea-basic",
 };
 
 export function Sizes(args: TextareaProps) {
   return (
     <div className="flex flex-col w-64">
       {sizes.map((size, i) => (
-        <div key={i} className={i ? 'mt-4' : ''}>
+        <div key={i} className={i ? "mt-4" : ""}>
           <Textarea {...args} id={`textarea-size-${size}`} size={size} />
         </div>
       ))}
@@ -79,36 +79,36 @@ export function WithIcon(args: TextareaProps) {
 export const Description = Template.bind({});
 
 Description.args = {
-  id: 'textarea-description',
-  description: 'This is a description.',
+  id: "textarea-description",
+  description: "This is a description.",
 };
 
 export const Message = Template.bind({});
 
 Message.args = {
-  id: 'textarea-message',
-  description: 'This is a message',
+  id: "textarea-message",
+  description: "This is a message",
 };
 
 export const Invalid = Template.bind({});
 
 Message.args = {
-  id: 'textarea-invalid',
+  id: "textarea-invalid",
   invalid: true,
-  description: 'Something went wrong',
+  description: "Something went wrong",
 };
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  id: 'textarea-disabled',
+  id: "textarea-disabled",
   disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 
 Disabled.args = {
-  id: 'textarea-readonly',
+  id: "textarea-readonly",
   readOnly: true,
 };
 

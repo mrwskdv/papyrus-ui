@@ -1,13 +1,13 @@
-import { StoryFn } from '@storybook/react';
+import { StoryFn } from "@storybook/react";
 
-import { Range, RangeProps } from './range';
+import { Range, RangeProps } from "./range";
 
 export default {
-  title: 'Inputs/Range',
+  title: "Inputs/Range",
   component: Range,
 
   args: {
-    label: 'Zoom',
+    label: "Zoom",
     defaultValue: 50,
     min: 0,
     max: 100,
@@ -19,36 +19,36 @@ const Template: StoryFn<RangeProps> = (args) => <Range {...args} />;
 export const Basic = Template.bind({});
 
 Basic.args = {
-  id: 'range-basic',
+  id: "range-basic",
 };
 
 export const Description = Template.bind({
-  id: 'range-description',
+  id: "range-description",
 });
 
 Description.args = {
-  id: 'range-description',
-  description: 'This is a description',
+  id: "range-description",
+  description: "This is a description",
 };
 
 export const Invalid = Template.bind({});
 
 Invalid.args = {
-  id: 'range-invalid',
+  id: "range-invalid",
   invalid: true,
-  message: 'Something went wrong',
+  message: "Something went wrong",
 };
 
 export const Message = Template.bind({});
 
 Message.args = {
-  id: 'range-message',
-  message: 'This is a message',
+  id: "range-message",
+  message: "This is a message",
 };
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-  id: 'range-disabled',
+  id: "range-disabled",
   disabled: true,
 };

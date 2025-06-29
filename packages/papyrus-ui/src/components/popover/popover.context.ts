@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { ExtendedRefs, FloatingContext } from '@floating-ui/react';
+import { ExtendedRefs, FloatingContext } from "@floating-ui/react";
 import {
   createContext,
   CSSProperties,
   HTMLAttributes,
   MutableRefObject,
-} from 'react';
+} from "react";
 
 export interface PopoverContextType {
   arrowRef: MutableRefObject<SVGSVGElement | null>;
@@ -16,10 +16,10 @@ export interface PopoverContextType {
   modal: boolean;
   refs: ExtendedRefs<Element>;
   getFloatingProps: (
-    userProps?: HTMLAttributes<Element>,
+    userProps?: HTMLAttributes<Element>
   ) => Record<string, unknown>;
   getReferenceProps: (
-    userProps?: HTMLAttributes<Element>,
+    userProps?: HTMLAttributes<Element>
   ) => Record<string, unknown>;
 }
 

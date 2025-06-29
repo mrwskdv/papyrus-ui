@@ -1,8 +1,8 @@
-import { OffsetOptions, Placement } from '@floating-ui/react';
-import { FC, ReactElement, ReactNode } from 'react';
+import { OffsetOptions, Placement } from "@floating-ui/react";
+import { FC, ReactElement, ReactNode } from "react";
 
-import { Popover, PopoverTrigger } from '../popover';
-import { Text } from '../text';
+import { Popover, PopoverTrigger } from "../popover";
+import { Text } from "../text";
 
 export interface TooltipProps {
   /**
@@ -77,12 +77,12 @@ const DEFAULT_OFFSET = {
   alignAxis: 4,
 };
 
-const DEFAULT_TRIGGER: PopoverTrigger[] = ['focus', 'hover'];
+const DEFAULT_TRIGGER: PopoverTrigger[] = ["focus", "hover"];
 
 export const Tooltip: FC<TooltipProps> = ({
   offset = DEFAULT_OFFSET,
   padding = 4,
-  placement = 'top',
+  placement = "top",
   title,
   trigger = DEFAULT_TRIGGER,
   children,

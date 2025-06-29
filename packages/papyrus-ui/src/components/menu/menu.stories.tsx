@@ -1,6 +1,6 @@
-import { StoryFn } from '@storybook/react';
-import { capitalize } from 'lodash';
-import { Fragment, useState } from 'react';
+import { StoryFn } from "@storybook/react";
+import { capitalize } from "lodash";
+import { Fragment, useState } from "react";
 import {
   BiCog,
   BiEnvelope,
@@ -10,27 +10,27 @@ import {
   BiRightIndent,
   BiStats,
   BiSupport,
-} from 'react-icons/bi';
+} from "react-icons/bi";
 
-import { Heading } from '../heading';
-import { IconButton } from '../icon-button';
+import { Heading } from "../heading";
+import { IconButton } from "../icon-button";
 
-import { Menu, MenuProps } from './menu';
+import { Menu, MenuProps } from "./menu";
 
-const variants: MenuProps['variant'][] = ['primary', 'secondary', 'ghost'];
+const variants: MenuProps["variant"][] = ["primary", "secondary", "ghost"];
 
-const sizes: MenuProps['size'][] = ['sm', 'md', 'lg'];
+const sizes: MenuProps["size"][] = ["sm", "md", "lg"];
 
 export default {
-  title: 'Navigation/Menu',
+  title: "Navigation/Menu",
   component: Menu,
   args: {
-    variant: 'secondary',
+    variant: "secondary",
   },
 };
 
 const Template: StoryFn<MenuProps> = (args) => (
-  <div className={args.collapsed ? '' : 'w-48'}>
+  <div className={args.collapsed ? "" : "w-48"}>
     <Menu {...args}>
       <Menu.Item icon={<BiHome />} selected>
         Option 1
@@ -72,7 +72,7 @@ export const Size: StoryFn<MenuProps> = (args) => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading className={`mb-1.5 mt-${i > 0 ? '6' : '0'}`} level={3}>
+        <Heading className={`mb-1.5 mt-${i > 0 ? "6" : "0"}`} level={3}>
           {capitalize(size)}
         </Heading>
 
@@ -88,13 +88,13 @@ export const Variant: StoryFn<MenuProps> = (args) => (
       <div
         key={i}
         className={
-          variant === 'ghost'
-            ? 'bg-gradient-to-br from-secondary-800 to-primary-900 px-2 py-4'
-            : 'px-2'
+          variant === "ghost"
+            ? "bg-gradient-to-br from-secondary-800 to-primary-900 px-2 py-4"
+            : "px-2"
         }
       >
         <Heading
-          className={variant === 'ghost' ? 'text-white mb-3' : 'mb-3'}
+          className={variant === "ghost" ? "text-white mb-3" : "mb-3"}
           level={3}
         >
           {capitalize(variant)}

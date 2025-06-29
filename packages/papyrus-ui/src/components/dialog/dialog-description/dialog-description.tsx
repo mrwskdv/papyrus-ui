@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useId } from '@floating-ui/react';
-import { FC, useContext, useLayoutEffect } from 'react';
+import { useId } from "@floating-ui/react";
+import { FC, useContext, useLayoutEffect } from "react";
 
-import { Text, TextProps } from '../../text';
-import { DialogContext } from '../dialog.context';
+import { Text, TextProps } from "../../text";
+import { DialogContext } from "../dialog.context";
 
 export type DialogDescriptionProps = TextProps;
 

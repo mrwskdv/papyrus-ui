@@ -14,7 +14,11 @@ export interface LabelProps
 
 export const Label = forwardRef<HTMLElement, LabelProps>(
   ({ as: Element = "label", className, children, ...props }, ref) => (
-    <Element ref={ref} className={cn("text-label", className)} {...props}>
+    <Element
+      ref={ref}
+      className={cn("font-sans", "text-label", className)}
+      {...props}
+    >
       {children}
     </Element>
   )

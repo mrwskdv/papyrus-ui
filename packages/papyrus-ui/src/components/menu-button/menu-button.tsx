@@ -223,12 +223,13 @@ const iconCollapsedDangerSelectedVariantClasses = {
   ghost: "text-danger-500",
 };
 
-const labelDefaultClasses = "block text-body-md-primary mx-1 truncate";
+const labelDefaultClasses =
+  "font-sans block text-body-md-primary mx-1 truncate";
 
 const labelDefaultSelectedClasses =
-  "block text-body-md-primary-bold mx-1 truncate";
+  "font-sans block text-body-md-primary-bold mx-1 truncate";
 
-const labelCollapsedClasses = "text-caption text-center truncate";
+const labelCollapsedClasses = "font-sans text-caption text-center truncate";
 
 const labelDirectionClasses = {
   vertical: "flex-1",

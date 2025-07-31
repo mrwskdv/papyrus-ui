@@ -180,7 +180,7 @@ const variantStyles = {
 };
 
 // Label styles
-const labelStyles = ["inline-block", "text-button", "truncate"];
+const labelStyles = ["font-sans", "inline-block", "text-button", "truncate"];
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
   (

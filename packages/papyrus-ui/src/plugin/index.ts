@@ -6,7 +6,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
   addComponents({
     // Input component styles
     ".input-base": {
-      "@apply block w-full bg-transparent": {},
+      "@apply font-sans text-body-md-primary block w-full bg-transparent": {},
 
       "&::placeholder": {
         "@apply opacity-100 text-neutral-600": {},
@@ -28,7 +28,8 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
 
     // Select component styles
     ".select-base": {
-      "@apply block w-full appearance-none bg-transparent": {},
+      "@apply font-sans text-body-md-primary block w-full appearance-none bg-transparent":
+        {},
       WebkitAppearance: "none",
       MozAppearance: "none",
 
@@ -52,7 +53,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
 
     // Textarea component styles
     ".textarea-base": {
-      "@apply block w-full bg-transparent": {},
+      "@apply font-sans text-body-md-primary block w-full bg-transparent": {},
       resize: "vertical",
 
       "&::placeholder": {
@@ -270,7 +271,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
     },
 
     ".table-sm-primary": {
-      "@apply text-body-sm-primary": {},
+      "@apply font-sans text-body-sm-primary": {},
       "& th": {
         "@apply text-body-sm-primary-bold": {},
       },
@@ -280,7 +281,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
     },
 
     ".table-sm-secondary": {
-      "@apply text-body-sm-secondary": {},
+      "@apply font-serif text-body-sm-secondary": {},
       "& th": {
         "@apply text-body-sm-secondary-bold": {},
       },
@@ -290,7 +291,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
     },
 
     ".table-md-primary": {
-      "@apply text-body-md-primary": {},
+      "@apply font-sans text-body-md-primary": {},
       "& th": {
         "@apply text-body-md-primary-bold": {},
       },
@@ -300,7 +301,7 @@ const papyrusUIPlugin = plugin(({ theme, addComponents, addUtilities }) => {
     },
 
     ".table-md-secondary": {
-      "@apply text-body-md-secondary": {},
+      "@apply font-serif text-body-md-secondary": {},
       "& th": {
         "@apply text-body-md-secondary-bold": {},
       },

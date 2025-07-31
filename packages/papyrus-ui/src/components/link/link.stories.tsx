@@ -1,6 +1,8 @@
 import { StoryFn } from "@storybook/react";
 import type { Meta } from "@storybook/react";
 
+import { Text } from "../text";
+
 import { Link, LinkProps } from "./link";
 
 const meta: Meta = {
@@ -12,7 +14,11 @@ const meta: Meta = {
   },
 };
 
-const Template: StoryFn<LinkProps> = (args: LinkProps) => <Link {...args} />;
+const Template: StoryFn<LinkProps> = (args: LinkProps) => (
+  <Text>
+    <Link {...args} />
+  </Text>
+);
 
 export const Basic = Template.bind({});
 

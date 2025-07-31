@@ -151,7 +151,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
           (badgeContent !== 0 || showZero) && (
             <span
               className={cn(
-                "flex items-center justify-center min-w-5 h-5 rounded-full text-white whitespace-nowrap px-1 overflow-hidden text-xs font-medium",
+                "flex items-center justify-center min-w-5 h-5 rounded-full text-white whitespace-nowrap px-1 overflow-hidden font-sans text-xs font-medium",
                 className?.includes("bg-") ? "" : `bg-secondary-500`,
                 className
               )}

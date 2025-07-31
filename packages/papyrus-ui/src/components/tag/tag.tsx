@@ -85,7 +85,13 @@ const interactiveVariantStyles = {
 // Interactive styles
 
 // Label styles
-const labelStyles = ["truncate", "text-caption", "leading-none", "-mb-0.5"];
+const labelStyles = [
+  "font-sans",
+  "truncate",
+  "text-caption",
+  "leading-none",
+  "-mb-0.5",
+];
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (

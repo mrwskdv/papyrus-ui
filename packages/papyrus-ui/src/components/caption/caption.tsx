@@ -8,7 +8,11 @@ export interface CaptionProps
 
 export const Caption = forwardRef<HTMLElement, CaptionProps>(
   ({ as: Element = "p", className, children, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cn("text-caption", className)}>
+    <Element
+      {...props}
+      ref={ref}
+      className={cn("font-sans", "text-caption", className)}
+    >
       {children}
     </Element>
   )

@@ -6,9 +6,7 @@ const meta: Meta = {
   title: "Feedback/Skeleton",
   component: Skeleton,
   args: {
-    height: 32,
-    width: 96,
-    rounded: "lg",
+    className: "w-64 h-10 rounded-lg",
   },
 };
 

@@ -1,12 +1,14 @@
-import cn from "classnames";
-import { forwardRef, HTMLAttributes } from "react";
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
 
-import { Text, TextSize, TextFontVariant } from "../text";
+import { Text } from '../text';
+import type { TextSize, TextFontVariant } from '../text';
 
-export type UListType = "disc" | "dash" | "none";
+export type UListType = 'disc' | 'dash' | 'none';
 
 export interface UListProps
-  extends Omit<HTMLAttributes<HTMLUListElement>, "size" | "type"> {
+  extends Omit<HTMLAttributes<HTMLUListElement>, 'size' | 'type'> {
   /**
    * Applies bold styling to the text.
    *
@@ -35,16 +37,16 @@ export interface UListProps
 }
 
 export const UList = forwardRef<HTMLUListElement, UListProps>(
-  ({ className, children, type = "disc", ...props }, ref) => (
+  ({ className, children, type = 'disc', ...props }, ref) => (
     <Text
       ref={ref}
-      as="ul"
-      className={cn("list", `list-${type}`, className)}
+      as='ul'
+      className={cn('list', `list-${type}`, className)}
       {...props}
     >
       {children}
     </Text>
-  )
+  ),
 );
 
-UList.displayName = "UList";
+UList.displayName = 'UList';

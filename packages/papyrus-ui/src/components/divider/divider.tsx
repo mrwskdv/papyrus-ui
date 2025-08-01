@@ -1,7 +1,7 @@
-import cn from "classnames";
-import { FC } from "react";
+import cn from 'classnames';
+import type { FC } from 'react';
 
-export type DividerDirection = "horizontal" | "vertical";
+export type DividerDirection = 'horizontal' | 'vertical';
 
 export interface DividerProps {
   direction?: DividerDirection;
@@ -9,17 +9,17 @@ export interface DividerProps {
 }
 
 const directionClass: Record<DividerDirection, string> = {
-  horizontal: "w-full h-px",
-  vertical: "h-full w-px",
+  horizontal: 'w-full h-px',
+  vertical: 'h-full w-px',
 };
 
 export const Divider: FC<DividerProps> = ({
-  direction = "horizontal",
+  direction = 'horizontal',
   className,
   ...props
 }) => (
   <div
     {...props}
-    className={cn("bg-current", directionClass[direction], className)}
+    className={cn('bg-current', directionClass[direction], className)}
   />
 );

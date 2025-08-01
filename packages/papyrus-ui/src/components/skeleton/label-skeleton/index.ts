@@ -1,1 +1,1 @@
-export * from "./label-skeleton";
+export * from './label-skeleton';

@@ -1,25 +1,26 @@
-import { Meta, StoryFn } from "@storybook/react";
-import cn from "classnames";
-import { capitalize } from "lodash";
-import { Fragment } from "react";
-import { BiBell } from "react-icons/bi";
+import type { Meta, StoryFn } from '@storybook/react';
+import cn from 'classnames';
+import { capitalize } from 'lodash';
+import { Fragment } from 'react';
+import { BiBell } from 'react-icons/bi';
 
-import { Avatar } from "../avatar";
-import { Heading } from "../heading";
+import { Avatar } from '../avatar';
+import { Heading } from '../heading';
 
-import { Alert, AlertProps, AlertVariant } from "./alert";
+import { Alert } from './alert';
+import type { AlertProps, AlertVariant } from './alert';
 
 const meta: Meta = {
-  title: "Feedback/Alert",
+  title: 'Feedback/Alert',
   args: {
-    variant: "secondary",
-    message: "Alert message",
-    children: "Alert description",
+    variant: 'secondary',
+    message: 'Alert message',
+    children: 'Alert description',
   },
 };
 
-const Template: StoryFn<AlertProps> = (args) => (
-  <div className="w-80">
+const Template: StoryFn<AlertProps> = args => (
+  <div className='w-80'>
     <Alert {...args} />
   </div>
 );
@@ -27,19 +28,19 @@ const Template: StoryFn<AlertProps> = (args) => (
 export const Basic = Template.bind({});
 
 const VARIANTS: AlertVariant[] = [
-  "primary",
-  "secondary",
-  "info",
-  "success",
-  "warning",
-  "danger",
+  'primary',
+  'secondary',
+  'info',
+  'success',
+  'warning',
+  'danger',
 ];
 
-export const Variants: StoryFn<AlertProps> = (args) => (
-  <div className="w-80">
+export const Variants: StoryFn<AlertProps> = args => (
+  <div className='w-80'>
     {VARIANTS.map((variant, i) => (
       <Fragment key={i}>
-        <Heading className={cn("mb-1.5", i > 0 ? "mt-6" : "mt-0")} level={3}>
+        <Heading className={cn('mb-1.5', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(variant)}
         </Heading>
 
@@ -71,8 +72,8 @@ export const WithAvatar = Template.bind({});
 
 WithAvatar.args = {
   icon: (
-    <Avatar size="md">
-      <img alt="Profile" src="https://i.pravatar.cc/300" />
+    <Avatar size='md'>
+      <img alt='Profile' src='https://i.pravatar.cc/300' />
     </Avatar>
   ),
 };

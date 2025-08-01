@@ -1,23 +1,24 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { TextSkeleton } from "../text-skeleton";
+import { TextSkeleton } from '../text-skeleton';
 
-import { CheckboxSkeleton, CheckboxSkeletonProps } from "./checkbox-skeleton";
+import { CheckboxSkeleton } from './checkbox-skeleton';
+import type { CheckboxSkeletonProps } from './checkbox-skeleton';
 
 const meta: Meta<CheckboxSkeletonProps> = {
-  title: "Feedback/Skeleton/CheckboxSkeleton",
+  title: 'Feedback/Skeleton/CheckboxSkeleton',
   component: CheckboxSkeleton,
   args: {
     children: (
       <>
-        <TextSkeleton className="w-40" />
-        <TextSkeleton className="w-40" />
+        <TextSkeleton className='w-40' />
+        <TextSkeleton className='w-40' />
       </>
     ),
   },
 };
 
-const Template: StoryFn<CheckboxSkeletonProps> = (args) => (
+const Template: StoryFn<CheckboxSkeletonProps> = args => (
   <CheckboxSkeleton {...args} />
 );
 

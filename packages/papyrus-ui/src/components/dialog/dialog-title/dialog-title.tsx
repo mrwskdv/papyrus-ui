@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useId } from "@floating-ui/react";
-import cn from "classnames";
-import { FC, HTMLAttributes, useContext, useLayoutEffect } from "react";
+import { useId } from '@floating-ui/react';
+import cn from 'classnames';
+import { useContext, useLayoutEffect } from 'react';
+import type { FC, HTMLAttributes } from 'react';
 
-import { Heading } from "../../heading";
-import { DialogContext } from "../dialog.context";
+import { Heading } from '../../heading';
+import { DialogContext } from '../dialog.context';
 
 export type DialogTitleProps = Omit<
   HTMLAttributes<HTMLElement>,
-  "color" | "size"
+  'color' | 'size'
 >;
 
 export const DialogTitle: FC<DialogTitleProps> = ({
@@ -30,8 +31,8 @@ export const DialogTitle: FC<DialogTitleProps> = ({
 
   return (
     <Heading
-      as="h1"
-      className={cn("flex-1 text-neutral-900 truncate", className)}
+      as='h1'
+      className={cn('flex-1 text-neutral-900 truncate', className)}
       id={id}
       level={5}
       {...props}

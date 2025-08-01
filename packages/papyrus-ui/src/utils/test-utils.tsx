@@ -2,20 +2,19 @@ import {
   act,
   cleanup,
   fireEvent,
-  RenderOptions,
-  RenderResult,
   render as renderTest,
   screen,
   waitFor,
   waitForElementToBeRemoved,
   renderHook,
-} from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
-import { configureAxe } from "jest-axe";
-import { ReactElement } from "react";
+} from '@testing-library/react';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import { configureAxe } from 'jest-axe';
+import type { ReactElement } from 'react';
 
-import "@testing-library/jest-dom/extend-expect";
-import "jest-axe/extend-expect";
+import '@testing-library/jest-dom/extend-expect';
+import 'jest-axe/extend-expect';
 
 export type RenderFn<T = unknown> = (
   component: ReactElement,
@@ -24,7 +23,7 @@ export type RenderFn<T = unknown> = (
 
 export const render: RenderFn<RenderResult> = (
   component,
-  options?: RenderOptions
+  options?: RenderOptions,
 ) => renderTest(component, options);
 
 export const axe = configureAxe({

@@ -1,18 +1,19 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { Label, LabelProps } from "./label";
+import { Label } from './label';
+import type { LabelProps } from './label';
 
 const meta: Meta = {
-  title: "Typography/Label",
+  title: 'Typography/Label',
   component: Label,
 };
 
-const Template: StoryFn<LabelProps> = (args) => <Label {...args} />;
+const Template: StoryFn<LabelProps> = args => <Label {...args} />;
 
 export const Basic = Template.bind({});
 
 Basic.args = {
-  children: "This is a label",
+  children: 'This is a label',
 };
 
 export default meta;

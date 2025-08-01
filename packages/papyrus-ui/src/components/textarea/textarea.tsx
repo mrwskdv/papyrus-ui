@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import {
+import { forwardRef, isValidElement } from 'react';
+import type {
   ChangeEventHandler,
   FC,
-  forwardRef,
-  isValidElement,
   ReactElement,
   ReactNode,
   TextareaHTMLAttributes,
-} from "react";
-import { IconBaseProps } from "react-icons";
+} from 'react';
+import type { IconBaseProps } from 'react-icons';
 
-import { useId } from "../../utils/use-id";
-import { InputAction } from "../input-action";
-import { InputBox, InputBoxSize } from "../input-box";
-import { InputGroup } from "../input-group";
+import { useId } from '../../utils/use-id';
+import { InputAction } from '../input-action';
+import { InputBox } from '../input-box';
+import type { InputBoxSize } from '../input-box';
+import { InputGroup } from '../input-group';
 
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -110,7 +110,7 @@ export const Textarea: FC<TextareaProps> = forwardRef<
       readOnly,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputId = useId(id);
 
@@ -129,24 +129,24 @@ export const Textarea: FC<TextareaProps> = forwardRef<
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction className="me-1">{startIcon}</InputAction>
+            <InputAction className='me-1'>{startIcon}</InputAction>
           )}
 
           <textarea
             {...props}
             ref={ref}
-            className="textarea-base"
+            className='textarea-base'
             disabled={disabled}
             readOnly={readOnly}
           />
 
           {isValidElement(endIcon) && (
-            <InputAction className="ms-1">{endIcon}</InputAction>
+            <InputAction className='ms-1'>{endIcon}</InputAction>
           )}
         </InputBox>
       </InputGroup>
     );
-  }
+  },
 );
 
-Textarea.displayName = "Textarea";
+Textarea.displayName = 'Textarea';

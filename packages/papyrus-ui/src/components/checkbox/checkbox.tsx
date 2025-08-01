@@ -1,16 +1,16 @@
-import cn from "classnames";
-import {
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type {
   ChangeEventHandler,
   ForwardedRef,
-  forwardRef,
   InputHTMLAttributes,
   ReactNode,
-} from "react";
+} from 'react';
 
-import { Text } from "../text";
+import { Text } from '../text';
 
 export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
@@ -24,28 +24,28 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, disabled, readOnly, children, ...props }, ref) => (
     <label
       className={cn(
-        "inline-flex items-baseline gap-2",
-        disabled || readOnly ? "cursor-default" : "pointer",
-        className
+        'inline-flex items-baseline gap-2',
+        disabled || readOnly ? 'cursor-default' : 'pointer',
+        className,
       )}
     >
-      <span className={children ? "py-1" : ""}>
+      <span className={children ? 'py-1' : ''}>
         <input
           {...props}
           ref={ref}
-          className="checkbox-input"
+          className='checkbox-input'
           disabled={disabled}
           readOnly={readOnly}
-          type="checkbox"
+          type='checkbox'
         />
       </span>
       {children && (
-        <Text as="span" className="flex-1">
+        <Text as='span' className='flex-1'>
           {children}
         </Text>
       )}
     </label>
-  )
+  ),
 );
 
-Checkbox.displayName = "Checkbox";
+Checkbox.displayName = 'Checkbox';

@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import cn from "classnames";
-import {
-  forwardRef,
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type {
   HTMLAttributes,
   KeyboardEvent,
   MouseEvent,
   MouseEventHandler,
   ReactNode,
-} from "react";
-import { BiX } from "react-icons/bi";
+} from 'react';
+import { BiX } from 'react-icons/bi';
 
-import { Icon } from "../icon";
+import { Icon } from '../icon';
 
-export type TagSize = "sm" | "md";
+export type TagSize = 'sm' | 'md';
 
 export type TagVariant =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "info"
-  | "success"
-  | "warning"
-  | "danger"
-  | "ghost";
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'ghost';
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   disabled?: boolean;
@@ -38,59 +38,59 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 
 // Base styles that are always applied
 const baseStyles = [
-  "inline-flex items-center justify-center",
-  "max-w-full",
-  "border",
-  "gap-1",
-  "px-1.5",
-  "overflow-hidden",
-  "transition-all",
+  'inline-flex items-center justify-center',
+  'max-w-full',
+  'border',
+  'gap-1',
+  'px-1.5',
+  'overflow-hidden',
+  'transition-all',
 ];
 
 // Size styles
 const sizeStyles = {
-  sm: "h-4",
-  md: "h-6",
+  sm: 'h-4',
+  md: 'h-6',
 };
 
 // Variant styles
 const variantStyles = {
-  primary: ["border-primary-600/30", "text-primary-800", "bg-primary-600/10"],
+  primary: ['border-primary-600/30', 'text-primary-800', 'bg-primary-600/10'],
   secondary: [
-    "border-secondary-600/30",
-    "text-secondary-800",
-    "bg-secondary-600/10",
+    'border-secondary-600/30',
+    'text-secondary-800',
+    'bg-secondary-600/10',
   ],
-  tertiary: ["border-neutral-300", "text-neutral-800", "bg-neutral-50"],
-  info: ["border-info-600/30", "text-info-800", "bg-info-600/10"],
-  success: ["border-success-600/30", "text-success-800", "bg-success-600/10"],
-  warning: ["border-warning-600/30", "text-warning-800", "bg-warning-600/10"],
-  danger: ["border-danger-600/30", "text-danger-800", "bg-danger-600/10"],
-  ghost: ["border-white/40", "text-white", "bg-white/20"],
+  tertiary: ['border-neutral-300', 'text-neutral-800', 'bg-neutral-50'],
+  info: ['border-info-600/30', 'text-info-800', 'bg-info-600/10'],
+  success: ['border-success-600/30', 'text-success-800', 'bg-success-600/10'],
+  warning: ['border-warning-600/30', 'text-warning-800', 'bg-warning-600/10'],
+  danger: ['border-danger-600/30', 'text-danger-800', 'bg-danger-600/10'],
+  ghost: ['border-white/40', 'text-white', 'bg-white/20'],
 };
 
-const interactiveStyles = ["cursor-pointer"];
+const interactiveStyles = ['cursor-pointer'];
 
 const interactiveVariantStyles = {
-  primary: ["hover:bg-primary-600/20", "active:bg-primary-600/30"],
-  secondary: ["hover:bg-secondary-600/20", "active:bg-secondary-600/30"],
-  tertiary: ["hover:bg-black/10", "active:bg-black/20"],
-  info: ["hover:bg-info-600/20", "active:bg-info-600/30"],
-  success: ["hover:bg-success-600/20", "active:bg-success-600/30"],
-  warning: ["hover:bg-warning-600/20", "active:bg-warning-600/30"],
-  danger: ["hover:bg-danger-600/20", "active:bg-danger-600/30"],
-  ghost: ["hover:bg-white/30", "active:bg-white/40"],
+  primary: ['hover:bg-primary-600/20', 'active:bg-primary-600/30'],
+  secondary: ['hover:bg-secondary-600/20', 'active:bg-secondary-600/30'],
+  tertiary: ['hover:bg-black/10', 'active:bg-black/20'],
+  info: ['hover:bg-info-600/20', 'active:bg-info-600/30'],
+  success: ['hover:bg-success-600/20', 'active:bg-success-600/30'],
+  warning: ['hover:bg-warning-600/20', 'active:bg-warning-600/30'],
+  danger: ['hover:bg-danger-600/20', 'active:bg-danger-600/30'],
+  ghost: ['hover:bg-white/30', 'active:bg-white/40'],
 };
 
 // Interactive styles
 
 // Label styles
 const labelStyles = [
-  "font-sans",
-  "truncate",
-  "text-caption",
-  "leading-none",
-  "-mb-0.5",
+  'font-sans',
+  'truncate',
+  'text-caption',
+  'leading-none',
+  '-mb-0.5',
 ];
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
@@ -102,16 +102,16 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       removable,
       rounded,
       role,
-      size = "md",
+      size = 'md',
       tabIndex,
-      variant = "secondary",
+      variant = 'secondary',
       onClick,
       onKeyDown,
       children,
       ...props
     },
-    ref
-  ): JSX.Element => {
+    ref,
+  ) => {
     const isInteractive = Boolean(onClick);
 
     const handleClick = (e: MouseEvent) =>
@@ -123,8 +123,8 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       }
 
       if (
-        (e.code === "Delete" && removable) ||
-        ((e.code === "Enter" || e.code === "Space") && !removable)
+        (e.code === 'Delete' && removable) ||
+        ((e.code === 'Enter' || e.code === 'Space') && !removable)
       ) {
         e.currentTarget.click();
       }
@@ -140,19 +140,19 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
           baseStyles,
           sizeStyles[size],
           variantStyles[variant],
-          disabled && "opacity-40",
-          removable && !disabled && !readOnly && "pr-1",
-          rounded ? "rounded-full" : "rounded-tag",
+          disabled && 'opacity-40',
+          removable && !disabled && !readOnly && 'pr-1',
+          rounded ? 'rounded-full' : 'rounded-tag',
           onClick &&
             !removable &&
             !disabled &&
             !readOnly && [interactiveStyles, interactiveVariantStyles[variant]],
-          removable && "cursor-default pointer-events-none",
-          className
+          removable && 'cursor-default pointer-events-none',
+          className,
         )}
-        role={isInteractive && !role ? "button" : role}
+        role={isInteractive && !role ? 'button' : role}
         tabIndex={
-          onClick && !disabled && !readOnly && typeof tabIndex === "undefined"
+          onClick && !disabled && !readOnly && typeof tabIndex === 'undefined'
             ? 0
             : tabIndex
         }
@@ -163,7 +163,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         <span
           className={cn(
             labelStyles,
-            onClick && !removable ? "cursor-inherit" : "cursor-text"
+            onClick && !removable ? 'cursor-inherit' : 'cursor-text',
           )}
         >
           {children}
@@ -171,15 +171,15 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
 
         {removable && !disabled && !readOnly && (
           <Icon
-            className="text-sm color-neutral-800 hover:opacity-60 cursor-pointer pointer-events-auto"
-            data-testid="clear-icon"
+            className='text-sm color-neutral-800 hover:opacity-60 cursor-pointer pointer-events-auto'
+            data-testid='clear-icon'
           >
             <BiX />
           </Icon>
         )}
       </span>
     );
-  }
+  },
 );
 
-Tag.displayName = "Tag";
+Tag.displayName = 'Tag';

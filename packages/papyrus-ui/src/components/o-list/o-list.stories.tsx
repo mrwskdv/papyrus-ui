@@ -1,14 +1,15 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { OList, OListProps } from "./o-list";
+import { OList } from './o-list';
+import type { OListProps } from './o-list';
 
 const meta: Meta = {
-  title: "Typography/OList",
+  title: 'Typography/OList',
   component: OList,
 };
 
-const Template: StoryFn<OListProps> = (args) => (
-  <div className="min-w-0 sm:min-w-96">
+const Template: StoryFn<OListProps> = args => (
+  <div className='min-w-0 sm:min-w-96'>
     <OList {...args}>
       <li>Item 1</li>
       <li>Item 2</li>
@@ -22,19 +23,19 @@ export const Basic = Template.bind({});
 export const SmallText = Template.bind({});
 
 SmallText.args = {
-  size: "sm",
+  size: 'sm',
 };
 
 export const PrimaryFont = Template.bind({});
 
 PrimaryFont.args = {
-  fontVariant: "primary",
+  fontVariant: 'primary',
 };
 
 export const SecondaryFont = Template.bind({});
 
 SecondaryFont.args = {
-  fontVariant: "secondary",
+  fontVariant: 'secondary',
 };
 
 export const BoldText = Template.bind({});

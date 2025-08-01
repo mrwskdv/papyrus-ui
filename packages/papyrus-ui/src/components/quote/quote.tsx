@@ -1,18 +1,20 @@
-import cn from "classnames";
-import { forwardRef, HTMLAttributes } from "react";
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
 
-import { Text, TextSize, TextFontVariant } from "../text";
+import { Text } from '../text';
+import type { TextSize, TextFontVariant } from '../text';
 
-export type QuoteVariant = "primary" | "secondary" | "tertiary";
+export type QuoteVariant = 'primary' | 'secondary' | 'tertiary';
 
 const lineVariantClasses = {
-  primary: "bg-primary-500",
-  secondary: "bg-secondary-500",
-  tertiary: "bg-neutral-400",
+  primary: 'bg-primary-500',
+  secondary: 'bg-secondary-500',
+  tertiary: 'bg-neutral-400',
 };
 
 export interface QuoteProps
-  extends Omit<HTMLAttributes<HTMLQuoteElement>, "color" | "size"> {
+  extends Omit<HTMLAttributes<HTMLQuoteElement>, 'color' | 'size'> {
   /**
    * Sets the variant of the text inside the quote.
    *
@@ -36,22 +38,22 @@ export interface QuoteProps
 }
 
 export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>(
-  ({ className, variant = "secondary", children, ...props }, ref) => (
+  ({ className, variant = 'secondary', children, ...props }, ref) => (
     <Text
       {...props}
       ref={ref}
-      as="blockquote"
-      className={cn("relative ps-4", className)}
+      as='blockquote'
+      className={cn('relative ps-4', className)}
     >
       {children}
       <span
         className={cn(
-          "absolute top-0 bottom-0 left-0 block w-1 rounded-full",
-          lineVariantClasses[variant]
+          'absolute top-0 bottom-0 left-0 block w-1 rounded-full',
+          lineVariantClasses[variant],
         )}
       />
     </Text>
-  )
+  ),
 );
 
-Quote.displayName = "Quote";
+Quote.displayName = 'Quote';

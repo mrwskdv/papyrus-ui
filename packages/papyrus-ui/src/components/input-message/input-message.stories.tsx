@@ -1,17 +1,16 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { InputMessage, InputMessageProps } from "./input-message";
+import { InputMessage } from './input-message';
+import type { InputMessageProps } from './input-message';
 
 const meta: Meta = {
-  title: "Inputs/InputMessage",
+  title: 'Inputs/InputMessage',
   args: {
-    children: "This is an input message",
+    children: 'This is an input message',
   },
 };
 
-const Template: StoryFn<InputMessageProps> = (args) => (
-  <InputMessage {...args} />
-);
+const Template: StoryFn<InputMessageProps> = args => <InputMessage {...args} />;
 
 export const Basic = Template.bind({});
 
@@ -19,7 +18,7 @@ export const Invalid = Template.bind({});
 
 Invalid.args = {
   invalid: true,
-  children: "This is an invalid message",
+  children: 'This is an invalid message',
 };
 
 export default meta;

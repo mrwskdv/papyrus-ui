@@ -1,15 +1,9 @@
-"use client";
+'use client';
 
-import {
-  cloneElement,
-  FC,
-  HTMLProps,
-  isValidElement,
-  ReactElement,
-  useContext,
-} from "react";
+import { cloneElement, isValidElement, useContext } from 'react';
+import type { FC, HTMLProps, ReactElement } from 'react';
 
-import { PopoverContext } from "../popover.context";
+import { PopoverContext } from '../popover.context';
 
 export interface DialogTriggerProps {
   children: ReactElement;
@@ -20,7 +14,9 @@ export const PopoverTrigger: FC<DialogTriggerProps> = ({ children }) => {
 
   if (isValidElement<HTMLProps<Element>>(children)) {
     return cloneElement(children, {
-      ref: refs.setReference,
+      ref: node => {
+        refs.setReference(node);
+      },
       ...getReferenceProps(),
     });
   }

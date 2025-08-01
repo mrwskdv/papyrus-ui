@@ -1,17 +1,18 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { InputSkeleton, InputSkeletonProps } from "./input-skeleton";
+import { InputSkeleton } from './input-skeleton';
+import type { InputSkeletonProps } from './input-skeleton';
 
 const meta: Meta<InputSkeletonProps> = {
-  title: "Feedback/Skeleton/InputSkeleton",
+  title: 'Feedback/Skeleton/InputSkeleton',
   component: InputSkeleton,
   args: {
-    size: "md",
+    size: 'md',
   },
 };
 
-const Template: StoryFn<InputSkeletonProps> = (args) => (
-  <div className="w-96">
+const Template: StoryFn<InputSkeletonProps> = args => (
+  <div className='w-96'>
     <InputSkeleton {...args} />
   </div>
 );
@@ -21,13 +22,13 @@ export const Basic = Template.bind({});
 export const SizeSm = Template.bind({});
 
 SizeSm.args = {
-  size: "sm",
+  size: 'sm',
 };
 
 export const SizeLg = Template.bind({});
 
 SizeLg.args = {
-  size: "lg",
+  size: 'lg',
 };
 
 export default meta;

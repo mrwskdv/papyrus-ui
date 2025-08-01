@@ -1,21 +1,19 @@
-import cn from "classnames";
+import cn from 'classnames';
 import {
-  ChangeEvent,
   Children,
   cloneElement,
-  FocusEventHandler,
   forwardRef,
   isValidElement,
-  ReactNode,
   useEffect,
   useState,
-} from "react";
+} from 'react';
+import type { ChangeEvent, FocusEventHandler, ReactNode } from 'react';
 
-import { useId } from "../../utils/use-id";
-import { InputGroup } from "../input-group";
-import { RadioProps } from "../radio";
+import { useId } from '../../utils/use-id';
+import { InputGroup } from '../input-group';
+import type { RadioProps } from '../radio';
 
-export type RadioGroupDirection = "row" | "column";
+export type RadioGroupDirection = 'row' | 'column';
 
 export interface RadioGroupProps {
   /**
@@ -125,7 +123,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       className,
       defaultValue,
       description,
-      direction = "row",
+      direction = 'row',
       disabled = false,
       invalid = false,
       label,
@@ -138,13 +136,13 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       onFocus,
       children,
     },
-    ref
+    ref,
   ) => {
     const [valueState, setValueState] = useState(() => value ?? defaultValue);
     const labelId = useId();
 
     useEffect(() => {
-      if (typeof value !== "undefined") {
+      if (typeof value !== 'undefined') {
         setValueState(value);
       }
     }, [value]);
@@ -171,11 +169,11 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
         <div
           aria-labelledby={labelId}
           className={cn(
-            "flex flex-wrap gap-x-6 gap-y-2",
-            direction === "row" ? "flex-row" : "flex-col",
-            block ? "flex" : "inline-flex"
+            'flex flex-wrap gap-x-6 gap-y-2',
+            direction === 'row' ? 'flex-row' : 'flex-col',
+            block ? 'flex' : 'inline-flex',
           )}
-          role="group"
+          role='group'
         >
           {Children.map(children, (child, idx) =>
             isValidElement<RadioProps>(child)
@@ -184,8 +182,8 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                   name,
                   checked: child.props.value === valueState,
                   className: cn(
-                    block ? "flex-1" : "flex-none",
-                    child.props.className
+                    block ? 'flex-1' : 'flex-none',
+                    child.props.className,
                   ),
                   disabled: disabled || child.props.disabled,
                   readOnly: readOnly || child.props.readOnly,
@@ -193,12 +191,12 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                   onFocus,
                   onBlur,
                 })
-              : child
+              : child,
           )}
         </div>
       </InputGroup>
     );
-  }
+  },
 );
 
-RadioGroup.displayName = "RadioGroup";
+RadioGroup.displayName = 'RadioGroup';

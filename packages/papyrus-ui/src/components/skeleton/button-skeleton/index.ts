@@ -1,1 +1,1 @@
-export * from "./button-skeleton";
+export * from './button-skeleton';

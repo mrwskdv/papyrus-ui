@@ -1,8 +1,9 @@
-import { OffsetOptions, Placement } from "@floating-ui/react";
-import { FC, ReactElement, ReactNode } from "react";
+import type { OffsetOptions, Placement } from '@floating-ui/react';
+import type { FC, ReactElement, ReactNode } from 'react';
 
-import { Popover, PopoverTrigger } from "../popover";
-import { Text } from "../text";
+import { Popover } from '../popover';
+import type { PopoverTrigger } from '../popover';
+import { Text } from '../text';
 
 export interface TooltipProps {
   /**
@@ -52,7 +53,7 @@ export interface TooltipProps {
    *
    * @default ['focus', 'hover']
    */
-  trigger?: PopoverTrigger | Array<PopoverTrigger>;
+  trigger?: PopoverTrigger | PopoverTrigger[];
 
   /**
    * Callback function that is triggered when the tooltip's visibility changes.
@@ -77,12 +78,12 @@ const DEFAULT_OFFSET = {
   alignAxis: 4,
 };
 
-const DEFAULT_TRIGGER: PopoverTrigger[] = ["focus", "hover"];
+const DEFAULT_TRIGGER: PopoverTrigger[] = ['focus', 'hover'];
 
 export const Tooltip: FC<TooltipProps> = ({
   offset = DEFAULT_OFFSET,
   padding = 4,
-  placement = "top",
+  placement = 'top',
   title,
   trigger = DEFAULT_TRIGGER,
   children,
@@ -95,16 +96,16 @@ export const Tooltip: FC<TooltipProps> = ({
     offset={offset}
     overflowPadding={padding}
     placement={placement}
-    role="tooltip"
+    role='tooltip'
     trigger={trigger}
   >
     <Popover.Trigger>{children}</Popover.Trigger>
-    <Popover.Content className="min-h-7 max-w-80 rounded-md bg-black/80 px-2 py-1 shadow-md">
-      <Text as="div" className="text-white" size="sm">
+    <Popover.Content className='min-h-7 max-w-80 rounded-md bg-black/80 px-2 py-1 shadow-md'>
+      <Text as='div' className='text-white' size='sm'>
         {title}
       </Text>
       <Popover.Arrow
-        className="fill-black/80"
+        className='fill-black/80'
         height={ARROW_HEIGHT}
         width={ARROW_WIDTH}
       />

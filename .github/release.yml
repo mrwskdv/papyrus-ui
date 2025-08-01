@@ -1,34 +1,34 @@
 changelog:
   exclude:
     labels:
-      - "Type: Meta"
-      - "Type: Question"
-      - "Type: Release"
+      - 'Type: Meta'
+      - 'Type: Question'
+      - 'Type: Release'
 
   categories:
     - title: 🛡️ Security Fixes
-      labels: ["Type: Security"]
+      labels: ['Type: Security']
     - title: 💥 Breaking Changes
-      labels: ["Type: Breaking Change"]
+      labels: ['Type: Breaking Change']
     - title: ✨ Features
-      labels: ["Type: Feature"]
+      labels: ['Type: Feature']
     - title: 🐛 Bug Fixes
-      labels: ["Type: Bug"]
+      labels: ['Type: Bug']
     - title: 🛠️ Build Optimisations
-      labels: ["Type: Build"]
+      labels: ['Type: Build']
     - title: ⚡ Performance Optimisations
-      labels: ["Type: Performance"]
+      labels: ['Type: Performance']
     - title: 💅 Style Changes
-      labels: ["Type: Style"]
+      labels: ['Type: Style']
     - title: 📚 Documentation
-      labels: ["Type: Documentation"]
+      labels: ['Type: Documentation']
     - title: 🧹 Refactoring
-      labels: ["Type: Refactoring"]
+      labels: ['Type: Refactoring']
     - title: 🧪 Testing
-      labels: ["Type: Testing"]
+      labels: ['Type: Testing']
     - title: 🏗️ CI
-      labels: ["Type: CI"]
+      labels: ['Type: CI']
     - title: 📦 Dependency Updates
-      labels: ["Type: Dependencies", "dependencies"]
+      labels: ['Type: Dependencies', 'dependencies']
     - title: Other Changes
-      labels: ["*"]
+      labels: ['*']

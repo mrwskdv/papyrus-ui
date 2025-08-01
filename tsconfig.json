@@ -9,19 +9,18 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["dom", "esnext"],
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
-    "noEmitOnError": true,
+    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "pretty": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "strict": true,
-    "target": "es6"
+    "strict": true
   },
-  "include": ["**/*"],
+  "include": ["**/*", ".storybook/**/*"],
   "exclude": ["node_modules", "**/node_modules/**/*", "**/dist/**/*"],
   "typeRoots": ["./global.d.ts"]
 }

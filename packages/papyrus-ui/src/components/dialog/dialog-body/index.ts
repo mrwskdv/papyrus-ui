@@ -1,1 +1,1 @@
-export * from "./dialog-body";
+export * from './dialog-body';

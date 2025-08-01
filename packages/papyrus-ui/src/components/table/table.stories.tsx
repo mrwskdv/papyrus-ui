@@ -1,16 +1,17 @@
-import { StoryFn } from "@storybook/react";
-import cn from "classnames";
-import { capitalize } from "lodash";
-import { Fragment } from "react";
+import type { StoryFn } from '@storybook/react';
+import cn from 'classnames';
+import { capitalize } from 'lodash';
+import { Fragment } from 'react';
 
-import { Heading } from "../heading";
+import { Heading } from '../heading';
 
-import { Table, TableProps, TableSize } from "./table";
+import { Table } from './table';
+import type { TableProps, TableSize } from './table';
 
-const sizes: TableSize[] = ["sm", "md"];
+const sizes: TableSize[] = ['sm', 'md'];
 
 export default {
-  title: "Data Display/Table",
+  title: 'Data Display/Table',
   component: Table,
   args: {
     children: (
@@ -39,15 +40,15 @@ export default {
   },
 };
 
-const Template: StoryFn<TableProps> = (args) => <Table {...args} />;
+const Template: StoryFn<TableProps> = args => <Table {...args} />;
 
 export const Basic = Template.bind({});
 
-export const Sizes: StoryFn<TableProps> = (args) => (
+export const Sizes: StoryFn<TableProps> = args => (
   <>
     {sizes.map((size, i) => (
       <Fragment key={i}>
-        <Heading className={cn("mb-3", i > 0 ? "mt-6" : "mt-0")} level={3}>
+        <Heading className={cn('mb-3', i > 0 ? 'mt-6' : 'mt-0')} level={3}>
           {capitalize(size)}
         </Heading>
 

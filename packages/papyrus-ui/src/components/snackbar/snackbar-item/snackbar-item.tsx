@@ -1,43 +1,39 @@
-"use client";
+'use client';
 
-import cn from "classnames";
-import {
+import cn from 'classnames';
+import { forwardRef, useCallback, useContext, useEffect, useRef } from 'react';
+import type {
   ComponentType,
-  forwardRef,
   HTMLAttributes,
   MouseEvent,
   ReactElement,
   ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
-import { IconBaseProps } from "react-icons";
+} from 'react';
+import type { IconBaseProps } from 'react-icons';
 import {
   BiCheckCircle,
   BiError,
   BiErrorCircle,
   BiInfoCircle,
   BiX,
-} from "react-icons/bi";
-import { Transition } from "react-transition-group";
+} from 'react-icons/bi';
+import { Transition } from 'react-transition-group';
 
-import { useTimeout } from "../../../utils/use-timeout";
-import { Button } from "../../button";
-import { Heading } from "../../heading";
-import { Icon } from "../../icon";
-import { IconButton } from "../../icon-button";
-import { Text } from "../../text";
-import { SnackbarContext } from "../snackbar.context";
+import { useTimeout } from '../../../utils/use-timeout';
+import { Button } from '../../button';
+import { Heading } from '../../heading';
+import { Icon } from '../../icon';
+import { IconButton } from '../../icon-button';
+import { Text } from '../../text';
+import { SnackbarContext } from '../snackbar.context';
 
 export type SnackbarItemVariant =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "danger"
-  | "warning"
-  | "success";
+  | 'primary'
+  | 'secondary'
+  | 'info'
+  | 'danger'
+  | 'warning'
+  | 'success';
 
 export interface SnackbarItemProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -115,30 +111,30 @@ const iconByVariant: Record<
 };
 
 const rootVariantClasses = {
-  primary: "bg-secondary-700",
-  secondary: "bg-black/80",
-  info: "bg-info-700",
-  success: "bg-success-700",
-  warning: "bg-warning-700",
-  danger: "bg-danger-700",
+  primary: 'bg-secondary-700',
+  secondary: 'bg-black/80',
+  info: 'bg-info-700',
+  success: 'bg-success-700',
+  warning: 'bg-warning-700',
+  danger: 'bg-danger-700',
 };
 
 const rootPlacementClasses = {
-  top: "snackbar-item-top",
-  "top-start": "snackbar-item-top-start",
-  "top-end": "snackbar-item-top-end",
-  bottom: "snackbar-item-bottom",
-  "bottom-start": "snackbar-item-bottom-start",
-  "bottom-end": "snackbar-item-bottom-end",
+  top: 'snackbar-item-top',
+  'top-start': 'snackbar-item-top-start',
+  'top-end': 'snackbar-item-top-end',
+  bottom: 'snackbar-item-bottom',
+  'bottom-start': 'snackbar-item-bottom-start',
+  'bottom-end': 'snackbar-item-bottom-end',
 };
 
 const rootVisiblePlacementClasses = {
-  top: "snackbar-item-visible-top",
-  "top-start": "snackbar-item-visible-top-start",
-  "top-end": "snackbar-item-visible-top-end",
-  bottom: "snackbar-item-visible-bottom",
-  "bottom-start": "snackbar-item-visible-bottom-start",
-  "bottom-end": "snackbar-item-visible-bottom-end",
+  top: 'snackbar-item-visible-top',
+  'top-start': 'snackbar-item-visible-top-start',
+  'top-end': 'snackbar-item-visible-top-end',
+  bottom: 'snackbar-item-visible-bottom',
+  'bottom-start': 'snackbar-item-visible-bottom-start',
+  'bottom-end': 'snackbar-item-visible-bottom-end',
 };
 
 export const SnackbarItem = forwardRef<
@@ -151,12 +147,12 @@ export const SnackbarItem = forwardRef<
       autoHideDuration,
       children,
       className,
-      dismissLabel = "Dismiss",
+      dismissLabel = 'Dismiss',
       icon,
       in: visible = true,
       message,
-      role = "alert",
-      variant = "secondary",
+      role = 'alert',
+      variant = 'secondary',
       onActionClick,
       onDismiss,
       onHide,
@@ -164,7 +160,7 @@ export const SnackbarItem = forwardRef<
       onMouseLeave,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { placement } = useContext(SnackbarContext);
     const { setTimeout, clearTimeout } = useTimeout();
@@ -209,35 +205,35 @@ export const SnackbarItem = forwardRef<
             {...childProps}
             ref={nodeRef}
             className={cn(
-              "snackbar-item",
+              'snackbar-item',
               rootPlacementClasses[placement],
-              status === "entered" && rootVisiblePlacementClasses[placement],
+              status === 'entered' && rootVisiblePlacementClasses[placement],
               rootVariantClasses[variant],
-              className
+              className,
             )}
             role={role}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="flex items-center space-x-3">
+            <div className='flex items-center space-x-3'>
               {icon ?? (
-                <Icon className="text-3xl" color="white">
+                <Icon className='text-3xl' color='white'>
                   <IconComponent />
                 </Icon>
               )}
 
-              <div className="flex-1 overflow-hidden">
+              <div className='flex-1 overflow-hidden'>
                 {children ? (
                   <>
-                    <Heading as="div" className="mb-1 truncate" level={5}>
+                    <Heading as='div' className='mb-1 truncate' level={5}>
                       {message}
                     </Heading>
-                    <Text as="div" className="mt-1 truncate" size="sm">
+                    <Text as='div' className='mt-1 truncate' size='sm'>
                       {children}
                     </Text>
                   </>
                 ) : (
-                  <Text as="div" className="truncate">
+                  <Text as='div' className='truncate'>
                     {message}
                   </Text>
                 )}
@@ -245,10 +241,10 @@ export const SnackbarItem = forwardRef<
 
               {actionLabel && onActionClick && (
                 <Button
-                  data-testid="action"
+                  data-testid='action'
                   rounded
-                  size="sm"
-                  variant="ghost"
+                  size='sm'
+                  variant='ghost'
                   onClick={onActionClick}
                 >
                   {actionLabel}
@@ -259,8 +255,8 @@ export const SnackbarItem = forwardRef<
                 <IconButton
                   aria-label={dismissLabel}
                   rounded
-                  size="sm"
-                  variant="ghost"
+                  size='sm'
+                  variant='ghost'
                   onClick={onDismiss}
                 >
                   <BiX />
@@ -271,7 +267,7 @@ export const SnackbarItem = forwardRef<
         )}
       </Transition>
     );
-  }
+  },
 );
 
-SnackbarItem.displayName = "SnackbarItem";
+SnackbarItem.displayName = 'SnackbarItem';

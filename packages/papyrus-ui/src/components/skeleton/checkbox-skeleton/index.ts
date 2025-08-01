@@ -1,1 +1,1 @@
-export * from "./checkbox-skeleton";
+export * from './checkbox-skeleton';

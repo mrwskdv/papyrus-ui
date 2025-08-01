@@ -1,24 +1,24 @@
-import cn from "classnames";
+import cn from 'classnames';
 import {
   Children,
   cloneElement,
-  FC,
-  HTMLAttributes,
   isValidElement,
-  KeyboardEvent,
   useEffect,
   useMemo,
   useRef,
   useState,
-} from "react";
+} from 'react';
+import type { FC, HTMLAttributes, KeyboardEvent } from 'react';
 
-import { Maybe } from "../../types";
-import { getFirstItem, getLastItem } from "../../utils/list-navigation";
+import type { Maybe } from '../../types';
+import { getFirstItem, getLastItem } from '../../utils/list-navigation';
 
-import { MenuItem, MenuItemProps } from "./menu-item";
-import { MenuContext, MenuContextType } from "./menu.context";
-import { MenuSize, MenuVariant } from "./menu.types";
-import { Submenu } from "./submenu";
+import { MenuItem } from './menu-item';
+import type { MenuItemProps } from './menu-item';
+import { MenuContext } from './menu.context';
+import type { MenuContextType } from './menu.context';
+import type { MenuSize, MenuVariant } from './menu.types';
+import { Submenu } from './submenu';
 
 export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
   collapsed?: boolean;
@@ -29,8 +29,8 @@ export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
 
 const MenuComponent: FC<MenuProps> = ({
   collapsed = false,
-  size = "md",
-  variant = "secondary",
+  size = 'md',
+  variant = 'secondary',
   children,
   className,
   onCollapsedChange,
@@ -51,7 +51,7 @@ const MenuComponent: FC<MenuProps> = ({
       setActiveIndex,
       onCollapsedChange,
     }),
-    [activeIndex, collapsed, onCollapsedChange, size, variant]
+    [activeIndex, collapsed, onCollapsedChange, size, variant],
   );
 
   useEffect(() => {
@@ -61,22 +61,22 @@ const MenuComponent: FC<MenuProps> = ({
       }
     }
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
-    if (e.key === "ArrowUp") {
+    if (e.key === 'ArrowUp') {
       e.preventDefault();
       e.stopPropagation();
       const item = getLastItem(menuRef, true);
       item?.focus();
     }
 
-    if (e.key === "ArrowDown") {
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
       e.stopPropagation();
       const item = getFirstItem(menuRef, true);
@@ -92,17 +92,17 @@ const MenuComponent: FC<MenuProps> = ({
         {...props}
         ref={menuRef}
         className={cn(
-          "flex flex-col gap-1 focus:outline-none focus-visible:ring",
-          className
+          'flex flex-col gap-1 focus:outline-none focus-visible:ring',
+          className,
         )}
-        role="menu"
+        role='menu'
         tabIndex={activeIndex == null ? 0 : -1}
         onKeyDown={handleKeyDown}
       >
         {Children.map(children, (child, i) =>
           isValidElement<MenuItemProps>(child)
             ? cloneElement(child, { index: i })
-            : null
+            : null,
         )}
       </ul>
     </MenuContext.Provider>

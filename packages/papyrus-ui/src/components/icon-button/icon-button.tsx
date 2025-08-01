@@ -1,32 +1,30 @@
-import cn from "classnames";
-import {
+import cn from 'classnames';
+import { cloneElement, forwardRef, isValidElement } from 'react';
+import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
-  cloneElement,
   ElementType,
-  forwardRef,
-  isValidElement,
   ReactElement,
-} from "react";
+} from 'react';
 
-import { AvatarProps } from "../avatar";
-import { Icon } from "../icon/icon";
+import type { AvatarProps } from '../avatar';
+import { Icon } from '../icon/icon';
 
-export type IconButtonSize = "sm" | "md" | "lg";
+export type IconButtonSize = 'sm' | 'md' | 'lg';
 
 export type IconButtonVariant =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "plain"
-  | "info"
-  | "success"
-  | "warning"
-  | "danger"
-  | "ghost";
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'plain'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'ghost';
 
 export interface IconButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLElement>, "type">,
+  extends Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>,
     AnchorHTMLAttributes<HTMLElement> {
   /**
    * Specifies the element type to be used for rendering the icon-button.
@@ -64,110 +62,110 @@ export interface IconButtonProps
   children?: ReactElement;
 }
 
-const avatarSize: Record<IconButtonSize, AvatarProps["size"]> = {
-  sm: "xs",
-  md: "sm",
-  lg: "md",
+const avatarSize: Record<IconButtonSize, AvatarProps['size']> = {
+  sm: 'xs',
+  md: 'sm',
+  lg: 'md',
 };
 
 const sizeMap: Record<IconButtonSize, string> = {
-  sm: "w-7 h-7",
-  md: "w-9 h-9",
-  lg: "w-12 h-12",
+  sm: 'w-7 h-7',
+  md: 'w-9 h-9',
+  lg: 'w-12 h-12',
 };
 
 const iconSizeMap: Record<IconButtonSize, string> = {
-  sm: "text-base",
-  md: "text-xl",
-  lg: "text-2xl",
+  sm: 'text-base',
+  md: 'text-xl',
+  lg: 'text-2xl',
 };
 
 // Base styles that are always applied
 const baseStyles = [
-  "inline-flex items-center justify-center",
-  "transition-colors",
-  "focus-visible:ring",
+  'inline-flex items-center justify-center',
+  'transition-colors',
+  'focus-visible:ring',
 ];
 
 // Variant styles
 const variantStyles = {
   primary: [
-    "text-primary-600",
-    "bg-primary-600/10",
-    "hover:bg-primary-600/20",
-    "active:bg-primary-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-primary-600',
+    'bg-primary-600/10',
+    'hover:bg-primary-600/20',
+    'active:bg-primary-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   secondary: [
-    "text-secondary-600",
-    "bg-secondary-600/10",
-    "hover:bg-secondary-600/20",
-    "active:bg-secondary-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-secondary-600',
+    'bg-secondary-600/10',
+    'hover:bg-secondary-600/20',
+    'active:bg-secondary-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
-    "text-black",
-    "bg-black/10",
-    "hover:bg-black/20",
-    "active:bg-black/30",
-    "disabled:opacity-disabled disabled:bg-black/10",
+    'text-black',
+    'bg-black/10',
+    'hover:bg-black/20',
+    'active:bg-black/30',
+    'disabled:opacity-disabled disabled:bg-black/10',
   ],
   plain: [
-    "text-black",
-    "hover:bg-black/10",
-    "active:bg-black/20",
-    "disabled:opacity-disabled disabled:bg-transparent",
+    'text-black',
+    'hover:bg-black/10',
+    'active:bg-black/20',
+    'disabled:opacity-disabled disabled:bg-transparent',
   ],
   info: [
-    "text-info-600",
-    "bg-info-600/10",
-    "hover:bg-info-600/20",
-    "active:bg-info-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-info-600',
+    'bg-info-600/10',
+    'hover:bg-info-600/20',
+    'active:bg-info-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   success: [
-    "text-success-600",
-    "bg-success-600/10",
-    "hover:bg-success-600/20",
-    "active:bg-success-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-success-600',
+    'bg-success-600/10',
+    'hover:bg-success-600/20',
+    'active:bg-success-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   warning: [
-    "text-warning-600",
-    "bg-warning-600/10",
-    "hover:bg-warning-600/20",
-    "active:bg-warning-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-warning-600',
+    'bg-warning-600/10',
+    'hover:bg-warning-600/20',
+    'active:bg-warning-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   danger: [
-    "text-danger-600",
-    "bg-danger-600/10",
-    "hover:bg-danger-600/20",
-    "active:bg-danger-600/30",
-    "disabled:opacity-disabled disabled:text-black disabled:bg-black/10",
+    'text-danger-600',
+    'bg-danger-600/10',
+    'hover:bg-danger-600/20',
+    'active:bg-danger-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   ghost: [
-    "text-white",
-    "hover:bg-white/30",
-    "active:bg-white/40",
-    "disabled:opacity-disabled disabled:bg-transparent",
+    'text-white',
+    'hover:bg-white/30',
+    'active:bg-white/40',
+    'disabled:opacity-disabled disabled:bg-transparent',
   ],
 };
 
 export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
   (
     {
-      as: Element = "button",
+      as: Element = 'button',
       avatar,
       rounded,
-      size = "md",
+      size = 'md',
       type,
-      variant = "secondary",
+      variant = 'secondary',
       className,
       children,
       ...elemProps
     },
-    ref
+    ref,
   ) => (
     <Element
       {...elemProps}
@@ -176,10 +174,10 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
         baseStyles,
         sizeMap[size],
         variantStyles[variant],
-        avatar || rounded ? "rounded-full" : "rounded-input",
-        className
+        avatar || rounded ? 'rounded-full' : 'rounded-input',
+        className,
       )}
-      type={Element === "button" && type == null ? "button" : type}
+      type={Element === 'button' && type == null ? 'button' : type}
     >
       {avatar &&
         isValidElement<AvatarProps>(avatar) &&
@@ -189,7 +187,7 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
 
       {!avatar && <Icon className={cn(iconSizeMap[size])}>{children}</Icon>}
     </Element>
-  )
+  ),
 );
 
-IconButton.displayName = "IconButton";
+IconButton.displayName = 'IconButton';

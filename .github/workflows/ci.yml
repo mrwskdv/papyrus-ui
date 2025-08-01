@@ -3,12 +3,12 @@ name: Continuous Integration
 on:
   push:
     branches-ignore:
-      - "main"
-      - "release/*"
+      - 'main'
+      - 'release/*'
 
   repository_dispatch:
     types: [release-pr-created]
-    
+
   workflow_dispatch:
 
 jobs:

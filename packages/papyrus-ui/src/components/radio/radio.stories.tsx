@@ -1,20 +1,21 @@
-import { StoryFn } from "@storybook/react";
+import type { StoryFn } from '@storybook/react';
 
-import { Radio, RadioProps } from "./radio";
+import { Radio } from './radio';
+import type { RadioProps } from './radio';
 
 export default {
-  title: "Inputs/Radio",
+  title: 'Inputs/Radio',
   component: Radio,
 
   args: {
-    name: "radio",
-    value: "true",
-    id: "radio",
-    children: "Radio",
+    name: 'radio',
+    value: 'true',
+    id: 'radio',
+    children: 'Radio',
   },
 };
 
-const Template: StoryFn<RadioProps> = (args) => <Radio {...args} />;
+const Template: StoryFn<RadioProps> = args => <Radio {...args} />;
 
 export const Basic = Template.bind({});
 

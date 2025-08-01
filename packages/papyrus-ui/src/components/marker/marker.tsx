@@ -1,5 +1,6 @@
-import cn from "classnames";
-import { forwardRef, HTMLAttributes } from "react";
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
 
 export type MarkerProps = HTMLAttributes<HTMLSpanElement>;
 
@@ -9,14 +10,14 @@ export const Marker = forwardRef<HTMLSpanElement, MarkerProps>(
     <span
       ref={ref}
       className={cn(
-        "absolute inline-block w-[1em] text-center -ms-[1.5em]",
-        className
+        'absolute inline-block w-[1em] text-center -ms-[1.5em]',
+        className,
       )}
       {...props}
     >
       {children}
     </span>
-  )
+  ),
 );
 
-Marker.displayName = "Marker";
+Marker.displayName = 'Marker';

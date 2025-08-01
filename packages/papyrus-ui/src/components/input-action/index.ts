@@ -1,1 +1,1 @@
-export * from "./input-action";
+export * from './input-action';

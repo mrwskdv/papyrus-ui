@@ -6,24 +6,29 @@ import { jest } from '@jest/globals';
 
 // Mock the config loader functions before importing the main module
 const mockConfigLoaderBase = jest.fn(() => ({
-  baseConfigs: [
+  default: [
     { name: 'papyrus-ui/base', rules: {} },
     { name: 'papyrus-ui/base-1', rules: {} },
   ],
 }));
 
 const mockConfigLoaderReact = jest.fn(() => ({
-  reactConfigs: [{ name: 'papyrus-ui/react', rules: {} }],
+  default: [{ name: 'papyrus-ui/react', rules: {} }],
 }));
 
 const mockConfigLoaderTypeScript = jest.fn(() => ({
-  typescriptConfigs: [
+  default: [
     {
       name: 'papyrus-ui/typescript',
-      languageOptions: {
-        parserOptions: {
-          tsconfigRootDir: '/default/root',
-          project: './tsconfig.json',
+      settings: {
+        'import/resolver': {
+          node: {
+            project: './tsconfig.json',
+          },
+          typescript: {
+            alwaysTryTypes: true,
+            project: './tsconfig.json',
+          },
         },
       },
       rules: {},
@@ -32,19 +37,19 @@ const mockConfigLoaderTypeScript = jest.fn(() => ({
 }));
 
 const mockConfigLoaderJest = jest.fn(() => ({
-  jestConfigs: [{ name: 'papyrus-ui/jest', rules: {} }],
+  default: [{ name: 'papyrus-ui/jest', rules: {} }],
 }));
 
 const mockConfigLoaderJestTypescript = jest.fn(() => ({
-  jestTypescriptConfigs: [{ name: 'papyrus-ui/jest-typescript', rules: {} }],
+  default: [{ name: 'papyrus-ui/jest-typescript', rules: {} }],
 }));
 
 const mockConfigLoaderStorybook = jest.fn(() => ({
-  storybookConfigs: [{ name: 'papyrus-ui/storybook', rules: {} }],
+  default: [{ name: 'papyrus-ui/storybook', rules: {} }],
 }));
 
 const mockConfigLoaderNextJS = jest.fn(() => ({
-  nextjsConfigs: [{ name: 'papyrus-ui/next', rules: {} }],
+  default: [{ name: 'papyrus-ui/next', rules: {} }],
 }));
 
 // Mock the createRequire function and its return value
@@ -278,10 +283,7 @@ describe('createConfig', () => {
     it('should respect explicit typescript option', () => {
       const config = createConfig({
         typescript: true,
-        typescriptOptions: {
-          tsconfigRootDir: '/custom/root',
-          project: './custom-tsconfig.json',
-        },
+        project: './custom-tsconfig.json',
       });
 
       const configNames = config.map((c: any) => c.name);
@@ -292,10 +294,10 @@ describe('createConfig', () => {
         (c: any) => c.name === 'papyrus-ui/typescript',
       );
       expect(tsConfig).toBeDefined();
-      expect(tsConfig?.languageOptions?.parserOptions?.tsconfigRootDir).toBe(
-        '/custom/root',
+      expect(tsConfig?.settings?.['import/resolver']?.node?.project).toBe(
+        './custom-tsconfig.json',
       );
-      expect(tsConfig?.languageOptions?.parserOptions?.project).toBe(
+      expect(tsConfig?.settings?.['import/resolver']?.typescript?.project).toBe(
         './custom-tsconfig.json',
       );
     });

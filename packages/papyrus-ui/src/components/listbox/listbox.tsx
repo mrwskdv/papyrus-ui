@@ -1,8 +1,14 @@
 import cn from 'classnames';
-import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
 export interface ListboxProps extends HTMLAttributes<HTMLUListElement> {
+  /**
+   * If `true`, the listbox will be visible.
+   * Controls the opacity of the listbox.
+   *
+   * @default true
+   */
   visible?: boolean;
 }
 

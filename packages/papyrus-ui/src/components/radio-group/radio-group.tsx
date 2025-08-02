@@ -7,7 +7,12 @@ import {
   useEffect,
   useState,
 } from 'react';
-import type { ChangeEvent, FocusEventHandler, ReactNode } from 'react';
+import type {
+  ChangeEvent,
+  FocusEventHandler,
+  ReactNode,
+  RefAttributes,
+} from 'react';
 
 import { useId } from '../../utils/use-id';
 import { InputGroup } from '../input-group';
@@ -176,7 +181,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
           role='group'
         >
           {Children.map(children, (child, idx) =>
-            isValidElement<RadioProps>(child)
+            isValidElement<RadioProps & RefAttributes<HTMLInputElement>>(child)
               ? cloneElement(child, {
                   ref: idx === Children.count(children) - 1 ? ref : undefined,
                   name,

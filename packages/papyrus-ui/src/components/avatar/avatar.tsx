@@ -1,11 +1,6 @@
 import cn from 'classnames';
 import { cloneElement, forwardRef, isValidElement } from 'react';
-import type {
-  FC,
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  ReactElement,
-} from 'react';
+import type { HTMLAttributes, ImgHTMLAttributes, ReactElement } from 'react';
 
 import { Icon } from '../icon';
 import { Text } from '../text';
@@ -74,7 +69,7 @@ const iconSizeMap: Record<AvatarSize, string> = {
   '2xl': 'text-5xl',
 };
 
-export const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(
+export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
   ({ icon, placeholder, size = 'md', className, children, ...props }, ref) => (
     <span
       ref={ref}

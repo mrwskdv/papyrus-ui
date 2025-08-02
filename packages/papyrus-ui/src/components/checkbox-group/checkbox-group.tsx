@@ -11,7 +11,9 @@ import type {
   ChangeEvent,
   FocusEventHandler,
   ForwardedRef,
+  ReactElement,
   ReactNode,
+  RefAttributes,
 } from 'react';
 
 import { useId } from '../../utils/use-id';
@@ -125,6 +127,13 @@ export interface CheckboxGroupProps<T extends boolean | string[]> {
   children?: ReactNode;
 }
 
+export interface CheckboxGroupFn {
+  <T extends boolean | string[]>(
+    props: CheckboxGroupProps<T> & RefAttributes<HTMLInputElement>,
+  ): ReactElement;
+  displayName: 'CheckboxGroup';
+}
+
 export const CheckboxGroup = forwardRef(
   <T extends boolean | string[]>(
     {
@@ -200,7 +209,9 @@ export const CheckboxGroup = forwardRef(
           )}
         >
           {Children.map(children, (child, idx) =>
-            isValidElement<CheckboxProps>(child)
+            isValidElement<CheckboxProps & RefAttributes<HTMLInputElement>>(
+              child,
+            )
               ? cloneElement(child, {
                   ref: idx === Children.count(children) - 1 ? ref : undefined,
                   name,
@@ -223,6 +234,6 @@ export const CheckboxGroup = forwardRef(
       </InputGroup>
     );
   },
-);
+) as CheckboxGroupFn;
 
 CheckboxGroup.displayName = 'CheckboxGroup';

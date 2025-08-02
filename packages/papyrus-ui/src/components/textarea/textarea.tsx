@@ -3,7 +3,6 @@
 import { forwardRef, isValidElement } from 'react';
 import type {
   ChangeEventHandler,
-  FC,
   ReactElement,
   ReactNode,
   TextareaHTMLAttributes,
@@ -92,10 +91,7 @@ export interface TextareaProps
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 }
 
-export const Textarea: FC<TextareaProps> = forwardRef<
-  HTMLTextAreaElement,
-  TextareaProps
->(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       disabled,
@@ -140,7 +136,7 @@ export const Textarea: FC<TextareaProps> = forwardRef<
             readOnly={readOnly}
           />
 
-          {isValidElement(endIcon) && (
+          {isValidElement<IconBaseProps>(endIcon) && (
             <InputAction className='ms-1'>{endIcon}</InputAction>
           )}
         </InputBox>

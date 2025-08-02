@@ -7,8 +7,26 @@ export type HeadingVariant = 'primary' | 'secondary';
 
 export interface HeadingProps
   extends Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'size'> {
+  /**
+   * Specifies the HTML element type to render the heading as.
+   * Should be one of h1-h6 elements for semantic correctness.
+   *
+   * @default 'h1'
+   */
   as?: ElementType;
+
+  /**
+   * The heading level (1-6) to use when no 'as' prop is provided.
+   *
+   * @default 1
+   */
   level?: HeadingLevel;
+
+  /**
+   * Sets the font family variant for the heading.
+   *
+   * @default 'primary'
+   */
   fontVariant?: HeadingVariant;
 }
 

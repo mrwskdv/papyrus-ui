@@ -1,11 +1,6 @@
 import cn from 'classnames';
 import { forwardRef } from 'react';
-import type {
-  ChangeEventHandler,
-  ForwardedRef,
-  InputHTMLAttributes,
-  ReactNode,
-} from 'react';
+import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
 
 import { Text } from '../text';
 
@@ -14,7 +9,6 @@ export interface RadioProps
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  ref?: ForwardedRef<HTMLInputElement>;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;

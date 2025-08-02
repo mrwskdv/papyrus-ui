@@ -4,6 +4,9 @@ import type { HTMLAttributes, ReactNode } from 'react';
 
 export interface IconProps
   extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
+  /**
+   * The icon content to be rendered.
+   */
   children: ReactNode;
 }
 

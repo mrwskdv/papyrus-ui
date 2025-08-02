@@ -34,7 +34,7 @@ import type {
   MouseEvent,
   ReactElement,
   ReactNode,
-  Ref,
+  RefAttributes,
 } from 'react';
 import type { IconBaseProps } from 'react-icons';
 import { BiCheck, BiX } from 'react-icons/bi';
@@ -168,11 +168,6 @@ export interface AutocompleteProps<
   readOnly?: boolean;
 
   /**
-   * Ref passed to the input element.
-   */
-  ref?: Ref<HTMLInputElement>;
-
-  /**
    * The amount of time to wait after the user stops typing before triggering
    * a search.
    */
@@ -223,7 +218,7 @@ export interface AutocompleteProps<
 
 interface AutocompleteFn {
   <Value = unknown, IsMulti extends boolean = false>(
-    props: AutocompleteProps<Value, IsMulti>,
+    props: AutocompleteProps<Value, IsMulti> & RefAttributes<HTMLInputElement>,
   ): ReactElement;
   displayName: 'Autocomplete';
 }

@@ -9,6 +9,7 @@
   "main": "./dist/es/index.js",
   "module": "./dist/es/index.js",
   "types": "./dist/types/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

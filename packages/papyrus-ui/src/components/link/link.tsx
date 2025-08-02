@@ -22,7 +22,7 @@ export const Link = forwardRef<HTMLElement, LinkProps>(
       className={cn(
         !disabled
           ? 'text-secondary-600 transition-colors cursor-pointer hover:text-secondary-400'
-          : 'text-neutral-300',
+          : 'text-neutral-700 opacity-disabled',
         className,
       )}
       disabled={disabled}

@@ -108,7 +108,7 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-primary-500',
     'active:bg-primary-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   secondary: [
     'border-transparent',
@@ -117,11 +117,11 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-secondary-500',
     'active:bg-secondary-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   tertiary: [
     'border-transparent',
-    'text-black',
+    'text-neutral-700',
     'bg-black/10',
     'hover:bg-black/20',
     'active:bg-black/30',
@@ -129,7 +129,7 @@ const variantStyles = {
   ],
   plain: [
     'border-transparent',
-    'text-black',
+    'text-neutral-700',
     'hover:bg-black/10',
     'active:bg-black/20',
     'disabled:opacity-disabled disabled:bg-transparent',
@@ -141,7 +141,7 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-info-500',
     'active:bg-info-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   success: [
     'border-transparent',
@@ -150,7 +150,7 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-success-500',
     'active:bg-success-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   warning: [
     'border-transparent',
@@ -159,7 +159,7 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-warning-500',
     'active:bg-warning-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   danger: [
     'border-transparent',
@@ -168,7 +168,7 @@ const variantStyles = {
     'shadow-sm',
     'hover:bg-danger-500',
     'active:bg-danger-700',
-    'disabled:bg-neutral-200',
+    'disabled:bg-neutral-300',
   ],
   ghost: [
     'border-white/60',

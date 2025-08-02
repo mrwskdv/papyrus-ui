@@ -1,9 +1,11 @@
 {
   "name": "@papyrus-ui/code-style",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Shareable ESLint configurations for JavaScript and TypeScript projects using ESLint 9+ flat config format.",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/es/index.js",
   "module": "./dist/es/index.js",
   "types": "./dist/types/index.d.ts",

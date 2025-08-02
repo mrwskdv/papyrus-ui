@@ -6,23 +6,27 @@ const papyrusUIPlugin = plugin(props => {
   props.addComponents({
     // Input component styles
     '.input-base': {
-      '@apply font-sans text-body-md-primary block w-full bg-transparent': {},
+      '@apply font-sans text-body-md-primary text-neutral-700 block w-full bg-transparent':
+        {},
+      WebkitTextFillColor: props.theme('colors.neutral.700'),
 
       '&::placeholder': {
-        '@apply opacity-100 text-neutral-600': {},
+        '@apply text-neutral-500 opacity-100': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
 
       '&:focus-visible': {
         outline: 'none',
       },
 
-      '&:disabled': {
+      '&:disabled:not(:placeholder-shown)': {
         '@apply text-neutral-700 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 
-      '&:disabled::placeholder': {
-        '@apply opacity-disabled': {},
+      '&:disabled:placeholder-shown': {
+        '@apply text-neutral-500 opacity-disabled': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
     },
 
@@ -34,20 +38,22 @@ const papyrusUIPlugin = plugin(props => {
       MozAppearance: 'none',
 
       '&::placeholder': {
-        '@apply opacity-100 text-neutral-600': {},
+        '@apply text-neutral-500 opacity-100': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
 
       '&:focus-visible': {
         outline: 'none',
       },
 
-      '&:disabled': {
+      '&:disabled:not(:placeholder-shown)': {
         '@apply text-neutral-700 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 
-      '&:disabled::placeholder': {
-        '@apply opacity-disabled': {},
+      '&:disabled:placeholder-shown': {
+        '@apply text-neutral-500 opacity-disabled': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
     },
 
@@ -57,20 +63,22 @@ const papyrusUIPlugin = plugin(props => {
       resize: 'vertical',
 
       '&::placeholder': {
-        '@apply opacity-100 text-neutral-600': {},
+        '@apply text-neutral-500 opacity-100': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
 
       '&:focus-visible': {
         outline: 'none',
       },
 
-      '&:disabled': {
+      '&:disabled:not(:placeholder-shown)': {
         '@apply text-neutral-700 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 
-      '&:disabled::placeholder': {
-        '@apply opacity-disabled': {},
+      '&:disabled:placeholder-shown': {
+        '@apply text-neutral-500 opacity-disabled': {},
+        WebkitTextFillColor: props.theme('colors.neutral.500'),
       },
     },
 

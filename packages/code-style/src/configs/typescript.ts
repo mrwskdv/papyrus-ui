@@ -31,7 +31,12 @@ const typescriptLintRules = {
     ...typescriptPluginConfig.configs?.recommended?.rules,
     ...typescriptPluginConfig.configs?.['recommended-type-checked']?.rules,
     ...importPlugin.configs?.recommended?.rules,
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        ignoreRestSiblings: true,
+      },
+    ],
     '@typescript-eslint/no-misused-promises': [
       'error',
       { checksVoidReturn: false },

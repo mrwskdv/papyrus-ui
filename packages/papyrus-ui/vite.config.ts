@@ -1,7 +1,9 @@
 import { resolve } from 'path';
 
 import react from '@vitejs/plugin-react';
+import { preserveDirectives } from 'rollup-plugin-preserve-directives';
 import { defineConfig } from 'vite';
+import type { Plugin } from 'vite';
 import dts from 'vite-plugin-dts';
 
 import packageJson from './package.json';
@@ -49,6 +51,7 @@ export default defineConfig({
           },
         },
       ],
+      plugins: [preserveDirectives() as unknown as Plugin],
     },
     sourcemap: true,
   },

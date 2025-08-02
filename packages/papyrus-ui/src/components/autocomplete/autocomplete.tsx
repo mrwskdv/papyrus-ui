@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 
-"use client";
+'use client';
 
 import {
   autoUpdate,
@@ -14,41 +14,45 @@ import {
   FloatingFocusManager,
   useClick,
   offset,
-} from "@floating-ui/react";
-import { useDebounceCallback } from "@react-hook/debounce";
+} from '@floating-ui/react';
+import { useDebounceCallback } from '@react-hook/debounce';
 import {
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import type {
   ChangeEvent,
   FC,
   FocusEvent,
   FocusEventHandler,
   ForwardedRef,
-  forwardRef,
-  isValidElement,
   KeyboardEvent,
   MouseEvent,
   ReactElement,
   ReactNode,
-  Ref,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { IconBaseProps } from "react-icons";
-import { BiCheck, BiX } from "react-icons/bi";
-import { Transition } from "react-transition-group";
+  RefAttributes,
+} from 'react';
+import type { IconBaseProps } from 'react-icons';
+import { BiCheck, BiX } from 'react-icons/bi';
+import { Transition } from 'react-transition-group';
 
-import { Maybe } from "../../types";
-import { slug } from "../../utils/slug";
-import { useId } from "../../utils/use-id";
-import { useMergeRefs } from "../../utils/use-merge-refs";
-import { Icon } from "../icon";
-import { InputAction } from "../input-action";
-import { InputBox, InputBoxSize } from "../input-box";
-import { InputGroup } from "../input-group";
-import { Listbox } from "../listbox/listbox";
-import { OptionProps, Option } from "../option";
-import { Tag } from "../tag";
+import type { Maybe } from '../../types';
+import { slug } from '../../utils/slug';
+import { useId } from '../../utils/use-id';
+import { useMergeRefs } from '../../utils/use-merge-refs';
+import { Icon } from '../icon';
+import { InputAction } from '../input-action';
+import { InputBox } from '../input-box';
+import type { InputBoxSize } from '../input-box';
+import { InputGroup } from '../input-group';
+import { Listbox } from '../listbox/listbox';
+import { Option } from '../option';
+import type { OptionProps } from '../option';
+import { Tag } from '../tag';
 
 export interface OptionComponentProps<OptionType> extends OptionProps {
   option: OptionType;
@@ -56,12 +60,12 @@ export interface OptionComponentProps<OptionType> extends OptionProps {
 
 export type MaybeMultiValue<
   Value,
-  IsMulti extends boolean
+  IsMulti extends boolean,
 > = IsMulti extends true ? Value[] : Value | null;
 
 export interface AutocompleteProps<
   Value = unknown,
-  IsMulti extends boolean = false
+  IsMulti extends boolean = false,
 > {
   /**
    * If `true`, the input element will be isFocused when the component is mounted.
@@ -151,7 +155,7 @@ export interface AutocompleteProps<
   /**
    * Array of options to display in the dropdown list.
    */
-  options?: Maybe<ReadonlyArray<Value>>;
+  options?: Maybe<readonly Value[]>;
 
   /**
    * Placeholder text to display in input element.
@@ -162,11 +166,6 @@ export interface AutocompleteProps<
    * If `true`, the input element is read-only and can't be interacted with.
    */
   readOnly?: boolean;
-
-  /**
-   * Ref passed to the input element.
-   */
-  ref?: Ref<HTMLInputElement>;
 
   /**
    * The amount of time to wait after the user stops typing before triggering
@@ -219,14 +218,14 @@ export interface AutocompleteProps<
 
 interface AutocompleteFn {
   <Value = unknown, IsMulti extends boolean = false>(
-    props: AutocompleteProps<Value, IsMulti>
-  ): JSX.Element;
-  displayName: "Autocomplete";
+    props: AutocompleteProps<Value, IsMulti> & RefAttributes<HTMLInputElement>,
+  ): ReactElement;
+  displayName: 'Autocomplete';
 }
 
-export const LISTBOX_ID = "listbox";
+export const LISTBOX_ID = 'listbox';
 
-export const OPTION_ID = "option";
+export const OPTION_ID = 'option';
 
 const TRANSITION_TIMEOUT = {
   appear: 0,
@@ -260,17 +259,17 @@ const offsetYBySizeMap: Record<InputBoxSize, number> = {
 
 function toInputValue<Value, IsMulti extends boolean>(
   value: Maybe<MaybeMultiValue<Value, IsMulti>>,
-  getLabel: (value: Value) => string
+  getLabel: (value: Value) => string,
 ): string {
   if (value == null || Array.isArray(value)) {
-    return "";
+    return '';
   }
 
   return getLabel(value as Value);
 }
 
 function toSelectedOptions<Value, IsMulti extends boolean>(
-  value: MaybeMultiValue<Value, IsMulti> | undefined
+  value: MaybeMultiValue<Value, IsMulti> | undefined,
 ): Value[] {
   if (value == null) {
     return [];
@@ -285,16 +284,16 @@ function toSelectedOptions<Value, IsMulti extends boolean>(
 
 function toValue<Value, IsMulti extends boolean>(
   selectedOptions: Value[],
-  multiple: IsMulti
+  multiple: IsMulti,
 ): MaybeMultiValue<Value, IsMulti> {
   return (
-    multiple ? selectedOptions : selectedOptions[0] ?? null
+    multiple ? selectedOptions : (selectedOptions[0] ?? null)
   ) as MaybeMultiValue<Value, IsMulti>;
 }
 
 function toggleOption<Value>(value: Value, items: Value[]): Value[] {
   return items.includes(value)
-    ? items.filter((item) => item !== value)
+    ? items.filter(item => item !== value)
     : [...items, value];
 }
 
@@ -302,7 +301,7 @@ export const Autocomplete = forwardRef(
   <Value = unknown, IsMulti extends boolean = false>(
     {
       autoFocus,
-      clearLabel = "Clear",
+      clearLabel = 'Clear',
       defaultValue,
       description,
       disabled,
@@ -311,17 +310,17 @@ export const Autocomplete = forwardRef(
       invalid,
       label,
       loading,
-      loadingLabel = "Loading...",
+      loadingLabel = 'Loading...',
       message,
       multiple = false as IsMulti,
       name,
-      noResultLabel = "No result",
+      noResultLabel = 'No result',
       OptionComponent = Option as FC<OptionComponentProps<Value>>,
       options,
       placeholder,
       readOnly,
       searchTimeout = 500,
-      size = "md",
+      size = 'md',
       startIcon,
       endIcon,
       value,
@@ -330,27 +329,27 @@ export const Autocomplete = forwardRef(
       onFocus,
       onSearch,
     }: AutocompleteProps<Value, IsMulti>,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isFocused, setIsFocused] = useState(false);
 
     const [inputValue, setInputValue] = useState(() =>
-      toInputValue(value ?? defaultValue, getLabel)
+      toInputValue(value ?? defaultValue, getLabel),
     );
 
-    const [optionsState, setOptionsState] = useState<
-      Maybe<ReadonlyArray<Value>>
-    >(() => options);
+    const [optionsState, setOptionsState] = useState<Maybe<readonly Value[]>>(
+      () => options,
+    );
 
     const [selectedOptions, setSelectedOptions] = useState<Value[]>(() =>
-      toSelectedOptions(value ?? defaultValue)
+      toSelectedOptions(value ?? defaultValue),
     );
 
     const containerRef = useRef<HTMLDivElement>(null);
     const listRef = useRef<Array<HTMLElement | null>>([]);
-    const isControlled = typeof value !== "undefined";
+    const isControlled = typeof value !== 'undefined';
     const inputId = useId(id);
 
     const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
@@ -382,14 +381,14 @@ export const Autocomplete = forwardRef(
         }),
       ],
       open: isOpen,
-      placement: "bottom-start",
-      strategy: "fixed",
+      placement: 'bottom-start',
+      strategy: 'fixed',
       transform: false,
       whileElementsMounted: autoUpdate,
       onOpenChange: setIsOpen,
     });
 
-    const role = useRole(context, { role: "listbox" });
+    const role = useRole(context, { role: 'listbox' });
 
     const click = useClick(context, {
       enabled: !disabled && !readOnly,
@@ -424,14 +423,14 @@ export const Autocomplete = forwardRef(
         }
 
         const filtered = nextQuery
-          ? options.filter((item) =>
-              getLabel(item).toLowerCase().includes(nextQuery.toLowerCase())
+          ? options.filter(item =>
+              getLabel(item).toLowerCase().includes(nextQuery.toLowerCase()),
             )
           : options;
 
         setOptionsState(filtered);
       },
-      [getLabel, options]
+      [getLabel, options],
     );
 
     const updateOptions = useDebounceCallback(async (nextQuery: string) => {
@@ -513,7 +512,7 @@ export const Autocomplete = forwardRef(
 
     const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (
-        e.key === "Enter" &&
+        e.key === 'Enter' &&
         activeIndex != null &&
         optionsState?.[activeIndex]
       ) {
@@ -543,7 +542,7 @@ export const Autocomplete = forwardRef(
       e.preventDefault();
       e.stopPropagation();
       changeValue([]);
-      setInputValue("");
+      setInputValue('');
     };
 
     const handleRemoveMouseDown = (e: MouseEvent<HTMLDivElement>) => {
@@ -576,13 +575,13 @@ export const Autocomplete = forwardRef(
           size={size}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
-            <InputAction className="me-1">{startIcon}</InputAction>
+            <InputAction className='me-1'>{startIcon}</InputAction>
           )}
 
-          <span className="flex flex-1 -mt-1 -mx-0.5 flex-wrap">
+          <span className='flex flex-1 -mt-1 -mx-0.5 flex-wrap'>
             {multiple &&
               selectedOptions.map((item, idx) => (
-                <span key={idx} className="block mt-1 px-0.5">
+                <span key={idx} className='block mt-1 px-0.5'>
                   <Tag
                     data-index={idx}
                     disabled={disabled}
@@ -590,7 +589,7 @@ export const Autocomplete = forwardRef(
                     removable
                     rounded
                     tabIndex={-1}
-                    variant="tertiary"
+                    variant='tertiary'
                     onMouseDown={handleRemoveMouseDown}
                   >
                     {getLabel(item)}
@@ -601,26 +600,26 @@ export const Autocomplete = forwardRef(
             {(!multiple ||
               selectedOptions.length === 0 ||
               (!disabled && !readOnly)) && (
-              <span className="block mt-1 px-0.5 w-full">
+              <span className='block mt-1 px-0.5 w-full'>
                 <input
                   aria-activedescendant={
                     activeIndex != null
                       ? slug(inputId, OPTION_ID, activeIndex)
-                      : ""
+                      : ''
                   }
-                  aria-autocomplete="list"
-                  aria-controls={isOpen ? slug(inputId, LISTBOX_ID) : ""}
+                  aria-autocomplete='list'
+                  aria-controls={isOpen ? slug(inputId, LISTBOX_ID) : ''}
                   aria-invalid={invalid}
-                  aria-owns={isOpen ? slug(inputId, LISTBOX_ID) : ""}
-                  autoComplete="off"
+                  aria-owns={isOpen ? slug(inputId, LISTBOX_ID) : ''}
+                  autoComplete='off'
                   autoFocus={autoFocus}
-                  className="input-base"
+                  className='input-base'
                   disabled={disabled}
                   id={inputId}
                   name={name}
                   placeholder={placeholder}
                   readOnly={readOnly}
-                  type="text"
+                  type='text'
                   {...getReferenceProps({
                     ref: mergedRefs,
                     value: inputValue,
@@ -638,11 +637,11 @@ export const Autocomplete = forwardRef(
             !readOnly &&
             isFocused &&
             (inputValue.length > 0 || selectedOptions.length > 0) && (
-              <InputAction className="ms-1">
+              <InputAction className='ms-1'>
                 <Icon
                   aria-label={clearLabel}
-                  className="text-lg color-neutral-800 hover:opacity-60"
-                  role="button"
+                  className='text-lg color-neutral-800 hover:opacity-60'
+                  role='button'
                   tabIndex={-1}
                   onMouseDown={handleClearMouseDown}
                 >
@@ -652,7 +651,7 @@ export const Autocomplete = forwardRef(
             )}
 
           {isValidElement(endIcon) && (
-            <InputAction className="ms-1">{endIcon}</InputAction>
+            <InputAction className='ms-1'>{endIcon}</InputAction>
           )}
         </InputBox>
 
@@ -663,7 +662,7 @@ export const Autocomplete = forwardRef(
           timeout={TRANSITION_TIMEOUT}
           unmountOnExit
         >
-          {(status) => (
+          {status => (
             <FloatingFocusManager
               context={context}
               initialFocus={-1}
@@ -673,17 +672,17 @@ export const Autocomplete = forwardRef(
                 ref={refs.setFloating}
                 id={slug(inputId, LISTBOX_ID)}
                 style={floatingStyles}
-                visible={status === "entered"}
+                visible={status === 'entered'}
                 {...getFloatingProps()}
               >
                 {(loading || !optionsState) && (
-                  <Option disabled role="none">
+                  <Option disabled role='none'>
                     {loadingLabel}
                   </Option>
                 )}
 
                 {!loading && optionsState && optionsState.length === 0 && (
-                  <Option disabled role="none">
+                  <Option disabled role='none'>
                     {noResultLabel}
                   </Option>
                 )}
@@ -699,14 +698,14 @@ export const Autocomplete = forwardRef(
                         data-index={idx}
                         endIcon={
                           isSelected ? (
-                            <BiCheck className="text-secondary-600" />
+                            <BiCheck className='text-secondary-600' />
                           ) : undefined
                         }
                         id={slug(inputId, OPTION_ID, idx)}
                         option={item}
                         selected={isSelected}
                         {...getItemProps({
-                          ref: (node) => {
+                          ref: node => {
                             listRef.current[idx] = node;
                           },
                           onClick: handleOptionClick,
@@ -722,7 +721,7 @@ export const Autocomplete = forwardRef(
         </Transition>
       </InputGroup>
     );
-  }
+  },
 ) as AutocompleteFn;
 
-Autocomplete.displayName = "Autocomplete";
+Autocomplete.displayName = 'Autocomplete';

@@ -1,33 +1,33 @@
-import { BiCheck } from "react-icons/bi";
+import { BiCheck } from 'react-icons/bi';
 
-import { render, screen } from "../../utils/test-utils";
-import { IconButton } from "../icon-button";
+import { render, screen } from '../../utils/test-utils';
+import { IconButton } from '../icon-button';
 
-import { Icon } from "./icon";
+import { Icon } from './icon';
 
-describe("Icon", () => {
-  describe("Given check icon", () => {
-    describe("When component is rendered", () => {
-      it("Then the `<i>` tag should be rendered", () => {
+describe('Icon', () => {
+  describe('Given check icon', () => {
+    describe('When component is rendered', () => {
+      it('Then the `<i>` tag should be rendered', () => {
         const { container } = render(
           <Icon>
             <BiCheck />
-          </Icon>
+          </Icon>,
         );
-        expect(container.querySelector("i")).toBeInTheDocument();
+        expect(container.querySelector('i')).toBeInTheDocument();
       });
     });
   });
 
-  describe("Given an icon component with a specific icon", () => {
-    describe("When the component is rendered", () => {
-      it("Then it should render the icon element", () => {
-        const testId = "icon";
+  describe('Given an icon component with a specific icon', () => {
+    describe('When the component is rendered', () => {
+      it('Then it should render the icon element', () => {
+        const testId = 'icon';
 
         render(
           <IconButton>
             <BiCheck data-testid={testId} />
-          </IconButton>
+          </IconButton>,
         );
 
         expect(screen.getByTestId(testId)).toBeInTheDocument();

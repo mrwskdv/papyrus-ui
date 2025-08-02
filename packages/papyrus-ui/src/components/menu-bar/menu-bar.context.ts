@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { ExtendedRefs, FloatingContext } from "@floating-ui/react";
-import {
-  createContext,
+import type { ExtendedRefs, FloatingContext } from '@floating-ui/react';
+import { createContext } from 'react';
+import type {
   CSSProperties,
   Dispatch,
   HTMLProps,
   MutableRefObject,
   SetStateAction,
-} from "react";
+} from 'react';
 
-import { MenuBarSize, MenuBarVariant } from "./menu-bar.types";
+import type { MenuBarSize, MenuBarVariant } from './menu-bar.types';
 
 export interface MenuBarContextType {
   activeIndex: number | null;
@@ -19,12 +19,12 @@ export interface MenuBarContextType {
   elementsRef: MutableRefObject<Array<HTMLElement | null>>;
   floatingStyles: CSSProperties;
   getFloatingProps: (
-    userProps?: HTMLProps<HTMLElement>
+    userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
   getItemProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   isOpen: boolean;
   isNested: boolean;
-  labelsRef: MutableRefObject<Array<string>>;
+  labelsRef: MutableRefObject<string[]>;
   refs: ExtendedRefs<HTMLElement>;
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
   size: MenuBarSize;
@@ -35,17 +35,17 @@ export const MenuBarContext = createContext<MenuBarContextType>({
   activeIndex: null,
   collapsed: false,
   context: {} as FloatingContext<HTMLElement>,
-  elementsRef: {} as MutableRefObject<Array<HTMLElement>>,
+  elementsRef: {} as MutableRefObject<HTMLElement[]>,
   floatingStyles: {},
   getFloatingProps: () => ({}),
   getItemProps: () => ({}),
   isOpen: false,
   isNested: false,
-  labelsRef: {} as MutableRefObject<Array<string>>,
+  labelsRef: {} as MutableRefObject<string[]>,
   refs: {} as ExtendedRefs<HTMLElement>,
   setActiveIndex: () => {
     // Do nothing
   },
-  size: "md",
-  variant: "secondary",
+  size: 'md',
+  variant: 'secondary',
 });

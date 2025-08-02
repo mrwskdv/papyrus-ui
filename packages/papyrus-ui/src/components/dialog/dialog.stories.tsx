@@ -1,20 +1,22 @@
-import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import type { Meta, StoryFn } from '@storybook/react';
+import { useState } from 'react';
 
-import { Button } from "../button";
+import { Button } from '../button';
 
-import { Dialog, DialogProps } from "./dialog";
-import { DialogSize } from "./dialog.types";
+import { Dialog } from './dialog';
+import type { DialogProps } from './dialog';
+import type { DialogSize } from './dialog.types';
 
 const meta: Meta<DialogProps> = {
-  title: "Feedback/Dialog",
+  title: 'Feedback/Dialog',
   component: Dialog,
   args: {
     children: [
-      <Dialog.Trigger key="dialog-trigger">
+      <Dialog.Trigger key='dialog-trigger'>
         <Button>Open Dialog</Button>
       </Dialog.Trigger>,
-      <Dialog.Content key="dialog-content">
+      <Dialog.Content key='dialog-content'>
         <Dialog.Header>
           <Dialog.Title>Basic Dialog</Dialog.Title>
           <Dialog.Close />
@@ -35,7 +37,7 @@ const meta: Meta<DialogProps> = {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
-          <Dialog.Close as={Button} variant="tertiary">
+          <Dialog.Close as={Button} variant='tertiary'>
             Cancel
           </Dialog.Close>
           <Dialog.Close as={Button}>OK</Dialog.Close>
@@ -51,28 +53,28 @@ const Template: StoryFn<DialogProps> = ({ children, ...args }) => (
 
 export const Basic = Template.bind({});
 
-export function Sizes(args: DialogProps): JSX.Element {
+export function Sizes(args: DialogProps) {
   const [open, setOpen] = useState(false);
-  const [dialogSize, setDialogSize] = useState<DialogSize>("md");
+  const [dialogSize, setDialogSize] = useState<DialogSize>('md');
 
   function handleOpenSmallDialog() {
     setOpen(true);
-    setDialogSize("sm");
+    setDialogSize('sm');
   }
 
   function handleOpenMediumDialog() {
     setOpen(true);
-    setDialogSize("md");
+    setDialogSize('md');
   }
 
   function handleOpenLargeDialog() {
     setOpen(true);
-    setDialogSize("lg");
+    setDialogSize('lg');
   }
 
   function handleOpenExtraLargeDialog() {
     setOpen(true);
-    setDialogSize("xl");
+    setDialogSize('xl');
   }
 
   function handleClose() {
@@ -81,27 +83,27 @@ export function Sizes(args: DialogProps): JSX.Element {
 
   return (
     <>
-      <div className="flex">
-        <div className="mr-4">
-          <Button variant="tertiary" onClick={handleOpenSmallDialog}>
+      <div className='flex'>
+        <div className='mr-4'>
+          <Button variant='tertiary' onClick={handleOpenSmallDialog}>
             Open Small Dialog
           </Button>
         </div>
 
-        <div className="mr-4">
-          <Button variant="tertiary" onClick={handleOpenMediumDialog}>
+        <div className='mr-4'>
+          <Button variant='tertiary' onClick={handleOpenMediumDialog}>
             Open Medium Dialog
           </Button>
         </div>
 
-        <div className="mr-4">
-          <Button variant="tertiary" onClick={handleOpenLargeDialog}>
+        <div className='mr-4'>
+          <Button variant='tertiary' onClick={handleOpenLargeDialog}>
             Open Large Dialog
           </Button>
         </div>
 
         <div>
-          <Button variant="tertiary" onClick={handleOpenExtraLargeDialog}>
+          <Button variant='tertiary' onClick={handleOpenExtraLargeDialog}>
             Open Extra Large Dialog
           </Button>
         </div>
@@ -109,8 +111,8 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === "sm"}
-        size="sm"
+        isOpen={open && dialogSize === 'sm'}
+        size='sm'
         onClose={handleClose}
       >
         <Dialog.Content>
@@ -124,8 +126,8 @@ export function Sizes(args: DialogProps): JSX.Element {
               lectus convallis, ultrices dui non, varius massa.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer className="justify-end">
-            <Button variant="primary" onClick={handleClose}>
+          <Dialog.Footer className='justify-end'>
+            <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
           </Dialog.Footer>
@@ -134,8 +136,8 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === "md"}
-        size="md"
+        isOpen={open && dialogSize === 'md'}
+        size='md'
         onClose={handleClose}
       >
         <Dialog.Content>
@@ -166,10 +168,10 @@ export function Sizes(args: DialogProps): JSX.Element {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button variant="tertiary" onClick={handleClose}>
+            <Button variant='tertiary' onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
           </Dialog.Footer>
@@ -178,8 +180,8 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === "lg"}
-        size="lg"
+        isOpen={open && dialogSize === 'lg'}
+        size='lg'
         onClose={handleClose}
       >
         <Dialog.Content>
@@ -235,10 +237,10 @@ export function Sizes(args: DialogProps): JSX.Element {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button variant="tertiary" onClick={handleClose}>
+            <Button variant='tertiary' onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
           </Dialog.Footer>
@@ -247,8 +249,8 @@ export function Sizes(args: DialogProps): JSX.Element {
 
       <Dialog
         {...args}
-        isOpen={open && dialogSize === "xl"}
-        size="xl"
+        isOpen={open && dialogSize === 'xl'}
+        size='xl'
         onClose={handleClose}
       >
         <Dialog.Content>
@@ -304,10 +306,10 @@ export function Sizes(args: DialogProps): JSX.Element {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
-            <Button variant="tertiary" onClick={handleClose}>
+            <Button variant='tertiary' onClick={handleClose}>
               Cancel
             </Button>
           </Dialog.Footer>

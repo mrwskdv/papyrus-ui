@@ -1,16 +1,17 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { LabelSkeleton, LabelSkeletonProps } from "./label-skeleton";
+import { LabelSkeleton } from './label-skeleton';
+import type { LabelSkeletonProps } from './label-skeleton';
 
 const meta: Meta<LabelSkeletonProps> = {
-  title: "Feedback/Skeleton/LabelSkeleton",
+  title: 'Feedback/Skeleton/LabelSkeleton',
   component: LabelSkeleton,
   args: {
-    className: "w-20",
+    className: 'w-20',
   },
 };
 
-const Template: StoryFn<LabelSkeletonProps> = (args) => (
+const Template: StoryFn<LabelSkeletonProps> = args => (
   <LabelSkeleton {...args} />
 );
 

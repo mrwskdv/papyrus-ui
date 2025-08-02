@@ -1,18 +1,19 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { ButtonSkeleton, ButtonSkeletonProps } from "./button-skeleton";
+import { ButtonSkeleton } from './button-skeleton';
+import type { ButtonSkeletonProps } from './button-skeleton';
 
 const meta: Meta<ButtonSkeletonProps> = {
-  title: "Feedback/Skeleton/ButtonSkeleton",
+  title: 'Feedback/Skeleton/ButtonSkeleton',
   component: ButtonSkeleton,
   args: {
     block: false,
     rounded: false,
-    size: "md",
+    size: 'md',
   },
 };
 
-const Template: StoryFn<ButtonSkeletonProps> = (args) => (
+const Template: StoryFn<ButtonSkeletonProps> = args => (
   <ButtonSkeleton {...args} />
 );
 
@@ -21,18 +22,18 @@ export const Basic = Template.bind({});
 export const SizeSm = Template.bind({});
 
 SizeSm.args = {
-  size: "sm",
+  size: 'sm',
 };
 
 export const SizeLg = Template.bind({});
 
 SizeLg.args = {
-  size: "lg",
+  size: 'lg',
 };
 
-export const Block: StoryFn<ButtonSkeletonProps> = (args) => (
-  <div className="w-96">
-    <Template {...args} block />{" "}
+export const Block: StoryFn<ButtonSkeletonProps> = args => (
+  <div className='w-96'>
+    <Template {...args} block />{' '}
   </div>
 );
 

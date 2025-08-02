@@ -1,18 +1,20 @@
-import { faker } from "@faker-js/faker";
-import { StoryFn } from "@storybook/react";
-import { capitalize } from "lodash";
-import { useRef, useState } from "react";
-import { BiBell } from "react-icons/bi";
+import { faker } from '@faker-js/faker';
+import type { StoryFn } from '@storybook/react';
+import { capitalize } from 'lodash';
+import { useRef, useState } from 'react';
+import { BiBell } from 'react-icons/bi';
 
-import { Avatar } from "../avatar";
-import { Button } from "../button";
-import { Icon } from "../icon";
+import { Avatar } from '../avatar';
+import { Button } from '../button';
+import { Icon } from '../icon';
 
-import { Snackbar, SnackbarProps } from "./snackbar";
-import { SnackbarItem, SnackbarItemVariant } from "./snackbar-item";
+import { Snackbar } from './snackbar';
+import type { SnackbarProps } from './snackbar';
+import { SnackbarItem } from './snackbar-item';
+import type { SnackbarItemVariant } from './snackbar-item';
 
 const meta = {
-  title: "Feedback/Snackbar",
+  title: 'Feedback/Snackbar',
   component: Snackbar,
   subcomponents: {
     SnackbarItem,
@@ -22,12 +24,12 @@ const meta = {
 const AUTO_HIDE_DURATION = 3000;
 
 const variants: SnackbarItemVariant[] = [
-  "primary",
-  "secondary",
-  "info",
-  "success",
-  "warning",
-  "danger",
+  'primary',
+  'secondary',
+  'info',
+  'success',
+  'warning',
+  'danger',
 ];
 
 interface SnackbarItemState {
@@ -39,13 +41,13 @@ interface SnackbarItemState {
   onHide: () => void;
 }
 
-const Template: StoryFn<SnackbarProps> = (args) => {
-  const [items, setItems] = useState<ReadonlyArray<SnackbarItemState>>([]);
+const Template: StoryFn<SnackbarProps> = args => {
+  const [items, setItems] = useState<readonly SnackbarItemState[]>([]);
 
   const createdItems = useRef(0);
 
   const remove = (id: number) => {
-    setItems((prevState) => prevState.filter((item) => item.id !== id));
+    setItems(prevState => prevState.filter(item => item.id !== id));
   };
 
   const onPush = () => {
@@ -60,14 +62,14 @@ const Template: StoryFn<SnackbarProps> = (args) => {
       onHide: () => remove(id),
     };
 
-    setItems((prevState) => [item, ...prevState]);
+    setItems(prevState => [item, ...prevState]);
     createdItems.current = id;
   };
 
   return (
     <div
-      className="flex flex-col items-center justify-center h-96"
-      style={{ width: "60vw" }}
+      className='flex flex-col items-center justify-center h-96'
+      style={{ width: '60vw' }}
     >
       <Button onClick={onPush}>Push Message</Button>
 
@@ -91,16 +93,16 @@ export const Basic = Template.bind({});
 export const Placement = Template.bind({});
 
 Placement.args = {
-  placement: "bottom-start",
+  placement: 'bottom-start',
 };
 
-export const Variants: StoryFn<SnackbarProps> = (args) => (
+export const Variants: StoryFn<SnackbarProps> = args => (
   <div
-    className="flex flex-col items-center justify-center h-96"
-    style={{ width: "60vw" }}
+    className='flex flex-col items-center justify-center h-96'
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
-      {variants.map((variant) => (
+      {variants.map(variant => (
         <Snackbar.Item
           key={variant}
           message={capitalize(faker.lorem.words({ min: 1, max: 3 }))}
@@ -116,14 +118,14 @@ export const Variants: StoryFn<SnackbarProps> = (args) => (
   </div>
 );
 
-export const WithAction: StoryFn<SnackbarProps> = (args) => (
+export const WithAction: StoryFn<SnackbarProps> = args => (
   <div
-    className="flex flex-col items-center justify-center h-96"
-    style={{ width: "60vw" }}
+    className='flex flex-col items-center justify-center h-96'
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
-        actionLabel="View More"
+        actionLabel='View More'
         message={capitalize(faker.lorem.words({ min: 1, max: 3 }))}
         onActionClick={() => {
           // Do nothing
@@ -138,15 +140,15 @@ export const WithAction: StoryFn<SnackbarProps> = (args) => (
   </div>
 );
 
-export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
+export const WithCustomIcon: StoryFn<SnackbarProps> = args => (
   <div
-    className="flex flex-col items-center justify-center h-96"
-    style={{ width: "60vw" }}
+    className='flex flex-col items-center justify-center h-96'
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
         icon={
-          <Icon className="text-3xl text-white">
+          <Icon className='text-3xl text-white'>
             <BiBell />
           </Icon>
         }
@@ -161,16 +163,16 @@ export const WithCustomIcon: StoryFn<SnackbarProps> = (args) => (
   </div>
 );
 
-export const WithAvatar: StoryFn<SnackbarProps> = (args) => (
+export const WithAvatar: StoryFn<SnackbarProps> = args => (
   <div
-    className="flex flex-col items-center justify-center h-96"
-    style={{ width: "60vw" }}
+    className='flex flex-col items-center justify-center h-96'
+    style={{ width: '60vw' }}
   >
     <Snackbar {...args}>
       <Snackbar.Item
         icon={
-          <Avatar size="md">
-            <img alt="Profile" src="https://i.pravatar.cc/300" />
+          <Avatar size='md'>
+            <img alt='Profile' src='https://i.pravatar.cc/300' />
           </Avatar>
         }
         message={capitalize(faker.lorem.words({ min: 1, max: 3 }))}

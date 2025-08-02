@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-import { resolve } from "path";
+import { resolve } from 'path';
 
-import papyrusUI from "papyrus-ui/plugin";
+import papyrusUI from 'papyrus-ui/plugin';
 
 export default {
   content: [
-    resolve(__dirname, "./components/**/*.{js,ts,jsx,tsx,mdx}"),
-    resolve(__dirname, "../packages/papyrus-ui/src/**/*.{js,ts,jsx,tsx,mdx}"),
+    resolve(__dirname, './components/**/*.{js,ts,jsx,tsx,mdx}'),
+    resolve(__dirname, '../packages/papyrus-ui/src/**/*.{js,ts,jsx,tsx,mdx}'),
   ],
-  darkMode: ["class"],
+  darkMode: ['class'],
   plugins: [papyrusUI],
 };

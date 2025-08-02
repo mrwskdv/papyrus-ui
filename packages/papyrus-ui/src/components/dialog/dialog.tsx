@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   useClick,
@@ -6,31 +6,26 @@ import {
   useFloating,
   useInteractions,
   useRole,
-} from "@floating-ui/react";
-import {
-  FC,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+} from '@floating-ui/react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { FC, ReactNode } from 'react';
 
-import { useTimeout } from "../../utils/use-timeout";
+import { useTimeout } from '../../utils/use-timeout';
 
-import { DialogBody } from "./dialog-body";
-import { DialogClose } from "./dialog-close";
-import { DialogContent } from "./dialog-content";
-import { DialogDescription } from "./dialog-description";
-import { DialogFooter } from "./dialog-footer";
-import { DialogHeader } from "./dialog-header";
-import { DialogTitle } from "./dialog-title";
-import { DialogTrigger } from "./dialog-trigger";
-import { ANIMATION_DURATION } from "./dialog.constants";
-import { DialogContext, DialogContextType } from "./dialog.context";
-import { DialogSize } from "./dialog.types";
+import { DialogBody } from './dialog-body';
+import { DialogClose } from './dialog-close';
+import { DialogContent } from './dialog-content';
+import { DialogDescription } from './dialog-description';
+import { DialogFooter } from './dialog-footer';
+import { DialogHeader } from './dialog-header';
+import { DialogTitle } from './dialog-title';
+import { DialogTrigger } from './dialog-trigger';
+import { ANIMATION_DURATION } from './dialog.constants';
+import { DialogContext } from './dialog.context';
+import type { DialogContextType } from './dialog.context';
+import type { DialogSize } from './dialog.types';
 
-export type DialogRole = "dialog" | "alertdialog";
+export type DialogRole = 'dialog' | 'alertdialog';
 
 export interface DialogProps {
   /**
@@ -93,8 +88,8 @@ const DialogComponent: FC<DialogProps> = ({
   closeOnEscClick = true,
   closeOnOutsideClick = true,
   isOpen,
-  role: roleProp = "dialog",
-  size = "md",
+  role: roleProp = 'dialog',
+  size = 'md',
   onClose,
   onAfterClose,
   children,
@@ -113,7 +108,7 @@ const DialogComponent: FC<DialogProps> = ({
         onClose();
       }
     },
-    [onClose]
+    [onClose],
   );
 
   const { refs, context } = useFloating({
@@ -128,7 +123,7 @@ const DialogComponent: FC<DialogProps> = ({
   const dismiss = useDismiss(context, {
     escapeKey: closeOnEscClick,
     outsidePress: closeOnOutsideClick,
-    outsidePressEvent: "mousedown",
+    outsidePressEvent: 'mousedown',
   });
 
   const role = useRole(context, { role: roleProp });
@@ -167,7 +162,7 @@ const DialogComponent: FC<DialogProps> = ({
       close,
       getFloatingProps,
       getReferenceProps,
-    ]
+    ],
   );
 
   useEffect(() => {

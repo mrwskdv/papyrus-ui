@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { ExtendedRefs, FloatingContext } from "@floating-ui/react";
-import {
-  createContext,
+import type { ExtendedRefs, FloatingContext } from '@floating-ui/react';
+import { createContext } from 'react';
+import type {
   CSSProperties,
   Dispatch,
   HTMLProps,
   MutableRefObject,
   SetStateAction,
-} from "react";
+} from 'react';
 
 export interface DropdownMenuContextType {
   activeIndex: number | null;
@@ -16,14 +16,14 @@ export interface DropdownMenuContextType {
   elementsRef: MutableRefObject<Array<HTMLElement | null>>;
   floatingStyles: CSSProperties;
   getFloatingProps: (
-    userProps?: HTMLProps<HTMLElement>
+    userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
   getItemProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   getReferenceProps: (
-    userProps?: HTMLProps<HTMLElement>
+    userProps?: HTMLProps<HTMLElement>,
   ) => Record<string, unknown>;
   isOpen: boolean;
-  labelsRef: MutableRefObject<Array<string>>;
+  labelsRef: MutableRefObject<string[]>;
   refs: ExtendedRefs<HTMLElement>;
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
 }
@@ -31,13 +31,13 @@ export interface DropdownMenuContextType {
 export const DropdownMenuContext = createContext<DropdownMenuContextType>({
   activeIndex: null,
   context: {} as FloatingContext<HTMLElement>,
-  elementsRef: {} as MutableRefObject<Array<HTMLElement>>,
+  elementsRef: {} as MutableRefObject<HTMLElement[]>,
   floatingStyles: {},
   getFloatingProps: () => ({}),
   getItemProps: () => ({}),
   getReferenceProps: () => ({}),
   isOpen: false,
-  labelsRef: {} as MutableRefObject<Array<string>>,
+  labelsRef: {} as MutableRefObject<string[]>,
   refs: {} as ExtendedRefs<HTMLElement>,
   setActiveIndex: () => {
     // Do nothing

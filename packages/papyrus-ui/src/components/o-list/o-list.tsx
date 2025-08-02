@@ -1,10 +1,12 @@
-import cn from "classnames";
-import { forwardRef, HTMLAttributes } from "react";
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
 
-import { Text, TextSize, TextFontVariant } from "../text";
+import { Text } from '../text';
+import type { TextSize, TextFontVariant } from '../text';
 
 export interface OListProps
-  extends Omit<HTMLAttributes<HTMLOListElement>, "color"> {
+  extends Omit<HTMLAttributes<HTMLOListElement>, 'color'> {
   /**
    * Applies bold styling to the text.
    *
@@ -31,13 +33,13 @@ export const OList = forwardRef<HTMLOListElement, OListProps>(
   ({ className, children, ...props }, ref) => (
     <Text
       ref={ref}
-      as="ol"
-      className={cn("list list-decimal", className)}
+      as='ol'
+      className={cn('list list-decimal', className)}
       {...props}
     >
       {children}
     </Text>
-  )
+  ),
 );
 
-OList.displayName = "OList";
+OList.displayName = 'OList';

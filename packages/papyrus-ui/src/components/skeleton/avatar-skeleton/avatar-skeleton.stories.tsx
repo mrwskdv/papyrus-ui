@@ -1,16 +1,17 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { AvatarSkeleton, AvatarSkeletonProps } from "./avatar-skeleton";
+import { AvatarSkeleton } from './avatar-skeleton';
+import type { AvatarSkeletonProps } from './avatar-skeleton';
 
 const meta: Meta = {
-  title: "Feedback/Skeleton/AvatarSkeleton",
+  title: 'Feedback/Skeleton/AvatarSkeleton',
   component: AvatarSkeleton,
   args: {
-    size: "md",
+    size: 'md',
   },
 };
 
-const Template: StoryFn<AvatarSkeletonProps> = (args) => (
+const Template: StoryFn<AvatarSkeletonProps> = args => (
   <AvatarSkeleton {...args} />
 );
 
@@ -19,31 +20,31 @@ export const Basic = Template.bind({});
 export const SizeXs = Template.bind({});
 
 SizeXs.args = {
-  size: "xs",
+  size: 'xs',
 };
 
 export const SizeSm = Template.bind({});
 
 SizeSm.args = {
-  size: "sm",
+  size: 'sm',
 };
 
 export const SizeLg = Template.bind({});
 
 SizeLg.args = {
-  size: "lg",
+  size: 'lg',
 };
 
 export const SizeXl = Template.bind({});
 
 SizeXl.args = {
-  size: "xl",
+  size: 'xl',
 };
 
 export const Size2Xl = Template.bind({});
 
 Size2Xl.args = {
-  size: "2xl",
+  size: '2xl',
 };
 
 export default meta;

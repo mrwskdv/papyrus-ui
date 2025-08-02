@@ -1,3 +1,3 @@
-declare module "@jest/expect";
+declare module '@jest/expect';
 
-declare module "*.mdx";
+declare module '*.mdx';

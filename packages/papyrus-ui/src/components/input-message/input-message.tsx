@@ -1,7 +1,8 @@
-import cn from "classnames";
-import { forwardRef, HTMLAttributes, ReactNode } from "react";
+import cn from 'classnames';
+import { forwardRef } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
-import { Text } from "../text";
+import { Text } from '../text';
 
 export interface InputMessageProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -20,18 +21,18 @@ export const InputMessage = forwardRef<HTMLDivElement, InputMessageProps>(
   ({ className, invalid, children, ...props }, ref) => (
     <Text
       ref={ref}
-      as="div"
+      as='div'
       className={cn(
-        invalid ? "text-danger-500" : "text-neutral-500",
-        className
+        invalid ? 'text-danger-500' : 'text-neutral-500',
+        className,
       )}
-      role={invalid ? "alert" : "status"}
-      size="sm"
+      role={invalid ? 'alert' : 'status'}
+      size='sm'
       {...props}
     >
       {children}
     </Text>
-  )
+  ),
 );
 
-InputMessage.displayName = "InputMessage";
+InputMessage.displayName = 'InputMessage';

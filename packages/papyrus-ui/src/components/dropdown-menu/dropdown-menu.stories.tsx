@@ -1,4 +1,4 @@
-import { StoryFn } from "@storybook/react";
+import type { StoryFn } from '@storybook/react';
 import {
   BiCog,
   BiDotsVerticalRounded,
@@ -7,19 +7,20 @@ import {
   BiHome,
   BiStats,
   BiSupport,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
-import { IconButton } from "../icon-button";
+import { IconButton } from '../icon-button';
 
-import { DropdownMenu, DropdownMenuProps } from "./dropdown-menu";
+import { DropdownMenu } from './dropdown-menu';
+import type { DropdownMenuProps } from './dropdown-menu';
 
 export default {
-  title: "Navigation/DropdownMenu",
+  title: 'Navigation/DropdownMenu',
   component: DropdownMenu,
 };
 
-export const Basic: StoryFn<DropdownMenuProps> = (args) => (
-  <div className="flex h-64 justify-center w-96">
+export const Basic: StoryFn<DropdownMenuProps> = args => (
+  <div className='flex h-64 justify-center w-96'>
     <DropdownMenu {...args}>
       <DropdownMenu.Trigger>
         <IconButton>
@@ -36,17 +37,17 @@ export const Basic: StoryFn<DropdownMenuProps> = (args) => (
           Option 3
         </DropdownMenu.Item>
 
-        <DropdownMenu.Submenu icon={<BiStats />} label="Option 4">
+        <DropdownMenu.Submenu icon={<BiStats />} label='Option 4'>
           <DropdownMenu.Item>Option 4-1</DropdownMenu.Item>
           <DropdownMenu.Item>Option 4-2</DropdownMenu.Item>
           <DropdownMenu.Item>Option 4-3</DropdownMenu.Item>
         </DropdownMenu.Submenu>
 
-        <DropdownMenu.Submenu icon={<BiCog />} label="Option 5">
+        <DropdownMenu.Submenu icon={<BiCog />} label='Option 5'>
           <DropdownMenu.Item>Option 5-1</DropdownMenu.Item>
           <DropdownMenu.Item>Option 5-2</DropdownMenu.Item>
 
-          <DropdownMenu.Submenu label="Option 5-3">
+          <DropdownMenu.Submenu label='Option 5-3'>
             <DropdownMenu.Item>Option 5-3-1</DropdownMenu.Item>
             <DropdownMenu.Item>Option 5-3-2</DropdownMenu.Item>
             <DropdownMenu.Item>Option 5-3-3</DropdownMenu.Item>

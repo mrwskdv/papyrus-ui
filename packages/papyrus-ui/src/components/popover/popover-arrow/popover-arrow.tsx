@@ -1,11 +1,13 @@
-import { FloatingArrow, FloatingArrowProps } from "@floating-ui/react";
-import { FC, useContext } from "react";
+import { FloatingArrow } from '@floating-ui/react';
+import type { FloatingArrowProps } from '@floating-ui/react';
+import { useContext } from 'react';
+import type { FC } from 'react';
 
-import { PopoverContext } from "../popover.context";
+import { PopoverContext } from '../popover.context';
 
-export type PopoverArrowProps = Omit<FloatingArrowProps, "context" | "ref">;
+export type PopoverArrowProps = Omit<FloatingArrowProps, 'context' | 'ref'>;
 
-export const PopoverArrow: FC<PopoverArrowProps> = (props) => {
+export const PopoverArrow: FC<PopoverArrowProps> = props => {
   const { arrowRef, context } = useContext(PopoverContext);
   return <FloatingArrow {...props} ref={arrowRef} context={context} />;
 };

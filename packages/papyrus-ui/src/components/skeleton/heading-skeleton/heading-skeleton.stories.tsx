@@ -1,19 +1,20 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from '@storybook/react';
 
-import { HeadingSkeleton, HeadingSkeletonProps } from "./heading-skeleton";
+import { HeadingSkeleton } from './heading-skeleton';
+import type { HeadingSkeletonProps } from './heading-skeleton';
 
 const meta: Meta = {
-  title: "Feedback/Skeleton/HeadingSkeleton",
+  title: 'Feedback/Skeleton/HeadingSkeleton',
   component: HeadingSkeleton,
   args: {
-    fontVariant: "primary",
+    fontVariant: 'primary',
     level: 1,
-    size: "md",
+    size: 'md',
     w: 96,
   },
 };
 
-const Template: StoryFn<HeadingSkeletonProps> = (args) => (
+const Template: StoryFn<HeadingSkeletonProps> = args => (
   <HeadingSkeleton {...args} />
 );
 

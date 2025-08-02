@@ -1,13 +1,14 @@
-import { Meta, StoryFn } from "@storybook/react";
-import { BiCheck } from "react-icons/bi";
+import type { Meta, StoryFn } from '@storybook/react';
+import { BiCheck } from 'react-icons/bi';
 
-import { Icon } from "../icon";
-import { UList } from "../u-list";
+import { Icon } from '../icon';
+import { UList } from '../u-list';
 
-import { Marker, MarkerProps } from "./marker";
+import { Marker } from './marker';
+import type { MarkerProps } from './marker';
 
 const meta: Meta = {
-  title: "Typography/Marker",
+  title: 'Typography/Marker',
   component: Marker,
   args: {
     children: (
@@ -18,8 +19,8 @@ const meta: Meta = {
   },
 };
 
-export const Basic: StoryFn<MarkerProps> = (args) => (
-  <UList type="none">
+export const Basic: StoryFn<MarkerProps> = args => (
+  <UList type='none'>
     <li>
       <Marker {...args} />
       List Item

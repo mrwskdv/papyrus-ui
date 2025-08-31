@@ -17,10 +17,6 @@ export type IconButtonVariant =
   | 'secondary'
   | 'tertiary'
   | 'plain'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'danger'
   | 'ghost';
 
 export interface IconButtonProps
@@ -83,6 +79,7 @@ const iconSizeMap: Record<IconButtonSize, string> = {
 // Base styles that are always applied
 const baseStyles = [
   'inline-flex items-center justify-center',
+  'border',
   'transition-colors',
   'focus-visible:ring',
 ];
@@ -90,6 +87,7 @@ const baseStyles = [
 // Variant styles
 const variantStyles = {
   primary: [
+    'border-transparent',
     'text-white',
     'bg-primary-600',
     'hover:bg-primary-500',
@@ -97,13 +95,15 @@ const variantStyles = {
     'disabled:bg-neutral-300',
   ],
   secondary: [
+    'border-primary-600/80',
     'text-primary-600',
-    'bg-primary-600/10',
-    'hover:bg-primary-600/20',
-    'active:bg-primary-600/30',
+    'bg-transparent',
+    'hover:bg-primary-600/10',
+    'active:bg-primary-600/20',
     'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
+    'border-transparent',
     'text-black',
     'bg-black/10',
     'hover:bg-black/20',
@@ -111,40 +111,14 @@ const variantStyles = {
     'disabled:opacity-disabled disabled:bg-black/10',
   ],
   plain: [
+    'border-transparent',
     'text-black',
     'hover:bg-black/10',
     'active:bg-black/20',
     'disabled:opacity-disabled disabled:bg-transparent',
   ],
-  info: [
-    'text-info-600',
-    'bg-info-600/10',
-    'hover:bg-info-600/20',
-    'active:bg-info-600/30',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
-  ],
-  success: [
-    'text-success-600',
-    'bg-success-600/10',
-    'hover:bg-success-600/20',
-    'active:bg-success-600/30',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
-  ],
-  warning: [
-    'text-warning-600',
-    'bg-warning-600/10',
-    'hover:bg-warning-600/20',
-    'active:bg-warning-600/30',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
-  ],
-  danger: [
-    'text-danger-600',
-    'bg-danger-600/10',
-    'hover:bg-danger-600/20',
-    'active:bg-danger-600/30',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
-  ],
   ghost: [
+    'border-transparent',
     'text-white',
     'hover:bg-white/30',
     'active:bg-white/40',

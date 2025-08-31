@@ -111,11 +111,11 @@ const variantStyles = {
     'disabled:bg-neutral-300',
   ],
   secondary: [
-    'border-transparent',
+    'border-primary-600/80',
     'text-primary-600',
-    'bg-primary-600/10',
-    'hover:bg-primary-600/20',
-    'active:bg-primary-600/30',
+    'bg-transparent',
+    'hover:bg-primary-600/10',
+    'active:bg-primary-600/20',
     'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
@@ -170,7 +170,7 @@ const variantStyles = {
     'disabled:bg-neutral-300',
   ],
   ghost: [
-    'border-white/60',
+    'border-white/80',
     'text-white',
     'hover:bg-white/30',
     'active:bg-white/40',

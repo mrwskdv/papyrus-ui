@@ -15,10 +15,6 @@ const variants: IconButtonVariant[] = [
   'secondary',
   'tertiary',
   'plain',
-  'info',
-  'success',
-  'warning',
-  'danger',
   'ghost',
 ];
 
@@ -98,7 +94,7 @@ export function WithAvatar(args: IconButtonProps) {
         </Avatar>
       }
       rounded
-      variant='secondary'
+      variant='tertiary'
     />
   );
 }

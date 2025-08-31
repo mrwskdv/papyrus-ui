@@ -24,7 +24,7 @@ export function Basic(args: AvatarProps) {
       </div>
 
       <div className='mr-2'>
-        <Avatar {...args} className='bg-primary-500' />
+        <Avatar {...args} className='bg-warning-500' />
       </div>
 
       <div>

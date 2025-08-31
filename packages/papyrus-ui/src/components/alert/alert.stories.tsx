@@ -13,7 +13,7 @@ import type { AlertProps, AlertVariant } from './alert';
 const meta: Meta = {
   title: 'Feedback/Alert',
   args: {
-    variant: 'secondary',
+    variant: 'primary',
     message: 'Alert message',
     children: 'Alert description',
   },
@@ -29,7 +29,6 @@ export const Basic = Template.bind({});
 
 const VARIANTS: AlertVariant[] = [
   'primary',
-  'secondary',
   'info',
   'success',
   'warning',

@@ -113,14 +113,14 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&:checked': {
-        '@apply border-transparent bg-secondary-600': {},
+        '@apply border-transparent bg-primary-600': {},
         backgroundImage:
           "url(\"data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E\")",
         backgroundSize: '62.5%',
       },
 
       '&:checked:hover:not(:disabled):not([readonly])': {
-        '@apply bg-secondary-500': {},
+        '@apply bg-primary-500': {},
       },
     },
 
@@ -158,12 +158,12 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&:checked': {
-        '@apply border-transparent bg-secondary-600': {},
+        '@apply border-transparent bg-primary-600': {},
         backgroundSize: '37.5%',
       },
 
       '&:checked:hover:not(:disabled):not([readonly])': {
-        '@apply bg-secondary-500': {},
+        '@apply bg-primary-500': {},
       },
     },
 
@@ -183,7 +183,7 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&::-webkit-slider-thumb': {
-        '@apply appearance-none w-3 h-3 rounded-full bg-secondary-600 shadow-sm transition-transform':
+        '@apply appearance-none w-3 h-3 rounded-full bg-primary-600 shadow-sm transition-transform':
           {},
         WebkitAppearance: 'none',
         marginTop: '-0.25rem',
@@ -191,13 +191,13 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&::-moz-range-thumb': {
-        '@apply w-3 h-3 rounded-full border-none bg-secondary-600 shadow-sm transition-transform':
+        '@apply w-3 h-3 rounded-full border-none bg-primary-600 shadow-sm transition-transform':
           {},
         boxShadow: props.theme('boxShadow.sm'),
       },
 
       '&::-ms-thumb': {
-        '@apply w-3 h-3 rounded-full border-none bg-secondary-600 shadow-sm transition-transform':
+        '@apply w-3 h-3 rounded-full border-none bg-primary-600 shadow-sm transition-transform':
           {},
         boxShadow: props.theme('boxShadow.sm'),
       },

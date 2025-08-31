@@ -4,6 +4,6 @@ export const theme = create({
   base: 'light',
   brandTitle: 'Papyrus UI',
   brandImage: '/images/logo.svg',
-  colorPrimary: '#9333ea',
+  colorPrimary: '#7c3aed',
   colorSecondary: '#4f46e5',
 });

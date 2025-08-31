@@ -57,7 +57,7 @@ export function Variants(args: IconButtonProps) {
             </div>
           ))}
       </div>
-      <div className='bg-gradient-to-br from-secondary-800 to-primary-900 py-2'>
+      <div className='bg-gradient-to-br from-primary-800 to-primary-900 py-2'>
         <div className='flex flex-wrap justify-center -mt-4 -mx-2'>
           {variants
             .filter(variant => variant === 'ghost')
@@ -98,6 +98,7 @@ export function WithAvatar(args: IconButtonProps) {
         </Avatar>
       }
       rounded
+      variant='secondary'
     />
   );
 }

@@ -21,7 +21,6 @@ import { Text } from '../text';
 
 export type AlertVariant =
   | 'primary'
-  | 'secondary'
   | 'info'
   | 'danger'
   | 'warning'
@@ -38,7 +37,6 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 
 const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
   primary: BiInfoCircle,
-  secondary: BiInfoCircle,
   info: BiInfoCircle,
   danger: BiErrorCircle,
   warning: BiError,
@@ -47,7 +45,6 @@ const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
 
 const rootVariantClasses = {
   primary: 'border-primary-300 bg-primary-50 text-primary-600',
-  secondary: 'border-secondary-300 bg-secondary-50 text-secondary-600',
   info: 'border-info-300 bg-info-50 text-info-600',
   success: 'border-success-300 bg-success-50 text-success-600',
   warning: 'border-warning-300 bg-warning-50 text-warning-600',
@@ -56,7 +53,6 @@ const rootVariantClasses = {
 
 const iconVariantClasses = {
   primary: 'text-primary-500',
-  secondary: 'text-secondary-500',
   info: 'text-info-500',
   success: 'text-success-500',
   warning: 'text-warning-500',
@@ -67,7 +63,7 @@ export const Alert: FC<AlertProps> = ({
   closeLabel = 'Close',
   icon,
   message,
-  variant = 'secondary',
+  variant = 'primary',
   className,
   role = 'alert',
   onClose,

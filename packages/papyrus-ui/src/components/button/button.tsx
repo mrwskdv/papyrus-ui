@@ -85,9 +85,9 @@ export interface ButtonProps
 }
 
 const sizeMap: Record<ButtonSize, string> = {
-  sm: 'min-w-20 h-7 px-2',
-  md: 'min-w-24 h-9 px-3',
-  lg: 'min-w-32 h-12 px-4',
+  sm: 'min-w-24 h-7 px-2',
+  md: 'min-w-28 h-9 px-3',
+  lg: 'min-w-36 h-12 px-4',
 };
 
 // Base styles that are always applied
@@ -112,12 +112,11 @@ const variantStyles = {
   ],
   secondary: [
     'border-transparent',
-    'text-white',
-    'bg-secondary-600',
-    'shadow-sm',
-    'hover:bg-secondary-500',
-    'active:bg-secondary-700',
-    'disabled:bg-neutral-300',
+    'text-primary-600',
+    'bg-primary-600/10',
+    'hover:bg-primary-600/20',
+    'active:bg-primary-600/30',
+    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
     'border-transparent',
@@ -192,7 +191,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
       startIcon,
       endIcon,
       type,
-      variant = 'secondary',
+      variant = 'primary',
       loading = false,
       className,
       children,

@@ -65,12 +65,12 @@ const linkDefaultSelectedVariantClasses = {
     active: 'ext-neutral-700 bg-black/10 active:bg-black/20',
   },
   secondary: {
-    base: 'text-secondary-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-700 bg-black/10 active:bg-black/20',
+    base: 'text-primary-700 hover:bg-black/10 active:bg-black/20',
+    active: 'text-primary-700 bg-black/10 active:bg-black/20',
   },
   ghost: {
-    base: 'text-white bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-white bg-secondary-500',
+    base: 'text-white bg-primary-600 hover:bg-primary-500',
+    active: 'text-white bg-primary-500',
   },
 };
 
@@ -99,8 +99,8 @@ const linkDefaultDangerSelectedVariantClasses = {
     active: 'text-danger-600 bg-black/10 active:bg-black/20',
   },
   ghost: {
-    base: 'text-danger-500 bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-danger-500 bg-secondary-500',
+    base: 'text-danger-500 bg-primary-600 hover:bg-primary-500',
+    active: 'text-danger-500 bg-primary-500',
   },
 };
 
@@ -128,12 +128,12 @@ const linkCollapsedSelectedVariantClasses = {
     active: 'text-neutral-700 bg-black/10 active:bg-black/20',
   },
   secondary: {
-    base: 'text-secondary-700 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-700 bg-black/10 active:bg-black/20',
+    base: 'text-primary-700 hover:bg-black/10 active:bg-black/20',
+    active: 'text-primary-700 bg-black/10 active:bg-black/20',
   },
   ghost: {
-    base: 'text-white bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-white bg-secondary-500',
+    base: 'text-white bg-primary-600 hover:bg-primary-500',
+    active: 'text-white bg-primary-500',
   },
 };
 
@@ -158,12 +158,12 @@ const linkCollapsedDangerSelectedVariantClasses = {
     active: 'text-danger-600 bg-black/10 active:bg-black/20',
   },
   secondary: {
-    base: 'text-secondary-600 hover:bg-black/10 active:bg-black/20',
-    active: 'text-secondary-600 bg-black/10 active:bg-black/20',
+    base: 'text-primary-600 hover:bg-black/10 active:bg-black/20',
+    active: 'text-primary-600 bg-black/10 active:bg-black/20',
   },
   ghost: {
-    base: 'text-danger-500 bg-secondary-600 hover:bg-secondary-500',
-    active: 'text-danger-500 bg-secondary-500',
+    base: 'text-danger-500 bg-primary-600 hover:bg-primary-500',
+    active: 'text-danger-500 bg-primary-500',
   },
 };
 
@@ -176,8 +176,8 @@ const iconDefaultVariantClasses = {
 };
 
 const iconDefaultSelectedVariantClasses = {
-  primary: 'text-secondary-600',
-  secondary: 'text-secondary-600',
+  primary: 'text-primary-600',
+  secondary: 'text-primary-600',
   ghost: 'text-white',
 };
 
@@ -202,8 +202,8 @@ const iconCollapsedVariantClasses = {
 };
 
 const iconCollapsedSelectedVariantClasses = {
-  primary: 'text-secondary-600',
-  secondary: 'text-secondary-600',
+  primary: 'text-primary-600',
+  secondary: 'text-primary-600',
   ghost: 'text-white',
 };
 
@@ -215,7 +215,7 @@ const iconCollapsedDangerVariantClasses = {
 
 const iconCollapsedDangerSelectedVariantClasses = {
   primary: 'text-danger-600',
-  secondary: 'text-secondary-600',
+  secondary: 'text-primary-600',
   ghost: 'text-danger-500',
 };
 
@@ -253,7 +253,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
       size = 'md',
       startIcon,
       endIcon,
-      variant = 'secondary',
+      variant = 'primary',
       children,
       ...props
     },
@@ -386,7 +386,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
             className={cn(
               'absolute block rounded-full opacity-0 transition',
               underlineDirectionClasses[direction],
-              !danger && 'bg-secondary-600',
+              !danger && 'bg-primary-600',
               danger && 'bg-danger-600',
               selected && 'opacity-100',
             )}

@@ -138,7 +138,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             <span
               className={cn(
                 'block w-2 h-2 rounded-full',
-                className?.includes('bg-') ? '' : `bg-secondary-500`,
+                className?.includes('bg-') ? '' : `bg-primary-500`,
                 className,
               )}
               data-testid='badge-dot'
@@ -153,7 +153,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             <span
               className={cn(
                 'flex items-center justify-center min-w-5 h-5 rounded-full text-white whitespace-nowrap px-1 overflow-hidden font-sans text-xs font-medium',
-                className?.includes('bg-') ? '' : `bg-secondary-500`,
+                className?.includes('bg-') ? '' : `bg-primary-500`,
                 className,
               )}
               style={badgeStyle}

@@ -37,7 +37,7 @@ const MenuBarComponent: FC<MenuBarProps> = ({
   block = false,
   collapsed = false,
   size = 'md',
-  variant = 'secondary',
+  variant = 'primary',
   children,
   ...props
 }) => {

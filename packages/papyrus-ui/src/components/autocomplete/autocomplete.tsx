@@ -698,7 +698,7 @@ export const Autocomplete = forwardRef(
                         data-index={idx}
                         endIcon={
                           isSelected ? (
-                            <BiCheck className='text-secondary-600' />
+                            <BiCheck className='text-primary-600' />
                           ) : undefined
                         }
                         id={slug(inputId, OPTION_ID, idx)}

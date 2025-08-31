@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import { resolve } from 'path';
 
-import papyrusUI from 'papyrus-ui/plugin';
+import papyrusUI from '../packages/papyrus-ui/src/plugin';
 
 export default {
   content: [

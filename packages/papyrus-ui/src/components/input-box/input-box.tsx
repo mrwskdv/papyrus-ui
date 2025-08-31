@@ -67,8 +67,8 @@ const interactiveStates = [
   'outline-transparent',
   'bg-black/10',
   'cursor-text',
-  'hover:outline-secondary-500',
-  'focus-within:outline-secondary-500',
+  'hover:outline-primary-500',
+  'focus-within:outline-primary-500',
   'focus-within:ring-4',
 ];
 

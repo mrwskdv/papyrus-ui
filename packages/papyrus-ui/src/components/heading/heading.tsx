@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import type { AllHTMLAttributes, ElementType } from 'react';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-export type HeadingVariant = 'primary' | 'secondary';
+export type HeadingFontVariant = 'primary' | 'secondary';
 
 export interface HeadingProps
   extends Omit<AllHTMLAttributes<HTMLElement>, 'as' | 'size'> {
@@ -27,7 +27,7 @@ export interface HeadingProps
    *
    * @default 'primary'
    */
-  fontVariant?: HeadingVariant;
+  fontVariant?: HeadingFontVariant;
 }
 
 export const Heading = forwardRef<HTMLElement, HeadingProps>(

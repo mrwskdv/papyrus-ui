@@ -42,7 +42,7 @@ const baseStyles = [
   'max-w-full',
   'border',
   'gap-1',
-  'px-1.5',
+  'px-2',
   'overflow-hidden',
   'transition-all',
 ];
@@ -55,12 +55,8 @@ const sizeStyles = {
 
 // Variant styles
 const variantStyles = {
-  primary: ['border-primary-600/30', 'text-primary-800', 'bg-primary-600/10'],
-  secondary: [
-    'border-secondary-600/30',
-    'text-secondary-800',
-    'bg-secondary-600/10',
-  ],
+  primary: ['border-transparent', 'text-white', 'bg-primary-600'],
+  secondary: ['border-primary-600/30', 'text-primary-800', 'bg-primary-600/10'],
   tertiary: ['border-neutral-300', 'text-neutral-800', 'bg-neutral-50'],
   info: ['border-info-600/30', 'text-info-800', 'bg-info-600/10'],
   success: ['border-success-600/30', 'text-success-800', 'bg-success-600/10'],
@@ -72,8 +68,8 @@ const variantStyles = {
 const interactiveStyles = ['cursor-pointer'];
 
 const interactiveVariantStyles = {
-  primary: ['hover:bg-primary-600/20', 'active:bg-primary-600/30'],
-  secondary: ['hover:bg-secondary-600/20', 'active:bg-secondary-600/30'],
+  primary: ['hover:bg-primary-500', 'active:bg-primary-700'],
+  secondary: ['hover:bg-primary-600/20', 'active:bg-primary-600/30'],
   tertiary: ['hover:bg-black/10', 'active:bg-black/20'],
   info: ['hover:bg-info-600/20', 'active:bg-info-600/30'],
   success: ['hover:bg-success-600/20', 'active:bg-success-600/30'],
@@ -104,7 +100,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       role,
       size = 'md',
       tabIndex,
-      variant = 'secondary',
+      variant = 'primary',
       onClick,
       onKeyDown,
       children,

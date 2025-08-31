@@ -5,12 +5,11 @@ import type { HTMLAttributes } from 'react';
 import { Text } from '../text';
 import type { TextSize, TextFontVariant } from '../text';
 
-export type QuoteVariant = 'primary' | 'secondary' | 'tertiary';
+export type QuoteVariant = 'primary' | 'secondary';
 
 const lineVariantClasses = {
   primary: 'bg-primary-500',
-  secondary: 'bg-secondary-500',
-  tertiary: 'bg-neutral-400',
+  secondary: 'bg-neutral-400',
 };
 
 export interface QuoteProps
@@ -38,7 +37,7 @@ export interface QuoteProps
 }
 
 export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>(
-  ({ className, variant = 'secondary', children, ...props }, ref) => (
+  ({ className, variant = 'primary', children, ...props }, ref) => (
     <Text
       {...props}
       ref={ref}

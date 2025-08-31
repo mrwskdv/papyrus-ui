@@ -10,7 +10,7 @@ const meta: Meta<TooltipProps> = {
   component: Tooltip,
   args: {
     title: 'This is a tooltip',
-    children: <Button variant='secondary'>Hover me</Button>,
+    children: <Button>Hover me</Button>,
   },
 };
 
@@ -36,7 +36,7 @@ export const TriggerOnClick = Template.bind({});
 TriggerOnClick.args = {
   title: 'Tooltip triggered on click',
   trigger: 'click',
-  children: <Button variant='secondary'>Click me</Button>,
+  children: <Button>Click me</Button>,
 };
 
 export default meta;

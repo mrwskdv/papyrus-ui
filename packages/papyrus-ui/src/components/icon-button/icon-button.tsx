@@ -90,17 +90,17 @@ const baseStyles = [
 // Variant styles
 const variantStyles = {
   primary: [
+    'text-white',
+    'bg-primary-600',
+    'hover:bg-primary-500',
+    'active:bg-primary-700',
+    'disabled:bg-neutral-300',
+  ],
+  secondary: [
     'text-primary-600',
     'bg-primary-600/10',
     'hover:bg-primary-600/20',
     'active:bg-primary-600/30',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
-  ],
-  secondary: [
-    'text-secondary-600',
-    'bg-secondary-600/10',
-    'hover:bg-secondary-600/20',
-    'active:bg-secondary-600/30',
     'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
@@ -160,7 +160,7 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
       rounded,
       size = 'md',
       type,
-      variant = 'secondary',
+      variant = 'primary',
       className,
       children,
       ...elemProps

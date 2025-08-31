@@ -30,7 +30,7 @@ export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
 const MenuComponent: FC<MenuProps> = ({
   collapsed = false,
   size = 'md',
-  variant = 'secondary',
+  variant = 'primary',
   children,
   className,
   onCollapsedChange,

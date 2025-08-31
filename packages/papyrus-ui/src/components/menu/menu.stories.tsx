@@ -26,7 +26,7 @@ export default {
   title: 'Navigation/Menu',
   component: Menu,
   args: {
-    variant: 'secondary',
+    variant: 'primary',
   },
 };
 
@@ -90,7 +90,7 @@ export const Variant: StoryFn<MenuProps> = args => (
         key={i}
         className={
           variant === 'ghost'
-            ? 'bg-gradient-to-br from-secondary-800 to-primary-900 px-2 py-4'
+            ? 'bg-gradient-to-br from-primary-800 to-primary-900 px-2 py-4'
             : 'px-2'
         }
       >

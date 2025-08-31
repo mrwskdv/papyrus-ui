@@ -111,7 +111,7 @@ const iconByVariant: Record<
 };
 
 const rootVariantClasses = {
-  primary: 'bg-secondary-700',
+  primary: 'bg-primary-700',
   secondary: 'bg-black/80',
   info: 'bg-info-700',
   success: 'bg-success-700',
@@ -152,7 +152,7 @@ export const SnackbarItem = forwardRef<
       in: visible = true,
       message,
       role = 'alert',
-      variant = 'secondary',
+      variant = 'primary',
       onActionClick,
       onDismiss,
       onHide,

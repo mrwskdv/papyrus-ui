@@ -6,6 +6,8 @@ export * from './components/button';
 export * from './components/caption';
 export * from './components/checkbox';
 export * from './components/checkbox-group';
+export * from './components/code';
+export * from './components/code-block';
 export * from './components/dialog';
 export * from './components/divider';
 export * from './components/dropdown-menu';

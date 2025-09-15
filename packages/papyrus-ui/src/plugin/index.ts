@@ -564,6 +564,35 @@ const papyrusUIPlugin = plugin(props => {
         display: 'none',
       },
     },
+
+    '.scrollbar': {
+      scrollbarWidth: 'thin',
+      scrollbarColor: '#d1d5db #f3f4f6', // neutral-300 neutral-100
+
+      '&::-webkit-scrollbar': {
+        width: '8px',
+        height: '8px',
+      },
+
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f3f4f6', // neutral-100
+        borderRadius: '4px',
+      },
+
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#d1d5db', // neutral-300
+        borderRadius: '4px',
+        border: '1px solid #f3f4f6', // neutral-100
+
+        '&:hover': {
+          backgroundColor: '#9ca3af', // neutral-400
+        },
+      },
+
+      '&::-webkit-scrollbar-corner': {
+        backgroundColor: '#f3f4f6', // neutral-100
+      },
+    },
   });
 }, config);
 

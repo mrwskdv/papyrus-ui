@@ -1,9 +1,10 @@
 import cn from 'classnames';
-import type { FC } from 'react';
+import type { FC, ElementType } from 'react';
 
 export type DividerDirection = 'horizontal' | 'vertical';
 
 export interface DividerProps {
+  as?: ElementType;
   direction?: DividerDirection;
   className?: string;
 }
@@ -14,12 +15,17 @@ const directionClass: Record<DividerDirection, string> = {
 };
 
 export const Divider: FC<DividerProps> = ({
+  as: Element = 'div',
   direction = 'horizontal',
   className,
   ...props
 }) => (
-  <div
+  <Element
     {...props}
-    className={cn('bg-current', directionClass[direction], className)}
+    className={cn(
+      className?.includes('bg-') ? '' : 'bg-current',
+      directionClass[direction],
+      className,
+    )}
   />
 );

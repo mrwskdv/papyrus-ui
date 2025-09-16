@@ -74,7 +74,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
     const hasContent = children && children.trim().length > 0;
 
     return (
-      <div className='relative'>
+      <div className={cn('relative', className)}>
         <pre
           ref={ref}
           className={cn(
@@ -83,7 +83,6 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
             size === 'md' && 'text-code-md',
             wrap && 'overflow-x-hidden whitespace-pre-wrap break-words',
             !wrap && 'overflow-x-auto scrollbar',
-            className,
           )}
           {...(language && { 'data-language': language })}
           {...props}

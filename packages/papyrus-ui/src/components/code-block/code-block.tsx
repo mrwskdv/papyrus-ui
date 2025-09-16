@@ -99,24 +99,24 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
           ) : (
             <code className='block max-w-full'>{children}</code>
           )}
-
-          {children && (
-            <div className='absolute flex items-center justify-center top-0 end-0 p-2'>
-              <Icon
-                className='text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer transition-colors duration-200'
-                role='button'
-                tabIndex={0}
-                title={copyLabel}
-                onClick={() => {
-                  copy(children);
-                  onCopy?.();
-                }}
-              >
-                <BiCopy />
-              </Icon>
-            </div>
-          )}
         </pre>
+
+        {children && (
+          <div className='absolute flex items-center justify-center top-0 end-0 p-2'>
+            <Icon
+              className='text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer transition-colors duration-200'
+              role='button'
+              tabIndex={0}
+              title={copyLabel}
+              onClick={() => {
+                copy(children);
+                onCopy?.();
+              }}
+            >
+              <BiCopy />
+            </Icon>
+          </div>
+        )}
       </div>
     );
   },

@@ -2,11 +2,14 @@ import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
 import Autocomplete, {
   Basic,
   Sizes,
+  Variants,
   Invalid,
-   Multiple,
+  Multiple,
   Disabled,
   ReadOnly,
-  WithIcon, Description, Message,
+  WithIcon,
+  Description,
+  Message,
 } from './autocomplete.stories';
 
 <Meta of={Autocomplete} />
@@ -39,6 +42,15 @@ type.
 ### Basic
 
 <Canvas of={Basic} />
+
+### Variants
+
+The `variant` property can be used to specify the visual variant of the input box. Available values are `primary` (default) and `secondary`.
+
+- `primary`: Default variant with black/10 background
+- `secondary`: White background with neutral border
+
+<Canvas of={Variants} />
 
 ### Multiple
 
@@ -77,8 +89,6 @@ has been occurred.
 Setting the `invalid` property to `true` indicates an error or issue with the input value.
 
 <Canvas of={Invalid} />
-
-
 
 ### Disabled
 

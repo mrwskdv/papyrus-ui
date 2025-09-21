@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
 export type InputBoxSize = 'sm' | 'md' | 'lg';
+export type InputBoxVariant = 'primary' | 'secondary';
 
 export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -46,6 +47,15 @@ export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
    * @default 'md'
    */
   size?: InputBoxSize;
+
+  /**
+   * Defines the visual variant of the input box.
+   * - `primary`: White background with neutral border
+   * - `secondary`: Black/10 background with transparent border
+   *
+   * @default 'primary'
+   */
+  variant?: InputBoxVariant;
 }
 
 const sizeMap: Record<InputBoxSize, string> = {
@@ -62,17 +72,52 @@ const baseStyles = [
   'overflow-hidden',
 ];
 
-// Interactive states
-const interactiveStates = [
-  'outline-transparent',
-  'bg-black/10',
-  'cursor-text',
-  'hover:outline-primary-500',
-  'focus-within:outline-primary-500',
-  'focus-within:ring-4',
-];
+// Primary variant styles
+const primaryVariantStyles = {
+  interactive: [
+    'outline-neutral-300',
+    'bg-white',
+    'cursor-text',
+    'hover:outline-primary-500',
+    'focus-within:outline-primary-500',
+    'focus-within:ring-4',
+  ],
+  disabled: [
+    'bg-neutral-50',
+    'outline-neutral-200',
+    'shadow-none',
+    'cursor-default',
+    'hover:outline-neutral-200',
+  ],
+  readOnly: ['bg-white', 'outline-neutral-300', 'shadow-none', 'cursor-text'],
+};
 
-// Invalid state styles
+// Secondary variant styles
+const secondaryVariantStyles = {
+  interactive: [
+    'outline-transparent',
+    'bg-black/10',
+    'cursor-text',
+    'hover:outline-primary-500',
+    'focus-within:outline-primary-500',
+    'focus-within:ring-4',
+  ],
+  disabled: [
+    'bg-black/5',
+    'outline-transparent',
+    'shadow-none',
+    'cursor-default',
+    'hover:outline-transparent',
+  ],
+  readOnly: [
+    'bg-black/10',
+    'outline-transparent',
+    'shadow-none',
+    'cursor-text',
+  ],
+};
+
+// Invalid state styles (same for both variants)
 const invalidStyles = [
   'outline-danger-500',
   'hover:outline-danger-500',
@@ -80,28 +125,12 @@ const invalidStyles = [
   'focus-within:ring-4 focus-within:ring-danger-500/50',
 ];
 
-// Disabled state styles
-const disabledStyles = [
-  'bg-black/5',
-  'outline-transparent',
-  'shadow-none',
-  'cursor-default',
-  'hover:outline-transparent',
-];
-
-// Readonly state styles
-const readonlyStyles = [
-  'bg-black/10',
-  'outline-transparent',
-  'shadow-none',
-  'cursor-text',
-];
-
 export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
   (
     {
       invalid,
       size = 'md',
+      variant = 'primary',
       className,
       disabled,
       readOnly,
@@ -110,24 +139,29 @@ export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
       ...elementProps
     },
     ref,
-  ) => (
-    <div
-      ref={ref}
-      className={cn(
-        baseStyles,
-        !disabled && !readOnly && interactiveStates,
-        invalid && invalidStyles,
-        disabled && disabledStyles,
-        readOnly && readonlyStyles,
-        sizeMap[size],
-        rounded ? 'rounded-full' : 'rounded-input',
-        className,
-      )}
-      {...elementProps}
-    >
-      {children}
-    </div>
-  ),
+  ) => {
+    const variantStyles =
+      variant === 'primary' ? primaryVariantStyles : secondaryVariantStyles;
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          baseStyles,
+          !disabled && !readOnly && variantStyles.interactive,
+          invalid && invalidStyles,
+          disabled && variantStyles.disabled,
+          readOnly && variantStyles.readOnly,
+          sizeMap[size],
+          rounded ? 'rounded-full' : 'rounded-input',
+          className,
+        )}
+        {...elementProps}
+      >
+        {children}
+      </div>
+    );
+  },
 );
 
 InputBox.displayName = 'InputBox';

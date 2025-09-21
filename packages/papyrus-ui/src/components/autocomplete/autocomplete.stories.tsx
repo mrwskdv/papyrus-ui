@@ -2,12 +2,13 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize } from '../input-box';
+import type { InputBoxSize, InputBoxVariant } from '../input-box';
 
 import { Autocomplete } from './autocomplete';
 import type { AutocompleteProps } from './autocomplete';
 
 const SIZE_OPTIONS: InputBoxSize[] = ['sm', 'md', 'lg'];
+const VARIANT_OPTIONS: InputBoxVariant[] = ['primary', 'secondary'];
 
 const OPTIONS_LIST = ['Peter', 'Louis', 'Mag', 'Chris', 'Stewie', 'Bryan'];
 
@@ -94,6 +95,24 @@ export function Sizes(args: AutocompleteProps) {
             id={`autocomplete-size-${size}`}
             options={OPTIONS_LIST}
             size={size}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function Variants(args: AutocompleteProps) {
+  return (
+    <div className='flex flex-col min-h-[384px] w-64'>
+      {VARIANT_OPTIONS.map((variant, i) => (
+        <div key={i} className={i ? 'mt-4' : ''}>
+          <Autocomplete
+            {...args}
+            id={`autocomplete-variant-${variant}`}
+            label={`${variant} variant`}
+            options={OPTIONS_LIST}
+            variant={variant}
           />
         </div>
       ))}

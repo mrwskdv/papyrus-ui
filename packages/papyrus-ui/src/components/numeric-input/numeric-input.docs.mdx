@@ -2,10 +2,13 @@ import { Meta, ArgTypes, Canvas } from '@storybook/addon-docs';
 import NumericInput, {
   Basic,
   Invalid,
-   Disabled,
+  Disabled,
   ReadOnly,
   Sizes,
-  WithIcon, Description, Message,
+  Variants,
+  WithIcon,
+  Description,
+  Message,
 } from './numeric-input.stories';
 
 <Meta of={NumericInput} />
@@ -23,6 +26,15 @@ Input component for collecting a number value from the user.
 ### Basic
 
 <Canvas of={Basic} />
+
+### Variants
+
+The `variant` property can be used to specify the visual variant of the input box. Available values are `primary` (default) and `secondary`.
+
+- `primary`: Default variant with black/10 background
+- `secondary`: White background with neutral border
+
+<Canvas of={Variants} />
 
 ### Sizes
 
@@ -56,7 +68,6 @@ Setting the `invalid` property to `true` indicates an error or issue with the in
 
 <Canvas of={Invalid} />
 
-
 ### Disabled
 
 Disabled input
@@ -80,7 +91,7 @@ Readonly input
 - Use **`description`**property to provide additional context or instructions for the input.
 
 - Display helpful hints with the `message` prop or error messages with `invalid` for user guidance, especially in form
-validation scenarios.
+  validation scenarios.
 
 ## Accessibility
 

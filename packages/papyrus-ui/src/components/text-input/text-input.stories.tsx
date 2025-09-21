@@ -2,12 +2,13 @@ import type { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize } from '../input-box';
+import type { InputBoxSize, InputBoxVariant } from '../input-box';
 
 import { TextInput } from './text-input';
 import type { TextInputProps } from './text-input';
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
+const variants: InputBoxVariant[] = ['primary', 'secondary'];
 
 export default {
   title: 'Inputs/TextInput',
@@ -45,6 +46,23 @@ export function Sizes(args: TextInputProps) {
       {sizes.map((size, i) => (
         <div key={i} className={i ? 'mt-4' : ''}>
           <TextInput {...args} id={`text-input-size-${size}`} size={size} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function Variants(args: TextInputProps) {
+  return (
+    <div className='flex flex-col w-64'>
+      {variants.map((variant, i) => (
+        <div key={i} className={i ? 'mt-4' : ''}>
+          <TextInput
+            {...args}
+            id={`text-input-variant-${variant}`}
+            label={`${variant} variant`}
+            variant={variant}
+          />
         </div>
       ))}
     </div>

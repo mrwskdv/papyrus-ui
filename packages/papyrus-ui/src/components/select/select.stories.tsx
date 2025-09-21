@@ -2,12 +2,13 @@ import type { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize } from '../input-box';
+import type { InputBoxSize, InputBoxVariant } from '../input-box';
 
 import { Select } from './select';
 import type { SelectProps } from './select';
 
 const SIZE_OPTIONS: InputBoxSize[] = ['sm', 'md', 'lg'];
+const VARIANT_OPTIONS: InputBoxVariant[] = ['primary', 'secondary'];
 
 const SELECT_OPTIONS = [
   'Choose a person',
@@ -59,6 +60,29 @@ export function Sizes(args: SelectProps) {
       {SIZE_OPTIONS.map((size, i) => (
         <div key={i} className={i ? 'mt-4' : ''}>
           <Select {...args} id={`select-size-${size}`} size={size}>
+            {SELECT_OPTIONS.map((val, idx) => (
+              <option key={idx} value={idx}>
+                {val}
+              </option>
+            ))}
+          </Select>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function Variants(args: SelectProps) {
+  return (
+    <div className='flex flex-col w-64'>
+      {VARIANT_OPTIONS.map((variant, i) => (
+        <div key={i} className={i ? 'mt-4' : ''}>
+          <Select
+            {...args}
+            id={`select-variant-${variant}`}
+            label={`${variant} variant`}
+            variant={variant}
+          >
             {SELECT_OPTIONS.map((val, idx) => (
               <option key={idx} value={idx}>
                 {val}

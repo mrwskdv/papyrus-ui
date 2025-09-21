@@ -47,7 +47,7 @@ import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox } from '../input-box';
-import type { InputBoxSize } from '../input-box';
+import type { InputBoxSize, InputBoxVariant } from '../input-box';
 import { InputGroup } from '../input-group';
 import { Listbox } from '../listbox/listbox';
 import { Option } from '../option';
@@ -177,6 +177,15 @@ export interface AutocompleteProps<
    * The size of the autocomplete component.
    */
   size?: InputBoxSize;
+
+  /**
+   * The visual variant of the input.
+   * - `primary`: Default variant with black/10 background
+   * - `secondary`: White background with neutral border
+   *
+   * @default 'primary'
+   */
+  variant?: InputBoxVariant;
 
   /**
    * icon to display at the start of the input element.
@@ -321,6 +330,7 @@ export const Autocomplete = forwardRef(
       readOnly,
       searchTimeout = 500,
       size = 'md',
+      variant,
       startIcon,
       endIcon,
       value,
@@ -573,6 +583,7 @@ export const Autocomplete = forwardRef(
           invalid={invalid}
           readOnly={readOnly}
           size={size}
+          variant={variant}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
             <InputAction className='me-1'>{startIcon}</InputAction>

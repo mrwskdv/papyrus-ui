@@ -44,7 +44,6 @@ const baseStyles = [
   'gap-1',
   'px-2',
   'overflow-hidden',
-  'transition-all',
 ];
 
 // Size styles
@@ -65,7 +64,7 @@ const variantStyles = {
   ghost: ['border-white/60', 'text-white', 'bg-white/20'],
 };
 
-const interactiveStyles = ['cursor-pointer'];
+const interactiveStyles = ['cursor-pointer', 'transition-colors'];
 
 const interactiveVariantStyles = {
   primary: ['hover:bg-primary-500', 'active:bg-primary-700'],

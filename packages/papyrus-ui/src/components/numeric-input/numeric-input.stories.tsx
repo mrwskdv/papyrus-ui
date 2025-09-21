@@ -3,12 +3,13 @@ import { capitalize } from 'lodash';
 import { BiInfoCircle, BiSolidPurchaseTag } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize } from '../input-box';
+import type { InputBoxSize, InputBoxVariant } from '../input-box';
 
 import { NumericInput } from './numeric-input';
 import type { NumericInputProps } from './numeric-input';
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
+const variants: InputBoxVariant[] = ['primary', 'secondary'];
 
 export default {
   title: 'Inputs/NumericInput',
@@ -44,6 +45,23 @@ export function Sizes(args: NumericInputProps) {
             id={`numeric-input-size-${size}`}
             label={capitalize(size)}
             size={size}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function Variants(args: NumericInputProps) {
+  return (
+    <div className='flex flex-col w-64'>
+      {variants.map((variant, i) => (
+        <div key={i} className={i ? 'mt-4' : ''}>
+          <NumericInput
+            {...args}
+            id={`numeric-input-variant-${variant}`}
+            label={`${variant} variant`}
+            variant={variant}
           />
         </div>
       ))}

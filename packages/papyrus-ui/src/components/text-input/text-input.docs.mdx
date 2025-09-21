@@ -7,8 +7,9 @@ import TextInput, {
   Disabled,
   ReadOnly,
   Sizes,
+  Variants,
   WithIcon,
-   Message,
+  Message,
 } from './text-input.stories';
 
 <Meta of={TextInput} />
@@ -26,6 +27,15 @@ Input component for text values.
 ### Basic
 
 <Canvas of={Basic} />
+
+### Variants
+
+The `variant` property can be used to specify the visual variant of the input box. Available values are `primary` (default) and `secondary`.
+
+- `primary`: Default variant with black/10 background
+- `secondary`: White background with neutral border
+
+<Canvas of={Variants} />
 
 ### Clearable
 
@@ -64,7 +74,6 @@ has been occurred.
 Setting the `invalid` property to `true` indicates an error or issue with the input value.
 
 <Canvas of={Invalid} />
-
 
 ### Disabled
 

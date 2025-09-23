@@ -58,12 +58,6 @@ export interface IconButtonProps
   children?: ReactElement;
 }
 
-const avatarSize: Record<IconButtonSize, AvatarProps['size']> = {
-  sm: 'xs',
-  md: 'sm',
-  lg: 'md',
-};
-
 const sizeMap: Record<IconButtonSize, string> = {
   sm: 'w-7 h-7',
   md: 'w-9 h-9',
@@ -71,23 +65,21 @@ const sizeMap: Record<IconButtonSize, string> = {
 };
 
 const iconSizeMap: Record<IconButtonSize, string> = {
-  sm: 'text-base',
-  md: 'text-xl',
-  lg: 'text-2xl',
+  sm: 'text-lg',
+  md: 'text-2xl',
+  lg: 'text-3xl',
 };
 
 // Base styles that are always applied
 const baseStyles = [
   'inline-flex items-center justify-center',
-  'border',
   'transition-colors',
-  'focus-visible:ring',
+  'focus:outline-none focus-visible:ring',
 ];
 
 // Variant styles
 const variantStyles = {
   primary: [
-    'border-transparent',
     'text-white',
     'bg-primary-600',
     'hover:bg-primary-500',
@@ -95,7 +87,7 @@ const variantStyles = {
     'disabled:bg-neutral-300',
   ],
   secondary: [
-    'border-primary-600/80',
+    'border border-primary-600/80',
     'text-primary-600',
     'bg-transparent',
     'hover:bg-primary-600/10',
@@ -103,7 +95,6 @@ const variantStyles = {
     'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
   ],
   tertiary: [
-    'border-transparent',
     'text-black',
     'bg-black/10',
     'hover:bg-black/20',
@@ -111,20 +102,24 @@ const variantStyles = {
     'disabled:opacity-disabled disabled:bg-black/10',
   ],
   plain: [
-    'border-transparent',
     'text-black',
     'hover:bg-black/10',
     'active:bg-black/20',
     'disabled:opacity-disabled disabled:bg-transparent',
   ],
   ghost: [
-    'border-transparent',
     'text-white',
     'hover:bg-white/30',
     'active:bg-white/40',
     'disabled:opacity-disabled disabled:bg-transparent',
   ],
 };
+
+const avatarStyles = 'relative bg-white';
+
+const avatarChildrenStyles = 'hover:opacity-60 transition-opacity';
+
+const avatarChildenDisabledStyles = 'opacity-disabled';
 
 export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
   (
@@ -136,6 +131,7 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
       type,
       variant = 'primary',
       className,
+      disabled,
       children,
       ...elemProps
     },
@@ -147,16 +143,27 @@ export const IconButton = forwardRef<HTMLElement, IconButtonProps>(
       className={cn(
         baseStyles,
         sizeMap[size],
-        variantStyles[variant],
+        !avatar && variantStyles[variant],
+        avatar && avatarStyles,
         avatar || rounded ? 'rounded-full' : 'rounded-input',
         className,
       )}
+      disabled={disabled}
       type={Element === 'button' && type == null ? 'button' : type}
     >
       {avatar &&
         isValidElement<AvatarProps>(avatar) &&
         cloneElement(avatar, {
-          size: avatarSize[size],
+          className: cn(
+            disabled ? avatarChildenDisabledStyles : avatarChildrenStyles,
+            avatar.props.className,
+          ),
+          style: {
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+          },
         })}
 
       {!avatar && <Icon className={cn(iconSizeMap[size])}>{children}</Icon>}

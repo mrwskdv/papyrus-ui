@@ -363,6 +363,12 @@ export const theme: Config['theme'] = {
     ringWidth: {
       DEFAULT: '3px',
     },
+    ringOffsetWidth: {
+      DEFAULT: '1px',
+    },
+    ringOffsetColor: {
+      DEFAULT: 'white',
+    },
     ringColor: {
       DEFAULT: 'rgba(79, 70, 229, .5)', // primary-600/50
     },

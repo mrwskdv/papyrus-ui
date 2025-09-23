@@ -1,6 +1,6 @@
 {
   "name": "@papyrus-ui/code-style",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "Shareable ESLint configurations for JavaScript and TypeScript projects using ESLint 9+ flat config format.",
   "type": "module",
   "files": [

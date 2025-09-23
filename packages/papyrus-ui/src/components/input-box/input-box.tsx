@@ -80,7 +80,13 @@ const primaryVariantStyles = {
     'cursor-text',
     'hover:outline-primary-500',
     'focus-within:outline-primary-500',
-    'focus-within:ring-4',
+    'focus-within:ring-4 focus-within:ring-offset-0',
+  ],
+  invalid: [
+    'outline-danger-500',
+    'bg-white',
+    'cursor-text',
+    'focus-within:ring-4 focus-within:ring-offset-0 focus-within:ring-danger-500/50',
   ],
   disabled: [
     'bg-neutral-50',
@@ -100,7 +106,13 @@ const secondaryVariantStyles = {
     'cursor-text',
     'hover:outline-primary-500',
     'focus-within:outline-primary-500',
-    'focus-within:ring-4',
+    'focus-within:ring-4 focus-within:ring-offset-0',
+  ],
+  invalid: [
+    'outline-danger-500',
+    'bg-black/10',
+    'cursor-text',
+    'focus-within:ring-4 focus-within:ring-offset-0 focus-within:ring-danger-500/50',
   ],
   disabled: [
     'bg-black/5',
@@ -116,14 +128,6 @@ const secondaryVariantStyles = {
     'cursor-text',
   ],
 };
-
-// Invalid state styles (same for both variants)
-const invalidStyles = [
-  'outline-danger-500',
-  'hover:outline-danger-500',
-  'focus-within:outline-danger-500',
-  'focus-within:ring-4 focus-within:ring-danger-500/50',
-];
 
 export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
   (
@@ -148,10 +152,10 @@ export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
         ref={ref}
         className={cn(
           baseStyles,
-          !disabled && !readOnly && variantStyles.interactive,
-          invalid && invalidStyles,
+          !disabled && !readOnly && !invalid && variantStyles.interactive,
+          !disabled && !readOnly && invalid && variantStyles.invalid,
+          !disabled && readOnly && variantStyles.readOnly,
           disabled && variantStyles.disabled,
-          readOnly && variantStyles.readOnly,
           sizeMap[size],
           rounded ? 'rounded-full' : 'rounded-input',
           className,

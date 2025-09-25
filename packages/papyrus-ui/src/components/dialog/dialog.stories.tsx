@@ -37,7 +37,7 @@ const meta: Meta<DialogProps> = {
           </Dialog.Description>
         </Dialog.Body>
         <Dialog.Footer>
-          <Dialog.Close as={Button} variant='tertiary'>
+          <Dialog.Close as={Button} variant='plain'>
             Cancel
           </Dialog.Close>
           <Dialog.Close as={Button}>OK</Dialog.Close>
@@ -126,7 +126,7 @@ export function Sizes(args: DialogProps) {
               lectus convallis, ultrices dui non, varius massa.
             </Dialog.Description>
           </Dialog.Body>
-          <Dialog.Footer className='justify-end'>
+          <Dialog.Footer className='justify-center'>
             <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
@@ -168,7 +168,7 @@ export function Sizes(args: DialogProps) {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button variant='tertiary' onClick={handleClose}>
+            <Button variant='plain' onClick={handleClose}>
               Cancel
             </Button>
             <Button variant='primary' onClick={handleClose}>
@@ -237,7 +237,7 @@ export function Sizes(args: DialogProps) {
             </Dialog.Description>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button variant='tertiary' onClick={handleClose}>
+            <Button variant='plain' onClick={handleClose}>
               Cancel
             </Button>
             <Button variant='primary' onClick={handleClose}>
@@ -309,7 +309,7 @@ export function Sizes(args: DialogProps) {
             <Button variant='primary' onClick={handleClose}>
               OK
             </Button>
-            <Button variant='tertiary' onClick={handleClose}>
+            <Button variant='plain' onClick={handleClose}>
               Cancel
             </Button>
           </Dialog.Footer>

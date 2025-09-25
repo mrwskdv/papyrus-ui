@@ -116,11 +116,11 @@ const variantStyles = {
     'bg-transparent',
     'hover:bg-primary-600/10',
     'active:bg-primary-600/20',
-    'disabled:opacity-disabled disabled:text-black disabled:bg-black/10',
+    'disabled:opacity-disabled disabled:text-neutral-950 disabled:bg-black/10',
   ],
   tertiary: [
     'border-transparent',
-    'text-neutral-700',
+    'text-neutral-950',
     'bg-black/10',
     'hover:bg-black/20',
     'active:bg-black/30',
@@ -128,7 +128,7 @@ const variantStyles = {
   ],
   plain: [
     'border-transparent',
-    'text-neutral-700',
+    'text-neutral-950',
     'hover:bg-black/10',
     'active:bg-black/20',
     'disabled:opacity-disabled disabled:bg-transparent',

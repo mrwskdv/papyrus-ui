@@ -3,6 +3,14 @@ import plugin from 'tailwindcss/plugin';
 import { config } from './config';
 
 const papyrusUIPlugin = plugin(props => {
+  // Global base styles
+  props.addBase({
+    '[data-floating-ui-portal]': {
+      position: 'fixed',
+      zIndex: '1000',
+    },
+  });
+
   props.addComponents({
     // Input component styles
     '.input-base': {
@@ -250,13 +258,6 @@ const papyrusUIPlugin = plugin(props => {
           width: '1em',
           marginInlineStart: '-1.5em',
         },
-      },
-    },
-
-    '.list-disc': {
-      listStyleType: 'none!important',
-      '& > li:before': {
-        content: '"\\2022"',
       },
     },
 

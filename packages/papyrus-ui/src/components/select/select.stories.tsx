@@ -104,7 +104,7 @@ export function WithIcon(args: SelectProps) {
           id='select-with-start-icon'
           label='With Start Icon'
           startIcon={
-            <Icon className='text-neutral-600'>
+            <Icon className='text-neutral-950'>
               <BiSearch />
             </Icon>
           }

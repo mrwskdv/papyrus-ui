@@ -56,7 +56,7 @@ const sizeStyles = {
 const variantStyles = {
   primary: ['border-transparent', 'text-white', 'bg-primary-600'],
   secondary: ['border-primary-600/60', 'text-primary-800', 'bg-primary-600/10'],
-  tertiary: ['border-neutral-400', 'text-neutral-800', 'bg-neutral-50'],
+  tertiary: ['border-neutral-400', 'text-neutral-950', 'bg-neutral-50'],
   info: ['border-info-600/60', 'text-info-800', 'bg-info-600/10'],
   success: ['border-success-600/60', 'text-success-800', 'bg-success-600/10'],
   warning: ['border-warning-600/60', 'text-warning-800', 'bg-warning-600/10'],

@@ -44,19 +44,19 @@ const iconByVariant: Record<AlertVariant, ComponentType<IconBaseProps>> = {
 };
 
 const rootVariantClasses = {
-  primary: 'border-primary-300 bg-primary-50 text-primary-600',
-  info: 'border-info-300 bg-info-50 text-info-600',
-  success: 'border-success-300 bg-success-50 text-success-600',
-  warning: 'border-warning-300 bg-warning-50 text-warning-600',
-  danger: 'border-danger-300 bg-danger-50 text-danger-600',
+  primary: 'border-primary-600/60 bg-primary-50 text-primary-700',
+  info: 'border-info-600/60 bg-info-50 text-info-700',
+  success: 'border-success-600/60 bg-success-50 text-success-700',
+  warning: 'border-warning-600/60 bg-warning-50 text-warning-700',
+  danger: 'border-danger-600/60 bg-danger-50 text-danger-700',
 };
 
 const iconVariantClasses = {
-  primary: 'text-primary-500',
-  info: 'text-info-500',
-  success: 'text-success-500',
-  warning: 'text-warning-500',
-  danger: 'text-danger-500',
+  primary: 'text-primary-600',
+  info: 'text-info-600',
+  success: 'text-success-600',
+  warning: 'text-warning-600',
+  danger: 'text-danger-600',
 };
 
 export const Alert: FC<AlertProps> = ({
@@ -93,7 +93,7 @@ export const Alert: FC<AlertProps> = ({
             <Heading as='div' className='mb-1' level={5}>
               {message}
             </Heading>
-            <Text as='div' className='mt-1 text-neutral-900' size='sm'>
+            <Text as='div' className='mt-1 text-neutral-950' size='sm'>
               {children}
             </Text>
           </>
@@ -105,7 +105,7 @@ export const Alert: FC<AlertProps> = ({
       {onClose && (
         <Icon
           aria-label={closeLabel}
-          className='absolute top-3 end-3 text-md text-neutral-800 hover:text-neutral-500'
+          className='absolute top-2 end-2 text-md text-neutral-500 hover:text-neutral-950 opacity-colors'
           role='button'
           tabIndex={0}
           onClick={onClose}

@@ -78,7 +78,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
         <pre
           ref={ref}
           className={cn(
-            'rounded-lg border border-neutral-200 bg-neutral-50 font-mono text-neutral-800 ps-4 pe-8 py-4',
+            'rounded-lg border border-neutral-200 bg-neutral-50 font-mono text-neutral-950 ps-4 pe-8 py-4',
             size === 'sm' && 'text-code-sm',
             size === 'md' && 'text-code-md',
             wrap && 'overflow-x-hidden whitespace-pre-wrap break-words',
@@ -104,7 +104,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
         {children && (
           <div className='absolute flex items-center justify-center top-0 end-0 p-2'>
             <Icon
-              className='text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer transition-colors duration-200'
+              className='text-sm text-neutral-500 hover:text-neutral-950 cursor-pointer transition-colors duration-200'
               role='button'
               tabIndex={0}
               title={copyLabel}

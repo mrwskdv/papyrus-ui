@@ -130,7 +130,7 @@ export function WithIcon(args: AutocompleteProps) {
           label='With Start Icon'
           options={OPTIONS_LIST}
           startIcon={
-            <Icon className='text-neutral-600'>
+            <Icon className='text-neutral-950'>
               <BiSearch />
             </Icon>
           }

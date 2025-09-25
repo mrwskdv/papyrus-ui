@@ -78,7 +78,7 @@ export function WithIcon(args: TextInputProps) {
           id='text-input-with-start-icon'
           label='With Start Icon'
           startIcon={
-            <Icon className='text-neutral-600'>
+            <Icon className='text-neutral-950'>
               <BiSearch />
             </Icon>
           }
@@ -89,7 +89,7 @@ export function WithIcon(args: TextInputProps) {
         <TextInput
           {...args}
           endIcon={
-            <Icon className='text-info-600'>
+            <Icon className='text-info-950'>
               <BiInfoCircle />
             </Icon>
           }

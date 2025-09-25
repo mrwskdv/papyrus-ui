@@ -87,7 +87,7 @@ export function WithIcon(args: TimeInputProps) {
           id='time-input-with-start-icon'
           label='With Start Icon'
           startIcon={
-            <Icon className='text-neutral-600'>
+            <Icon className='text-neutral-950'>
               <BiSearch />
             </Icon>
           }

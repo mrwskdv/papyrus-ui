@@ -651,7 +651,7 @@ export const Autocomplete = forwardRef(
               <InputAction className='ms-1'>
                 <Icon
                   aria-label={clearLabel}
-                  className='text-lg color-neutral-800 hover:opacity-60'
+                  className='text-lg color-neutral-950 hover:opacity-60'
                   role='button'
                   tabIndex={-1}
                   onMouseDown={handleClearMouseDown}

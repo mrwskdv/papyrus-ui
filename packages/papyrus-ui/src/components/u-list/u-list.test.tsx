@@ -1,6 +1,7 @@
 import { render } from '../../utils/test-utils';
 
 import { UList } from './u-list';
+import type { UListType } from './u-list';
 
 describe('UList', () => {
   describe('Given u-list with default props', () => {
@@ -27,6 +28,34 @@ describe('UList', () => {
         expect(getByText('Item 2')).toBeInTheDocument();
         expect(getByText('Item 3')).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('Given u-list with different types', () => {
+    it.each([
+      ['disc', 'list-disc'],
+      ['dash', 'list-dash'],
+      ['none', 'list-none'],
+    ])('When type is %s, Then should have %s class', (type, expectedClass) => {
+      const { container } = render(
+        <UList type={type as UListType}>
+          <li>Item 1</li>
+        </UList>,
+      );
+
+      const ulElement = container.querySelector('ul');
+      expect(ulElement).toHaveClass(expectedClass);
+    });
+
+    it('When no type is provided, Then should default to dash type', () => {
+      const { container } = render(
+        <UList>
+          <li>Item 1</li>
+        </UList>,
+      );
+
+      const ulElement = container.querySelector('ul');
+      expect(ulElement).toHaveClass('list-dash');
     });
   });
 });

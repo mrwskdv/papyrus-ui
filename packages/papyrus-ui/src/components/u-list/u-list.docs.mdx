@@ -35,15 +35,20 @@ The UList component is used to create unordered lists. It is a wrapper for the `
 
 ### Types
 
-Use the `type` prop to change the list style. The default type is `disc`.
+Use the `type` prop to change the list style. The default type is `dash`.
 
-#### Disc (default)
+The component supports the following list types:
 
-<Canvas of={DiscType} />
+- **Custom UI-kit types**: `dash` - A custom list marker style specific to this UI library
+- **TailwindCSS types**: `disc` and `none` - These correspond to standard TailwindCSS list-style utilities
 
-#### Dash
+#### Dash (default)
 
 <Canvas of={DashType} />
+
+#### Disc
+
+<Canvas of={DiscType} />
 
 #### None
 

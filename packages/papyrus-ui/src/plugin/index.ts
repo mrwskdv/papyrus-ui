@@ -253,13 +253,6 @@ const papyrusUIPlugin = plugin(props => {
       },
     },
 
-    '.list-disc': {
-      listStyleType: 'none!important',
-      '& > li:before': {
-        content: '"\\2022"',
-      },
-    },
-
     '.list-dash': {
       '@apply list-none': {},
       '& > li:before': {

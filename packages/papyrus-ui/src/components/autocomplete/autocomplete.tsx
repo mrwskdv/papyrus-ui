@@ -40,7 +40,7 @@ import type { IconBaseProps } from 'react-icons';
 import { BiCheck, BiX } from 'react-icons/bi';
 import { Transition } from 'react-transition-group';
 
-import type { Maybe } from '../../types';
+import type { Maybe, MaybeMultiValue } from '../../types';
 import { slug } from '../../utils/slug';
 import { useId } from '../../utils/use-id';
 import { useMergeRefs } from '../../utils/use-merge-refs';
@@ -58,10 +58,7 @@ export interface OptionComponentProps<OptionType> extends OptionProps {
   option: OptionType;
 }
 
-export type MaybeMultiValue<
-  Value,
-  IsMulti extends boolean,
-> = IsMulti extends true ? Value[] : Value | null;
+// unified in ../../types
 
 export interface AutocompleteProps<
   Value = unknown,

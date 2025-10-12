@@ -95,6 +95,7 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@papyrus-ui/code-style": "^0.8.1"
+    "@papyrus-ui/code-style": "^0.8.1",
+    "react-dropzone": "^14.3.8"
   }
 }

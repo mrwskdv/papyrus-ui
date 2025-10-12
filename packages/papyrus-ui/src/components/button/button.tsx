@@ -85,9 +85,9 @@ export interface ButtonProps
 }
 
 const sizeMap: Record<ButtonSize, string> = {
-  sm: 'min-w-24 h-7 px-2',
-  md: 'min-w-28 h-9 px-3',
-  lg: 'min-w-36 h-12 px-4',
+  sm: 'min-w-20 h-7 px-2',
+  md: 'min-w-24 h-9 px-3',
+  lg: 'min-w-32 h-12 px-4',
 };
 
 // Base styles that are always applied

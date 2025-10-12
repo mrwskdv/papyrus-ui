@@ -1,3 +1,10 @@
+// types
+export * from './types';
+
+// utils
+export * from './utils/use-dropzone-upload';
+
+// components
 export * from './components/alert';
 export * from './components/autocomplete';
 export * from './components/avatar';
@@ -14,6 +21,7 @@ export * from './components/dropdown-menu';
 export * from './components/heading';
 export * from './components/icon';
 export * from './components/icon-button';
+export * from './components/image-input';
 export * from './components/input-action';
 export * from './components/input-box';
 export * from './components/input-group';
@@ -44,4 +52,5 @@ export * from './components/text-input';
 export * from './components/textarea';
 export * from './components/time-input';
 export * from './components/tooltip';
+export * from './components/upload-preview';
 export * from './components/u-list';

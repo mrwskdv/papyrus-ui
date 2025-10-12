@@ -2,13 +2,14 @@
 
 import { forwardRef, isValidElement } from 'react';
 import type {
-  ChangeEventHandler,
+  ChangeEvent,
   ReactElement,
   ReactNode,
   TextareaHTMLAttributes,
 } from 'react';
 import type { IconBaseProps } from 'react-icons';
 
+import type { ChangeHandler } from '../../types';
 import { useId } from '../../utils/use-id';
 import { InputAction } from '../input-action';
 import { InputBox } from '../input-box';
@@ -16,7 +17,7 @@ import type { InputBoxSize, InputBoxVariant } from '../input-box';
 import { InputGroup } from '../input-group';
 
 export interface TextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   /**
    * The default value of the uncontrolled input.
    * This is used when the component is uncontrolled and does not have a `value` prop.
@@ -94,31 +95,36 @@ export interface TextareaProps
   value?: string;
 
   /**
-   * Callback function triggered when the value of the textarea changes.
-   * This is used to capture the new value when the user interacts with the textarea.
+   * Callback fired when the value changes. Receives the new value and the raw event.
    */
-  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  onChange?: ChangeHandler<string, ChangeEvent<HTMLTextAreaElement>>;
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
-      disabled,
+      defaultValue,
       description,
+      disabled,
+      endIcon,
       id,
       invalid,
       label,
       message,
-      size,
-      variant,
-      startIcon,
-      endIcon,
+      onChange,
       readOnly,
+      size,
+      startIcon,
+      value,
+      variant,
       ...props
     },
     ref,
   ) => {
     const inputId = useId(id);
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      onChange?.(e.target.value, e);
+    };
 
     return (
       <InputGroup
@@ -143,8 +149,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {...props}
             ref={ref}
             className='textarea-base'
+            defaultValue={defaultValue}
             disabled={disabled}
             readOnly={readOnly}
+            value={value}
+            onChange={handleChange}
           />
 
           {isValidElement<IconBaseProps>(endIcon) && (

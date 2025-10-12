@@ -1,11 +1,12 @@
 import { forwardRef } from 'react';
-import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
+import type { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react';
 
+import type { ChangeHandler } from '../../types';
 import { useId } from '../../utils/use-id';
 import { InputGroup } from '../input-group';
 
 export interface RangeProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   /**
    * The default value of the uncontrolled input.
    * This is used when the component is uncontrolled and does not have a `value` prop.
@@ -59,15 +60,21 @@ export interface RangeProps
   value?: number;
 
   /**
-   * Callback function triggered when the value of the range input changes.
-   * This is used to capture the new value when the user interacts with the range input.
+   * Callback fired when the value changes. Receives the new value and the raw event.
    */
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeHandler<number, ChangeEvent<HTMLInputElement>>;
 }
 
 export const Range = forwardRef<HTMLInputElement, RangeProps>(
-  ({ className, description, id, invalid, label, message, ...props }, ref) => {
+  (
+    { className, description, id, invalid, label, message, onChange, ...props },
+    ref,
+  ) => {
     const inputId = useId(id);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const next = Number(e.target.value);
+      onChange?.(next, e);
+    };
 
     return (
       <InputGroup
@@ -78,7 +85,13 @@ export const Range = forwardRef<HTMLInputElement, RangeProps>(
         label={label}
         message={message}
       >
-        <input ref={ref} className='range-input' type='range' {...props} />
+        <input
+          ref={ref}
+          className='range-input'
+          type='range'
+          {...props}
+          onChange={handleChange}
+        />
       </InputGroup>
     );
   },

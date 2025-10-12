@@ -69,7 +69,7 @@ describe('Range', () => {
           target: { value: 100 },
         });
 
-        expect(onChange.mock.calls[0][0].target.value).toBe('100');
+        expect(onChange.mock.calls[0][0]).toBe(100);
       });
     });
   });

@@ -116,8 +116,7 @@ export interface TimeInputProps
   value?: string;
 
   /**
-   * Callback function fired when the value of input component changes.
-   * The function receives the new value as its argument.
+   * Callback function fired when the value changes. Receives the new formatted time string.
    */
   onChange?: (value: string) => void;
 }
@@ -284,8 +283,8 @@ export const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
       }
     };
 
-    const handleValueChange = ({ formattedValue }: NumberFormatValues) => {
-      changeValue(formattedValue);
+    const handleValueChange = (values: NumberFormatValues) => {
+      changeValue(values.formattedValue);
     };
 
     return (

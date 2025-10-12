@@ -13,6 +13,7 @@ import type {
 import type { IconBaseProps } from 'react-icons';
 import { BiChevronDown } from 'react-icons/bi';
 
+import type { ChangeHandler } from '../../types';
 import { useId } from '../../utils/use-id';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
@@ -105,10 +106,12 @@ export interface SelectProps<IsMulti extends boolean = false>
   value?: SelectValue<IsMulti>;
 
   /**
-   * Callback function triggered when the value of the input changes.
-   * The function receives the new value as its argument.
+   * Callback fired when the value changes. Receives the new value and the raw event.
    */
-  onChange?: (value: SelectValue<IsMulti>) => void;
+  onChange?: ChangeHandler<
+    SelectValue<IsMulti>,
+    ChangeEvent<HTMLSelectElement>
+  >;
 
   /**
    * The options for the select dropdown. These are typically provided as `<option>` elements.
@@ -153,7 +156,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         ? Array.from(e.target.selectedOptions, v => v.value)
         : e.target.value;
 
-      onChange?.(nextValue as SelectValue<IsMulti>);
+      onChange?.(nextValue as SelectValue<IsMulti>, e);
     };
 
     return (

@@ -141,7 +141,8 @@ describe('TextInput', () => {
         const onChange = jest.fn();
         render(<TextInput onChange={onChange} />);
         await userEvent.type(screen.getByRole('textbox'), 'Bob');
-        expect(onChange).toHaveBeenCalledWith('Bob');
+        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1];
+        expect(lastCall[0]).toBe('Bob');
       });
     });
   });
@@ -199,7 +200,8 @@ describe('TextInput', () => {
         await userEvent.click(screen.getByRole('textbox'));
         expect(getByRole('button')).toBeInTheDocument();
         await userEvent.click(getByRole('button'));
-        expect(onChange).toHaveBeenCalledWith('');
+        const [firstArg] = onChange.mock.calls[0];
+        expect(firstArg).toBe('');
       });
     });
   });

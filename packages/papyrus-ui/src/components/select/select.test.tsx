@@ -122,7 +122,7 @@ describe('Select', () => {
 
         await userEvent.selectOptions(screen.getByRole('combobox'), '1');
 
-        expect(onChange).toHaveBeenCalledWith('1');
+        expect(onChange.mock.calls[0][0]).toBe('1');
       });
     });
   });
@@ -173,7 +173,7 @@ describe('Select', () => {
 
         await userEvent.selectOptions(screen.getByRole('listbox'), ['1', '2']);
 
-        expect(onChange).toHaveBeenCalledWith(['1', '2']);
+        expect(onChange.mock.calls[1][0]).toEqual(['1', '2']);
       });
     });
   });

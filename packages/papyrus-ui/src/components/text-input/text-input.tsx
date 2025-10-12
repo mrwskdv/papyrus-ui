@@ -12,6 +12,7 @@ import type {
 import type { IconBaseProps } from 'react-icons';
 import { BiX } from 'react-icons/bi';
 
+import type { ChangeHandler } from '../../types';
 import { useId } from '../../utils/use-id';
 import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Icon } from '../icon';
@@ -113,10 +114,9 @@ export interface TextInputProps
   value?: string;
 
   /**
-   * Callback function fired when the value of input component changes.
-   * The function receives the new value as its argument.
+   * Callback fired when the value changes. Receives the new value and the raw event.
    */
-  onChange?: (value: string) => void;
+  onChange?: ChangeHandler<string, ChangeEvent<HTMLInputElement>>;
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
@@ -162,13 +162,16 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       }
     }, [value]);
 
-    const changeValue = (nextValue: string) => {
+    const changeValue = (
+      nextValue: string,
+      e?: ChangeEvent<HTMLInputElement>,
+    ) => {
       setValueState(nextValue);
-      onChange?.(nextValue);
+      onChange?.(nextValue, e);
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      changeValue(e.target.value);
+      changeValue(e.target.value, e);
     };
 
     const handleFocus = (e: FocusEvent<HTMLInputElement>) => {

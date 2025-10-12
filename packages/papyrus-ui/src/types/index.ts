@@ -15,3 +15,9 @@ export type MaybeMultiValue<
   Value,
   IsMulti extends boolean,
 > = IsMulti extends true ? ReadonlyArray<Value> : Value | null;
+
+// Standardized change handler for inputs: always (value, event?)
+export type ChangeHandler<Value, E = unknown> = (
+  value: Value,
+  event?: E,
+) => void;

@@ -80,7 +80,10 @@ describe('Textarea', () => {
         render(<Textarea defaultValue='' onChange={onChange} />);
         await userEvent.type(screen.getByRole('textbox'), 'Bob');
 
-        expect(onChange['mock'].calls[0][0].target.value).toEqual('Bob');
+        expect(onChange).toHaveBeenCalled();
+        const [value] =
+          onChange['mock'].calls[onChange['mock'].calls.length - 1];
+        expect(value).toEqual('Bob');
       });
     });
   });

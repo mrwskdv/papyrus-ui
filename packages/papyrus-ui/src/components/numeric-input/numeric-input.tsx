@@ -168,7 +168,7 @@ export interface NumericInputProps
 
   /**
    * Callback function triggered when the value of the input changes.
-   * The function receives the new value as its argument.
+   * The function receives the new numeric value as its argument.
    */
   onChange?: (value: NumericValue) => void;
 }
@@ -208,8 +208,8 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
       }
     }, [value]);
 
-    const handleValueChange = ({ floatValue }: NumberFormatValues) => {
-      onChange?.(floatValue ?? null);
+    const handleValueChange = (values: NumberFormatValues) => {
+      onChange?.(values.floatValue ?? null);
     };
 
     return (

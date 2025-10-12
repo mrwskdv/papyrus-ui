@@ -109,12 +109,6 @@ export const ImageInput = <
 
   const inputId = useId(id);
 
-  console.log('=========================================');
-  console.log('inputId', inputId);
-  console.log('filesState', filesState);
-  console.log('invalid', invalid);
-  console.log('=========================================');
-
   return (
     <InputGroup
       description={description}

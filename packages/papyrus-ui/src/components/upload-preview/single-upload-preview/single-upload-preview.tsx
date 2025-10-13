@@ -7,7 +7,6 @@ import {
   MouseEvent,
   MouseEventHandler,
   ReactElement,
-  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -157,17 +156,6 @@ export const SingleUploadPreview = forwardRef<
       typeof url === 'string' ? url : undefined,
     );
 
-    const handleRemove = useCallback(
-      (e: MouseEvent<HTMLButtonElement>): void => {
-        e.stopPropagation();
-
-        if (index != null && onRemove) {
-          onRemove(index);
-        }
-      },
-      [index, onRemove],
-    );
-
     useEffect(() => {
       const objUrl = url instanceof Blob ? URL.createObjectURL(url) : undefined;
       setSrc(typeof url === 'string' ? url : objUrl);
@@ -178,6 +166,14 @@ export const SingleUploadPreview = forwardRef<
         }
       };
     }, [url]);
+
+    const handleRemove = (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+
+      if (index != null && onRemove) {
+        onRemove(index);
+      }
+    };
 
     return (
       <div

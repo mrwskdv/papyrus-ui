@@ -1,15 +1,9 @@
-import concat from 'lodash/fp/concat';
-import filter from 'lodash/fp/filter';
-import flow from 'lodash/fp/flow';
-import map from 'lodash/fp/map';
 import { useCallback, useEffect, useState } from 'react';
 import { ErrorCode, useDropzone } from 'react-dropzone';
 import type { Accept, FileError, FileRejection } from 'react-dropzone';
 
 import type { FileOrUrl, FileState, Maybe, MaybeMultiValue } from '../types';
 export type { FileOrUrl, FileState, MaybeMultiValue } from '../types';
-
-// types moved to src/types
 
 export interface UseDropzoneUploadProps<
   Value = unknown,
@@ -126,12 +120,7 @@ export function useDropzoneUpload<
       const items = getFilesState(data, getName, getUrl);
 
       if (multiple) {
-        setFilesState(
-          flow(
-            filter(v => v.data == null),
-            concat(items),
-          ),
-        );
+        setFilesState(prev => prev.filter(v => v.data == null).concat(items));
       } else {
         setFilesState(items);
       }
@@ -176,8 +165,8 @@ export function useDropzoneUpload<
         console.error(e);
         setError(uploadFailedMessage);
         // replace intermediate loading state of current media with invalid state
-        setFilesState(
-          map(item =>
+        setFilesState(prev =>
+          prev.map(item =>
             item.file && files.includes(item.file)
               ? { ...item, loading: false, invalid: true }
               : item,
@@ -236,7 +225,7 @@ export function useDropzoneUpload<
           return prev;
         }
 
-        return concat(prev, loadingState);
+        return prev.concat(loadingState);
       });
 
       void uploadFiles(dropped);
@@ -249,7 +238,7 @@ export function useDropzoneUpload<
       const rejectedState: FileState[] = rejected.map(createInvalidState);
 
       if (multiple) {
-        setFilesState(concat(rejectedState));
+        setFilesState(prev => prev.concat(rejectedState));
       } else {
         setFilesState(rejectedState);
       }
@@ -278,7 +267,7 @@ export function useDropzoneUpload<
     (file: File) => {
       setFilesState(prev => {
         const loadingState = createLoadingState(file);
-        return concat(prev, loadingState);
+        return prev.concat(loadingState);
       });
 
       setFileToEdit(null);

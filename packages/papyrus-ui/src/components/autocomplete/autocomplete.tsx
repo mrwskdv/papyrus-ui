@@ -47,7 +47,7 @@ import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox } from '../input-box';
-import type { InputBoxSize, InputBoxVariant } from '../input-box';
+import type { InputBoxSize } from '../input-box';
 import { InputGroup } from '../input-group';
 import { Listbox } from '../listbox/listbox';
 import { Option } from '../option';
@@ -174,15 +174,6 @@ export interface AutocompleteProps<
    * The size of the autocomplete component.
    */
   size?: InputBoxSize;
-
-  /**
-   * The visual variant of the input.
-   * - `primary`: Default variant with black/10 background
-   * - `secondary`: White background with neutral border
-   *
-   * @default 'primary'
-   */
-  variant?: InputBoxVariant;
 
   /**
    * icon to display at the start of the input element.
@@ -327,7 +318,6 @@ export const Autocomplete = forwardRef(
       readOnly,
       searchTimeout = 500,
       size = 'md',
-      variant,
       startIcon,
       endIcon,
       value,
@@ -578,9 +568,7 @@ export const Autocomplete = forwardRef(
           ref={containerRef}
           disabled={disabled}
           invalid={invalid}
-          readOnly={readOnly}
           size={size}
-          variant={variant}
         >
           {isValidElement<IconBaseProps>(startIcon) && (
             <InputAction className='me-1'>{startIcon}</InputAction>
@@ -593,12 +581,18 @@ export const Autocomplete = forwardRef(
                   <Tag
                     data-index={idx}
                     disabled={disabled}
-                    readOnly={readOnly}
-                    removable
                     rounded
                     tabIndex={-1}
                     variant='tertiary'
                     onMouseDown={handleRemoveMouseDown}
+                    onRemove={() => {
+                      if (onChange) {
+                        const newValue = selectedOptions.filter(
+                          (_, i) => i !== idx,
+                        );
+                        onChange(newValue as MaybeMultiValue<Value, IsMulti>);
+                      }
+                    }}
                   >
                     {getLabel(item)}
                   </Tag>

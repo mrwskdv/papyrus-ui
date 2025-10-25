@@ -18,15 +18,19 @@ export interface DropdownMenuItemProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   as?: ElementType;
   danger?: boolean;
+  description?: string;
   disabled?: boolean;
-  icon?: ReactElement;
+  startIcon?: ReactElement;
+  endIcon?: ReactElement;
   selected?: boolean;
   children: string;
 }
 
 export const DropdownMenuItem: FC<DropdownMenuItemProps> = ({
   disabled,
-  icon,
+  description,
+  startIcon,
+  endIcon,
   onClick,
   onFocus,
   children,
@@ -52,8 +56,10 @@ export const DropdownMenuItem: FC<DropdownMenuItemProps> = ({
   return (
     <MenuButton
       ref={item.ref}
+      description={description}
+      endIcon={endIcon}
       size='sm'
-      startIcon={icon}
+      startIcon={startIcon}
       tabIndex={isActive ? 0 : -1}
       variant='secondary'
       {...getItemProps({

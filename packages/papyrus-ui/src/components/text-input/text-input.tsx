@@ -18,7 +18,7 @@ import { useMergeRefs } from '../../utils/use-merge-refs';
 import { Icon } from '../icon';
 import { InputAction } from '../input-action';
 import { InputBox } from '../input-box';
-import type { InputBoxSize, InputBoxVariant } from '../input-box';
+import type { InputBoxSize } from '../input-box';
 import { InputGroup } from '../input-group';
 
 export interface TextInputProps
@@ -89,15 +89,6 @@ export interface TextInputProps
   size?: InputBoxSize;
 
   /**
-   * The visual variant of the input.
-   * - `primary`: Default variant with black/10 background
-   * - `secondary`: White background with neutral border
-   *
-   * @default 'primary'
-   */
-  variant?: InputBoxVariant;
-
-  /**
    * icon to display at the start of the input element.
    */
   startIcon?: ReactElement;
@@ -132,7 +123,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       label,
       message,
       size,
-      variant,
       startIcon,
       endIcon,
       readOnly,
@@ -201,13 +191,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         label={label}
         message={message}
       >
-        <InputBox
-          disabled={disabled}
-          invalid={invalid}
-          readOnly={readOnly}
-          size={size}
-          variant={variant}
-        >
+        <InputBox disabled={disabled} invalid={invalid} size={size}>
           {isValidElement<IconBaseProps>(startIcon) && (
             <InputAction className='me-1'>{startIcon}</InputAction>
           )}

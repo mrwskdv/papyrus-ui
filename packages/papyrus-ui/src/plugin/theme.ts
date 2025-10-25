@@ -355,7 +355,7 @@ export const theme: Config['theme'] = {
     },
     borderRadius: {
       input: '0.375rem',
-      tag: '0.25rem',
+      tag: '0.375rem',
     },
     opacity: {
       disabled: '0.4',
@@ -364,13 +364,13 @@ export const theme: Config['theme'] = {
       DEFAULT: '3px',
     },
     ringOffsetWidth: {
-      DEFAULT: '1px',
+      DEFAULT: '0px',
     },
     ringOffsetColor: {
-      DEFAULT: 'white',
+      DEFAULT: 'transparent',
     },
     ringColor: {
-      DEFAULT: 'rgba(79, 70, 229, .5)', // primary-600/50
+      DEFAULT: 'rgba(79, 70, 229, .6)', // primary-600/80
     },
   },
 };

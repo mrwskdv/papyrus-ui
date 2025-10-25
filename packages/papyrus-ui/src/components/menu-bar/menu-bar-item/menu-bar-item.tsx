@@ -18,15 +18,19 @@ export interface MenuBarItemProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   as?: ElementType;
   danger?: boolean;
+  description?: string;
   disabled?: boolean;
-  icon?: ReactElement;
+  startIcon?: ReactElement;
+  endIcon?: ReactElement;
   selected?: boolean;
   children: string;
 }
 
 export const MenuBarItem: FC<MenuBarItemProps> = ({
   disabled,
-  icon,
+  description,
+  startIcon,
+  endIcon,
   onClick,
   onFocus,
   children,
@@ -60,9 +64,11 @@ export const MenuBarItem: FC<MenuBarItemProps> = ({
     <MenuButton
       ref={item.ref}
       collapsed={collapsed}
+      description={description}
       direction={isNested ? 'vertical' : 'horizontal'}
+      endIcon={endIcon}
       size={isNested ? 'sm' : size}
-      startIcon={icon}
+      startIcon={startIcon}
       tabIndex={isActive ? 0 : -1}
       variant={variant}
       {...getItemProps({

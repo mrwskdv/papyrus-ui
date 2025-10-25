@@ -1,5 +1,5 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
-import DropdownMenu, { Basic } from './dropdown-menu.stories';
+import DropdownMenu, { Basic, WithDescriptions } from './dropdown-menu.stories';
 
 <Meta of={DropdownMenu} />
 
@@ -16,6 +16,12 @@ A menu that opens when the user clicks on a trigger element.
 ### Basic
 
 <Canvas of={Basic} />
+
+### With Descriptions
+
+Use the `description` prop on DropdownMenu.Item to provide additional context or help text for dropdown menu items. This is particularly useful for action menus where users need more information about what each option does.
+
+<Canvas of={WithDescriptions} />
 
 ## Guidelines
 

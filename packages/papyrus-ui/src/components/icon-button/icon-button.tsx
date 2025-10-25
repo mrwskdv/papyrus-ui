@@ -65,53 +65,63 @@ const sizeMap: Record<IconButtonSize, string> = {
 };
 
 const iconSizeMap: Record<IconButtonSize, string> = {
-  sm: 'text-lg',
-  md: 'text-2xl',
-  lg: 'text-3xl',
+  sm: 'text-md',
+  md: 'text-xl',
+  lg: 'text-2xl',
 };
 
 // Base styles that are always applied
 const baseStyles = [
   'inline-flex items-center justify-center',
+  'border border-solid',
   'transition-colors',
-  'focus:outline-none focus-visible:ring',
+  'focus:outline-none',
 ];
 
 // Variant styles
 const variantStyles = {
   primary: [
+    'border-transparent',
     'text-white',
     'bg-primary-600',
     'hover:bg-primary-500',
     'active:bg-primary-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   secondary: [
-    'border border-primary-600/80',
+    'border-primary-400',
     'text-primary-600',
     'bg-transparent',
     'hover:bg-primary-600/10',
     'active:bg-primary-600/20',
-    'disabled:opacity-disabled disabled:text-neutral-950 disabled:bg-black/10',
+    'disabled:opacity-disabled disabled:border-neutral-400 disabled:bg-transparent disabled:text-neutral-600',
+    'focus-visible:ring',
   ],
   tertiary: [
+    'border-neutral-300',
     'text-neutral-950',
-    'bg-black/10',
-    'hover:bg-black/20',
-    'active:bg-black/30',
-    'disabled:opacity-disabled disabled:bg-black/10',
+    'bg-neutral-500/10',
+    'hover:bg-neutral-500/20',
+    'active:bg-neutral-500/30',
+    'disabled:opacity-disabled disabled:bg-neutral-500/10',
+    'focus-visible:ring',
   ],
   plain: [
+    'border-transparent',
     'text-neutral-950',
-    'hover:bg-black/10',
-    'active:bg-black/20',
+    'hover:bg-neutral-500/10',
+    'active:hover:bg-neutral-500/20',
     'disabled:opacity-disabled disabled:bg-transparent',
+    'focus-visible:ring',
   ],
   ghost: [
+    'border-transparent',
     'text-white',
     'hover:bg-white/30',
     'active:bg-white/40',
     'disabled:opacity-disabled disabled:bg-transparent',
+    'focus-visible:ring focus-visible:ring-primary-400/80',
   ],
 };
 

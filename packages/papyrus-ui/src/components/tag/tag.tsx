@@ -13,7 +13,7 @@ import { BiX } from 'react-icons/bi';
 
 import { Icon } from '../icon';
 
-export type TagSize = 'sm' | 'md';
+export type TagSize = 'sm' | 'md' | 'lg';
 
 export type TagVariant =
   | 'primary'
@@ -27,12 +27,12 @@ export type TagVariant =
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   disabled?: boolean;
-  readOnly?: boolean;
-  removable?: boolean;
+  icon?: ReactNode;
   rounded?: boolean;
   size?: TagSize;
   variant?: TagVariant;
   onClick?: MouseEventHandler;
+  onRemove?: () => void;
   children?: ReactNode;
 }
 
@@ -41,60 +41,96 @@ const baseStyles = [
   'inline-flex items-center justify-center',
   'max-w-full',
   'border',
-  'gap-1',
-  'px-2',
-  'overflow-hidden',
+  'gap-1.5',
 ];
 
 // Size styles
 const sizeStyles = {
-  sm: 'h-4',
-  md: 'h-6',
+  sm: 'min-w-6 h-4 px-1.5',
+  md: 'min-w-9 h-6 px-2',
+  lg: 'min-w-14 h-9 px-3',
 };
 
 // Variant styles
 const variantStyles = {
   primary: ['border-transparent', 'text-white', 'bg-primary-600'],
-  secondary: ['border-primary-600/60', 'text-primary-800', 'bg-primary-600/10'],
-  tertiary: ['border-neutral-400', 'text-neutral-950', 'bg-neutral-50'],
-  info: ['border-info-600/60', 'text-info-800', 'bg-info-600/10'],
-  success: ['border-success-600/60', 'text-success-800', 'bg-success-600/10'],
-  warning: ['border-warning-600/60', 'text-warning-800', 'bg-warning-600/10'],
-  danger: ['border-danger-600/60', 'text-danger-800', 'bg-danger-600/10'],
+  secondary: ['border-primary-400', 'text-primary-800', 'bg-primary-500/10'],
+  tertiary: ['border-neutral-300', 'text-neutral-950', 'bg-neutral-500/10'],
+  info: ['border-info-400', 'text-info-800', 'bg-info-500/10'],
+  success: ['border-success-400', 'text-success-800', 'bg-success-500/10'],
+  warning: ['border-warning-400', 'text-warning-800', 'bg-warning-500/10'],
+  danger: ['border-danger-400', 'text-danger-800', 'bg-danger-500/10'],
   ghost: ['border-white/60', 'text-white', 'bg-white/20'],
 };
 
-const interactiveStyles = ['cursor-pointer', 'transition-colors'];
+const interactiveStyles = [
+  'cursor-pointer',
+  'transition-colors',
+  'focus:outline-none',
+];
 
 const interactiveVariantStyles = {
-  primary: ['hover:bg-primary-500', 'active:bg-primary-700'],
-  secondary: ['hover:bg-primary-600/20', 'active:bg-primary-600/30'],
-  tertiary: ['hover:bg-black/10', 'active:bg-black/20'],
-  info: ['hover:bg-info-600/20', 'active:bg-info-600/30'],
-  success: ['hover:bg-success-600/20', 'active:bg-success-600/30'],
-  warning: ['hover:bg-warning-600/20', 'active:bg-warning-600/30'],
-  danger: ['hover:bg-danger-600/20', 'active:bg-danger-600/30'],
-  ghost: ['hover:bg-white/30', 'active:bg-white/40'],
+  primary: [
+    'hover:bg-primary-500',
+    'active:bg-primary-700',
+    'focus-visible:ring',
+  ],
+  secondary: [
+    'hover:bg-primary-500/20',
+    'active:bg-primary-500/30',
+    'focus-visible:ring',
+  ],
+  tertiary: [
+    'hover:bg-neutral-500/20',
+    'active:bg-neutral-500/30',
+    'focus-visible:ring',
+  ],
+  info: ['hover:bg-info-500/20', 'active:bg-info-500/30', 'focus-visible:ring'],
+  success: [
+    'hover:bg-success-500/20',
+    'active:bg-success-500/30',
+    'focus-visible:ring',
+  ],
+  warning: [
+    'hover:bg-warning-500/20',
+    'active:bg-warning-500/30',
+    'focus-visible:ring',
+  ],
+  danger: [
+    'hover:bg-danger-500/20',
+    'active:bg-danger-500/30',
+    'focus-visible:ring',
+  ],
+  ghost: [
+    'hover:bg-white/30',
+    'active:bg-white/40',
+    'focus-visible:ring focus-visible:ring-primary-400/80',
+  ],
 };
 
 // Interactive styles
 
 // Label styles
 const labelStyles = [
+  'inline-block',
   'font-sans',
   'truncate',
-  'text-caption',
   'leading-none',
   '-mb-0.5',
 ];
+
+const labelSizeStyles = {
+  sm: 'text-caption',
+  md: 'text-caption',
+  lg: 'text-body-sm-primary',
+};
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (
     {
       className,
       disabled,
-      readOnly,
-      removable,
+      icon,
       rounded,
       role,
       size = 'md',
@@ -102,26 +138,23 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       variant = 'primary',
       onClick,
       onKeyDown,
+      onRemove,
       children,
       ...props
     },
     ref,
   ) => {
-    const isInteractive = Boolean(onClick);
+    const isInteractive = Boolean(onClick || onRemove);
 
-    const handleClick = (e: MouseEvent) =>
-      !disabled && !readOnly && onClick?.(e);
+    const handleClick = (e: MouseEvent) => !disabled && onClick?.(e);
 
     const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-      if (disabled || readOnly) {
-        return;
+      if ((!disabled && e.code === 'Space') || e.code === 'Enter') {
+        e.currentTarget.click();
       }
 
-      if (
-        (e.code === 'Delete' && removable) ||
-        ((e.code === 'Enter' || e.code === 'Space') && !removable)
-      ) {
-        e.currentTarget.click();
+      if (!disabled && onRemove && e.code === 'Delete') {
+        onRemove();
       }
 
       onKeyDown?.(e);
@@ -136,38 +169,34 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
           sizeStyles[size],
           variantStyles[variant],
           disabled && 'opacity-40',
-          removable && !disabled && !readOnly && 'pr-1',
           rounded ? 'rounded-full' : 'rounded-tag',
-          onClick &&
-            !removable &&
-            !disabled &&
-            !readOnly && [interactiveStyles, interactiveVariantStyles[variant]],
-          removable && 'cursor-default pointer-events-none',
+          !disabled && onClick
+            ? [interactiveStyles, interactiveVariantStyles[variant]]
+            : ['cursor-text'],
           className,
         )}
         role={isInteractive && !role ? 'button' : role}
         tabIndex={
-          onClick && !disabled && !readOnly && typeof tabIndex === 'undefined'
-            ? 0
-            : tabIndex
+          onClick && !disabled && typeof tabIndex === 'undefined' ? 0 : tabIndex
         }
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         {...props}
       >
-        <span
-          className={cn(
-            labelStyles,
-            onClick && !removable ? 'cursor-inherit' : 'cursor-text',
-          )}
-        >
+        {icon && <Icon className='text-sm'>{icon}</Icon>}
+
+        <span className={cn(labelStyles, labelSizeStyles[size])}>
           {children}
         </span>
 
-        {removable && !disabled && !readOnly && (
+        {!disabled && onRemove && (
           <Icon
-            className='text-sm color-neutral-800 hover:opacity-60 cursor-pointer pointer-events-auto'
+            className='text-sm hover:opacity-60 cursor-pointer'
             data-testid='clear-icon'
+            onMouseDown={e => {
+              e.stopPropagation();
+              onRemove();
+            }}
           >
             <BiX />
           </Icon>

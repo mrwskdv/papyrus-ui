@@ -24,6 +24,8 @@ export default [
   {
     name: 'papyrus-ui/ignores',
     ignores: [
+      '**/.nx/**',
+      '**/storybook-static/**',
       '**/dist/**',
       '**/node_modules/**',
       '**/coverage/**',

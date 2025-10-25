@@ -2,7 +2,7 @@ import type { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize, InputBoxVariant } from '../input-box';
+import type { InputBoxSize } from '../input-box';
 
 import { Textarea } from './textarea';
 import type { TextareaProps } from './textarea';
@@ -20,7 +20,6 @@ const meta = {
 };
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
-const variants: InputBoxVariant[] = ['primary', 'secondary'];
 
 const Template: StoryFn<TextareaProps> = args => (
   <div className='w-64'>
@@ -40,22 +39,6 @@ export function Sizes(args: TextareaProps) {
       {sizes.map((size, i) => (
         <div key={i} className={i ? 'mt-4' : ''}>
           <Textarea {...args} id={`textarea-size-${size}`} size={size} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function Variants(args: TextareaProps) {
-  return (
-    <div className='flex flex-col w-64'>
-      {variants.map((variant, i) => (
-        <div key={i} className={i ? 'mt-4' : ''}>
-          <Textarea
-            {...args}
-            id={`textarea-variant-${variant}`}
-            variant={variant}
-          />
         </div>
       ))}
     </div>
@@ -105,15 +88,15 @@ export const Message = Template.bind({});
 
 Message.args = {
   id: 'textarea-message',
-  description: 'This is a message',
+  message: 'This is a message',
 };
 
 export const Invalid = Template.bind({});
 
-Message.args = {
+Invalid.args = {
   id: 'textarea-invalid',
   invalid: true,
-  description: 'Something went wrong',
+  message: 'Something went wrong',
 };
 
 export const Disabled = Template.bind({});
@@ -121,13 +104,6 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   id: 'textarea-disabled',
   disabled: true,
-};
-
-export const ReadOnly = Template.bind({});
-
-Disabled.args = {
-  id: 'textarea-readonly',
-  readOnly: true,
 };
 
 export default meta;

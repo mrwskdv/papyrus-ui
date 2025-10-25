@@ -168,7 +168,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
           baseStyles,
           sizeStyles[size],
           variantStyles[variant],
-          disabled && 'opacity-40',
+          disabled && 'opacity-disabled',
           rounded ? 'rounded-full' : 'rounded-tag',
           !disabled && onClick
             ? [interactiveStyles, interactiveVariantStyles[variant]]

@@ -114,12 +114,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       : undefined;
 
     return (
-      <span
-        {...props}
-        ref={ref}
-        className='inline-block relative'
-        style={badgeStyle}
-      >
+      <span {...props} ref={ref} className='inline-block relative'>
         {children}
 
         {typeof badgeContent === 'object' && (

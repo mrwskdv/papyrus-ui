@@ -17,15 +17,19 @@ import { MenuContext } from '../menu.context';
 export interface MenuItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   as?: ElementType;
   danger?: boolean;
+  description?: string;
   disabled?: boolean;
-  icon?: ReactElement;
+  startIcon?: ReactElement;
+  endIcon?: ReactElement;
   index?: number;
   selected?: boolean;
 }
 
 export const MenuItem: FC<MenuItemProps> = ({
   disabled,
-  icon,
+  description,
+  startIcon,
+  endIcon,
   index,
   onFocus,
   onKeyDown,
@@ -84,10 +88,12 @@ export const MenuItem: FC<MenuItemProps> = ({
       {...props}
       ref={buttonRef}
       collapsed={collapsed}
+      description={description}
       disabled={disabled}
+      endIcon={endIcon}
       indent={indent}
       size={size}
-      startIcon={icon}
+      startIcon={startIcon}
       tabIndex={isActive ? 0 : -1}
       variant={variant}
       onFocus={handleFocus}

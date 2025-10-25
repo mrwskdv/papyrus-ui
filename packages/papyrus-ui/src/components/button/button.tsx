@@ -94,9 +94,9 @@ const sizeMap: Record<ButtonSize, string> = {
 const baseStyles = [
   'inline-flex items-center justify-center',
   'border border-solid',
-  'transition-all',
+  'transition-color',
   'gap-1.5',
-  'focus-visible:ring',
+  'focus:outline-none',
 ];
 
 // Variant styles
@@ -109,29 +109,33 @@ const variantStyles = {
     'hover:bg-primary-500',
     'active:bg-primary-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   secondary: [
-    'border-primary-600/80',
+    'border-primary-400',
     'text-primary-600',
     'bg-transparent',
     'hover:bg-primary-600/10',
     'active:bg-primary-600/20',
-    'disabled:opacity-disabled disabled:text-neutral-950 disabled:bg-black/10',
+    'disabled:opacity-disabled disabled:border-neutral-400 disabled:bg-transparent disabled:text-neutral-600',
+    'focus-visible:ring',
   ],
   tertiary: [
-    'border-transparent',
+    'border-neutral-300',
     'text-neutral-950',
-    'bg-black/10',
-    'hover:bg-black/20',
-    'active:bg-black/30',
-    'disabled:opacity-disabled disabled:bg-black/10',
+    'bg-neutral-500/10',
+    'hover:bg-neutral-500/20',
+    'active:bg-neutral-500/30',
+    'disabled:opacity-disabled disabled:bg-neutral-500/10',
+    'focus-visible:ring',
   ],
   plain: [
     'border-transparent',
     'text-neutral-950',
-    'hover:bg-black/10',
-    'active:bg-black/20',
+    'hover:bg-neutral-500/10',
+    'active:hover:bg-neutral-500/20',
     'disabled:opacity-disabled disabled:bg-transparent',
+    'focus-visible:ring',
   ],
   info: [
     'border-transparent',
@@ -141,6 +145,7 @@ const variantStyles = {
     'hover:bg-info-500',
     'active:bg-info-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   success: [
     'border-transparent',
@@ -150,6 +155,7 @@ const variantStyles = {
     'hover:bg-success-500',
     'active:bg-success-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   warning: [
     'border-transparent',
@@ -159,6 +165,7 @@ const variantStyles = {
     'hover:bg-warning-500',
     'active:bg-warning-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   danger: [
     'border-transparent',
@@ -168,6 +175,7 @@ const variantStyles = {
     'hover:bg-danger-500',
     'active:bg-danger-700',
     'disabled:bg-neutral-300',
+    'focus-visible:ring',
   ],
   ghost: [
     'border-white/80',
@@ -175,11 +183,18 @@ const variantStyles = {
     'hover:bg-white/30',
     'active:bg-white/40',
     'disabled:opacity-disabled disabled:bg-transparent',
+    'focus-visible:ring focus-visible:ring-primary-400/80',
   ],
 };
 
 // Label styles
-const labelStyles = ['font-sans', 'inline-block', 'text-button', 'truncate'];
+const labelStyles = [
+  'font-sans',
+  'inline-block',
+  'text-button',
+  'truncate',
+  '-mb-px',
+];
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
   (
@@ -212,13 +227,13 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
       type={Element === 'button' && type == null ? 'button' : type}
       {...props}
     >
-      {loading && <Loader className='text-lg' />}
+      {loading && <Loader className='text-md' />}
 
-      {!loading && startIcon && <Icon className='text-lg'>{startIcon}</Icon>}
+      {!loading && startIcon && <Icon className='text-md'>{startIcon}</Icon>}
 
       {!loading && <span className={cn(labelStyles)}>{children}</span>}
 
-      {!loading && endIcon && <Icon className='text-lg'>{endIcon}</Icon>}
+      {!loading && endIcon && <Icon className='text-md'>{endIcon}</Icon>}
     </Element>
   ),
 );

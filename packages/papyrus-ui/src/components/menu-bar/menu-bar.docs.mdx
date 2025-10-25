@@ -1,5 +1,11 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
-import MenuBar, { Basic, Size, Variant, Collapsed } from './menu-bar.stories';
+import MenuBar, {
+  Basic,
+  Size,
+  Variant,
+  Collapsed,
+  WithDescriptions,
+} from './menu-bar.stories';
 
 <Meta of={MenuBar} />
 
@@ -30,6 +36,12 @@ Use `size` property to change the size meu items.
 Use `variant` property to change the variant of the menu. Available variants are `primary`, `secondary`, and `ghost`.
 
 <Canvas of={Variant} />
+
+### With Descriptions
+
+Use the `description` prop on MenuBar.Item to provide additional context or help text for menu bar items. This is particularly useful for toolbars where users need more information about what each option does.
+
+<Canvas of={WithDescriptions} />
 
 ### Collapsed
 

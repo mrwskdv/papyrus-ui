@@ -1,3 +1,5 @@
+import { BiCheck } from 'react-icons/bi';
+
 import { render, screen, userEvent } from '../../utils/test-utils';
 
 import { Tag } from './tag';
@@ -98,109 +100,76 @@ describe('Tag', () => {
     });
   });
 
-  describe('Given a tag component with readOnly prop set to true and an onClick handler', () => {
-    describe('When a user clicks on the tag', () => {
-      it('Then the onClick handler should not be called', () => {
-        const onClickMock = jest.fn();
-        render(
-          <Tag readOnly onClick={onClickMock}>
-            Tag
-          </Tag>,
+  describe('Given a tag component with an icon', () => {
+    describe('When the component is rendered', () => {
+      it('Then it should render the icon', () => {
+        const { container } = render(
+          <Tag icon={<BiCheck />}>Tag with icon</Tag>,
         );
-        screen.getByRole('button').click();
-        expect(onClickMock).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('When a user presses the Enter key on the tag', () => {
-      it('Then the onClick handler should not be called', async () => {
-        const onClickMock = jest.fn();
-        render(
-          <Tag readOnly onClick={onClickMock}>
-            Tag
-          </Tag>,
-        );
-        screen.getByRole('button').focus();
-        await userEvent.keyboard('{enter}');
-        expect(onClickMock).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('When a user presses the Space key on the tag', () => {
-      it('Then the onClick handler should not be called', async () => {
-        const onClickMock = jest.fn();
-        render(
-          <Tag readOnly onClick={onClickMock}>
-            Tag
-          </Tag>,
-        );
-        screen.getByRole('button').focus();
-        await userEvent.keyboard('{ }');
-        expect(onClickMock).not.toHaveBeenCalled();
+        expect(screen.getByText('Tag with icon')).toBeInTheDocument();
+        // Icon should be present as an SVG element
+        expect(container.querySelector('svg')).toBeInTheDocument();
       });
     });
   });
 
-  describe('Given a tag component with the removable prop set to true', () => {
+  describe('Given a tag component with onRemove handler', () => {
     describe('When the component is rendered', () => {
       it('Then it should render the clear-icon component', () => {
         const testId = 'clear-icon';
-        render(<Tag removable>Tag</Tag>);
+        render(<Tag onRemove={() => {}}>Tag</Tag>);
         expect(screen.getByTestId(testId)).toBeInTheDocument();
       });
 
       it('Then the tag should have a role of button', () => {
-        render(<Tag onClick={() => {}}>Tag</Tag>);
+        render(<Tag onRemove={() => {}}>Tag</Tag>);
         expect(screen.getByRole('button')).toBeInTheDocument();
       });
 
-      it('Then the tag should have a tabIndex of 0', () => {
-        render(<Tag onClick={() => {}}>Tag</Tag>);
-        expect(screen.getByRole('button')).toHaveAttribute('tabIndex', '0');
+      it('Then the tag should not have a tabIndex when only onRemove is provided', () => {
+        render(<Tag onRemove={() => {}}>Tag</Tag>);
+        const button = screen.getByRole('button');
+        expect(button).not.toHaveAttribute('tabIndex', '0');
       });
     });
   });
 
-  describe('Given a tag component with the removable prop set to true and an onClick handler', () => {
+  describe('Given a tag component with onRemove handler', () => {
     describe("When a user clicks on the tag's clear-icon", () => {
-      it('Then the onClick handler should be called', () => {
-        const onClickMock = jest.fn();
+      it('Then the onRemove handler should be called', () => {
+        const onRemoveMock = jest.fn();
 
-        render(
-          <Tag removable onClick={onClickMock}>
-            Tag
-          </Tag>,
-        );
+        render(<Tag onRemove={onRemoveMock}>Tag</Tag>);
 
-        screen.getByTestId('clear-icon').click();
-        expect(onClickMock).toHaveBeenCalledTimes(1);
+        const clearIcon = screen.getByTestId('clear-icon');
+        // The clear icon uses onMouseDown, so we need to trigger that event
+        clearIcon.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+        expect(onRemoveMock).toHaveBeenCalledTimes(1);
       });
     });
 
     describe('When a user presses the Del key on the tag', () => {
-      it('Then the onClick handler should be called', async () => {
-        const onClickMock = jest.fn();
+      it('Then the onRemove handler should be called when tag is focusable', async () => {
+        const onRemoveMock = jest.fn();
 
         render(
-          <Tag removable onClick={onClickMock}>
+          <Tag onClick={() => {}} onRemove={onRemoveMock}>
             Tag
           </Tag>,
         );
 
         screen.getByRole('button').focus();
         await userEvent.keyboard('{delete}');
-        expect(onClickMock).toHaveBeenCalledTimes(1);
+        expect(onRemoveMock).toHaveBeenCalledTimes(1);
       });
     });
   });
 
-  describe('Given a tag component with the removable and disabled props set to true and an onClick handler', () => {
-    describe("When a user clicks on the tag's clear-icon", () => {
-      it('Then the onClick handler should not be called', () => {
-        const onClickMock = jest.fn();
-
+  describe('Given a tag component with onRemove handler and disabled prop set to true', () => {
+    describe('When the component is rendered', () => {
+      it('Then the clear-icon should not be rendered', () => {
         render(
-          <Tag disabled removable onClick={onClickMock}>
+          <Tag disabled onRemove={() => {}}>
             Tag
           </Tag>,
         );
@@ -210,50 +179,18 @@ describe('Tag', () => {
     });
 
     describe('When a user presses the Del key on the tag', () => {
-      it('Then the onClick handler should not be called', async () => {
-        const onClickMock = jest.fn();
+      it('Then the onRemove handler should not be called', async () => {
+        const onRemoveMock = jest.fn();
 
         render(
-          <Tag readOnly removable onClick={onClickMock}>
+          <Tag disabled onRemove={onRemoveMock}>
             Tag
           </Tag>,
         );
 
         screen.getByRole('button').focus();
         await userEvent.keyboard('{delete}');
-        expect(onClickMock).not.toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('Given a tag component with the removable and readOnly props set to true and an onClick handler', () => {
-    describe("When a user clicks on the tag's clear-icon", () => {
-      it('Then the onClick handler should not be called', () => {
-        const onClickMock = jest.fn();
-
-        render(
-          <Tag readOnly removable onClick={onClickMock}>
-            Tag
-          </Tag>,
-        );
-
-        expect(screen.queryByTestId('clear-icon')).not.toBeInTheDocument();
-      });
-    });
-
-    describe('When a user presses the Del key on the tag', () => {
-      it('Then the onClick handler should not be called', async () => {
-        const onClickMock = jest.fn();
-
-        render(
-          <Tag readOnly removable onClick={onClickMock}>
-            Tag
-          </Tag>,
-        );
-
-        screen.getByRole('button').focus();
-        await userEvent.keyboard('{delete}');
-        expect(onClickMock).not.toHaveBeenCalled();
+        expect(onRemoveMock).not.toHaveBeenCalled();
       });
     });
   });

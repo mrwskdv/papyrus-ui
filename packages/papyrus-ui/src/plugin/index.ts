@@ -14,7 +14,7 @@ const papyrusUIPlugin = plugin(props => {
   props.addComponents({
     // Input component styles
     '.input-base': {
-      '@apply font-sans text-body-md-primary text-neutral-700 block w-full bg-transparent':
+      '@apply font-sans text-body-md-primary text-neutral-950 block w-full bg-transparent':
         {},
       WebkitTextFillColor: props.theme('colors.neutral.700'),
 
@@ -28,7 +28,7 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&:disabled:not(:placeholder-shown)': {
-        '@apply text-neutral-700 opacity-disabled': {},
+        '@apply text-neutral-950 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 
@@ -40,7 +40,7 @@ const papyrusUIPlugin = plugin(props => {
 
     // Select component styles
     '.select-base': {
-      '@apply font-sans text-body-md-primary block w-full appearance-none bg-transparent':
+      '@apply font-sans text-body-md-primary text-neutral-950 block w-full appearance-none bg-transparent':
         {},
       WebkitAppearance: 'none',
       MozAppearance: 'none',
@@ -55,7 +55,7 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&:disabled:not(:placeholder-shown)': {
-        '@apply text-neutral-700 opacity-disabled': {},
+        '@apply text-neutral-950 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 
@@ -67,7 +67,8 @@ const papyrusUIPlugin = plugin(props => {
 
     // Textarea component styles
     '.textarea-base': {
-      '@apply font-sans text-body-md-primary block w-full bg-transparent': {},
+      '@apply font-sans text-body-md-primary text-neutral-950 block w-full bg-transparent':
+        {},
       resize: 'vertical',
 
       '&::placeholder': {
@@ -80,7 +81,7 @@ const papyrusUIPlugin = plugin(props => {
       },
 
       '&:disabled:not(:placeholder-shown)': {
-        '@apply text-neutral-700 opacity-disabled': {},
+        '@apply text-neutral-950 opacity-disabled': {},
         WebkitTextFillColor: props.theme('colors.neutral.700'),
       },
 

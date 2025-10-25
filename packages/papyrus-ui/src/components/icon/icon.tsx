@@ -12,13 +12,13 @@ export interface IconProps
 
 export const Icon = forwardRef<HTMLElement, IconProps>(
   ({ className, children, ...props }, ref) => (
-    <i
+    <span
       ref={ref}
       className={cn('inline-block leading-none align-[-0.125em]', className)}
       {...props}
     >
       {children}
-    </i>
+    </span>
   ),
 );
 

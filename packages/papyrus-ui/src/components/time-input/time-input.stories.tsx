@@ -2,13 +2,12 @@ import type { StoryFn } from '@storybook/react';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 
 import { Icon } from '../icon';
-import type { InputBoxSize, InputBoxVariant } from '../input-box';
+import type { InputBoxSize } from '../input-box';
 
 import { TimeInput } from './time-input';
 import type { TimeInputProps } from './time-input';
 
 const sizes: InputBoxSize[] = ['sm', 'md', 'lg'];
-const variants: InputBoxVariant[] = ['primary', 'secondary'];
 
 export default {
   title: 'Inputs/TimeInput',
@@ -56,22 +55,6 @@ export function Sizes(args: TimeInputProps) {
       {sizes.map((size, i) => (
         <div key={i} className={i ? 'mt-4' : ''}>
           <TimeInput {...args} id={`time-input-size-${size}`} size={size} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function Variants(args: TimeInputProps) {
-  return (
-    <div className='flex flex-col w-64'>
-      {variants.map((variant, i) => (
-        <div key={i} className={i ? 'mt-4' : ''}>
-          <TimeInput
-            {...args}
-            id={`time-input-variant-${variant}`}
-            variant={variant}
-          />
         </div>
       ))}
     </div>
@@ -137,11 +120,4 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   id: 'time-input-disabled',
   disabled: true,
-};
-
-export const ReadOnly = Template.bind({});
-
-ReadOnly.args = {
-  id: 'time-input-readonly',
-  readOnly: true,
 };

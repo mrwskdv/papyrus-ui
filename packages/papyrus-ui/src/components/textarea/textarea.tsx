@@ -13,7 +13,7 @@ import type { ChangeHandler } from '../../types';
 import { useId } from '../../utils/use-id';
 import { InputAction } from '../input-action';
 import { InputBox } from '../input-box';
-import type { InputBoxSize, InputBoxVariant } from '../input-box';
+import type { InputBoxSize } from '../input-box';
 import { InputGroup } from '../input-group';
 
 export interface TextareaProps
@@ -70,15 +70,6 @@ export interface TextareaProps
   size?: InputBoxSize;
 
   /**
-   * The visual variant of the input.
-   * - `primary`: Default variant with black/10 background
-   * - `secondary`: White background with neutral border
-   *
-   * @default 'primary'
-   */
-  variant?: InputBoxVariant;
-
-  /**
    * icon to display at the start of the input element.
    */
   startIcon?: ReactElement;
@@ -111,12 +102,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       invalid,
       label,
       message,
-      onChange,
       readOnly,
       size,
       startIcon,
       value,
-      variant,
+      onChange,
       ...props
     },
     ref,
@@ -134,13 +124,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         label={label}
         message={message}
       >
-        <InputBox
-          disabled={disabled}
-          invalid={invalid}
-          readOnly={readOnly}
-          size={size}
-          variant={variant}
-        >
+        <InputBox disabled={disabled} invalid={invalid} size={size}>
           {isValidElement<IconBaseProps>(startIcon) && (
             <InputAction className='me-1'>{startIcon}</InputAction>
           )}

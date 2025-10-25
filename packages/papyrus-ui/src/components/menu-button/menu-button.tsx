@@ -20,6 +20,7 @@ export interface MenuButtonProps
   active?: boolean;
   collapsed?: boolean;
   danger?: boolean;
+  description?: string;
   direction?: MenuButtonDirection;
   disabled?: boolean;
   indent?: number;
@@ -41,7 +42,7 @@ const rootDirectionPrimaryClasses = {
 };
 
 const linkDefaultClasses =
-  'relative flex justify-center items-center gap-1 rounded-md text-start transition-colors cursor-pointer focus:outline-none focus-visible:ring';
+  'relative flex justify-center items-center gap-2 rounded-md text-start transition-colors cursor-pointer focus:outline-none focus-visible:ring';
 
 const linkSizeClasses = {
   sm: 'px-2.5 py-0.5',
@@ -70,8 +71,8 @@ const linkDefaultSelectedVariantClasses = {
     active: 'ext-neutral-950 bg-neutral-500/10 active:bg-neutral-400/20',
   },
   secondary: {
-    base: 'text-primary-600 bg-primary-400/20 hover:bg-primary-400/10 active:bg-primary/20',
-    active: 'text-primary-600 bg-primary-400/10 active:bg-neutral-400/20',
+    base: 'text-primary-600 bg-primary-400/20 hover:bg-primary-500/10 active:bg-primary-400/20',
+    active: 'text-primary-600 bg-primary-500/10 active:bg-neutral-400/20',
   },
   ghost: {
     base: 'text-white bg-primary-600 hover:bg-primary-500',
@@ -100,8 +101,8 @@ const linkDefaultDangerSelectedVariantClasses = {
     active: 'text-danger-600 bg-neutral-500/10 active:bg-neutral-400/20',
   },
   secondary: {
-    base: 'text-danger-600 bg-primary-400/20 hover:bg-primary-400/10 active:bg-primary-400/20',
-    active: 'text-danger-600 bg-primary-400/10 active:bg-primary-400/20',
+    base: 'text-danger-600 bg-primary-400/20 hover:bg-primary-500/10 active:bg-primary-400/20',
+    active: 'text-danger-600 bg-primary-500/10 active:bg-primary-400/20',
   },
   ghost: {
     base: 'text-danger-500 bg-primary-600 hover:bg-primary-500',
@@ -133,8 +134,8 @@ const linkCollapsedSelectedVariantClasses = {
     active: 'text-neutral-500 bg-neutral-500/10 active:bg-neutral-400/20',
   },
   secondary: {
-    base: 'text-primary-600 bg-primary-400/20 hover:bg-primary-400/10 active:bg-primary-400/20',
-    active: 'text-primary-600 bg-primary-400/10 active:bg-primary-400/20',
+    base: 'text-primary-600 bg-primary-400/20 hover:bg-primary-500/10 active:bg-primary-400/20',
+    active: 'text-primary-600 bg-primary-500/10 active:bg-primary-400/20',
   },
   ghost: {
     base: 'text-white bg-primary-600 hover:bg-primary-500',
@@ -163,8 +164,8 @@ const linkCollapsedDangerSelectedVariantClasses = {
     active: 'text-danger-600 bg-neutral-500/10 active:bg-neutral-400/20',
   },
   secondary: {
-    base: 'text-danger-600 bg-primary-400/20 hover:bg-primary-400/10 active:bg-primary-400/20',
-    active: 'text-danger-600 bg-primary-400/10 active:bg-primary-400/20',
+    base: 'text-danger-600 bg-primary-400/20 hover:bg-primary-500/10 active:bg-primary-400/20',
+    active: 'text-danger-600 bg-primary-500/10 active:bg-primary-400/20',
   },
   ghost: {
     base: 'text-danger-500 bg-primary-600 hover:bg-primary-500',
@@ -175,8 +176,8 @@ const linkCollapsedDangerSelectedVariantClasses = {
 const iconDefaultClasses = 'text-lg';
 
 const iconDefaultVariantClasses = {
-  primary: 'text-neutral-950',
-  secondary: 'text-neutral-950',
+  primary: 'text-neutral-500',
+  secondary: 'text-neutral-500',
   ghost: 'text-white',
 };
 
@@ -224,17 +225,27 @@ const iconCollapsedDangerSelectedVariantClasses = {
   ghost: 'text-danger-500',
 };
 
-const labelDefaultClasses =
-  'font-sans block text-body-md-primary mx-1 truncate';
+const labelContainerClasses = 'min-w-0 max-w-full inline-flex flex-col gap-0.5';
+
+const labelDefaultClasses = 'font-sans block text-body-md-primary truncate';
 
 const labelDefaultSelectedClasses =
-  'font-sans block text-body-md-primary-bold mx-1 truncate';
+  'font-sans block text-body-md-primary-bold truncate';
 
 const labelCollapsedClasses = 'font-sans text-caption text-center truncate';
 
-const labelDirectionClasses = {
+const labelContainerDirectionClasses = {
   vertical: 'flex-1',
   horizontal: '',
+};
+
+const descriptionBaseClasses =
+  'block font-sans text-caption text-neutral-500 truncate';
+
+const descriptionVariantClasses = {
+  primary: 'text-neutral-500',
+  secondary: 'text-neutral-500',
+  ghost: 'text-white/80',
 };
 
 const underlineDirectionClasses = {
@@ -256,6 +267,7 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
       role = 'menuitem',
       selected,
       size = 'md',
+      description,
       startIcon,
       endIcon,
       variant = 'primary',
@@ -380,18 +392,34 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
 
         <span
           className={cn(
-            labelDirectionClasses[direction],
-            !collapsed && [
-              !selected && labelDefaultClasses,
-              selected && labelDefaultSelectedClasses,
-            ],
-            collapsed && labelCollapsedClasses,
+            labelContainerClasses,
+            labelContainerDirectionClasses[direction],
           )}
         >
-          {children}
+          <span
+            className={cn(
+              !collapsed && [
+                !selected && labelDefaultClasses,
+                selected && labelDefaultSelectedClasses,
+              ],
+              collapsed && labelCollapsedClasses,
+            )}
+          >
+            {children}
+          </span>
+          {!collapsed && (
+            <span
+              className={cn(
+                descriptionBaseClasses,
+                descriptionVariantClasses[variant],
+              )}
+            >
+              {description}
+            </span>
+          )}
         </span>
 
-        {!collapsed && endIcon && <Icon className='text-xl'>{endIcon}</Icon>}
+        {!collapsed && endIcon && <Icon className='text-lg'>{endIcon}</Icon>}
 
         {variant === 'primary' && !disabled && (
           <span

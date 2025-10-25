@@ -8,6 +8,7 @@ import {
   BiHome,
   BiLeftIndent,
   BiRightIndent,
+  BiSolidCrown,
   BiStats,
   BiSupport,
 } from 'react-icons/bi';
@@ -33,13 +34,17 @@ export default {
 const Template: StoryFn<MenuProps> = args => (
   <div className={args.collapsed ? '' : 'w-48'}>
     <Menu {...args}>
-      <Menu.Item icon={<BiHome />} selected>
+      <Menu.Item
+        endIcon={<BiSolidCrown className='text-primary-600' />}
+        selected
+        startIcon={<BiHome />}
+      >
         Option 1
       </Menu.Item>
 
-      <Menu.Item icon={<BiEnvelope />}>Option 2</Menu.Item>
+      <Menu.Item startIcon={<BiEnvelope />}>Option 2</Menu.Item>
 
-      <Menu.Item disabled icon={<BiGridAlt />}>
+      <Menu.Item disabled startIcon={<BiGridAlt />}>
         Option 3
       </Menu.Item>
 
@@ -60,7 +65,7 @@ const Template: StoryFn<MenuProps> = args => (
         </Menu.Submenu>
       </Menu.Submenu>
 
-      <Menu.Item danger icon={<BiSupport />}>
+      <Menu.Item danger startIcon={<BiSupport />}>
         Option 6
       </Menu.Item>
     </Menu>
@@ -104,6 +109,43 @@ export const Variant: StoryFn<MenuProps> = args => (
         <Template {...args} key={i} variant={variant} />
       </div>
     ))}
+  </div>
+);
+
+export const WithDescriptions: StoryFn<MenuProps> = args => (
+  <div className={args.collapsed ? '' : 'w-48'}>
+    <Menu {...args}>
+      <Menu.Item
+        description='Navigate to the main dashboard'
+        endIcon={<BiSolidCrown className='text-primary-600' />}
+        selected
+        startIcon={<BiHome />}
+      >
+        Dashboard
+      </Menu.Item>
+
+      <Menu.Item
+        description='View and manage your messages'
+        startIcon={<BiEnvelope />}
+      >
+        Messages
+      </Menu.Item>
+
+      <Menu.Item
+        description='Access your account settings'
+        startIcon={<BiCog />}
+      >
+        Settings
+      </Menu.Item>
+
+      <Menu.Item
+        danger
+        description='Get help and support'
+        startIcon={<BiSupport />}
+      >
+        Support
+      </Menu.Item>
+    </Menu>
   </div>
 );
 

@@ -8,13 +8,13 @@ import { Icon } from './icon';
 describe('Icon', () => {
   describe('Given check icon', () => {
     describe('When component is rendered', () => {
-      it('Then the `<i>` tag should be rendered', () => {
+      it('Then the `<span>` tag should be rendered', () => {
         const { container } = render(
           <Icon>
             <BiCheck />
           </Icon>,
         );
-        expect(container.querySelector('i')).toBeInTheDocument();
+        expect(container.querySelector('span')).toBeInTheDocument();
       });
     });
   });

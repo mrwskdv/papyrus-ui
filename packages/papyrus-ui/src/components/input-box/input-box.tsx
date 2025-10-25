@@ -3,7 +3,6 @@ import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 
 export type InputBoxSize = 'sm' | 'md' | 'lg';
-export type InputBoxVariant = 'primary' | 'secondary';
 
 export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -28,13 +27,6 @@ export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
   invalid?: boolean;
 
   /**
-   * If `true`, visually indicates that the input box is in a read-only state by applying a read-only style.
-   *
-   * @default false
-   */
-  readOnly?: boolean;
-
-  /**
    * If `true`, the input box will have a rounded appearance.
    *
    * @default false
@@ -47,15 +39,6 @@ export interface InputBoxProps extends HTMLAttributes<HTMLDivElement> {
    * @default 'md'
    */
   size?: InputBoxSize;
-
-  /**
-   * Defines the visual variant of the input box.
-   * - `primary`: White background with neutral border
-   * - `secondary`: Black/10 background with transparent border
-   *
-   * @default 'primary'
-   */
-  variant?: InputBoxVariant;
 }
 
 const sizeMap: Record<InputBoxSize, string> = {
@@ -67,95 +50,54 @@ const sizeMap: Record<InputBoxSize, string> = {
 // Base styles that are always applied
 const baseStyles = [
   'flex items-center',
-  'outline outline-1',
-  'transition-all',
+  'border border-solid',
+  'transition-colors',
   'overflow-hidden',
+  'focus:outline-none',
 ];
 
-// Primary variant styles
-const primaryVariantStyles = {
-  interactive: [
-    'outline-neutral-300',
-    'bg-white',
-    'cursor-text',
-    'hover:outline-primary-500',
-    'focus-within:outline-primary-500',
-    'focus-within:ring-4 focus-within:ring-offset-0',
-  ],
-  invalid: [
-    'outline-danger-500',
-    'bg-white',
-    'cursor-text',
-    'focus-within:ring-4 focus-within:ring-offset-0 focus-within:ring-danger-500/50',
-  ],
-  disabled: [
-    'bg-neutral-50',
-    'outline-neutral-200',
-    'shadow-none',
-    'cursor-default',
-    'hover:outline-neutral-200',
-  ],
-  readOnly: ['bg-white', 'outline-neutral-300', 'shadow-none', 'cursor-text'],
-};
+const interactiveStyles = [
+  'border-neutral-400',
+  'bg-white',
+  'cursor-text',
+  'hover:border-primary-500',
+  'focus-within:border-primary-500 focus-within:ring-4',
+];
 
-// Secondary variant styles
-const secondaryVariantStyles = {
-  interactive: [
-    'outline-transparent',
-    'bg-black/10',
-    'cursor-text',
-    'hover:outline-primary-500',
-    'focus-within:outline-primary-500',
-    'focus-within:ring-4 focus-within:ring-offset-0',
-  ],
-  invalid: [
-    'outline-danger-500',
-    'bg-black/10',
-    'cursor-text',
-    'focus-within:ring-4 focus-within:ring-offset-0 focus-within:ring-danger-500/50',
-  ],
-  disabled: [
-    'bg-black/5',
-    'outline-transparent',
-    'shadow-none',
-    'cursor-default',
-    'hover:outline-transparent',
-  ],
-  readOnly: [
-    'bg-black/10',
-    'outline-transparent',
-    'shadow-none',
-    'cursor-text',
-  ],
-};
+const invalidStyles = [
+  'border-danger-500',
+  'bg-white',
+  'cursor-text',
+  'focus-within:ring-4 focus-within:ring-danger-500/50',
+];
+
+const disabledStyles = [
+  'bg-neutral-50',
+  'border-neutral-200',
+  'cursor-default',
+];
 
 export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>(
   (
     {
       invalid,
       size = 'md',
-      variant = 'primary',
       className,
       disabled,
-      readOnly,
       rounded,
       children,
       ...elementProps
     },
     ref,
   ) => {
-    const variantStyles =
-      variant === 'primary' ? primaryVariantStyles : secondaryVariantStyles;
-
     return (
       <div
         ref={ref}
         className={cn(
           baseStyles,
-          !disabled && !readOnly && !invalid && variantStyles.interactive,
-          !disabled && !readOnly && invalid && variantStyles.invalid,
-          !disabled && readOnly && variantStyles.readOnly,
-          disabled && variantStyles.disabled,
+          !disabled && !invalid && interactiveStyles,
+          !disabled && invalid && invalidStyles,
+          disabled && disabledStyles,
           sizeMap[size],
           rounded ? 'rounded-full' : 'rounded-input',
           className,

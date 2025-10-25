@@ -9,6 +9,7 @@ import {
   BiHome,
   BiStats,
   BiSupport,
+  BiSolidCrown,
 } from 'react-icons/bi';
 
 import { Divider } from '../divider';
@@ -36,13 +37,17 @@ export default {
 const Template: StoryFn<MenuBarProps> = args => (
   <div>
     <MenuBar {...args}>
-      <MenuBar.Item icon={<BiHome />} selected>
+      <MenuBar.Item
+        endIcon={<BiSolidCrown className='text-primary-600' />}
+        selected
+        startIcon={<BiHome />}
+      >
         Option 1
       </MenuBar.Item>
 
-      <MenuBar.Item icon={<BiEnvelope />}>Option 2</MenuBar.Item>
+      <MenuBar.Item startIcon={<BiEnvelope />}>Option 2</MenuBar.Item>
 
-      <MenuBar.Item disabled icon={<BiGridAlt />}>
+      <MenuBar.Item disabled startIcon={<BiGridAlt />}>
         Option 3
       </MenuBar.Item>
 
@@ -63,7 +68,7 @@ const Template: StoryFn<MenuBarProps> = args => (
         <MenuBar.Item>Option 5-3</MenuBar.Item>
       </MenuBar.Submenu>
 
-      <MenuBar.Item danger icon={<BiSupport />}>
+      <MenuBar.Item danger startIcon={<BiSupport />}>
         Option 6
       </MenuBar.Item>
     </MenuBar>
@@ -108,6 +113,44 @@ export const Variant: StoryFn<MenuBarProps> = args => (
         <Template {...args} key={i} variant={variant} />
       </div>
     ))}
+  </div>
+);
+
+export const WithDescriptions: StoryFn<MenuBarProps> = args => (
+  <div>
+    <MenuBar {...args}>
+      <MenuBar.Item
+        description='Navigate to the main dashboard'
+        endIcon={<BiSolidCrown className='text-primary-600' />}
+        selected
+        startIcon={<BiHome />}
+      >
+        Dashboard
+      </MenuBar.Item>
+
+      <MenuBar.Item
+        description='View and manage your messages'
+        startIcon={<BiEnvelope />}
+      >
+        Messages
+      </MenuBar.Item>
+
+      <MenuBar.Item
+        description='Access your account settings'
+        startIcon={<BiCog />}
+      >
+        Settings
+      </MenuBar.Item>
+
+      <MenuBar.Item
+        danger
+        description='Get help and support'
+        startIcon={<BiSupport />}
+      >
+        Support
+      </MenuBar.Item>
+    </MenuBar>
+    {args.variant === 'primary' && <Divider className='text-neutral-200' />}
   </div>
 );
 

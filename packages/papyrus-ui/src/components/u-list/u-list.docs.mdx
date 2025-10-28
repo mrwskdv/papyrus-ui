@@ -3,13 +3,12 @@ import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs';
 import UList, {
   Basic,
   BoldText,
-  DashType,
-  DiscType,
-  NoneType,
   PrimaryFont,
   SecondaryFont,
   SmallText,
   WithIcons,
+  WithNoBullets,
+  NestedList,
 } from './u-list.stories';
 
 <Meta of={UList} />
@@ -33,26 +32,21 @@ The UList component is used to create unordered lists. It is a wrapper for the `
 
 <Canvas of={Basic} />
 
-### Types
+The UList component applies `list-disc` style by default for disc bullets, along with consistent spacing styles. To use a different bullet style, you can override with Tailwind CSS utilities.
 
-Use the `type` prop to change the list style. The default type is `dash`.
+### Custom List Styles
 
-The component supports the following list types:
+To apply a specific list style type, you can use Tailwind CSS utilities:
 
-- **Custom UI-kit types**: `dash` - A custom list marker style specific to this UI library
-- **TailwindCSS types**: `disc` and `none` - These correspond to standard TailwindCSS list-style utilities
+#### With No Bullets
 
-#### Dash (default)
+<Canvas of={WithNoBullets} />
 
-<Canvas of={DashType} />
+### Nested Lists
 
-#### Disc
+You can nest lists within list items to create hierarchies. Use different bullet styles for nested levels to improve visual distinction. In this example, the first level uses the default `list-disc` style, while nested lists use `list-[circle]` style.
 
-<Canvas of={DiscType} />
-
-#### None
-
-<Canvas of={NoneType} />
+<Canvas of={NestedList} />
 
 ### With Icons
 

@@ -20,6 +20,43 @@ const Template: StoryFn<OListProps> = args => (
 
 export const Basic = Template.bind({});
 
+export const WithCustomNumbering: StoryFn<OListProps> = args => (
+  <div className='min-w-0 sm:min-w-96 space-y-4'>
+    <div>
+      <p className='text-sm font-semibold mb-2'>Decimal (default)</p>
+      <OList {...args} className='list-decimal'>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </OList>
+    </div>
+    <div>
+      <p className='text-sm font-semibold mb-2'>Lowercase Roman</p>
+      <OList {...args} className='list-[lower-roman]'>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </OList>
+    </div>
+    <div>
+      <p className='text-sm font-semibold mb-2'>Lowercase Alpha</p>
+      <OList {...args} className='list-[lower-alpha]'>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </OList>
+    </div>
+    <div>
+      <p className='text-sm font-semibold mb-2'>No Numbers</p>
+      <OList {...args} className='list-none'>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </OList>
+    </div>
+  </div>
+);
+
 export const SmallText = Template.bind({});
 
 SmallText.args = {

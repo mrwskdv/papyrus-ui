@@ -5,10 +5,7 @@ import type { HTMLAttributes } from 'react';
 import { Text } from '../text';
 import type { TextSize, TextFontVariant } from '../text';
 
-export type UListType = 'dash' | 'disc' | 'none';
-
-export interface UListProps
-  extends Omit<HTMLAttributes<HTMLUListElement>, 'size' | 'type'> {
+export interface UListProps extends HTMLAttributes<HTMLUListElement> {
   /**
    * Applies bold styling to the text.
    *
@@ -29,28 +26,16 @@ export interface UListProps
    * @default 'md'
    */
   size?: TextSize;
-
-  /**
-   * Sets the marker type of the list. Use 'none' type for custom markers.
-   *
-   * Custom UI-kit types: 'dash'
-   * TailwindCSS types: 'disc', 'none'
-   *
-   * @default 'dash'
-   */
-  type?: UListType;
 }
 
 export const UList = forwardRef<HTMLUListElement, UListProps>(
-  ({ className, children, type = 'dash', ...props }, ref) => (
+  ({ className, children, ...props }, ref) => (
     <Text
       ref={ref}
       as='ul'
       className={cn(
         'list',
-        type === 'dash' && 'list-dash',
-        type === 'disc' && 'list-disc',
-        type === 'none' && 'list-none',
+        !className?.includes('list-') && 'list-disc',
         className,
       )}
       {...props}

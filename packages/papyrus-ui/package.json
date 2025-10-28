@@ -1,6 +1,6 @@
 {
   "name": "papyrus-ui",
-  "version": "0.9.16",
+  "version": "0.9.17",
   "description": "The UI kit with fundamental React components based on the Papyrus UI design system.",
   "files": [
     "dist",

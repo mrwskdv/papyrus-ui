@@ -20,7 +20,7 @@ const meta: Meta = {
 };
 
 export const Basic: StoryFn<MarkerProps> = args => (
-  <UList type='none'>
+  <UList className='list-none'>
     <li>
       <Marker {...args} />
       List Item

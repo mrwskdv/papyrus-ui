@@ -1,7 +1,6 @@
 import { render } from '../../utils/test-utils';
 
 import { UList } from './u-list';
-import type { UListType } from './u-list';
 
 describe('UList', () => {
   describe('Given u-list with default props', () => {
@@ -9,6 +8,18 @@ describe('UList', () => {
       it('Then `<ul>` element should be in the document', () => {
         const { container } = render(<UList />);
         expect(container.querySelector('ul')).toBeInTheDocument();
+      });
+
+      it('Then should have list class for consistent spacing', () => {
+        const { container } = render(<UList />);
+        const ulElement = container.querySelector('ul');
+        expect(ulElement).toHaveClass('list');
+      });
+
+      it('Then should have list-disc class by default', () => {
+        const { container } = render(<UList />);
+        const ulElement = container.querySelector('ul');
+        expect(ulElement).toHaveClass('list-disc');
       });
     });
   });
@@ -31,31 +42,31 @@ describe('UList', () => {
     });
   });
 
-  describe('Given u-list with different types', () => {
-    it.each([
-      ['disc', 'list-disc'],
-      ['dash', 'list-dash'],
-      ['none', 'list-none'],
-    ])('When type is %s, Then should have %s class', (type, expectedClass) => {
-      const { container } = render(
-        <UList type={type as UListType}>
-          <li>Item 1</li>
-        </UList>,
-      );
+  describe('Given u-list with custom className', () => {
+    describe('When component is rendered with Tailwind list utilities', () => {
+      it('Then should apply custom className', () => {
+        const { container } = render(
+          <UList className='list-disc'>
+            <li>Item 1</li>
+          </UList>,
+        );
 
-      const ulElement = container.querySelector('ul');
-      expect(ulElement).toHaveClass(expectedClass);
-    });
+        const ulElement = container.querySelector('ul');
+        expect(ulElement).toHaveClass('list');
+        expect(ulElement).toHaveClass('list-disc');
+      });
 
-    it('When no type is provided, Then should default to dash type', () => {
-      const { container } = render(
-        <UList>
-          <li>Item 1</li>
-        </UList>,
-      );
+      it('Then should support list-none className', () => {
+        const { container } = render(
+          <UList className='list-none'>
+            <li>Item 1</li>
+          </UList>,
+        );
 
-      const ulElement = container.querySelector('ul');
-      expect(ulElement).toHaveClass('list-dash');
+        const ulElement = container.querySelector('ul');
+        expect(ulElement).toHaveClass('list');
+        expect(ulElement).toHaveClass('list-none');
+      });
     });
   });
 });

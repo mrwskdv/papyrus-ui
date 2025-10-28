@@ -5,7 +5,8 @@ import OList, {
   BoldText,
   PrimaryFont,
   SecondaryFont,
-  SmallText
+  SmallText,
+  WithCustomNumbering,
 } from './o-list.stories';
 
 <Meta of={OList} />
@@ -52,6 +53,14 @@ The OList component is used to create ordered lists. It is a wrapper for the `<o
 
 <Canvas of={Basic} />
 
+The OList component applies `list-decimal` style by default for decimal numbering, along with consistent spacing styles. To use a different numbering style, you can override with Tailwind CSS utilities.
+
+### Custom Numbering Styles
+
+To apply specific numbering styles, you can use Tailwind CSS utilities:
+
+<Canvas of={WithCustomNumbering} />
+
 ### Small Text
 
 For smaller text, use the 'sm' size:
@@ -79,8 +88,11 @@ Use `bold` property for bold text.
 - **List Item Content**: Use ListItem component to wrap list item content in `<li>` element. Each list item should contain
   a single item of content or a group of related content.
 
-- **Appropriate Numbering**: Choose the appropriate numbering style for your list, such as decimal (1, 2, 3),
-  alphabetical (a, b, c), or Roman numerals (I, II, III), depending on the content and context.
+- **Numbering Styles**: The component applies `list-decimal` by default. To customize numbering styles (alphabetical, Roman numerals, or no numbering), use Tailwind CSS utilities or custom styles. For example:
+  - Use `list-[lower-alpha]` for alphabetical numbering
+  - Use `list-[lower-roman]` for lowercase Roman numerals
+  - Use `list-[upper-roman]` for uppercase Roman numerals
+  - Use `list-none` to remove numbering
 
 - **List Length**: Keep ordered lists to a reasonable length. If a list becomes too long, consider breaking it into smaller
   sub-lists or sections for improved comprehension.

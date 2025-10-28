@@ -262,13 +262,6 @@ const papyrusUIPlugin = plugin(props => {
       },
     },
 
-    '.list-dash': {
-      '@apply list-none': {},
-      '& > li:before': {
-        content: '"\\2014"',
-      },
-    },
-
     // Table styles
     '.table': {
       '@apply w-full overflow-auto': {},

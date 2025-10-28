@@ -24,27 +24,19 @@ const Template: StoryFn<UListProps> = args => (
 
 export const Basic = Template.bind({});
 
-export const DiscType = Template.bind({});
-
-DiscType.args = {
-  type: 'disc',
-};
-
-export const DashType = Template.bind({});
-
-DashType.args = {
-  type: 'dash',
-};
-
-export const NoneType = Template.bind({});
-
-NoneType.args = {
-  type: 'none',
-};
+export const WithNoBullets: StoryFn<UListProps> = args => (
+  <div className='min-w-0 sm:min-w-96'>
+    <UList {...args} className='list-none'>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </UList>
+  </div>
+);
 
 export const WithIcons: StoryFn<UListProps> = args => (
   <div className='min-w-0 sm:min-w-96'>
-    <UList {...args} type='none'>
+    <UList {...args} className='list-none'>
       <li>
         <Marker role='none'>
           <Icon>
@@ -69,6 +61,28 @@ export const WithIcons: StoryFn<UListProps> = args => (
         </Marker>
         Item 3
       </li>
+    </UList>
+  </div>
+);
+
+export const NestedList: StoryFn<UListProps> = args => (
+  <div className='min-w-0 sm:min-w-96'>
+    <UList {...args}>
+      <li>
+        First level item
+        <UList className='list-[circle]'>
+          <li>Nested item 1</li>
+          <li>Nested item 2</li>
+        </UList>
+      </li>
+      <li>
+        Second level item
+        <UList className='list-[circle]'>
+          <li>Another nested item 1</li>
+          <li>Another nested item 2</li>
+        </UList>
+      </li>
+      <li>Third level item</li>
     </UList>
   </div>
 );

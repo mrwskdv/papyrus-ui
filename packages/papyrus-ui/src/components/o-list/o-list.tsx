@@ -1,12 +1,11 @@
 import cn from 'classnames';
 import { forwardRef } from 'react';
-import type { HTMLAttributes } from 'react';
+import type { OlHTMLAttributes } from 'react';
 
 import { Text } from '../text';
 import type { TextSize, TextFontVariant } from '../text';
 
-export interface OListProps
-  extends Omit<HTMLAttributes<HTMLOListElement>, 'color'> {
+export interface OListProps extends OlHTMLAttributes<HTMLOListElement> {
   /**
    * Applies bold styling to the text.
    *
@@ -34,7 +33,11 @@ export const OList = forwardRef<HTMLOListElement, OListProps>(
     <Text
       ref={ref}
       as='ol'
-      className={cn('list list-decimal', className)}
+      className={cn(
+        'list',
+        !className?.includes('list-') && 'list-decimal',
+        className,
+      )}
       {...props}
     >
       {children}

@@ -314,7 +314,7 @@ export const theme: Config['theme'] = {
       button: [
         '0.875rem',
         {
-          lineHeight: '1',
+          lineHeight: '1.2',
           fontWeight: '600',
           letterSpacing: '0.024em',
         },

@@ -1,5 +1,5 @@
 import type { StoryFn } from '@storybook/react';
-import { toUpper } from 'lodash';
+import { capitalize, toUpper } from 'lodash';
 import { BiCheck, BiStar, BiTag } from 'react-icons/bi';
 
 import { Tag } from './tag';
@@ -51,7 +51,7 @@ export const Variants: StoryFn<TagProps> = args => (
         .map((variant, i) => (
           <div key={i} className='mt-2 px-1'>
             <Tag {...args} variant={variant}>
-              {toUpper(variant)}
+              {capitalize(variant)}
             </Tag>
           </div>
         ))}
@@ -63,7 +63,7 @@ export const Variants: StoryFn<TagProps> = args => (
           .map((variant, i) => (
             <div key={i} className='mt-4 px-2'>
               <Tag {...args} variant={variant}>
-                {toUpper(variant)}
+                {capitalize(variant)}
               </Tag>
             </div>
           ))}

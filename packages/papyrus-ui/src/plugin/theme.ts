@@ -370,7 +370,7 @@ export const theme: Config['theme'] = {
       DEFAULT: 'transparent',
     },
     ringColor: {
-      DEFAULT: 'rgba(79, 70, 229, .6)', // primary-600/80
+      DEFAULT: 'rgba(79, 70, 229, .6)', // primary-600/60
     },
   },
 };

@@ -188,13 +188,7 @@ const variantStyles = {
 };
 
 // Label styles
-const labelStyles = [
-  'font-sans',
-  'inline-block',
-  'text-button',
-  'truncate',
-  '-mb-px',
-];
+const labelStyles = ['font-sans', 'inline-block', 'text-button', 'truncate'];
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
   (

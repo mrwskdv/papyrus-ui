@@ -407,7 +407,8 @@ export const MenuButton = forwardRef<HTMLAnchorElement, MenuButtonProps>(
           >
             {children}
           </span>
-          {!collapsed && (
+
+          {!collapsed && description && (
             <span
               className={cn(
                 descriptionBaseClasses,

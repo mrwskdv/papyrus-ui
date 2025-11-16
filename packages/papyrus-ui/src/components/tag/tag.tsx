@@ -109,7 +109,7 @@ const interactiveVariantStyles = {
 };
 
 // Label styles
-const labelStyles = ['inline-block', 'font-sans', 'truncate', 'leading-none'];
+const labelStyles = ['inline-block', 'font-sans', 'truncate'];
 
 const labelSizeStyles = {
   sm: 'text-caption',

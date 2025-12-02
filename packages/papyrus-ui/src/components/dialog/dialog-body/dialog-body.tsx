@@ -19,7 +19,14 @@ export const DialogBody: FC<DialogBodyProps> = ({
 
   return (
     <div
-      className={cn('flex-1', size === 'sm' ? 'px-4' : 'py-3 px-4', className)}
+      className={cn(
+        'flex-1 overflow-y-auto',
+        size === 'sm' && 'px-4',
+        size === 'md' && 'py-3 px-4',
+        size === 'lg' && 'py-3 px-4',
+        size === 'xl' && 'py-3 px-4',
+        className,
+      )}
       {...props}
     >
       {children}

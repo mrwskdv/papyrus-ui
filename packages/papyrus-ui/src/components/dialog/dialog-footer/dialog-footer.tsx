@@ -21,7 +21,7 @@ export const DialogFooter: FC<DialogFooterProps> = ({
   return (
     <div
       className={cn(
-        'sticky bottom-0 flex items-center gap-4 py-3.5 px-4 z-20',
+        'flex items-center gap-4 py-3.5 px-4 z-20',
         size !== 'sm' && 'border-t border-neutral-100 bg-white',
         className?.includes('justify') ? '' : 'justify-between',
         className,

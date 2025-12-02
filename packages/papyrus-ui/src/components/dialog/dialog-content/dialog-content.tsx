@@ -25,8 +25,8 @@ const TRANSITION_TIMEOUT = {
 };
 
 export const DialogContent: FC<DialogContentProps> = ({
-  children,
   className,
+  children,
   ...props
 }) => {
   const {
@@ -55,10 +55,9 @@ export const DialogContent: FC<DialogContentProps> = ({
               size === 'sm' && 'justify-center p-4 overflow-y-auto',
               size === 'md' &&
                 'justify-center p-0 sm:p-4 overflow-y-hidden sm:overflow-y-auto',
-              size === 'lg' &&
-                'justify-start p-0 sm:p-4 overflow-y-hidden sm:overflow-y-auto',
+              size === 'lg' && 'justify-center p-0 sm:p-4 overflow-y-hidden',
               size === 'xl' &&
-                'justify-start px-0 lg:px-12 py-0 lg:py-4 overflow-y-hidden lg:overflow-y-auto',
+                'justify-start px-0 lg:px-12 py-0 lg:py-4 overflow-y-hidden',
               'fade',
               status === 'entered' && 'opacity-100',
               className,
@@ -74,15 +73,15 @@ export const DialogContent: FC<DialogContentProps> = ({
                 aria-describedby={descriptionId}
                 aria-labelledby={labelId}
                 className={cn(
-                  'bg-white flex-none flex flex-col w-full',
+                  'bg-white flex flex-col w-full shadow-md overflow-hidden',
                   size === 'sm' &&
-                    'relative max-w-sm max-h-full rounded-xl shadow-md overflow-hidden',
+                    'relative flex-none max-w-sm max-h-full rounded-xl ',
                   size === 'md' &&
-                    'absolute sm:relative inset-0 sm:max-w-lg h-full sm:h-auto max-h-full sm:rounded-xl shadow-md overflow-y-auto sm:overflow-y-hidden',
+                    'absolute sm:relative inset-0 flex-none sm:max-w-lg h-full sm:h-auto max-h-full sm:rounded-xl',
                   size === 'lg' &&
-                    'absolute sm:relative inset-0 sm:max-w-4xl min-h-full h-full sm:h-auto sm:rounded-xl shadow-md overflow-y-auto sm:overflow-y-hidden',
+                    'absolute sm:relative inset-0 flex-none sm:max-w-4xl h-full sm:h-auto max-h-full sm:rounded-xl',
                   size === 'xl' &&
-                    'absolute lg:relative inset-0 min-h-full h-full lg:h-auto lg:rounded-xl shadow-md overflow-y-auto lg:overflow-y-hidden',
+                    'absolute lg:relative inset-0 flex-1 min-h-full h-full lg:rounded-xl',
                 )}
                 {...getFloatingProps(props)}
               >

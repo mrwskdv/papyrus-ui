@@ -24,10 +24,10 @@ Completion criterion: staged set is non-empty.
 
 Run:
 ```bash
-git symbolic-ref --short HEAD
+pnpm -s tsx scripts/generate-pr-description/derive-issue-ref.ts "$(git symbolic-ref --short HEAD)"
 ```
 
-If the branch name matches `^(\d+)-`, capture the number as `ISSUE`. Otherwise `ISSUE` is unset and this step is done.
+Non-empty output → capture as `ISSUE`. Empty → `ISSUE` unset, step done.
 
 With `ISSUE` set, read what the issue will be judged on:
 

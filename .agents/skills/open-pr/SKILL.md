@@ -38,7 +38,12 @@ git rev-list --count origin/main..HEAD
 ```
 
 - **Count is 1:** title = that commit's subject (`git log -1 --format=%s`).
-- **Count is more than 1:** title = the branch name with `-`/`_` replaced by spaces (e.g. `49-rename-git-commit-skill-to-commit` → `49 rename git commit skill to commit`).
+- **Count is more than 1:** resolve the issue behind the branch:
+  ```bash
+  pnpm -s tsx scripts/generate-pr-description/derive-issue-ref.ts "$(git symbolic-ref --short HEAD)"
+  ```
+  - Non-empty (`ISSUE`) → title = that issue's title (`gh issue view "$ISSUE" --json title --jq .title`).
+  - Empty → title = the branch name with `-`/`_` replaced by spaces (e.g. `49-rename-git-commit-skill-to-commit` → `49 rename git commit skill to commit`).
 
 **Completion criterion:** a title in hand — never ask the user for one.
 

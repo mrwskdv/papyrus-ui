@@ -13,7 +13,7 @@ import {
   useFocus,
 } from '@floating-ui/react';
 import type { OffsetOptions, Placement } from '@floating-ui/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
 import { PopoverArrow as Arrow } from './popover-arrow';
@@ -30,9 +30,9 @@ export type PopoverTrigger = 'click' | 'focus' | 'hover';
 export interface PopoverProps {
   arrowPadding?: number;
   children?: ReactNode;
-  initialOpen?: boolean;
+  defaultIsOpen?: boolean;
   offset?: OffsetOptions;
-  open?: boolean;
+  isOpen?: boolean;
   overflowPadding?: number;
   modal?: boolean;
   placement?: Placement;
@@ -43,9 +43,9 @@ export interface PopoverProps {
 
 function PopoverComponent({
   arrowPadding,
-  initialOpen = false,
+  defaultIsOpen = false,
   offset,
-  open,
+  isOpen,
   overflowPadding,
   modal = false,
   placement = 'bottom',
@@ -54,14 +54,15 @@ function PopoverComponent({
   onOpenChange,
   children,
 }: PopoverProps) {
-  const [openState, setOpenState] = useState(() => open ?? initialOpen);
+  const [isOpenState, setIsOpenState] = useState(defaultIsOpen);
   const arrowRef = useRef<SVGSVGElement | null>(null);
-  const isControlled = open !== undefined;
+  const isControlled = isOpen !== undefined;
+  const currentIsOpen = isOpen ?? isOpenState;
   const triggers = Array.isArray(trigger) ? trigger : [trigger];
 
   const { context, floatingStyles, refs } = useFloating({
     placement,
-    open: openState,
+    open: currentIsOpen,
     whileElementsMounted: autoUpdate,
     middleware: [
       // eslint-disable-next-line react-hooks/refs -- the middleware stores the ref object; .current is read by floating-ui, not during render
@@ -81,7 +82,7 @@ function PopoverComponent({
       if (isControlled) {
         onOpenChange?.(nextOpen);
       } else {
-        setOpenState(nextOpen);
+        setIsOpenState(nextOpen);
       }
     },
   });
@@ -118,7 +119,7 @@ function PopoverComponent({
       floatingStyles,
       getReferenceProps,
       getFloatingProps,
-      open: openState,
+      isOpen: currentIsOpen,
       modal,
       refs,
     }),
@@ -128,16 +129,10 @@ function PopoverComponent({
       getFloatingProps,
       getReferenceProps,
       modal,
-      openState,
+      currentIsOpen,
       refs,
     ],
   );
-
-  useEffect(() => {
-    if (open !== undefined) {
-      setOpenState(open);
-    }
-  }, [open]);
 
   return (
     <PopoverContext.Provider value={popoverCxt}>

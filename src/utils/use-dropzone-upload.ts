@@ -305,6 +305,7 @@ export function useDropzoneUpload<
 
   useEffect(() => {
     if (typeof value !== 'undefined') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- multiple mode merges `value` with in-flight entries already in filesState (loading/invalid), so this reads previous committed state and cannot be derived from `value` alone during render
       updateFilesState(value);
     }
   }, [updateFilesState, value]);

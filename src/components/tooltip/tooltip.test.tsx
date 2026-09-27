@@ -49,11 +49,11 @@ describe('Tooltip', () => {
     });
   });
 
-  describe('Given a tooltip component with `initialOpen` prop set to true', () => {
+  describe('Given a tooltip component with `defaultIsOpen` prop set to true', () => {
     describe("When it's rendered", () => {
       it('Then the tooltip content is visible initially', () => {
         render(
-          <Tooltip initialOpen title="This is a tooltip">
+          <Tooltip defaultIsOpen title="This is a tooltip">
             <button type="button">Hover me</button>
           </Tooltip>,
         );
@@ -63,11 +63,11 @@ describe('Tooltip', () => {
     });
   });
 
-  describe('Given a tooltip component with `open` prop', () => {
-    describe('When the open prop is toggled from false to true', () => {
+  describe('Given a tooltip component with `isOpen` prop', () => {
+    describe('When the isOpen prop is toggled from false to true', () => {
       it('Then the tooltip should become visible', async () => {
         const { rerender } = render(
-          <Tooltip open={false} title="This is a tooltip">
+          <Tooltip isOpen={false} title="This is a tooltip">
             <button type="button">Hover me</button>
           </Tooltip>,
         );
@@ -75,7 +75,7 @@ describe('Tooltip', () => {
         expect(screen.queryByText('This is a tooltip')).not.toBeInTheDocument();
 
         rerender(
-          <Tooltip open title="This is a tooltip">
+          <Tooltip isOpen title="This is a tooltip">
             <button type="button">Hover me</button>
           </Tooltip>,
         );
@@ -86,10 +86,10 @@ describe('Tooltip', () => {
       });
     });
 
-    describe('When the open prop is toggled from true to false', () => {
+    describe('When the isOpen prop is toggled from true to false', () => {
       it('Then the tooltip should become hidden', async () => {
         const { rerender } = render(
-          <Tooltip open title="This is a tooltip">
+          <Tooltip isOpen title="This is a tooltip">
             <button type="button">Hover me</button>
           </Tooltip>,
         );
@@ -97,7 +97,7 @@ describe('Tooltip', () => {
         expect(screen.getByText('This is a tooltip')).toBeVisible();
 
         rerender(
-          <Tooltip open={false} title="This is a tooltip">
+          <Tooltip isOpen={false} title="This is a tooltip">
             <button type="button">Hover me</button>
           </Tooltip>,
         );
@@ -111,7 +111,7 @@ describe('Tooltip', () => {
     });
   });
 
-  describe('Given a tooltip component with open and onOpenChange props', () => {
+  describe('Given a tooltip component with isOpen and onOpenChange props', () => {
     describe('When the tooltip is triggered and user clicks outside the tooltip content', () => {
       it('Then the onOpenChange callback should be called with the new open state', async () => {
         const onOpenChange = vi.fn();
@@ -119,7 +119,11 @@ describe('Tooltip', () => {
         render(
           <>
             <button type="button">Outside</button>
-            <Tooltip open title="This is a tooltip" onOpenChange={onOpenChange}>
+            <Tooltip
+              isOpen
+              title="This is a tooltip"
+              onOpenChange={onOpenChange}
+            >
               <button type="button">Hover me</button>
             </Tooltip>
           </>,

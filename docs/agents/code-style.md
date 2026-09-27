@@ -25,13 +25,20 @@ Tooling still apply to spike. Judgment rule — no.
 
 ## Comments
 
-Explain why, not what. Keep density low — comment earn place by carry context code cannot.
+Explain why, not what. Keep the density low; a comment earns its place by
+carrying context the code cannot.
 
 ```ts
-// Good — Tolerates the cell padding Prettier adds when it aligns Markdown tables.
-// Bad  — Matches a skill row.
-const SKILL_ROW = /\|[ \t]*`([a-z-]+)`[ \t]*\|/g;
+// Authorization for `Skill(implement)` under GitHub Actions.
+//
+// The skill is model-invocable, so Claude decides *whether* a comment meant
+// "implement". These rules decide whether it is *allowed to*, from facts the
+// agent cannot write: the issue's labels and its author's association.
 ```
+
+`// gates the implement skill` would have earned nothing. A comment that
+records a decision should name the ADR that made it — that is how a reader
+gets from a line of code to the reasoning behind it.
 
 ## Escape hatches
 

@@ -2,10 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches-ignore:
-      - 'main'
-
-  workflow_dispatch:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   ci:
@@ -27,6 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint commit messages
+        run: pnpm exec commitlint --from origin/main
 
       - name: Check dependency licenses
         run: pnpm check:licenses

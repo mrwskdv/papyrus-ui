@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
+import type { SkillsLock } from './validate-skills.utils';
 import {
   extractSkills,
+  findLockIssues,
   findMissingSkills,
   findSymlinkIssue,
+  hashSkill,
 } from './validate-skills.utils';
 
 describe('findSymlinkIssue', () => {
@@ -77,5 +80,84 @@ describe('findMissingSkills', () => {
 
   it('returns nothing when no skills are documented', () => {
     expect(findMissingSkills([], () => false)).toEqual([]);
+  });
+});
+
+describe('hashSkill', () => {
+  const files = [
+    { path: 'SKILL.md', content: '# Skill' },
+    { path: 'scripts/run.sh', content: 'echo hi' },
+  ];
+
+  it('is stable across input ordering', () => {
+    expect(hashSkill(files)).toEqual(hashSkill([...files].reverse()));
+  });
+
+  it("changes when a file's content changes", () => {
+    const edited = [{ path: 'SKILL.md', content: '# Skill ' }, files[1]];
+
+    expect(hashSkill(edited)).not.toEqual(hashSkill(files));
+  });
+
+  it('changes when a file is deleted', () => {
+    expect(hashSkill([files[0]])).not.toEqual(hashSkill(files));
+  });
+
+  it('changes when a file is renamed', () => {
+    const renamed = [files[0], { path: 'scripts/go.sh', content: 'echo hi' }];
+
+    expect(hashSkill(renamed)).not.toEqual(hashSkill(files));
+  });
+
+  it('does not confuse a path boundary with content', () => {
+    expect(hashSkill([{ path: 'ab', content: 'c' }])).not.toEqual(
+      hashSkill([{ path: 'a', content: 'bc' }]),
+    );
+  });
+});
+
+describe('findLockIssues', () => {
+  const lock: SkillsLock = {
+    version: 2,
+    skills: {
+      tdd: {
+        source: 'mattpocock/skills',
+        path: 'skills/engineering/tdd',
+        hash: 'aaa',
+      },
+    },
+    local: ['implement'],
+  };
+
+  it('passes when every directory matches the lock', () => {
+    expect(findLockIssues({ tdd: 'aaa', implement: 'zzz' }, lock)).toEqual([]);
+  });
+
+  it('flags a locked skill whose directory hash has changed', () => {
+    expect(findLockIssues({ tdd: 'bbb', implement: 'zzz' }, lock)).toEqual([
+      { kind: 'hash-mismatch', skill: 'tdd' },
+    ]);
+  });
+
+  it('ignores edits to a skill named in local', () => {
+    expect(findLockIssues({ tdd: 'aaa', implement: 'yyy' }, lock)).toEqual([]);
+  });
+
+  it('flags a directory in neither list', () => {
+    expect(
+      findLockIssues({ tdd: 'aaa', implement: 'zzz', stray: 'ccc' }, lock),
+    ).toEqual([{ kind: 'unaccounted', skill: 'stray' }]);
+  });
+
+  it('flags a locked entry with no directory', () => {
+    expect(findLockIssues({ implement: 'zzz' }, lock)).toEqual([
+      { kind: 'orphan-entry', skill: 'tdd' },
+    ]);
+  });
+
+  it('flags a local entry with no directory', () => {
+    expect(findLockIssues({ tdd: 'aaa' }, lock)).toEqual([
+      { kind: 'orphan-entry', skill: 'implement' },
+    ]);
   });
 });

@@ -51,6 +51,25 @@ ref.current = node;
 
 Reason say why rule wrong _here_. Restate what rule check earn nothing. Narrow to one line — file-wide disable hide next violation.
 
+## Component tests
+
+Assert what a caller or a user observe — rendered text, element type, role, ARIA
+state, event outcome, and that a supplied `className` survive. Never the utility
+classes a component pick for itself.
+
+```tsx
+// no — break on a Tailwind rename
+expect(container.firstChild).toHaveClass('w-full', 'h-px', 'bg-current');
+
+// yes — a caller's class reach the DOM
+expect(screen.getByText('Link')).toHaveClass('custom-link-class');
+```
+
+Logic whose only observable is a style fall outside a unit test — stories cover
+it, no class string stand in.
+
+Older assertion fix on next touch of its file — no sweep.
+
 ## Scripts
 
 One directory per script, named for script. `index.ts` = I/O composition root. Pure logic in `<name>.utils.ts`. Test colocated `<name>.utils.test.ts` — cover `.utils`, not `index.ts`.

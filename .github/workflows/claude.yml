@@ -399,13 +399,19 @@ jobs:
           # and pull-requests write, which a blanket grant would expose. Every
           # entry is a read.
           #
+          # Quoted because the value is split on whitespace, not just commas:
+          # unquoted, `Bash(gh issue view:*)` reached the SDK as three tools
+          # named `Bash(gh`, `issue` and `view:*)`, so every specifier with a
+          # space in it silently became nothing and this tier ran with no `gh`
+          # or `git` at all.
+          #
           # The system prompt is load-bearing: without it Claude treats a
           # request it cannot fulfil as a task to retry, and spends the whole
           # turn budget colliding with the missing write tools.
           claude_args: |
             --model claude-sonnet-5
             --max-turns 15
-            --allowedTools Read,Glob,Grep,Skill,TodoWrite,Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh pr view:*),Bash(gh pr list:*),Bash(gh pr diff:*),Bash(gh run view:*),Bash(git log:*),Bash(git diff:*),Bash(git show:*)
+            --allowedTools "Read,Glob,Grep,Skill,TodoWrite,Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh pr view:*),Bash(gh pr list:*),Bash(gh pr diff:*),Bash(gh run view:*),Bash(git log:*),Bash(git diff:*),Bash(git show:*)"
             --append-system-prompt "You are the read-only tier. You have no Write, Edit or general Bash tools and cannot change, commit or push anything. If answering needs a code change, do not attempt it and do not retry after a denial. Invoke the implement skill instead: it reports whether the issue is authorized for a run. Say what it found, and that a maintainer can start one by commenting `@claude implement N` on the issue. Then stop."
 
       # The runner-local file the reporter reads, kept so a run can be diagnosed

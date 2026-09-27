@@ -62,12 +62,12 @@ Completion criterion: custom rules understood; if the file is absent, skip this 
 
 ### 4. Generate commit message
 
-Draft a Conventional Commits message from the staged diff (`git diff --cached`), satisfying the rules from step 3. No `Co-Authored-By` trailer.
+Draft a Conventional Commits message from the staged diff (`git diff --cached`), satisfying the rules from step 3.
 
 Keep it caveman-terse:
 - Subject: imperative mood ("add", "fix", not "added", "adds"), ≤50 chars when possible, hard cap 72, no trailing period.
 - Body: only if the subject isn't self-explanatory; wrap at 72 chars.
-- Never write "this commit does X", "I", "we", "now", "currently", any AI-attribution line, emoji, or the scope's own name restated in the subject.
+- Never write "this commit does X", "I", "we", "now", "currently", emoji, or the scope's own name restated in the subject.
 
 If `ISSUE` is set, `CLOSES` from step 2 decides the footer. A closing keyword claims that merging this commit finishes the issue, so it rides the commit that settles the last criterion — not the slices before it.
 

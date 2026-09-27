@@ -74,6 +74,6 @@ EOF
 )"
 ```
 
-No `Co-Authored-By` trailer and no "Generated with Claude Code" footer — this repo's PRs carry neither.
+Post the body exactly as step 4 assembled it: this repo's PR descriptions carry no "Generated with Claude Code" footer. Commit trailers are `commit-changes`' business — this skill pushes commits, it never writes them.
 
 Report the PR URL from the command's output.

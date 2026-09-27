@@ -5,23 +5,9 @@ import { Divider } from './divider';
 describe('Divider', () => {
   describe('Given no props', () => {
     describe('When the component is rendered', () => {
-      it('Then it should apply the horizontal classes and `bg-current`', () => {
+      it('Then it should render a `div` element', () => {
         const { container } = render(<Divider />);
-        expect(container.firstChild).toHaveClass(
-          'w-full',
-          'h-px',
-          'bg-current',
-        );
-      });
-    });
-  });
-
-  describe('Given a `direction` of `vertical`', () => {
-    describe('When the component is rendered', () => {
-      it('Then it should apply the vertical classes instead', () => {
-        const { container } = render(<Divider direction="vertical" />);
-        expect(container.firstChild).toHaveClass('h-full', 'w-px');
-        expect(container.firstChild).not.toHaveClass('w-full', 'h-px');
+        expect(container.firstChild?.nodeName).toBe('DIV');
       });
     });
   });

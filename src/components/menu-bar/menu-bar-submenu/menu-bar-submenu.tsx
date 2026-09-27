@@ -55,7 +55,7 @@ import type { MenuBarContextType } from '../menu-bar.context';
 export interface SubMenuProps extends ButtonHTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
   icon?: ReactElement;
-  initialOpen?: boolean;
+  defaultIsOpen?: boolean;
   label: string;
 }
 
@@ -69,14 +69,14 @@ const TRANSITION_TIMEOUT = {
 
 export function MenuBarSubmenu({
   icon,
-  initialOpen = false,
+  defaultIsOpen = false,
   label,
   children,
   onFocus,
   onKeyDown,
   ...props
 }: SubMenuProps) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const elementsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const labelsRef = useRef<string[]>([]);

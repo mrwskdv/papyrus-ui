@@ -43,19 +43,19 @@ import type { DropdownMenuContextType } from '../dropdown-menu.context';
 
 export interface DropdownSubmenuProps extends ButtonHTMLAttributes<HTMLAnchorElement> {
   icon?: ReactElement;
-  initialOpen?: boolean;
+  defaultIsOpen?: boolean;
   label: string;
 }
 
 export function DropdownSubmenu({
   icon,
-  initialOpen = false,
+  defaultIsOpen = false,
   label,
   onKeyDown,
   children,
   ...props
 }: DropdownSubmenuProps) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const elementsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const labelsRef = useRef<string[]>([]);

@@ -1,23 +1,21 @@
 name: Claude
 
 # `@claude <anything>` on an issue, a pull request, or a review thread. One
-# trigger phrase, routed to a different tier by where it is used.
+# trigger phrase, routed to a tier by where it is used and who is talking.
 #
-# This repository is public, so the file checks who is talking before any tier
-# runs: a drive-by mention would otherwise cost a runner, a checkout and an
-# install. What it then decides is *which tier* answers: real work needs a big
-# turn budget and write tools, a question needs neither.
+# The repository is public, so `guard` checks the commenter before any tier
+# runs: a drive-by mention otherwise costs a runner, a checkout and an install.
 #
 # Whether a comment meant "implement" is Claude's judgement, not this file's —
-# the regex below is a fast path that skips straight to the skill when the
-# phrasing is obvious. Everything else lands in `converse`, where Claude can
-# still reach the same conclusion and escalate.
+# the regex below is only a fast path to the skill when the phrasing is obvious.
+# Everything else lands in `converse`, which can reach the same conclusion and
+# escalate.
 #
-# What is *not* Claude's judgement is authorization, and it is enforced here
-# rather than by the PreToolUse hook: `prompt: /implement N` inlines the skill
-# as a slash command without ever calling the Skill tool, so the hook cannot
-# see this route. It covers Claude self-invoking the skill; these two checks
-# cover the workflow driving it.
+# Authorization is *not* Claude's judgement, and is enforced here rather than by
+# the PreToolUse hook: `prompt: /implement N` inlines the skill as a slash
+# command without ever calling the Skill tool, so the hook cannot see this
+# route. It covers Claude self-invoking the skill; `guard` and `Verify
+# authorization` cover the workflow driving it.
 
 on:
   issue_comment:
@@ -60,6 +58,7 @@ jobs:
     steps:
       - id: route
         env:
+          GH_TOKEN: ${{ github.token }}
           BODY: ${{ github.event.comment.body }}
           IS_PR: ${{ github.event_name == 'pull_request_review_comment' || github.event.issue.pull_request != null }}
           NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
@@ -70,9 +69,31 @@ jobs:
           echo "issue=$NUMBER" >> "$GITHUB_OUTPUT"
 
           if [[ "$IS_PR" == "true" ]]; then
-            # A PR mention is never an implement-skill run, but it still needs
-            # write tools to act on review feedback.
-            echo "route=pr" >> "$GITHUB_OUTPUT"
+            # claude-code-action checks the PR head out into the workspace
+            # root for any open PR — `isCrossRepository` picks the refspec, not
+            # whether. Fork code therefore lands in a job holding
+            # `contents: write`, `Bash` and the OAuth token. See #180.
+            #
+            # `false`, not `true`: a read that failed is an unanswered question,
+            # not a permission.
+            cross=$(gh pr view "$NUMBER" --repo "$GITHUB_REPOSITORY" \
+                      --json isCrossRepository --jq .isCrossRepository) || cross=''
+
+            if [[ "$cross" == "false" ]]; then
+              # A PR mention is never an implement-skill run, but it still needs
+              # write tools to act on review feedback.
+              echo "route=pr" >> "$GITHUB_OUTPUT"
+            else
+              # Same route either way; the wording differs because a fork is
+              # permanent and a failed read is worth retrying.
+              if [[ "$cross" == "true" ]]; then
+                why="its head branch lives in a fork"
+              else
+                why="where its head branch lives could not be read"
+              fi
+              echo "route=converse" >> "$GITHUB_OUTPUT"
+              echo "notice=$why, so the write tier is not authorized for it: no commits, no pushes, and no \`Bash\` beyond \`gh\` and \`git\` reads." >> "$GITHUB_OUTPUT"
+            fi
           # No \b — bash uses POSIX ERE, where it silently never matches and
           # every comment would fall through to converse.
           elif [[ ! "$BODY" =~ @claude[[:space:]]+(please[[:space:]]+)?(implement|build|fix|ship|start|do)([[:space:]]|$) ]]; then
@@ -93,10 +114,9 @@ jobs:
           fi
 
       # Refuse here rather than in an agent job. Routing an unauthorized
-      # implement request to `converse` was tried and is worse than useless:
-      # the tier has no write tools, so Claude attempted the work anyway, hit
-      # three permission denials, burned all 15 turns and failed the run — 49
-      # seconds and a red X to say something this step says in two.
+      # implement request to `converse` was tried: with no write tools Claude
+      # attempted the work anyway, hit three permission denials and burned all
+      # 15 turns — 49 seconds and a red X to say what this step says in two.
       - name: Refuse an unauthorized implement request
         if: steps.route.outputs.route == 'refuse'
         env:
@@ -106,6 +126,18 @@ jobs:
         run: |
           gh issue comment "$ISSUE" --repo "${{ github.repository }}" \
             --body "Not starting an implementation run: $REASON"
+
+      # Otherwise the downgrade is invisible: `converse` just answers, and
+      # the maintainer never learns which tier refused the change.
+      - name: Note a route downgraded to the read-only tier
+        if: steps.route.outputs.notice != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ steps.route.outputs.issue }}
+          NOTICE: ${{ steps.route.outputs.notice }}
+        run: |
+          gh issue comment "$ISSUE" --repo "${{ github.repository }}" \
+            --body "Answering this from the read-only tier: $NOTICE"
 
   implement:
     needs: guard
@@ -181,17 +213,11 @@ jobs:
             --max-turns 120
             --allowedTools Read,Write,Edit,Glob,Grep,Bash,Skill,TodoWrite
 
-      # The action injects a system prompt telling Claude it may only commit and
-      # push — which contradicted /implement telling it to open a PR, and which
-      # instruction won was a coin flip. Opening it here means it never depends
-      # on which prompt the model obeyed.
-      # !cancelled(): a run cut short by the turn cap still pushed per-slice
-      # commits, and a PR is a better artifact than an orphan branch.
       # Our own App token, not the action's: claude-code-action revokes the
       # installation token it minted in its own last step, so
-      # `steps.claude.outputs.github_token` is already dead by the time the next
-      # step runs. Not GITHUB_TOKEN either — the agent branch only gets CI via
-      # the pull_request event, which a PR opened by GITHUB_TOKEN never fires.
+      # `steps.claude.outputs.github_token` is already dead by the next step.
+      # Not GITHUB_TOKEN either — the agent branch only gets CI via the
+      # pull_request event, which a PR opened by GITHUB_TOKEN never fires.
       - name: Mint an app token
         id: app-token
         if: ${{ !cancelled() }}
@@ -200,6 +226,11 @@ jobs:
           app-id: ${{ secrets.RELEASE_PLEASE_APP_ID }}
           private-key: ${{ secrets.RELEASE_PLEASE_PRIVATE_KEY }}
 
+      # Opened here, not by the agent: the action's injected system prompt tells
+      # Claude it may only commit and push, which contradicted /implement telling
+      # it to open a PR, and which instruction won was a coin flip.
+      # !cancelled(): a run cut short by the turn cap still pushed per-slice
+      # commits, and a PR is a better artifact than an orphan branch.
       - name: Open a pull request
         if: ${{ !cancelled() }}
         env:
@@ -253,12 +284,7 @@ jobs:
 
           gh pr create --base main --head "$BRANCH" --title "$title" --body "$body"
 
-      # Last, and `always()`: the endings worth reporting are the ones no other
-      # step survives to describe — a cancelled job, a gate that refused before
-      # the agent, an action that skipped itself. A step rather than a
-      # downstream job because `execution_file` is a runner-local path that dies
-      # with this one, and without it a report can only repeat the red X GitHub
-      # already shows. See scripts/report-run.
+      # Last, and `always()`. See scripts/report-run for why it is a step.
       - name: Report how the run ended
         if: ${{ always() }}
         env:
@@ -318,17 +344,10 @@ jobs:
             --max-turns 120
             --allowedTools Read,Write,Edit,Glob,Grep,Bash,Skill,TodoWrite
 
-      # Last, and `always()`: the endings worth reporting are the ones no other
-      # step survives to describe — a cancelled job, a gate that refused before
-      # the agent, an action that skipped itself. A step rather than a
-      # downstream job because `execution_file` is a runner-local path that dies
-      # with this one, and without it a report can only repeat the red X GitHub
-      # already shows. See scripts/report-run.
+      # Last, and `always()`. See scripts/report-run for why it is a step.
       - name: Report how the run ended
         if: ${{ always() }}
         env:
-          # github.token, not the action's App token: that output is empty on
-          # exactly the endings this reports, and no commit is involved here.
           GH_TOKEN: ${{ github.token }}
           TIER: pr
           ISSUE: ${{ needs.guard.outputs.issue }}
@@ -379,12 +398,10 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Unlike the other two jobs, this one *does* pass github_token. The
           # rule against it exists because commits made with GITHUB_TOKEN do not
-          # fire ci.yml — and this tier never commits. What it needs instead is
-          # `actions: write` to dispatch an escalation, which the App's
-          # installation token does not carry: the dispatch came back
-          # "Resource not accessible by integration". workflow_dispatch is one
-          # of the two events GITHUB_TOKEN can still trigger, so the escalated
-          # run does start.
+          # fire ci.yml — and this tier never commits. It needs `actions: write`
+          # to dispatch an escalation, which the App's installation token does
+          # not carry: that came back "Resource not accessible by integration".
+          # workflow_dispatch is one of the two events GITHUB_TOKEN can trigger.
           github_token: ${{ github.token }}
           # `gh` is enumerated rather than `gh:*` because this job holds issues
           # and pull-requests write, which a blanket grant would expose.
@@ -399,10 +416,9 @@ jobs:
             --allowedTools Read,Glob,Grep,Skill,TodoWrite,Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh pr view:*),Bash(gh pr list:*),Bash(gh pr diff:*),Bash(gh run view:*),Bash(gh workflow run:*),Bash(git log:*),Bash(git diff:*),Bash(git show:*)
             --append-system-prompt "You are the read-only tier. You have no Write, Edit or general Bash tools and cannot change, commit or push anything. If answering needs a code change, do not attempt it and do not retry after a denial. Invoke the implement skill instead: it will either authorize an escalation or tell you why the run is not permitted. Report that outcome and stop."
 
-      # The same runner-local file the reporter reads, kept after the job so a
-      # run can be diagnosed once it is gone. It carries which tools a run was
-      # denied, which the job log does not: that log holds only the action's
-      # `init` and `result` lines, five apart, with no per-turn stream.
+      # The runner-local file the reporter reads, kept so a run can be diagnosed
+      # once it is gone. It records which tools were denied; the job log holds
+      # only the action's `init` and `result` lines, with no per-turn stream.
       - name: Preserve the execution log
         if: ${{ always() && steps.claude.outputs.execution_file != '' }}
         uses: actions/upload-artifact@v7
@@ -412,17 +428,10 @@ jobs:
           retention-days: 14
           if-no-files-found: warn
 
-      # Last, and `always()`: the endings worth reporting are the ones no other
-      # step survives to describe — a cancelled job, a gate that refused before
-      # the agent, an action that skipped itself. A step rather than a
-      # downstream job because `execution_file` is a runner-local path that dies
-      # with this one, and without it a report can only repeat the red X GitHub
-      # already shows. See scripts/report-run.
+      # Last, and `always()`. See scripts/report-run for why it is a step.
       - name: Report how the run ended
         if: ${{ always() }}
         env:
-          # github.token, not the action's App token: that output is empty on
-          # exactly the endings this reports, and no commit is involved here.
           GH_TOKEN: ${{ github.token }}
           TIER: converse
           ISSUE: ${{ needs.guard.outputs.issue }}

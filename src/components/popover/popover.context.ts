@@ -8,7 +8,7 @@ export interface PopoverContextType {
   arrowRef: MutableRefObject<SVGSVGElement | null>;
   context: FloatingContext;
   floatingStyles: CSSProperties;
-  open: boolean;
+  isOpen: boolean;
   modal: boolean;
   refs: ExtendedRefs<Element>;
   getFloatingProps: (
@@ -23,7 +23,7 @@ export const PopoverContext = createContext<PopoverContextType>({
   arrowRef: { current: null },
   context: {} as FloatingContext,
   floatingStyles: {},
-  open: false,
+  isOpen: false,
   refs: {} as ExtendedRefs<Element>,
   modal: false,
   getFloatingProps: () => ({}),

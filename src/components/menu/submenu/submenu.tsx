@@ -42,7 +42,7 @@ export interface SubmenuProps extends Omit<
   disabled?: boolean;
   icon?: ReactElement;
   index?: number;
-  initialOpen?: boolean;
+  defaultIsOpen?: boolean;
   label: string;
   selected?: boolean;
   children?: ReactNode;
@@ -58,7 +58,7 @@ export function Submenu({
   disabled,
   icon,
   index,
-  initialOpen,
+  defaultIsOpen,
   label,
   selected,
   onClick,
@@ -67,7 +67,7 @@ export function Submenu({
   children,
   ...props
 }: SubmenuProps) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
   const [activeIndex, setActiveIndex] = useState<Maybe<number>>(null);
   const parent = useContext(MenuContext);
   const buttonRef = useRef<HTMLAnchorElement>(null);

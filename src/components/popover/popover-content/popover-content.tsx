@@ -17,7 +17,7 @@ const TRANSITION_TIMEOUT = {
 
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
   ({ className, style, children, ...props }, ref) => {
-    const { context, floatingStyles, modal, open, refs, getFloatingProps } =
+    const { context, floatingStyles, modal, isOpen, refs, getFloatingProps } =
       useContext(PopoverContext);
 
     const meredRef = useMergeRefs(ref, node => {
@@ -26,7 +26,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
 
     return (
       <Transition
-        in={open}
+        in={isOpen}
         mountOnEnter
         nodeRef={refs.floating}
         timeout={TRANSITION_TIMEOUT}

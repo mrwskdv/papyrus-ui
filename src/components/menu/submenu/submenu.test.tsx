@@ -5,7 +5,7 @@ import { MenuItem } from '../menu-item';
 import { Submenu } from './submenu';
 
 describe('Submenu', () => {
-  describe('Given a submenu with no initialOpen prop', () => {
+  describe('Given a submenu with no defaultIsOpen prop', () => {
     describe('When it is rendered', () => {
       it('Then it should be collapsed', () => {
         render(
@@ -48,7 +48,7 @@ describe('Submenu', () => {
       it('Then the submenu should close', () => {
         const { rerender } = render(
           <Menu collapsed={false}>
-            <Submenu initialOpen label="Products">
+            <Submenu defaultIsOpen label="Products">
               <MenuItem>Electronics</MenuItem>
             </Submenu>
           </Menu>,
@@ -60,7 +60,7 @@ describe('Submenu', () => {
 
         rerender(
           <Menu collapsed>
-            <Submenu initialOpen label="Products">
+            <Submenu defaultIsOpen label="Products">
               <MenuItem>Electronics</MenuItem>
             </Submenu>
           </Menu>,
@@ -76,7 +76,7 @@ describe('Submenu', () => {
       it('Then the submenu should return to its previous open state', () => {
         const { rerender } = render(
           <Menu collapsed>
-            <Submenu initialOpen label="Products">
+            <Submenu defaultIsOpen label="Products">
               <MenuItem>Electronics</MenuItem>
             </Submenu>
           </Menu>,
@@ -88,7 +88,7 @@ describe('Submenu', () => {
 
         rerender(
           <Menu collapsed={false}>
-            <Submenu initialOpen label="Products">
+            <Submenu defaultIsOpen label="Products">
               <MenuItem>Electronics</MenuItem>
             </Submenu>
           </Menu>,

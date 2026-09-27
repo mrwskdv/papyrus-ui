@@ -30,7 +30,7 @@ export const OpenControlled = Template.bind({});
 
 OpenControlled.args = {
   title: 'Controlled open tooltip',
-  open: true,
+  isOpen: true,
 };
 
 export const TriggerOnClick = Template.bind({});

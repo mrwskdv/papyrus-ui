@@ -57,11 +57,11 @@ describe('Popover', () => {
     });
   });
 
-  describe('Given a popover component with `initialOpen` prop set to true', () => {
+  describe('Given a popover component with `defaultIsOpen` prop set to true', () => {
     describe("When it's rendered", () => {
       it('Then the popover content is visible', () => {
         render(
-          <Popover initialOpen>
+          <Popover defaultIsOpen>
             <Popover.Trigger>
               <button type="button">Trigger</button>
             </Popover.Trigger>
@@ -76,11 +76,11 @@ describe('Popover', () => {
     });
   });
 
-  describe('Given a popover component with `open` prop', () => {
-    describe('When the open prop is toggled from false to true', () => {
+  describe('Given a popover component with `isOpen` prop', () => {
+    describe('When the isOpen prop is toggled from false to true', () => {
       it('Then the popover should become open', async () => {
         const { rerender } = render(
-          <Popover open={false}>
+          <Popover isOpen={false}>
             <Popover.Trigger>
               <button type="button">Trigger</button>
             </Popover.Trigger>
@@ -93,7 +93,7 @@ describe('Popover', () => {
         expect(screen.queryByText('Content')).not.toBeInTheDocument();
 
         rerender(
-          <Popover open>
+          <Popover isOpen>
             <Popover.Trigger>
               <button type="button">Trigger</button>
             </Popover.Trigger>
@@ -109,10 +109,10 @@ describe('Popover', () => {
       });
     });
 
-    describe('When the open prop is toggled from true to false', () => {
+    describe('When the isOpen prop is toggled from true to false', () => {
       it('Then the popover should become hidden', async () => {
         const { rerender } = render(
-          <Popover open>
+          <Popover isOpen>
             <Popover.Trigger>
               <button type="button">Trigger</button>
             </Popover.Trigger>
@@ -125,7 +125,7 @@ describe('Popover', () => {
         expect(screen.getByText('Content')).toBeVisible();
 
         rerender(
-          <Popover open={false}>
+          <Popover isOpen={false}>
             <Popover.Trigger>
               <button type="button">Trigger</button>
             </Popover.Trigger>
@@ -142,7 +142,7 @@ describe('Popover', () => {
     });
   });
 
-  describe('Given a popover component with open and onOpenChange props', () => {
+  describe('Given a popover component with isOpen and onOpenChange props', () => {
     describe('When the popover is opened and user click outside the popover content', () => {
       it('Then the onOpenChange callback should be called with the new open state', async () => {
         const onOpenChange = vi.fn();
@@ -150,7 +150,7 @@ describe('Popover', () => {
         render(
           <>
             <button type="button">Outside</button>
-            <Popover open onOpenChange={onOpenChange}>
+            <Popover isOpen onOpenChange={onOpenChange}>
               <Popover.Trigger>
                 <button type="button">Trigger</button>
               </Popover.Trigger>

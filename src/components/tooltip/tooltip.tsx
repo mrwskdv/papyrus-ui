@@ -11,7 +11,7 @@ export interface TooltipProps {
    *
    * @default false
    */
-  initialOpen?: boolean;
+  defaultIsOpen?: boolean;
 
   /**
    * The offset of the tooltip relative to its target element. It can be used to adjust the positioning of the tooltip.
@@ -22,9 +22,9 @@ export interface TooltipProps {
   offset?: OffsetOptions;
 
   /**
-   * If `true`, the tooltip will be open. It can be controlled programmatically by passing the `open` prop.
+   * If `true`, the tooltip will be open. It can be controlled programmatically by passing the `isOpen` prop.
    */
-  open?: boolean;
+  isOpen?: boolean;
 
   /**
    * Adjusts the padding around the tooltip relative to the viewport's edges.

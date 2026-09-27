@@ -75,6 +75,7 @@ export function Submenu({
   const buttonId = useId();
   const menuId = useId();
   const isActive = index === parent.activeIndex;
+  const isSubmenuOpen = isOpen && !parent.collapsed;
 
   const menuCtx = useMemo<MenuContextType>(
     () => ({
@@ -88,12 +89,6 @@ export function Submenu({
     }),
     [activeIndex, parent.indent, parent.menuRef, parent.size, parent.variant],
   );
-
-  useEffect(() => {
-    if (parent.collapsed) {
-      setIsOpen(false);
-    }
-  }, [parent.collapsed]);
 
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
@@ -170,13 +165,15 @@ export function Submenu({
       <MenuButton
         {...props}
         ref={buttonRef}
-        aria-controls={isOpen ? menuId : undefined}
-        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-controls={isSubmenuOpen ? menuId : undefined}
+        aria-expanded={isSubmenuOpen ? 'true' : 'false'}
         aria-haspopup="menu"
         collapsed={parent.collapsed}
         disabled={disabled}
         endIcon={
-          <BiChevronUp className={cn(!isOpen ? 'rotate-180' : 'rotate-0')} />
+          <BiChevronUp
+            className={cn(!isSubmenuOpen ? 'rotate-180' : 'rotate-0')}
+          />
         }
         id={buttonId}
         indent={parent.indent}
@@ -196,7 +193,7 @@ export function Submenu({
       {!parent.collapsed && (
         <MenuContext.Provider value={menuCtx}>
           <Transition
-            in={isOpen}
+            in={isSubmenuOpen}
             mountOnEnter
             nodeRef={menuRef}
             timeout={TRANSITION_TIMEOUT}

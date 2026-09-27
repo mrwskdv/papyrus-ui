@@ -182,13 +182,6 @@ export default [
         },
       ],
 
-      // TODO: these four sites sync a prop into state inside an effect —
-      // dialog.tsx:170, popover.tsx:137, submenu.tsx:94 and
-      // use-dropzone-upload.ts:303. Reworking controlled/uncontrolled state
-      // handling changes runtime behaviour, so it belongs in its own PR rather
-      // than in the lint-config migration.
-      'react-hooks/set-state-in-effect': 'off',
-
       // `void expr;` is how @typescript-eslint/no-floating-promises — enabled by
       // strictTypeChecked below — wants a deliberately unawaited promise marked.
       // airbnb bans the operator outright, which would leave no way to satisfy it.

@@ -95,10 +95,10 @@ function DialogComponent({
   children,
 }: DialogProps) {
   const { setTimeout, clearTimeout } = useTimeout();
-  // Set initial isOpen state as false to have an animation on first isOpen
   const [isOpenState, setIsOpenState] = useState(false);
   const [labelId, setLabelId] = useState<string | undefined>();
   const [descriptionId, setDescriptionId] = useState<string | undefined>();
+  const currentIsOpen = isOpen ?? isOpenState;
 
   const setOpen = useCallback(
     (nextOpen: boolean) => {
@@ -112,7 +112,7 @@ function DialogComponent({
   );
 
   const { refs, context } = useFloating({
-    open: isOpenState,
+    open: currentIsOpen,
     onOpenChange: setOpen,
   });
 
@@ -142,7 +142,7 @@ function DialogComponent({
     () => ({
       context,
       descriptionId,
-      isOpen: isOpenState,
+      isOpen: currentIsOpen,
       labelId,
       refs,
       size,
@@ -155,7 +155,7 @@ function DialogComponent({
     [
       context,
       descriptionId,
-      isOpenState,
+      currentIsOpen,
       labelId,
       refs,
       size,
@@ -166,13 +166,7 @@ function DialogComponent({
   );
 
   useEffect(() => {
-    if (isOpen !== undefined) {
-      setIsOpenState(isOpen);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpenState) {
+    if (!currentIsOpen) {
       setTimeout(() => {
         onAfterClose?.();
       }, ANIMATION_DURATION);
@@ -181,7 +175,7 @@ function DialogComponent({
     return () => {
       clearTimeout();
     };
-  }, [clearTimeout, onAfterClose, isOpen, isOpenState, setTimeout]);
+  }, [clearTimeout, onAfterClose, currentIsOpen, setTimeout]);
 
   return (
     <DialogContext.Provider value={dialogCxt}>

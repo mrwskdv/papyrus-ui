@@ -284,6 +284,20 @@ jobs:
 
           gh pr create --base main --head "$BRANCH" --title "$title" --body "$body"
 
+      # Kept so a failed run can be diagnosed once the runner is gone. This tier
+      # runs unattended at 120 turns, so nobody watched it: when one dies on the
+      # cap, the per-turn stream is the only record of where the budget went, and
+      # the reporter only ever surfaces a denial count. The job log holds just
+      # the action's `init` and `result`.
+      - name: Preserve the execution log
+        if: ${{ always() && steps.claude.outputs.execution_file != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: claude-execution-implement-${{ github.run_id }}
+          path: ${{ steps.claude.outputs.execution_file }}
+          retention-days: 14
+          if-no-files-found: warn
+
       # Last, and `always()`. See scripts/report-run for why it is a step.
       - name: Report how the run ended
         if: ${{ always() }}

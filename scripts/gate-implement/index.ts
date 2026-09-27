@@ -24,7 +24,7 @@ const execFileAsync = promisify(execFile);
 //
 // Only the implement tier writes it. There, every refusal means the run is not
 // authorized. In `pr` and `converse` a denial is the routine answer — the skill
-// is issue-scoped, or the tier must escalate — and reporting that as
+// is issue-scoped, or the tier is read-only — and reporting that as
 // "Not starting a run" would contradict the run that is plainly happening.
 async function deny(reason: string): Promise<void> {
   console.error(reason);

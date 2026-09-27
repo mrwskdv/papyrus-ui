@@ -190,7 +190,7 @@ describe('decide', () => {
       });
     });
 
-    it('tells the converse job it is blocked rather than to escalate', () => {
+    it('tells the converse job it is blocked rather than how to start a run', () => {
       const decision = decide(
         { ...authorized, blockedBy: [{ number: 91, state: 'open' }] },
         'converse',
@@ -203,17 +203,20 @@ describe('decide', () => {
   });
 
   // The routing denial: authorized, but the read-only job cannot finish the work.
-  it('tells the converse job to escalate, with the issue number in the command', () => {
+  // It names the comment a maintainer would type, since this tier has no way to
+  // start a run itself.
+  it('tells the converse job to hand off, naming the comment and the issue', () => {
     const decision = decide(authorized, 'converse');
     expect(decision.allow).toBe(false);
     expect(decision).toMatchObject({
-      reason: expect.stringContaining(
-        'gh workflow run claude.yml -f issue=159',
-      ),
+      reason: expect.stringContaining('`@claude implement 159`'),
+    });
+    expect(decision).not.toMatchObject({
+      reason: expect.stringContaining('gh workflow run'),
     });
   });
 
-  it('checks authorization before routing, so converse is not told to escalate an unlabelled issue', () => {
+  it('checks authorization before routing, so converse is not told to hand off an unlabelled issue', () => {
     const decision = decide({ ...authorized, labels: [] }, 'converse');
     expect(decision).toMatchObject({
       reason: expect.stringContaining(AGENT_LABEL),

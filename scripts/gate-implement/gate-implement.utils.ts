@@ -93,7 +93,7 @@ export function decideOnUnreadableBlockers(stderr: string): Decision {
 
 /**
  * `job` is the workflow job asking — `implement` and `pr` can do the work,
- * `converse` is the read-only tier and must escalate instead.
+ * `converse` is the read-only tier and can only report what it found.
  */
 export function decide(facts: IssueFacts, job: string): Decision {
   if (facts.isPullRequest) {
@@ -150,9 +150,10 @@ export function decide(facts: IssueFacts, job: string): Decision {
     return {
       allow: false,
       reason:
-        'Authorized, but this job is read-only and cannot finish an implementation. ' +
-        'Escalate instead, then stop:\n\n' +
-        `    gh workflow run claude.yml -f issue=${facts.number}`,
+        `Issue #${facts.number} is authorized, but this job is read-only and cannot ` +
+        'finish an implementation. Say so on the thread, and that a maintainer can ' +
+        `start one by commenting \`@claude implement ${facts.number}\` on the issue. ` +
+        'Then stop.',
     };
   }
 

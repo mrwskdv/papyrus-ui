@@ -1,0 +1,88 @@
+{
+  "version": 2,
+  "skills": {
+    "codebase-design": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/codebase-design",
+      "hash": "6af47ce35b6d06ce5a06201ab222c29d77fdd0211168526f30035a24e6873c7b"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/diagnosing-bugs",
+      "hash": "2c0266a1f5b56222b3e9fa5fb8b212270b9afc2da44ea0e977cef5084cd3bc61"
+    },
+    "domain-modeling": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/domain-modeling",
+      "hash": "9c70797062c1017367293905782a5a3a6b8f3ea85148abc172996a8de3f60071"
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "path": "skills/productivity/grilling",
+      "hash": "ee21609258468bb126585f896fe9eb267c72b142dd07f652adcaa29a09164306"
+    },
+    "handoff": {
+      "source": "mattpocock/skills",
+      "path": "skills/productivity/handoff",
+      "hash": "cdbcb9150df241254a5178eeebfa7c20c9a09613b19aea56eb4d4ca79893666e"
+    },
+    "improve-codebase-architecture": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/improve-codebase-architecture",
+      "hash": "ef111e1f05457f0942e89cb4a4d77a4595438deba9d50cfcd9c50ad4409dcc60"
+    },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "version": "4.7.0",
+      "hash": "8e8ab3099bfdf51bd0fbb4ecd0d1e82db91b5e8119c4837b9df684b560dd7664"
+    },
+    "ponytail-review": {
+      "source": "DietrichGebert/ponytail",
+      "version": "4.7.0",
+      "hash": "1164b79369da6035b874cc56f7b238df69528c495738ad7b42c3178650d6819b"
+    },
+    "prototype": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/prototype",
+      "hash": "ad398b650049820eb34d968fcc947354e5c881184bd850fd651112d642d4dfe4"
+    },
+    "research": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/research",
+      "hash": "6e70265f3f531ab6f3c77ee5ecbafaed4398cc2094ca04510a0048553f560c5e"
+    },
+    "resolving-merge-conflicts": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/resolving-merge-conflicts",
+      "hash": "300c819ad5273b1fb325e771a56e593cf77809d3f8deba17fd5d51785b6b9488"
+    },
+    "tdd": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/tdd",
+      "hash": "8161e48b1c61022cbe3ffd53a2f192ce3b2fe2acd76feb5d04ccabcdc024c3a2"
+    },
+    "to-spec": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/to-spec",
+      "hash": "5e473e70f28e35ddbb130ebd6843aad8f6167840367589ace50356b5cd60d7c5"
+    },
+    "triage": {
+      "source": "mattpocock/skills",
+      "path": "skills/engineering/triage",
+      "hash": "398ebf71b85210b05002a143d1d18c50c1ea178f4a1bcc8f1f19709196949f2e"
+    },
+    "writing-great-skills": {
+      "source": "mattpocock/skills",
+      "path": "skills/productivity/writing-great-skills",
+      "hash": "0cda022b9e1dc47594b9907235a5d4e221fb1eaaf191ab9b4952d937cdc81068"
+    }
+  },
+  "local": [
+    "code-review",
+    "codifying-standards",
+    "commit-changes",
+    "implement",
+    "open-pr",
+    "to-tickets"
+  ]
+}

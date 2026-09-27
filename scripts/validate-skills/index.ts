@@ -1,9 +1,14 @@
-import { access, lstat, readFile, readlink } from 'node:fs/promises';
+import { access, lstat, readdir, readFile, readlink } from 'node:fs/promises';
+import { join, relative } from 'node:path';
 
+import type { SkillsLock } from './validate-skills.utils';
 import {
   extractSkills,
+  findLockIssues,
   findMissingSkills,
   findSymlinkIssue,
+  hashSkill,
+  LOCK_ISSUE_TEXT,
 } from './validate-skills.utils';
 
 const SKILLS_DIR = '.agents/skills';
@@ -45,6 +50,42 @@ const symlinkIssue = findSymlinkIssue(
   stats.isSymbolicLink() ? await readlink(CLAUDE_SKILLS_DIR) : null,
 );
 
+// One walk of .agents/skills, one hash per directory. Any further
+// reconciliation against skills-lock.json reads these rather than walking again.
+const skillDirs = await readdir(SKILLS_DIR);
+const hashes = Object.fromEntries(
+  await Promise.all(
+    skillDirs.map(async (skill): Promise<[string, string]> => {
+      const dir = join(SKILLS_DIR, skill);
+      const entries = await readdir(dir, {
+        recursive: true,
+        withFileTypes: true,
+      });
+
+      return [
+        skill,
+        hashSkill(
+          await Promise.all(
+            entries
+              .filter(entry => entry.isFile())
+              .map(async entry => {
+                const full = join(entry.parentPath, entry.name);
+                return {
+                  path: relative(dir, full),
+                  content: await readFile(full, 'utf-8'),
+                };
+              }),
+          ),
+        ),
+      ];
+    }),
+  ),
+);
+const lock = JSON.parse(
+  await readFile('skills-lock.json', 'utf-8'),
+) as SkillsLock;
+const lockIssues = findLockIssues(hashes, lock);
+
 for (const { skill, path } of missing) {
   console.error(`Missing: ${skill} → ${path}`);
 }
@@ -57,11 +98,17 @@ if (symlinkIssue?.kind === 'wrong-target') {
   );
 }
 
-const total = missing.length + (symlinkIssue ? 1 : 0);
+for (const { kind, skill } of lockIssues) {
+  const { label, remedy } = LOCK_ISSUE_TEXT[kind];
+  console.error(`${label}: ${skill} — ${remedy}`);
+}
+
+const total = missing.length + (symlinkIssue ? 1 : 0) + lockIssues.length;
 if (total > 0) {
   throw new Error(`${total.toFixed()} issue(s) found.`);
 }
 
 console.log(
-  `All ${documented.length.toFixed()} documented skills present. Symlink in sync.`,
+  `All ${documented.length.toFixed()} documented skills present. Symlink in sync. ` +
+    `${skillDirs.length.toFixed()} skill directories locked or declared local.`,
 );

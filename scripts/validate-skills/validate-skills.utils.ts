@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
 // Tolerates the cell padding Prettier adds when it aligns Markdown tables.
@@ -41,4 +42,93 @@ export function findSymlinkIssue(
   }
 
   return undefined;
+}
+
+// ── skills-lock.json v2 ──────────────────────────────────────────────────────
+
+export interface LockedSkill {
+  source: string;
+  path?: string;
+  version?: string;
+  hash: string;
+}
+
+export interface SkillsLock {
+  version: number;
+  // Indexing a parsed lock can miss, so the value is optional.
+  skills: Record<string, LockedSkill | undefined>;
+  local: string[];
+}
+
+export interface SkillFile {
+  path: string;
+  content: string;
+}
+
+// A per-file hash cannot notice a file deleted upstream, so the lock covers the
+// whole directory: every path relative to it, sorted, with its contents. NUL
+// separates the fields because no path or file we vendor contains one.
+export function hashSkill(files: SkillFile[]): string {
+  const hash = createHash('sha256');
+
+  for (const { path, content } of [...files].sort((a, b) =>
+    a.path.localeCompare(b.path),
+  )) {
+    hash.update(`${path}\0${content}\0`);
+  }
+
+  return hash.digest('hex');
+}
+
+export type LockIssue =
+  | { kind: 'unaccounted'; skill: string }
+  | { kind: 'hash-mismatch'; skill: string }
+  | { kind: 'orphan-entry'; skill: string };
+
+export const LOCK_ISSUE_TEXT: Record<
+  LockIssue['kind'],
+  { label: string; remedy: string }
+> = {
+  unaccounted: {
+    label: 'Unaccounted skill',
+    remedy: 'add it to `skills` or `local` in skills-lock.json',
+  },
+  'hash-mismatch': {
+    label: 'Locked skill modified',
+    remedy:
+      're-vendor it, or update its hash in skills-lock.json if the edit is deliberate',
+  },
+  'orphan-entry': {
+    label: 'Lock entry with no directory',
+    remedy: 'remove it from skills-lock.json',
+  },
+};
+
+// `hashes` is one entry per directory in .agents/skills, keyed by skill name.
+export function findLockIssues(
+  hashes: Record<string, string>,
+  lock: SkillsLock,
+): LockIssue[] {
+  const local = new Set(lock.local);
+  const issues: LockIssue[] = [];
+
+  for (const [skill, hash] of Object.entries(hashes)) {
+    const locked = lock.skills[skill];
+
+    if (locked) {
+      if (locked.hash !== hash) {
+        issues.push({ kind: 'hash-mismatch', skill });
+      }
+    } else if (!local.has(skill)) {
+      issues.push({ kind: 'unaccounted', skill });
+    }
+  }
+
+  for (const skill of [...Object.keys(lock.skills), ...lock.local]) {
+    if (!(skill in hashes)) {
+      issues.push({ kind: 'orphan-entry', skill });
+    }
+  }
+
+  return issues;
 }

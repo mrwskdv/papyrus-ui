@@ -13,3 +13,7 @@ The skills speak in terms of five canonical triage roles. This file maps those r
 When a skill mentions a role (e.g. "apply the AFK-ready triage label"), use the corresponding label string from this table.
 
 Edit the right-hand column to match whatever vocabulary you actually use.
+
+## CI/CD workflow configuration is always `ready-for-human`
+
+A ticket that requires changing CI/CD workflow configuration is never `ready-for-agent` — on any tracker, an agent's push credentials cannot modify workflow definitions, so the change is rejected. Give the workflow change its own `ready-for-human` ticket; tickets blocked by it can stay `ready-for-agent`.

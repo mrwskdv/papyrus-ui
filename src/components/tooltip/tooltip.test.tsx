@@ -119,7 +119,11 @@ describe('Tooltip', () => {
         render(
           <>
             <button type="button">Outside</button>
-            <Tooltip isOpen title="This is a tooltip" onOpenChange={onOpenChange}>
+            <Tooltip
+              isOpen
+              title="This is a tooltip"
+              onOpenChange={onOpenChange}
+            >
               <button type="button">Hover me</button>
             </Tooltip>
           </>,

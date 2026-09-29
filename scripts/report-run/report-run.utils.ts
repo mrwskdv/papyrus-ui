@@ -13,8 +13,17 @@ export interface Execution {
   permission_denials_count?: number;
 }
 
+const TIERS = ['implement', 'pr', 'converse'] as const;
+
+export type Tier = (typeof TIERS)[number];
+
+/** `TIER` as a known tier. Unset is `implement`; anything else is undefined. */
+export function parseTier(value = 'implement'): Tier | undefined {
+  return TIERS.find(tier => tier === value);
+}
+
 export interface RunFacts {
-  tier: 'implement' | 'pr' | 'converse';
+  tier: Tier;
   issue: number;
   branch: string;
   maxTurns: number;
@@ -49,11 +58,11 @@ function cause(facts: RunFacts): string {
   const { execution: run, maxTurns } = facts;
 
   if (run?.subtype === 'error_max_turns') {
-    return `at turn ${run.num_turns ?? maxTurns} of ${maxTurns}`;
+    return `at turn ${(run.num_turns ?? maxTurns).toFixed()} of ${maxTurns.toFixed()}`;
   }
 
   if (run?.permission_denials_count) {
-    return `after ${run.permission_denials_count} permission denial${plural(run.permission_denials_count)}`;
+    return `after ${run.permission_denials_count.toFixed()} permission denial${plural(run.permission_denials_count)}`;
   }
 
   return 'on an error';
@@ -70,10 +79,10 @@ function workState(facts: RunFacts): string {
     return 'Nothing was pushed.';
   }
 
-  const commits = `${facts.commitsAhead} commit${plural(facts.commitsAhead)}`;
+  const commits = `${facts.commitsAhead.toFixed()} commit${plural(facts.commitsAhead)}`;
 
   if (facts.prNumber !== null) {
-    return `PR #${facts.prNumber} carries the ${commits} it managed — incomplete.`;
+    return `PR #${facts.prNumber.toFixed()} carries the ${commits} it managed — incomplete.`;
   }
 
   return `\`${facts.branch}\` carries ${commits}; no PR was opened.`;
@@ -86,7 +95,7 @@ export function classify(facts: RunFacts): Report | null {
 
   if (facts.jobStatus === 'cancelled') {
     return {
-      headline: `Timed out at ${facts.timeoutMinutes}m`,
+      headline: `Timed out at ${facts.timeoutMinutes.toFixed()}m`,
       next: `${workState(facts)} Re-run to continue.`,
     };
   }
@@ -111,7 +120,7 @@ export function classify(facts: RunFacts): Report | null {
     return {
       headline: `Stopped ${cause(facts)}`,
       next: pushedNothing(facts)
-        ? `Nothing to review. Re-run, or split #${facts.issue}.`
+        ? `Nothing to review. Re-run, or split #${facts.issue.toFixed()}.`
         : workState(facts),
     };
   }
@@ -127,9 +136,9 @@ export function classify(facts: RunFacts): Report | null {
 
       return {
         headline: denials
-          ? `Finished having pushed nothing, after ${denials} permission denial${plural(denials)}`
+          ? `Finished having pushed nothing, after ${denials.toFixed()} permission denial${plural(denials)}`
           : 'Finished having pushed nothing',
-        next: `No branch, no PR. Check whether #${facts.issue} was already done.`,
+        next: `No branch, no PR. Check whether #${facts.issue.toFixed()} was already done.`,
       };
     }
 
@@ -207,4 +216,62 @@ export function composeComment(
   runUrl: string,
 ): string {
   return `${stripSpinner(existingBody).trimEnd()}\n\n---\n\n${formatReport(report, runUrl)}\n`;
+}
+
+/** The comment the report lands in, if the run already owns one. */
+export interface CommentTarget {
+  repo: string;
+  issue: number;
+  existingId: string | undefined;
+  /** Null when the existing comment could not be read back. */
+  existingBody: string | null;
+}
+
+export interface CommentWrite {
+  /** What a dry run prints in place of the write. */
+  intent: string;
+  body: string;
+  /** `gh` argv that performs the write. */
+  args: string[];
+}
+
+/**
+ * The action's own tracking comment already carries this run's URL, and it is
+ * a better home for the outcome than a fresh comment nobody asked for.
+ *
+ * Passed as argv rather than through a temp file: execFile spawns no shell, so
+ * the body needs no quoting and leaves nothing behind on the runner.
+ */
+export function planCommentWrite(
+  target: CommentTarget,
+  report: Report,
+  runUrl: string,
+): CommentWrite {
+  const { repo, issue, existingId, existingBody } = target;
+
+  const body =
+    existingId && existingBody !== null
+      ? composeComment(existingBody, report, runUrl)
+      : `${formatReport(report, runUrl)}\n`;
+
+  if (existingId) {
+    return {
+      intent: `--- would PATCH comment ${existingId} ---`,
+      body,
+      args: [
+        'api',
+        `repos/${repo}/issues/comments/${existingId}`,
+        '-X',
+        'PATCH',
+        '-f',
+        `body=${body}`,
+      ],
+    };
+  }
+
+  return {
+    intent: '--- would post a new comment ---',
+    body,
+    args: ['issue', 'comment', issue.toFixed(), '--repo', repo, '--body', body],
+  };
 }

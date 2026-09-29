@@ -64,7 +64,7 @@ jobs:
             # claude-code-action checks the PR head out into the workspace
             # root for any open PR — `isCrossRepository` picks the refspec, not
             # whether. Fork code therefore lands in a job holding
-            # `contents: write`, `Bash` and the OAuth token. See #180.
+            # `contents: write`, `Bash` and the OAuth token.
             #
             # `false`, not `true`: a read that failed is an unanswered question,
             # not a permission.

@@ -23,7 +23,7 @@ export interface BlockingIssue {
 
 export interface IssueFacts {
   number: number;
-  state: string;
+  state: 'open' | 'closed';
   labels: string[];
   authorAssociation: string;
   isPullRequest: boolean;
@@ -34,7 +34,7 @@ export interface IssueFacts {
 /** The `gh api repos/{repo}/issues/{number}` fields the decision reads. */
 export interface IssuePayload {
   number: number;
-  state: string;
+  state: 'open' | 'closed';
   labels: { name: string }[];
   author_association: string;
   /** Present only when the number names a pull request — the endpoint serves both. */
@@ -60,12 +60,38 @@ export function toIssueFacts(
 }
 
 function describeBlockers(numbers: number[]): string {
-  const named = numbers.slice(0, MAX_NAMED_BLOCKERS).map(n => `#${n}`);
+  const named = numbers
+    .slice(0, MAX_NAMED_BLOCKERS)
+    .map(n => `#${n.toFixed()}`);
   const rest = numbers.length - named.length;
 
   return rest > 0
-    ? `${named.join(', ')} and ${rest} other${rest === 1 ? '' : 's'}`
+    ? `${named.join(', ')} and ${rest.toFixed()} other${rest === 1 ? '' : 's'}`
     : named.join(', ');
+}
+
+/**
+ * The workflow job asking — `implement` and `pr` can do the work, `converse` is
+ * the read-only tier and can only report what it found.
+ */
+const JOBS = ['implement', 'pr', 'converse'] as const;
+
+export type Job = (typeof JOBS)[number];
+
+/** `GATE_JOB` as a known job, or undefined when it is unset or unrecognised. */
+export function parseJob(value: string | undefined): Job | undefined {
+  return JOBS.find(job => job === value);
+}
+
+/**
+ * Whether a refusal is handed to the job as well as to Claude. Only the
+ * implement tier's refusals mean the run is not authorized. In `pr` and
+ * `converse` a denial is the routine answer — the skill is issue-scoped, or the
+ * tier is read-only — and reporting that as "Not starting a run" would
+ * contradict the run that is plainly happening.
+ */
+export function recordsRefusal(job: Job | undefined): boolean {
+  return job === 'implement';
 }
 
 export type Decision = { allow: true } | { allow: false; reason: string };
@@ -91,11 +117,7 @@ export function decideOnUnreadableBlockers(stderr: string): Decision {
   };
 }
 
-/**
- * `job` is the workflow job asking — `implement` and `pr` can do the work,
- * `converse` is the read-only tier and can only report what it found.
- */
-export function decide(facts: IssueFacts, job: string): Decision {
+export function decide(facts: IssueFacts, job: Job): Decision {
   if (facts.isPullRequest) {
     return {
       allow: false,
@@ -111,7 +133,7 @@ export function decide(facts: IssueFacts, job: string): Decision {
     return {
       allow: false,
       reason:
-        `Issue #${facts.number} is closed. If the work is genuinely outstanding, ` +
+        `Issue #${facts.number.toFixed()} is closed. If the work is genuinely outstanding, ` +
         'reopen it; a closed issue is not a request.',
     };
   }
@@ -120,7 +142,7 @@ export function decide(facts: IssueFacts, job: string): Decision {
     return {
       allow: false,
       reason:
-        `Not authorized: issue #${facts.number} is not labelled \`${AGENT_LABEL}\`. ` +
+        `Not authorized: issue #${facts.number.toFixed()} is not labelled \`${AGENT_LABEL}\`. ` +
         'Say so on the thread and stop — applying the label is a maintainer decision.',
     };
   }
@@ -129,7 +151,7 @@ export function decide(facts: IssueFacts, job: string): Decision {
     return {
       allow: false,
       reason:
-        `Not authorized: issue #${facts.number} was opened by an outside author ` +
+        `Not authorized: issue #${facts.number.toFixed()} was opened by an outside author ` +
         `(${facts.authorAssociation}), so its body is untrusted input. It needs rewriting ` +
         'as a maintainer-authored spec with `/to-spec` first.',
     };
@@ -142,7 +164,7 @@ export function decide(facts: IssueFacts, job: string): Decision {
   if (openBlockers.length > 0) {
     return {
       allow: false,
-      reason: `Issue #${facts.number} is blocked by ${describeBlockers(openBlockers)}.`,
+      reason: `Issue #${facts.number.toFixed()} is blocked by ${describeBlockers(openBlockers)}.`,
     };
   }
 
@@ -150,9 +172,9 @@ export function decide(facts: IssueFacts, job: string): Decision {
     return {
       allow: false,
       reason:
-        `Issue #${facts.number} is authorized, but this job is read-only and cannot ` +
+        `Issue #${facts.number.toFixed()} is authorized, but this job is read-only and cannot ` +
         'finish an implementation. Say so on the thread, and that a maintainer can ' +
-        `start one by commenting \`@claude implement ${facts.number}\` on the issue. ` +
+        `start one by commenting \`@claude implement ${facts.number.toFixed()}\` on the issue. ` +
         'Then stop.',
     };
   }

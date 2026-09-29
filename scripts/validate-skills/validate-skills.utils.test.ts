@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { SkillsLock } from './validate-skills.utils';
+import type { SkillFile, SkillsLock } from './validate-skills.utils';
 import {
   extractSkills,
   findLockIssues,
@@ -84,7 +84,7 @@ describe('findMissingSkills', () => {
 });
 
 describe('hashSkill', () => {
-  const files = [
+  const files: [SkillFile, SkillFile] = [
     { path: 'SKILL.md', content: '# Skill' },
     { path: 'scripts/run.sh', content: 'echo hi' },
   ];

@@ -2,10 +2,12 @@ import { describe, it, expect } from 'vitest';
 import {
   decide,
   decideOnUnreadableBlockers,
+  parseJob,
+  recordsRefusal,
   toIssueFacts,
   AGENT_LABEL,
 } from './gate-implement.utils';
-import type { IssueFacts } from './gate-implement.utils';
+import type { IssueFacts, IssuePayload } from './gate-implement.utils';
 
 // An issue a maintainer marked ready. Every case below is this one with
 // something taken away.
@@ -19,7 +21,7 @@ const authorized: IssueFacts = {
 };
 
 describe('toIssueFacts', () => {
-  const payload = {
+  const payload: IssuePayload = {
     number: 159,
     state: 'open',
     labels: [{ name: AGENT_LABEL }, { name: 'feature' }],
@@ -54,17 +56,19 @@ describe('decide', () => {
       'implement',
     );
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('issue-scoped'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('issue-scoped'),
+    );
   });
 
   it('denies a closed issue', () => {
     const decision = decide({ ...authorized, state: 'closed' }, 'implement');
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('is closed'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('is closed'),
+    );
   });
 
   it('says closed rather than unlabelled when an issue is both', () => {
@@ -72,9 +76,10 @@ describe('decide', () => {
       { ...authorized, state: 'closed', labels: [] },
       'implement',
     );
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('is closed'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('is closed'),
+    );
   });
 
   it('denies an unlabelled issue', () => {
@@ -83,9 +88,10 @@ describe('decide', () => {
       'implement',
     );
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining(AGENT_LABEL),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining(AGENT_LABEL),
+    );
   });
 
   it('denies an outside-authored issue even when labelled', () => {
@@ -94,9 +100,10 @@ describe('decide', () => {
       'implement',
     );
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('/to-spec'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('/to-spec'),
+    );
   });
 
   it('accepts MEMBER and COLLABORATOR as trusted authors', () => {
@@ -117,9 +124,10 @@ describe('decide', () => {
       );
 
       expect(decision.allow).toBe(false);
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining('blocked by #91'),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining('blocked by #91'),
+      );
     });
 
     // A closed blocker is a dependency that was satisfied, not one to wait on.
@@ -144,9 +152,10 @@ describe('decide', () => {
         'implement',
       );
 
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining('blocked by #92'),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining('blocked by #92'),
+      );
     });
 
     it('counts the rest rather than listing every blocker', () => {
@@ -156,9 +165,10 @@ describe('decide', () => {
       }));
       const decision = decide({ ...authorized, blockedBy }, 'implement');
 
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining('#10, #20, #30 and 3 others'),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining('#10, #20, #30 and 3 others'),
+      );
     });
 
     it('writes one remaining blocker without an s', () => {
@@ -168,9 +178,10 @@ describe('decide', () => {
       }));
       const decision = decide({ ...authorized, blockedBy }, 'implement');
 
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining('and 1 other.'),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining('and 1 other.'),
+      );
     });
 
     // Authorization is the earlier question: an unlabelled issue is refused for
@@ -185,9 +196,10 @@ describe('decide', () => {
         'implement',
       );
 
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining(AGENT_LABEL),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining(AGENT_LABEL),
+      );
     });
 
     it('tells the converse job it is blocked rather than how to start a run', () => {
@@ -196,9 +208,10 @@ describe('decide', () => {
         'converse',
       );
 
-      expect(decision).toMatchObject({
-        reason: expect.stringContaining('blocked by #91'),
-      });
+      expect(decision).toHaveProperty(
+        'reason',
+        expect.stringContaining('blocked by #91'),
+      );
     });
   });
 
@@ -208,20 +221,46 @@ describe('decide', () => {
   it('tells the converse job to hand off, naming the comment and the issue', () => {
     const decision = decide(authorized, 'converse');
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('`@claude implement 159`'),
-    });
-    expect(decision).not.toMatchObject({
-      reason: expect.stringContaining('gh workflow run'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('`@claude implement 159`'),
+    );
+    expect(decision).not.toHaveProperty(
+      'reason',
+      expect.stringContaining('gh workflow run'),
+    );
   });
 
   it('checks authorization before routing, so converse is not told to hand off an unlabelled issue', () => {
     const decision = decide({ ...authorized, labels: [] }, 'converse');
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining(AGENT_LABEL),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining(AGENT_LABEL),
+    );
   });
+});
+
+describe('parseJob', () => {
+  it.each(['implement', 'pr', 'converse'])('accepts %s', job => {
+    expect(parseJob(job)).toBe(job);
+  });
+
+  it.each([undefined, '', 'Implement', 'guard'])('rejects %j', job => {
+    expect(parseJob(job)).toBeUndefined();
+  });
+});
+
+describe('recordsRefusal', () => {
+  it('records a refusal for the implement job', () => {
+    expect(recordsRefusal('implement')).toBe(true);
+  });
+
+  it.each(['pr', 'converse', undefined] as const)(
+    'leaves a refusal unrecorded for the %s job',
+    job => {
+      expect(recordsRefusal(job)).toBe(false);
+    },
+  );
 });
 
 describe('decideOnUnreadableBlockers', () => {
@@ -237,9 +276,10 @@ describe('decideOnUnreadableBlockers', () => {
     const decision = decideOnUnreadableBlockers(`gh: failed (HTTP ${status})`);
 
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining(`HTTP ${status}`),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining(`HTTP ${status}`),
+    );
   });
 
   // A spawn failure or a timeout carries no status at all.
@@ -247,8 +287,9 @@ describe('decideOnUnreadableBlockers', () => {
     const decision = decideOnUnreadableBlockers('Error: spawn gh ENOENT');
 
     expect(decision.allow).toBe(false);
-    expect(decision).toMatchObject({
-      reason: expect.stringContaining('HTTP unknown'),
-    });
+    expect(decision).toHaveProperty(
+      'reason',
+      expect.stringContaining('HTTP unknown'),
+    );
   });
 });

@@ -48,7 +48,6 @@
     "prepare": "husky",
     "storybook": "storybook dev --no-open -p 6006",
     "test": "vitest run",
-    "test:ci": "vitest run --coverage",
     "test:watch": "vitest",
     "typecheck": "tsc -p tsconfig.json",
     "validate-skills": "tsx scripts/validate-skills/index.ts"

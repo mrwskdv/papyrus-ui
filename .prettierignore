@@ -3,6 +3,7 @@
 
 coverage
 storybook-static
+CHANGELOG.md
 
 # Generated — pnpm rewrites this on every install.
 pnpm-lock.yaml

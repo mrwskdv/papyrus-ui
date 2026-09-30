@@ -10,6 +10,14 @@
 # below 1.0.0 a breaking change bumps the minor. 1.0.0 is a stability promise to
 # every npm consumer, so it is reached by a `Release-As: 1.0.0` commit when we
 # decide the API has settled — never as a side effect of breaking something.
+#
+# npm authenticates the publish through trusted publishing (OIDC), which binds
+# to this workflow's filename: renaming the file breaks publishing until the
+# package's trusted publisher on npmjs.com is updated to match.
+#
+# The `publish-tag` dispatch input publishes a tag that release-please already
+# released. A re-run cannot recover a failed publish: release-please reports no
+# new release, so the publish steps stay skipped.
 name: Release
 
 on:
@@ -17,6 +25,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      publish-tag:
+        description: Existing release tag to publish to npm (e.g. v0.11.0)
+        required: false
 
 permissions:
   contents: write
@@ -48,15 +60,17 @@ jobs:
           manifest-file: .release-please-manifest.json
 
       - name: Checkout
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.publish-tag }}
 
       - name: Setup pnpm
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         uses: pnpm/action-setup@v6
 
       - name: Setup Node.js
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         uses: actions/setup-node@v7
         with:
           node-version: 22
@@ -64,15 +78,13 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         run: pnpm build
 
       - name: Publish to npm
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.publish-tag }}
         run: pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
